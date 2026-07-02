@@ -1,0 +1,11 @@
+Fiche Mémo : Système de Ressources "Aliment"
+Objectif : Centraliser les propriétés des aliments (visuel, prix, nom).
+
+1. Création d'un nouvel aliment :
+	
+Dans le dossier ressources/aliments, faire clic droit dans le FileSystem > Nouvelle ressource.
+Rechercher FoodData.
+Nommer le fichier (ex: pain.tres).
+Remplir les champs de personnalisation de l'aliment dans l'Inspecteur.
+
+Peut être utilisé dans la composante Aliments, propriété FoodData.

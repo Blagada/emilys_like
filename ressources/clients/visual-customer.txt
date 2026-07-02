@@ -1,0 +1,25 @@
+Cette procédure explique comment intégrer un nouveau personnage ou groupe visuel dans le jeu et l'assigner à un type de comportement existant.
+
+1. Création de la ressource visuelle
+Pour créer un nouveau look il faut au préalable avoir créer une scène dans /scenes/entities/customers. Ces cette scène qui contient la texture, animation, etc. du client.
+
+Ensuite, clic droit > Create New Resource dans le dossier /ressources/clients/visuals.
+
+Cherche CustomerVisual et nomme ton fichier (ex: touriste.tres).
+
+Dans l'inspecteur, remplis les champs :
+
+Name : Nom interne pour ton organisation (ex: "Touriste").
+
+Skin Scene : Glisse ou cherche la scène (.tscn) créer pour ce look.
+
+2. Assignation au type de comportement
+Une fois le look créé, tu dois associer le look au type de client.
+
+Dans /ressources/clients/data, choisi la ressource (.tres) correspondant au comportement souhaité (ex: tranquille.tres pour le type CLIENT_TRANQUILLE).
+
+Déroule la liste Possible Customers dans l'inspecteur.
+
+Clique sur Ajouter un élément.
+
+Glisse ou cherche la ressource précédemment créer pour ce look (ex: touriste.tres) dans cet élément.

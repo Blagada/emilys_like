@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dsga2s4whexiw"]
+
+[ext_resource type="Script" uid="uid://djr12w8vyqnmu" path="res://scenes/entities/Customers/base_customer_skin.gd" id="1_4w1pk"]
+[ext_resource type="Texture2D" uid="uid://cxua7jiyb6kxh" path="res://assets/customers/npc_characters.png" id="1_iper4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot5uo"]
+atlas = ExtResource("1_iper4")
+region = Rect2(32, 48, 32, 102)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+
+[node name="InvisibleCustomer" type="Node2D" unique_id=1959103000]
+script = ExtResource("1_4w1pk")
+
+[node name="SpriteCustomer" type="Sprite2D" parent="." unique_id=1778173962]
+position = Vector2(-5.9604645e-08, 5.684342e-14)
+scale = Vector2(1.71875, 1.71875)
+texture = SubResource("AtlasTexture_ot5uo")
+
+[node name="AnimatedCustomer" type="AnimatedSprite2D" parent="." unique_id=669088488]
+sprite_frames = SubResource("SpriteFrames_g4v7s")

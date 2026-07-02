@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://drbeiqg2746sk"]
+
+[ext_resource type="Script" uid="uid://clqblflb5cona" path="res://scenes/entities/Foods/aliments.gd" id="1_d0f31"]
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scenes/components/Interaction_component.tscn" id="2_35bts"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qisy3"]
+size = Vector2(152, 104)
+
+[node name="Aliments" type="Node2D" unique_id=1694997751 groups=["Food"]]
+script = ExtResource("1_d0f31")
+
+[node name="AlimentSprite" type="Sprite2D" parent="." unique_id=1781891285]
+position = Vector2(75.82847, 53.250008)
+scale = Vector2(0.24695866, 0.24695866)
+
+[node name="InteractionComponent" parent="." unique_id=2030365436 instance=ExtResource("2_35bts")]
+
+[node name="InteractionPoint" parent="InteractionComponent" index="1" unique_id=1962856339]
+position = Vector2(76, 162)
+
+[node name="ZoneDeClic" type="CollisionShape2D" parent="InteractionComponent" unique_id=1380196619]
+position = Vector2(76, 52)
+shape = SubResource("RectangleShape2D_qisy3")
+debug_color = Color(0.8177201, 0.21578583, 0.84252006, 0.41960785)
+
+[connection signal="input_event" from="InteractionComponent" to="." method="_on_interaction_component_input_event"]
+
+[editable path="InteractionComponent"]

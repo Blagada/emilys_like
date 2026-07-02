@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://w2tsxuaqqj4x"]
+
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scenes/components/Interaction_component.tscn" id="3_7fxvm"]
+
+[sub_resource type="Curve" id="Curve_f48kq"]
+_data = [Vector2(0.16513762, 0.8810976), 0.0, 0.0, 0, 0, Vector2(0.88073397, 0.6591464), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ju813"]
+curve = SubResource("Curve_f48kq")
+
+[sub_resource type="CurveTexture" id="CurveTexture_whlvb"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_y3jko"]
+diffuse_texture = SubResource("CurveTexture_whlvb")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fxvm"]
+size = Vector2(71.5, 40)
+
+[node name="Comptoir" type="Node2D" unique_id=1212267104]
+
+[node name="Comptoir" type="StaticBody2D" parent="." unique_id=332925225]
+
+[node name="ComptoirLong" type="Sprite2D" parent="Comptoir" unique_id=2140659547]
+position = Vector2(-2.0000038, 27)
+scale = Vector2(0.71875006, 40)
+texture = SubResource("CurveTexture_ju813")
+
+[node name="ComptoirDroit" type="Sprite2D" parent="Comptoir" unique_id=817249745]
+position = Vector2(63.999992, 70)
+scale = Vector2(0.20507817, 47.5)
+texture = SubResource("CanvasTexture_y3jko")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Comptoir" unique_id=177311783]
+polygon = PackedVector2Array(-93, 19, -94, 46, 38, 47, 38, 95, 90, 95, 90, 18)
+
+[node name="InteractionComponent" parent="." unique_id=1478060783 instance=ExtResource("3_7fxvm")]
+position = Vector2(-65, 47)
+
+[node name="caisse" type="CollisionShape2D" parent="InteractionComponent" unique_id=1758675681]
+position = Vector2(7, -20)
+shape = SubResource("RectangleShape2D_7fxvm")
+debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)

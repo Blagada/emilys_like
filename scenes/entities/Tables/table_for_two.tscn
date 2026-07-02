@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://blfuh5focianj"]
+
+[ext_resource type="Texture2D" uid="uid://b6fhc1adxpvw8" path="res://assets/mobiliers/table_for_two.png" id="1_c21dl"]
+[ext_resource type="Texture2D" uid="uid://dbfm1uh4fwcr3" path="res://assets/mobiliers/chaise.png" id="2_jclyv"]
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scenes/components/Interaction_component.tscn" id="3_68kwq"]
+[ext_resource type="PackedScene" uid="uid://d3o6jvtspe4o1" path="res://scenes/components/table_component.tscn" id="4_74kbq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpsah"]
+atlas = ExtResource("1_c21dl")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7fxvm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bsor"]
+atlas = ExtResource("2_jclyv")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fxvm"]
+size = Vector2(185, 94)
+
+[node name="Table_pour_deux" type="Node2D" unique_id=443123715 groups=["Table"]]
+
+[node name="Table" type="StaticBody2D" parent="." unique_id=1658989343]
+collision_mask = 0
+
+[node name="TableCollision" type="CollisionPolygon2D" parent="Table" unique_id=274124338]
+position = Vector2(0.5, 34.25)
+rotation = -0.0030897078
+polygon = PackedVector2Array(-0.37563708, -40.25135, -36.44962, -16.362696, -35.517597, 5.6402893, 38.482048, 5.868927, 38.540752, -13.130981)
+
+[node name="TableSprite2D" type="Sprite2D" parent="Table" unique_id=1763519983]
+texture = SubResource("AtlasTexture_tpsah")
+
+[node name="Chaise_gauche" type="StaticBody2D" parent="." unique_id=557980110]
+position = Vector2(-60, -2)
+collision_layer = 8
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_7fxvm")
+
+[node name="ChaiseCollision" type="CollisionPolygon2D" parent="Chaise_gauche" unique_id=391914200]
+position = Vector2(-4.021248, 35.09768)
+rotation = 3.132748
+polygon = PackedVector2Array(-5.9776535, -4.9553833, 4.0219574, -4.8669357, 11.01284, -3.8050652, 16.003792, -2.7608795, 19.968262, 1.2743416, 19.924042, 6.274147, 17.88874, 10.256302, 12.862396, 13.21196, -27.153728, 14.858095, -26.976833, -5.141121)
+
+[node name="ChaiseSprite2D" type="Sprite2D" parent="Chaise_gauche" unique_id=951199433]
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_6bsor")
+
+[node name="Chaise_droite" type="StaticBody2D" parent="." unique_id=554378070]
+position = Vector2(64, -2)
+collision_layer = 8
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_7fxvm")
+
+[node name="ChaiseCollision" type="CollisionPolygon2D" parent="Chaise_droite" unique_id=2045037363]
+position = Vector2(4, 35.75)
+polygon = PackedVector2Array(-28, -10.75, -28, 6.25, -2, 4.25, 5, 3.25, 11, 2.25, 15, 1.25, 19, -3.75, 20, -9.75, 15, -14.75)
+
+[node name="ChaiseSprite2D" type="Sprite2D" parent="Chaise_droite" unique_id=1693012959]
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AtlasTexture_6bsor")
+flip_h = true
+
+[node name="InteractionComponent" parent="." unique_id=264114937 instance=ExtResource("3_68kwq")]
+position = Vector2(0, 47)
+
+[node name="ZoneDeClic" type="CollisionShape2D" parent="InteractionComponent" unique_id=462389672]
+position = Vector2(0, -47)
+shape = SubResource("RectangleShape2D_7fxvm")
+debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)
+
+[node name="ChairPositions" type="Node2D" parent="." unique_id=2024955540]
+
+[node name="LeftChair" type="Marker2D" parent="ChairPositions" unique_id=1757810520]
+position = Vector2(-61, -2)
+
+[node name="RightChair" type="Marker2D" parent="ChairPositions" unique_id=804391825]
+position = Vector2(63, -2)
+
+[node name="TableComponent" parent="." unique_id=1795287937 node_paths=PackedStringArray("chair_positions") instance=ExtResource("4_74kbq")]
+chair_positions = NodePath("../ChairPositions")

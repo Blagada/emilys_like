@@ -1,0 +1,165 @@
+[gd_scene format=3 uid="uid://d3d62e0dcbxqc"]
+
+[ext_resource type="Texture2D" uid="uid://ba0pu7xm4i852" path="res://assets/player_idle.png" id="1_8afob"]
+[ext_resource type="Script" uid="uid://l7dw2osgfq4u" path="res://scenes/entities/Staff/player.gd" id="1_dovo2"]
+[ext_resource type="PackedScene" uid="uid://beb8n78sa7hsm" path="res://scenes/components/movement_component.tscn" id="3_w3ybl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dovo2"]
+atlas = ExtResource("1_8afob")
+region = Rect2(61, 0, 61, 184)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gmlin"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dovo2")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_dovo2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.008994331]
+}
+
+[sub_resource type="Animation" id="Animation_8afob"]
+resource_name = "idle"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.03, 1.03)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_gmlin"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.03, 1.03)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.39999998),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.008994331, 0.03490658503988659, 0.00872664625997164]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gmlin"]
+_data = {
+&"RESET": SubResource("Animation_dovo2"),
+&"idle": SubResource("Animation_8afob"),
+&"walk": SubResource("Animation_gmlin")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gmlin"]
+radius = 11.0
+height = 26.0
+
+[node name="player" type="CharacterBody2D" unique_id=660937136 groups=["Player"]]
+collision_layer = 2
+collision_mask = 13
+script = ExtResource("1_dovo2")
+
+[node name="body" type="AnimatedSprite2D" parent="." unique_id=1286825334]
+rotation = 0.008994331
+sprite_frames = SubResource("SpriteFrames_gmlin")
+autoplay = "default"
+frame_progress = 0.22366497
+offset = Vector2(3, -83)
+
+[node name="Animation" type="AnimationPlayer" parent="body" unique_id=667203613]
+libraries/ = SubResource("AnimationLibrary_gmlin")
+autoplay = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=333361648]
+position = Vector2(0, -11)
+shape = SubResource("CapsuleShape2D_gmlin")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1363271275]
+
+[node name="MovementComponent" parent="." unique_id=904041681 node_paths=PackedStringArray("nav_agent", "character_body") instance=ExtResource("3_w3ybl")]
+nav_agent = NodePath("../NavigationAgent2D")
+character_body = NodePath("..")

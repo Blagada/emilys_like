@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://ef3q0rvptar7"]
+
+[ext_resource type="Script" uid="uid://cm4wis5ivh5wy" path="res://scenes/entities/Tray/tray_component.gd" id="1_2odtk"]
+
+[sub_resource type="Curve" id="Curve_ashcm"]
+_data = [Vector2(0.23547402, 0.32621956), 0.0, 0.0, 0, 0, Vector2(0.85932726, 0.75426835), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2odtk"]
+curve = SubResource("Curve_ashcm")
+
+[node name="TrayComponent" type="Control" unique_id=298009879 groups=["Tray"]]
+layout_mode = 3
+anchor_right = 0.44400004
+anchor_bottom = 0.19800001
+offset_right = -511.48804
+offset_bottom = -128.30402
+script = ExtResource("1_2odtk")
+
+[node name="TrayContainer" type="NinePatchRect" parent="." unique_id=28782819]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 96.0
+texture = SubResource("CurveTexture_2odtk")
+
+[node name="ZoneDepotFoods" type="GridContainer" parent="TrayContainer" unique_id=887182427]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 96.0
+columns = 3

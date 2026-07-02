@@ -1,0 +1,25 @@
+Pour créer un nouveau type de client : 
+
+1. Ajout de nouveau type dans CustomerType
+
+Avant tout, s'assurer que le nom du nouveau type est répertorié dans le fichier /stripts/models/game_enums.gd, sous enum CustomerType.
+S'il n'est pas présent il ne sera pas sélectionnable lors de la création de la ressource.
+
+2. Création de la ressource
+
+clic droit > Create New Resource dans le dossier /ressources/clients/data.
+Cherche CustomerData et nomme ton fichier (ex: vip.tres).
+
+3. Remplir la ressource
+
+Dans l'inspecteur, remplis les champs :
+Groupe Type : c'est une  liste déroulante basé sur CustomerType. Si le type n'est pas là, revoir l'étape 1.
+Speed : vitesse de déplacement
+Patience : patience avant que les clients ne se fâchent
+Tip multiplier : multiplication du tip par défaut
+Possible Customers : c'est un tableau de CustomerVisual. Faire Ajouter un élément pour tous les "look" associé à ce type de client.
+
+4. SpawnComponent
+
+Lorsque la ressource est prêt, dans la scène SpawnComponent, ajouter un élément au Array Spawn Data list.
+Glisser ou chercher la nouvelle ressource dans l'élément.

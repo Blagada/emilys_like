@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodData" format=3 uid="uid://c7f4dnl7hrimb"]
+
+[ext_resource type="Script" uid="uid://cv00lidll5uk0" path="res://ressources/aliments/food_data.gd" id="1_g4wxu"]
+[ext_resource type="Texture2D" uid="uid://bb3l1prnpbb37" path="res://assets/foods/Gemini_Generated_Image_y700uky700uky700.png" id="2_xynma"]
+
+[resource]
+script = ExtResource("1_g4wxu")
+name = "Cupcake"
+sprite = ExtResource("2_xynma")
+preparation_time = 1.3
+price = 2
+metadata/_custom_type_script = "uid://cv00lidll5uk0"
