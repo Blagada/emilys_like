@@ -20,7 +20,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Emily like"
 run/main_scene="uid://dm1md5v5vp5lu"
-config/features=PackedStringArray("4.7", "Forward Plus")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -49,3 +49,8 @@ Food=""
 2d_physics/layer_2="Staff"
 2d_physics/layer_3="Customers"
 2d_physics/layer_4="Chairs"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
