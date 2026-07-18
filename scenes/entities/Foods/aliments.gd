@@ -19,9 +19,11 @@ func _ready() -> void:
 
 
 func _on_player_arrived():
+	var player = get_tree().get_first_node_in_group("Player")
+	
 	print("Préparation lancée...")
+	player.is_busy = true # tant que la préparation n'est pas terminé
 	await get_tree().create_timer(food_data.preparation_time).timeout
 
-	var player = get_tree().get_first_node_in_group("Player")
-	player.is_busy = false
+	player.is_busy = false # préparation terminée
 	food_clicked.emit(food_data)

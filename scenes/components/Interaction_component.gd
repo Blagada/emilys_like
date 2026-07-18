@@ -25,5 +25,6 @@ func _input_event(_viewport, event, _shape_idx):
 	player.set_movement_target(interaction_point.global_position)
 	await player.movement_component.destination_reached
 
+	player.is_busy = false
 	player_arrived.emit()
 	
