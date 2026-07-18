@@ -8,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://bmxa6rs11pctl" path="res://ressources/aliments/bouboule.tres" id="7_iwr0g"]
 [ext_resource type="Resource" uid="uid://c7f4dnl7hrimb" path="res://ressources/aliments/cupcake.tres" id="8_bahl2"]
 [ext_resource type="PackedScene" uid="uid://d3d62e0dcbxqc" path="res://scenes/entities/Staff/player.tscn" id="9_np2pn"]
+[ext_resource type="Resource" uid="uid://dnf5dnacueeen" path="res://ressources/menus/menu.tres" id="10_dnkej"]
 [ext_resource type="PackedScene" uid="uid://qvto3r4aka43" path="res://scenes/components/level_manager.tscn" id="10_iav0o"]
 [ext_resource type="PackedScene" uid="uid://ef3q0rvptar7" path="res://scenes/entities/Tray/tray.tscn" id="10_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://boj0snxc5fiux" path="res://scenes/components/spawn_component.tscn" id="11_excbq"]
@@ -156,6 +157,7 @@ text = "Spawn clients"
 [node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner") instance=ExtResource("10_iav0o")]
 tray_places = NodePath("../../ZoneFixe/Tray_places")
 customer_spawner = NodePath("../CustomerSpawner")
+level_menu = ExtResource("10_dnkej")
 
 [node name="CustomerSpawner" parent="Scripts" unique_id=1257491940 instance=ExtResource("11_excbq")]
 y_sort_enabled = true

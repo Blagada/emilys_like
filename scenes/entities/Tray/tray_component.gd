@@ -5,6 +5,9 @@ var collected_items: Array[FoodData] = []
 
 @onready var zone_depot_foods: GridContainer = $TrayContainer/ZoneDepotFoods
 
+func _ready() -> void:
+	GameDataManager.tray_updated.connect(update_tray_visuals)
+
 func add_item(item: FoodData) -> bool:
 	if GameDataManager.tray_items.size() < GameDataManager.current_max_capacity:
 		GameDataManager.tray_items.append(item)

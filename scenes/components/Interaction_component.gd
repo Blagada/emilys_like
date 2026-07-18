@@ -1,9 +1,9 @@
 extends Area2D
 class_name Interactable
 
-signal interaction_ready # Signal qui annonce que le déplacement est terminé
-
 @export var interaction_point: Marker2D
+
+signal player_arrived
 
 func _ready():
 	# Si interaction_point n'a pas d'assignation spéacial, assigne le premier enfant de type Marker2D
@@ -14,14 +14,16 @@ func _ready():
 				break
 
 func _input_event(_viewport, event, _shape_idx):
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-		var player = get_tree().get_first_node_in_group("Player")
-		
-		if player != null and player.has_method("set_movement_target"):
-			player.set_movement_target(interaction_point.global_position)
-			
-			# On attend ici que le mouvement soit terminé grâce au signal
-			await player.movement_component.destination_reached
-			
-			print("DEBUG: Arrivé !")
-			interaction_ready.emit()
+	if not (event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT):
+		return
+
+	var player = get_tree().get_first_node_in_group("Player")
+	if player == null or player.is_busy or not player.has_method("set_movement_target"):
+		return
+
+	player.is_busy = true
+	player.set_movement_target(interaction_point.global_position)
+	await player.movement_component.destination_reached
+
+	player_arrived.emit()
+	

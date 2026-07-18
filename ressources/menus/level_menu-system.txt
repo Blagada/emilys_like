@@ -1,0 +1,12 @@
+Fiche Mémo : Système de Ressources "Menu"
+Objectif : Lister les aliments sur le menu par niveau
+
+1. Création d'un nouveau menu :
+	
+Dans le dossier ressources/menus, faire clic droit dans le FileSystem > Nouvelle ressource.
+Rechercher LevelMenu.
+Nommer le fichier (ex: menu_casse-croute.tres).
+Ajouer des éléments au array et drag&drop les aliments du menu.
+
+Peut être utilisé pour afficher les aliments dans le restaurant
+et permettre au client de choisir un aliment sur le menu.

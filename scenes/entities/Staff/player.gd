@@ -7,9 +7,6 @@ extends CharacterBody2D
 var is_busy: bool = false
 
 func set_movement_target(target_point: Vector2):
-	if is_busy:
-		print("Action ignorée : Je suis déjà occupé !")
-		return # On arrête tout si le joueur est occupé
 	# vers quoi le player va se déplacer
 	movement_component.set_target(target_point)
 

@@ -1,5 +1,7 @@
 extends Node
 
+signal tray_updated
+
 # --- DONNÉES ---
 var tray_items: Array[FoodData] = []
 var current_max_capacity: int = 3 # Dépent du niveau

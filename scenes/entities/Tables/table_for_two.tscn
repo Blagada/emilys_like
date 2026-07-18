@@ -75,5 +75,6 @@ position = Vector2(-61, -2)
 [node name="RightChair" type="Marker2D" parent="ChairPositions" unique_id=804391825]
 position = Vector2(63, -2)
 
-[node name="TableComponent" parent="." unique_id=1795287937 node_paths=PackedStringArray("chair_positions") instance=ExtResource("4_74kbq")]
+[node name="TableComponent" parent="." unique_id=1795287937 node_paths=PackedStringArray("chair_positions", "interaction_component") instance=ExtResource("4_74kbq")]
 chair_positions = NodePath("../ChairPositions")
+interaction_component = NodePath("../InteractionComponent")

@@ -7,6 +7,8 @@ class_name Customer
 
 signal state_changed(new_state, target_pos)
 
+var current_order: FoodData
+var customer_data: CustomerData
 
 func _physics_process(_delta):
 	velocity = movement_component.get_velocity_for_movement()
@@ -36,12 +38,11 @@ func setup(visual: CustomerVisual, data: CustomerData):
 
 func apply_data(new_data: CustomerData):
 	# Applique les propriétés (vitesse, etc.)
+	customer_data = new_data
 	movement_component.speed = new_data.speed
 	print("Nouveau client de type : ", new_data.group_type)
 
-
 func change_state(new_state, target_pos = Vector2.ZERO):
-	var current_state = new_state
 	state_changed.emit(new_state, target_pos)
 
 
@@ -61,3 +62,7 @@ func move_to_table(table_marker: Marker2D, table_position: Vector2):
 	tween.tween_property(self, "global_position", table_marker.global_position, 0.3)
 	
 	print("Client assis et collision désactivée.")
+
+
+func set_order(food: FoodData):
+	current_order = food

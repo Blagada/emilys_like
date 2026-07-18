@@ -11,28 +11,17 @@ signal food_clicked(item: FoodData) # Le signal envoie la ressource concernée
 func _ready() -> void:
 	if food_data:
 		aliment_sprite.texture = food_data.sprite
+		var tex_size = aliment_sprite.texture.get_size()
+		if tex_size.x > 0 and tex_size.y > 0:
+			aliment_sprite.scale = target_size / tex_size
+
+	interaction_component.player_arrived.connect(_on_player_arrived)
 
 
-func _on_interaction_component_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		var player = get_tree().get_first_node_in_group("Player")
-		# Vérification si le joueur n'est présent là ou est déjà en train de faire quelque chose
-		if player == null or player.is_busy:
-			return
-			
-		# Début de la séquence
-		player.is_busy = true # <-- ON VERROUILLE
+func _on_player_arrived():
+	print("Préparation lancée...")
+	await get_tree().create_timer(food_data.preparation_time).timeout
 
-		# Déplacement
-		if player.has_method("set_movement_target"):
-			player.set_movement_target(interaction_component.interaction_point.global_position)
-			# Attente du signal de movement component
-			await player.movement_component.destination_reached
-			
-			# Préparation
-			print("Préparation lancée...")
-			await get_tree().create_timer(food_data.preparation_time).timeout
-			
-			# 4. Succès
-			player.is_busy = false # <-- ON DÉVERROUILLE
-			food_clicked.emit(food_data)
+	var player = get_tree().get_first_node_in_group("Player")
+	player.is_busy = false
+	food_clicked.emit(food_data)
