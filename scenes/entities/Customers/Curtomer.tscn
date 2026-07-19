@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jgeaii7nbt5i"]
 
 [ext_resource type="Script" uid="uid://cnsjgwkj8i6mf" path="res://scenes/entities/Customers/customer.gd" id="1_ujya7"]
-[ext_resource type="PackedScene" uid="uid://beb8n78sa7hsm" path="res://scenes/components/movement_component.tscn" id="2_ht86k"]
+[ext_resource type="PackedScene" uid="uid://beb8n78sa7hsm" path="res://scripts/components/movement_component.tscn" id="2_ht86k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 

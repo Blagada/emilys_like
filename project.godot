@@ -31,7 +31,7 @@ GameDataManager="*uid://df2e4eijik5ls"
 
 folder_colors={
 "res://assets/": "purple",
-"res://ressources/": "green",
+"res://resources/": "green",
 "res://scenes/": "yellow",
 "res://scripts/": "orange"
 }

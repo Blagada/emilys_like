@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://drbeiqg2746sk"]
 
 [ext_resource type="Script" uid="uid://clqblflb5cona" path="res://scenes/entities/Foods/aliments.gd" id="1_d0f31"]
-[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scenes/components/Interaction_component.tscn" id="2_35bts"]
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/Interaction_component.tscn" id="2_35bts"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qisy3"]
 size = Vector2(152, 104)

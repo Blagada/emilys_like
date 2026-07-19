@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @onready var movement_component: MovementComponent = $MovementComponent
 @onready var animation: AnimationPlayer = $body/Animation
@@ -6,11 +7,11 @@ extends CharacterBody2D
 
 var is_busy: bool = false
 
-func set_movement_target(target_point: Vector2):
+func set_movement_target(target_point: Vector2) -> void:
 	# vers quoi le player va se déplacer
 	movement_component.set_target(target_point)
 
-func _physics_process(_delta):
+func _physics_process(_delta: float) -> void:
 	velocity = movement_component.get_velocity_for_movement()
 	
 	if velocity != Vector2.ZERO:

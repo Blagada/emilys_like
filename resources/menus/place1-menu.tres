@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelMenu" format=3 uid="uid://dnf5dnacueeen"]
+
+[ext_resource type="Script" uid="uid://cv00lidll5uk0" path="res://resources/foods/food_data.gd" id="1_v0pb6"]
+[ext_resource type="Resource" uid="uid://c7f4dnl7hrimb" path="res://resources/foods/cupcake.tres" id="2_1doox"]
+[ext_resource type="Resource" uid="uid://bmxa6rs11pctl" path="res://resources/foods/bouboule.tres" id="3_eb2ty"]
+[ext_resource type="Script" uid="uid://dhgdjnrfvxdys" path="res://resources/menus/level_menu.gd" id="4_c7x3w"]
+
+[resource]
+script = ExtResource("4_c7x3w")
+available_foods = Array[ExtResource("1_v0pb6")]([ExtResource("2_1doox"), ExtResource("3_eb2ty")])
+metadata/_custom_type_script = "uid://dhgdjnrfvxdys"

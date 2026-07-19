@@ -7,27 +7,26 @@ var collected_items: Array[FoodData] = []
 
 func _ready() -> void:
 	GameDataManager.tray_updated.connect(update_tray_visuals)
+	update_tray_visuals()
 
 func add_item(item: FoodData) -> bool:
 	if GameDataManager.tray_items.size() < GameDataManager.current_max_capacity:
 		GameDataManager.tray_items.append(item)
 		print("DEBUG : Succès ! Nouvel état du plateau : ", GameDataManager.tray_items.size(), "/", GameDataManager.current_max_capacity)
-		update_tray_visuals()
+		GameDataManager.tray_updated.emit()
 		return true
-	else:
-		print("DEBUG : Échec ! Plateau plein (", GameDataManager.tray_items.size(), "/", GameDataManager.current_max_capacity, ")")
-		return false
+	return false
 
-func update_tray_visuals():
+func update_tray_visuals()-> void:
 	# On vide le conteneur
-	for child in zone_depot_foods.get_children():
+	for child: Node in zone_depot_foods.get_children():
 		child.queue_free()
 	
 	# On parcourt la liste
-	for i in range(GameDataManager.tray_items.size()):
-		var item = GameDataManager.tray_items[i]
+	for i: int in range(GameDataManager.tray_items.size()):
+		var item: FoodData = GameDataManager.tray_items[i]
 		# création des éléments de tray (bouton pour qu'il puisse être cliquable/supprimable)
-		var item_in_tray = TextureButton.new()
+		var item_in_tray: TextureButton = TextureButton.new()
 		item_in_tray.texture_normal = item.sprite
 		# Modifie la taille de la texture pour s'assurer que ça entre dans le tray
 		item_in_tray.custom_minimum_size = Vector2(50, 50)
@@ -41,11 +40,7 @@ func update_tray_visuals():
 
 # Fonction appelée quand on clique sur un aliment dans le plateau
 func _on_item_in_tray_pressed(index: int):
-	var item = GameDataManager.tray_items[index]
-	print("DEBUG : Suppression de : ", item.name)
-	
-	# 1. On retire de la liste globale
-	GameDataManager.tray_items.remove_at(index)
-	
-	# 2. On met à jour l'affichage pour supprimer le bouton visuellement
-	update_tray_visuals()
+	if index >= 0 and index < GameDataManager.tray_items.size():
+		GameDataManager.tray_items.remove_at(index)
+		print(index, " est supprimé du tray")
+		GameDataManager.tray_updated.emit()

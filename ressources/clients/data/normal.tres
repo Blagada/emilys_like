@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="CustomerData" format=3 uid="uid://dt2s421p0vlsn"]
-
-[ext_resource type="Script" uid="uid://b8cno6w8l0n5w" path="res://ressources/clients/visuals/customer_visual.gd" id="1_ejwt0"]
-[ext_resource type="Script" uid="uid://coyjgufjo44k3" path="res://ressources/clients/data/customer_data.gd" id="2_wbjqv"]
-
-[resource]
-script = ExtResource("2_wbjqv")
-metadata/_custom_type_script = "uid://coyjgufjo44k3"

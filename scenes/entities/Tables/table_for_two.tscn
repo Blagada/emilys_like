@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://blfuh5focianj"]
 
-[ext_resource type="Texture2D" uid="uid://b6fhc1adxpvw8" path="res://assets/mobiliers/table_for_two.png" id="1_c21dl"]
-[ext_resource type="Texture2D" uid="uid://dbfm1uh4fwcr3" path="res://assets/mobiliers/chaise.png" id="2_jclyv"]
-[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scenes/components/Interaction_component.tscn" id="3_68kwq"]
-[ext_resource type="PackedScene" uid="uid://d3o6jvtspe4o1" path="res://scenes/components/table_component.tscn" id="4_74kbq"]
+[ext_resource type="Texture2D" uid="uid://b6fhc1adxpvw8" path="res://assets/furniture/table_for_two.png" id="1_c21dl"]
+[ext_resource type="Texture2D" uid="uid://dbfm1uh4fwcr3" path="res://assets/furniture/chair.png" id="2_jclyv"]
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/Interaction_component.tscn" id="3_68kwq"]
+[ext_resource type="PackedScene" uid="uid://d3o6jvtspe4o1" path="res://scripts/components/table_component.tscn" id="4_74kbq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpsah"]
 atlas = ExtResource("1_c21dl")
