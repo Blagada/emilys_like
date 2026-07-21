@@ -70,6 +70,6 @@ func move_to_table(table_marker: Marker2D, table_position: Vector2) -> void:
 
 
 func move_to(target_marker: Marker2D, state: GameEnums.CustomerState = GameEnums.CustomerState.MOVING) -> void:
-	change_state(state)
+	change_state(state, target_marker.global_position)
 	movement_component.set_target(target_marker.global_position)
 	await movement_component.destination_reached

@@ -17,86 +17,71 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - Clients assignés à une table libre avec assez de places (`TableAssignmentService`)
 - Menu par niveau : les aliments disponibles au comptoir sont piochés au hasard dans une liste modifiable (`LevelMenu`)
 
-### Session(s) récentes
-- Nettoyage du code (variables/fonctions/signaux inutilisés, fichiers temporaires Godot)
-- Extraction de la logique de sélection de table hors de `level_manager.gd` → `TableAssignmentService` (réutilisable pour plusieurs niveaux)
-- Chaque client reçoit une commande aléatoire (`current_order`) une fois assis à table
-- Service des clients : clic sur la table → si le plateau contient l'item demandé, il est retiré du plateau et retiré de la commande du client
-- Service **individuel** par client (pas besoin d'avoir tout le groupe en même temps sur le plateau)
-- Le joueur peut toujours se déplacer vers une table même s'il n'a rien à servir (meilleure UX, évite l'effet de bug)
-- Renommage des états de table pour plus de clarté (`EN_ATTENTE_SERVICE`, `EN_REPAS`)
-- Signal `all_orders_served` : quand tout le groupe est servi, tous les clients passent à `EATING` en même temps
-- Centralisation de la logique clic + déplacement dans `InteractionComponent` (signal `player_arrived`), utilisé par les aliments, les tables, et le comptoir
-- Fix de bugs importants :
-  - `is_busy` qui restait bloqué à `true` (conflit entre `Interaction_component.gd` et le check redondant dans `player.gd`)
-  - `is_busy` qui restait bloqué après un clic sur le comptoir (rien n'écoutait `player_arrived`)
-- README du projet rédigé
+### Sessions récentes
+- Nettoyage du code, extraction de `TableAssignmentService`
+- Système de commande complet : phylactère par table (icône "..." puis commandes), timer basé sur la vitesse du groupe
+- Renommage des dossiers en anglais, typage statique renforcé partout
+- Séparation des responsabilités : `OrderComponent` (commandes/service) distinct de `TableComponent` (sièges/état)
 
-### Dernière session
-- Fix ratio images comptoir (aliments.gd) : scale calculé avec min(target/tex.x, target/tex.y) au lieu d'une division qui écrasait le ratio
-- Refactor table_component.gd → séparation des responsabilités :
-	- Nouveau order_component.gd : gère seated_customers, serve_food(), has_servable_customer(), signal all_orders_served
-	- table_component.gd : garde uniquement sièges/état de table, délègue à order_component
-- Phylactère de commande par table (order_bubble.gd + scène OrderBubble.tscn) :
-	- Une bulle par table (pas par client), positionnée via Marker2D (order_bubble_anchor) + bubble_offset ajustable en inspecteur
-	- Affichage "..." pendant la réflexion (show_thinking()), grid des commandes une fois prêtes (set_orders())
-	- Bugs réglés en cours de route : TextureRect.expand_mode, ancrages Control mal configurés, écrasement du ratio des icônes
-- Timer de commande groupé : démarre une fois que tout le groupe est assis (délégué à _handle_group_ordering dans level_manager.gd), basé sur la vitesse du groupe
-	- Délai avant "..." (sitting_animation_delay, exposé en @export) pour laisser de la place à une future animation d'assise
-	- Fix race condition : movement_component.has_arrived() ajouté pour éviter un await bloqué indéfiniment si le client est déjà arrivé avant que l'écoute du signal commence (bug touchant surtout les tables à 2)
+### Session la plus récente — Cycle paiement + nettoyage + machine à états complète
+- File d'attente à la caisse (`PaymentQueueComponent`) : les clients se placent aux markers devant le comptoir, le représentant du groupe se déplace et paie au clic du joueur sur la caisse
+- Cycle client complet, de bout en bout : commande → service → manger → attente de paiement (bulle `$`) → file d'attente → sortie du restaurant
+- Nettoyage de table : clic sur une table sale (`UNOCCUPIED_AND_DIRTY`) → le joueur nettoie (délai) → table redevient propre et réutilisable
+- `StaffComponent` créé (réutilisable joueur + futur staff) : gère un état (`WAITING`, `MOVING`, `FOOD_PREP`, `DELIVERING`, `CLEANING`)
+- Les animations du joueur sont maintenant pilotées par son état, plus par sa vélocité seule
+- Machine à états des clients complétée : tous les moments (commande, manger, paiement) déclenchent maintenant le bon `CustomerState`, visible en temps réel dans l'onglet Distant
+- Plusieurs bugs de navigation/timing corrigés (voir `ROADMAP.md` pour le détail technique)
+
 ---
 
-## 🔧 En cours / prochaine étape discutée
+## 🔧 En cours / prochaine étape
 
-- Aucun chantier ouvert non terminé — la feature "commande + phylactère" est fonctionnelle de bout en bout
+- **Paiement à la caisse** : calculer le montant dû selon le prix des aliments commandés à la table + le `tip_multiplier` du type de client. C'est la prochaine priorité.
 
 ---
 
 ## 📋 À faire (basé sur les notes de conception)
 
 ### Boucle de jeu principale
-- [ ] Clients qui partent si aucune table disponible / bon nombre de places (actuellement ils ne gèrent pas ce refus)
-- [ ] Paiement : faire payer les clients, incluant prix des commandes + pourboires dépendants du type de client
-- [ ] Sortie des clients une fois payés (table redevient libre)
-- [ ] Table sale → besoin d'être nettoyée avant de réassigner un nouveau groupe (`LIBRE_SALE`)
+- [ ] Calcul du paiement (prix des commandes + pourboires selon type de client) — **priorité actuelle**
+- [ ] Clients qui partent si aucune table disponible / bon nombre de places
+- [ ] Réinitialisation complète d'un groupe à une table (à valider une fois le paiement en place)
 
 ### Comptoir
-- [ ] Logique du comptoir : faire passer les clients à la caisse
-- [ ] File d'attente au comptoir
-  - À réfléchir : probablement plusieurs `Marker2D` en ligne (position 1, 2, 3...) devant le comptoir, où chaque client en attente se place au marker libre le plus proche du comptoir. Quand le client en tête est servi/encaissé, tout le monde avance d'une position. Similaire dans l'esprit à `chair_positions` sur les tables.
+- [ ] Clarifier le comportement de `DELIVERING` (actuellement dérivé de `MOVING` + tray non vide plutôt qu'un état séparé)
 
 ### Rythme / difficulté
-- [ ] Délai différent par type de client, incluant le parcours complet vers le paiement (patience — mis de côté pour le niveau 1 pour l'instant, à revoir plus tard)
-- [ ] Délai/minuterie de la journée : heures d'ouverture définies pour le niveau (pas aléatoire), resto ferme une fois le dernier client sorti après l'heure de fermeture. Certains niveaux plus difficiles pourraient avoir plusieurs périodes d'ouverture (déjeuner, dîner, souper).
-  - Menu choisi par le joueur en début de journée (par défaut, celui choisi la veille), avec une animation pour le changement d'aliments entre les services
-
-### Assets
-- [ ] Uniformiser tous les sprites d'aliments en 64x64 (évite les soucis de ratio/écrasement rencontrés avec le phylactère)
+- [ ] Délai différent par type de client, incluant le parcours complet vers le paiement (patience — mis de côté pour le niveau 1 pour l'instant)
+- [ ] Délai/minuterie de la journée : heures d'ouverture, resto ferme après le dernier client, plusieurs services (déjeuner/dîner/souper)
+- [ ] Menu choisi par le joueur en début de journée
 
 ### Plus tard
-- [ ] Écran de menu (menu principal du jeu)
-- [ ] Paramètres du jeu (ex: taille de police, choix de la police de caractère)
-- [ ] Feedback visuel quand une table ne peut pas être servie (actuellement juste un `print`)
-- [ ] Animations des personnages
+- [ ] Écran de menu principal
+- [ ] Paramètres du jeu (taille de police, choix de police)
+- [ ] Feedback visuel quand une table ne peut pas être servie
+- [ ] Vraies animations des personnages (actuellement placeholders `walk`/`idle` pour `food_prep`/`cleaning`/`delivering`)
 - [ ] Score / objectifs de niveau
 - [ ] Multi-niveaux avec layouts différents
-- [ ] Joueur choisit lui-même les aliments de son resto par niveau (le système `LevelMenu` a été conçu pour rendre ça possible facilement)
+- [ ] Joueur choisit lui-même les aliments de son resto par niveau
+- [ ] Uniformiser tous les sprites d'aliments en 64x64
 
 ---
 
 ## 🏗️ Architecture
 
 Le projet suit une approche **orientée composants** plutôt que l'héritage classique :
+```
 scenes/
 ├── components/     → Logique réutilisable (déplacement, interaction, tables, plateau)
 ├── entities/        → Objets du jeu (clients, aliments, personnel)
-└── levels/           → Scènes de niveau (pourrait changer en cours de route si plusieurs restaurant et plusieurs niveau  par restaurant)
-ressources/           → Données (Resource) : types de clients, aliments, visuels
+└── levels/           → Scènes de niveau
+resources/           → Données (Resource) : types de clients, aliments, visuels
 scripts/
 ├── globals/          → Autoloads (état partagé, ex: GameDataManager)
 └── models/           → Enums et types partagés (GameEnums)
+```
 
-**Principe clé** : les entités (Customer, Player, Table) délèguent leur comportement à des composants indépendants (`MovementComponent`, `InteractionComponent`, `TableComponent`...), ce qui permet de les réutiliser et de les tester séparément.
+**Principe clé** : les entités (Customer, Player, Table) délèguent leur comportement à des composants indépendants (`MovementComponent`, `InteractionComponent`, `TableComponent`, `OrderComponent`, `StaffComponent`, `PaymentQueueComponent`...), ce qui permet de les réutiliser et de les tester séparément.
 
 ---
 
@@ -113,9 +98,13 @@ scripts/
 *Objectifs de ce jeu*
 
 - Apprendre à déplacer des CharacterBody2D d'un endroit à un autre au clic
-- Créer des composantes réutilisables le plus possible pour ne pas dubliquer de code
+- Créer des composantes réutilisables le plus possible pour ne pas dupliquer de code
 - Utiliser les Ressources de Godot dès qu'il y a des paramètres ou spécificité (aliments, clients, restaurant, menu)
 - Générer des groupes de clients qui vont se déplacer à une table libre
-- Au clic, ajouter un aliment dans le tray, et le servir à table (supression du tray)
+- Au clic, ajouter un aliment dans le tray, et le servir à table (suppression du tray)
 - Gestion des niveaux par restaurant : ajout d'une table, changement de menu, etc.
+- Piloter les animations par une machine à états plutôt que par la vélocité seule
+
+Pour les détails techniques, bugs corrigés et idées en vrac, voir `ROADMAP.md`.
+
 ---
