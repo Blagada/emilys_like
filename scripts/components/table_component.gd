@@ -5,12 +5,12 @@ class_name TableComponent
 @onready var all_chair_positions: Array[Node] = chair_positions.get_children()
 @export var chair_positions: Node2D
 @export var interaction_component: Interactable
-@export var current_state: GameEnums.TableState = GameEnums.TableState.OCCUPIED_CLEAN # Par défaut, toutes les chaises sont libre et propre
+@export var current_state: GameEnums.TableState = GameEnums.TableState.UNOCCUPIED_AND_CLEAN # Par défaut, toutes les chaises sont libre et propre
+@export var order_component: OrderComponent
+@export var cleaning_duration: float = 3.0
 
 var occupied_seats: Array[Marker2D] = [] # Liste pour garder en mémoire quels sièges sont pris
-var seated_customers: Array[Customer] = [] #type de client assis à table
 
-signal all_orders_served
 
 func _ready() -> void:
 	if interaction_component:
@@ -18,16 +18,34 @@ func _ready() -> void:
 
 
 func _on_player_arrived()-> void:
-	serve_food()
 	var player: Node = get_tree().get_first_node_in_group("Player")
+
+	if current_state == GameEnums.TableState.UNOCCUPIED_AND_DIRTY:
+		_start_cleaning(player)
+		print(current_state, " : état de la table")
+		return
+
+	order_component.serve_food() # Appel serve_food à partir de la composante Order
 	if player and player.has_method("set_busy"):
 		player.is_busy = false
+
+
+func _start_cleaning(player: Node) -> void:
+	if not player or not player.has_node("StaffComponent"):
+		return
+
+	player.is_busy = true
+	await player.staff_component.start_task(GameEnums.StaffState.CLEANING, cleaning_duration)
+
+	occupied_seats.clear()
+	current_state = GameEnums.TableState.UNOCCUPIED_AND_CLEAN
+	player.is_busy = false
 
 
 # Retourne vrai si la table n'est pas occupé et a assez de chaises libres
 func can_accommodate_group(group_size: int) -> bool:
 	# 1. Vérifie si la table est déjà occupée
-	if current_state != GameEnums.TableState.OCCUPIED_CLEAN:
+	if current_state != GameEnums.TableState.UNOCCUPIED_AND_CLEAN:
 		return false
 	
 	# 2. Vérifie si la table a assez de chaises pour le groupe
@@ -71,41 +89,3 @@ func reserve_seats(group_size: int) -> Array[Marker2D]:
 
 	# On renvoie bien les Marker2D, comme avant
 	return reserved
-
-# Vérifie s'il y a au moins un client qu'on pourrait servir avec le plateau actuel
-func has_servable_customer() -> bool:
-	for customer: Customer in seated_customers:
-		if customer.current_order != null and GameDataManager.tray_items.has(customer.current_order):
-			return true
-	return false
-
-
-func serve_food()-> void:
-	print("DEBUG: serve_food() appelée, ", seated_customers.size(), " client(s) à cette table")
-	var served_someone: bool = false
-
-	for customer: Customer in seated_customers:
-		if customer.current_order == null:
-			continue
-
-		if GameDataManager.tray_items.has(customer.current_order):
-			GameDataManager.tray_items.erase(customer.current_order)
-			customer.current_order = null
-			served_someone = true
-
-	if not served_someone:
-		print("Rien à servir : aucun item du plateau ne correspond aux commandes en attente")
-		return
-
-	GameDataManager.tray_updated.emit()
-
-	if _all_customers_served():
-		current_state = GameEnums.TableState.IN_MEAL
-		all_orders_served.emit()
-
-
-func _all_customers_served() -> bool:
-	for customer: Customer in seated_customers:
-		if customer.current_order != null:
-			return false
-	return true

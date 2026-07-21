@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkppr7j1akxet"
-path="res://.godot/imported/Gemini_Generated_Image_beq0zibeq0zibeq0.png-c2f928aa2bdf7238f2e3ccb45973533c.ctex"
+uid="uid://16gnu1n34pr8"
+path="res://.godot/imported/food_hotdog.png-b89e1a472f093a79c7062ca161224868.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/foods/Gemini_Generated_Image_beq0zibeq0zibeq0.png"
-dest_files=["res://.godot/imported/Gemini_Generated_Image_beq0zibeq0zibeq0.png-c2f928aa2bdf7238f2e3ccb45973533c.ctex"]
+source_file="res://assets/foods/food_hotdog.png"
+dest_files=["res://.godot/imported/food_hotdog.png-b89e1a472f093a79c7062ca161224868.ctex"]
 
 [params]
 

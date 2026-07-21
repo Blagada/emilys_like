@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://njl8cv1qs2e"
-path="res://.godot/imported/food_nouilles.png-ec8b2ab5a1e0851a77d65fb6ce21655f.ctex"
+uid="uid://c5suymunjk48c"
+path="res://.godot/imported/tray.png-56798455ad830ca904421387b4705c6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/foods/food_nouilles.png"
-dest_files=["res://.godot/imported/food_nouilles.png-ec8b2ab5a1e0851a77d65fb6ce21655f.ctex"]
+source_file="res://assets/furniture/tray.png"
+dest_files=["res://.godot/imported/tray.png-56798455ad830ca904421387b4705c6b.ctex"]
 
 [params]
 

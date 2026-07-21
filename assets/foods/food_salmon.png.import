@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cujtt5u35vxpl"
-path="res://.godot/imported/Gemini_Generated_Image_ygredjygredjygre.png-af45b4950b9541825a832828b3cd6c19.ctex"
+uid="uid://b1lm8e6cmvl2j"
+path="res://.godot/imported/food_salmon.png-7583570a3c9d7a8341b39e2ea062f137.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/foods/Gemini_Generated_Image_ygredjygredjygre.png"
-dest_files=["res://.godot/imported/Gemini_Generated_Image_ygredjygredjygre.png-af45b4950b9541825a832828b3cd6c19.ctex"]
+source_file="res://assets/foods/food_salmon.png"
+dest_files=["res://.godot/imported/food_salmon.png-7583570a3c9d7a8341b39e2ea062f137.ctex"]
 
 [params]
 

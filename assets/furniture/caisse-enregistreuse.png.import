@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl40bjh5r6s4i"
-path="res://.godot/imported/Gemini_Generated_Image_3z09f3z09f3z09f3.png-4e08f256072c50c8566fe80af58b135e.ctex"
+uid="uid://bgac03pjid7i8"
+path="res://.godot/imported/caisse-enregistreuse.png-75c3b0f664c04a23ab4340b63f85e7e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/foods/Gemini_Generated_Image_3z09f3z09f3z09f3.png"
-dest_files=["res://.godot/imported/Gemini_Generated_Image_3z09f3z09f3z09f3.png-4e08f256072c50c8566fe80af58b135e.ctex"]
+source_file="res://assets/furniture/caisse-enregistreuse.png"
+dest_files=["res://.godot/imported/caisse-enregistreuse.png-75c3b0f664c04a23ab4340b63f85e7e2.ctex"]
 
 [params]
 

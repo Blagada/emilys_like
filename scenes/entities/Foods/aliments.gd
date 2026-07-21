@@ -2,7 +2,6 @@ extends Node
 class_name FoodItem
 
 @export var food_data: FoodData # Contient l'aliment à afficher
-@export var target_size: Vector2 = Vector2(64, 64) # La taille que tu veux pour tous
 
 @onready var interaction_component: Interactable = $InteractionComponent
 @onready var aliment_sprite: Sprite2D = $AlimentSprite
@@ -13,9 +12,12 @@ func _ready() -> void:
 	if food_data and aliment_sprite:
 		aliment_sprite.texture = food_data.sprite
 		var tex_size: Vector2 = aliment_sprite.texture.get_size()
+		var target_size = Vector2(GameDataManager.item_target_size, GameDataManager.item_target_size)
+			
 		# Protection contre la division par zéro
 		if tex_size.x > 0 and tex_size.y > 0:
-			aliment_sprite.scale = target_size / tex_size
+			var scale_factor: float = min(target_size.x / tex_size.x, target_size.y / tex_size.y)
+			aliment_sprite.scale = Vector2(scale_factor, scale_factor)
 
 	if interaction_component:
 		interaction_component.player_arrived.connect(_on_player_arrived)
@@ -25,9 +27,8 @@ func _on_player_arrived() -> void:
 	var player: Player = get_tree().get_first_node_in_group("Player") as Player
 	
 	if player:
-		print("Préparation lancée...")
-		player.is_busy = true # tant que la préparation n'est pas terminé
-		await get_tree().create_timer(food_data.preparation_time).timeout
+		player.is_busy = true
+		await player.staff_component.start_task(GameEnums.StaffState.FOOD_PREP, food_data.preparation_time)
 
-		player.is_busy = false # préparation terminée
+		player.is_busy = false
 		food_clicked.emit(food_data)

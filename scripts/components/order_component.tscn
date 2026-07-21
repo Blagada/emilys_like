@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://dm15runckn1m6"]
+
+[ext_resource type="Script" uid="uid://cxijo8u2pyowo" path="res://scripts/components/order_component.gd" id="1_xxqls"]
+[ext_resource type="PackedScene" uid="uid://cg3oc1pl8lsjl" path="res://scenes/entities/Tables/OrderBubble.tscn" id="2_ie0xq"]
+
+[node name="OrderComponent" type="Node2D" unique_id=490812539 node_paths=PackedStringArray("order_bubble_anchor")]
+script = ExtResource("1_xxqls")
+order_bubble_anchor = NodePath("OrderBubbleAnchor")
+order_bubble_scene = ExtResource("2_ie0xq")
+
+[node name="OrderBubbleAnchor" type="Marker2D" parent="." unique_id=1178491824]

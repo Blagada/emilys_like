@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dbfm1uh4fwcr3" path="res://assets/furniture/chair.png" id="2_jclyv"]
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/Interaction_component.tscn" id="3_68kwq"]
 [ext_resource type="PackedScene" uid="uid://d3o6jvtspe4o1" path="res://scripts/components/table_component.tscn" id="4_74kbq"]
+[ext_resource type="PackedScene" uid="uid://dm15runckn1m6" path="res://scripts/components/order_component.tscn" id="5_ppnig"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tpsah"]
 atlas = ExtResource("1_c21dl")
@@ -19,18 +20,19 @@ size = Vector2(185, 94)
 [node name="Table_pour_deux" type="Node2D" unique_id=443123715 groups=["Table"]]
 
 [node name="Table" type="StaticBody2D" parent="." unique_id=1658989343]
+position = Vector2(0, -47)
 collision_mask = 0
 
 [node name="TableCollision" type="CollisionPolygon2D" parent="Table" unique_id=274124338]
-position = Vector2(0.5, 34.25)
+position = Vector2(1, -7)
 rotation = -0.0030897078
-polygon = PackedVector2Array(-0.37563708, -40.25135, -36.44962, -16.362696, -35.517597, 5.6402893, 38.482048, 5.868927, 38.540752, -13.130981)
+polygon = PackedVector2Array(-0.37563708, -40.25135, -36.44962, -16.362696, -36.135777, 43.888557, 37.86387, 44.117195, 38.540752, -13.130981)
 
 [node name="TableSprite2D" type="Sprite2D" parent="Table" unique_id=1763519983]
 texture = SubResource("AtlasTexture_tpsah")
 
 [node name="Chaise_gauche" type="StaticBody2D" parent="." unique_id=557980110]
-position = Vector2(-60, -2)
+position = Vector2(-60, -49)
 collision_layer = 8
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7fxvm")
@@ -45,7 +47,7 @@ scale = Vector2(1.5, 1.5)
 texture = SubResource("AtlasTexture_6bsor")
 
 [node name="Chaise_droite" type="StaticBody2D" parent="." unique_id=554378070]
-position = Vector2(64, -2)
+position = Vector2(64, -49)
 collision_layer = 8
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_7fxvm")
@@ -60,7 +62,6 @@ texture = SubResource("AtlasTexture_6bsor")
 flip_h = true
 
 [node name="InteractionComponent" parent="." unique_id=264114937 instance=ExtResource("3_68kwq")]
-position = Vector2(0, 47)
 
 [node name="ZoneDeClic" type="CollisionShape2D" parent="InteractionComponent" unique_id=462389672]
 position = Vector2(0, -47)
@@ -68,13 +69,20 @@ shape = SubResource("RectangleShape2D_7fxvm")
 debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)
 
 [node name="ChairPositions" type="Node2D" parent="." unique_id=2024955540]
+position = Vector2(0, -47)
 
 [node name="LeftChair" type="Marker2D" parent="ChairPositions" unique_id=1757810520]
-position = Vector2(-61, -2)
+position = Vector2(-61, 28)
 
 [node name="RightChair" type="Marker2D" parent="ChairPositions" unique_id=804391825]
-position = Vector2(63, -2)
+position = Vector2(63, 28)
 
-[node name="TableComponent" parent="." unique_id=1795287937 node_paths=PackedStringArray("chair_positions", "interaction_component") instance=ExtResource("4_74kbq")]
+[node name="TableComponent" parent="." unique_id=1795287937 node_paths=PackedStringArray("chair_positions", "interaction_component", "order_component") instance=ExtResource("4_74kbq")]
+position = Vector2(0, -47)
 chair_positions = NodePath("../ChairPositions")
 interaction_component = NodePath("../InteractionComponent")
+order_component = NodePath("../OrderComponent")
+
+[node name="OrderComponent" parent="." unique_id=490812539 instance=ExtResource("5_ppnig")]
+y_sort_enabled = true
+position = Vector2(0, -107)

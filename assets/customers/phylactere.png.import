@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb3l1prnpbb37"
-path="res://.godot/imported/Gemini_Generated_Image_y700uky700uky700.png-ea89cd66594319328b3803be1af2a3d3.ctex"
+uid="uid://c5u2rxmxxfawm"
+path="res://.godot/imported/phylactere.png-068d51c102ec8333fdeb1d234ba26f45.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/foods/Gemini_Generated_Image_y700uky700uky700.png"
-dest_files=["res://.godot/imported/Gemini_Generated_Image_y700uky700uky700.png-ea89cd66594319328b3803be1af2a3d3.ctex"]
+source_file="res://assets/customers/phylactere.png"
+dest_files=["res://.godot/imported/phylactere.png-068d51c102ec8333fdeb1d234ba26f45.ctex"]
 
 [params]
 

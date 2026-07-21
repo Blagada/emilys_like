@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://njl8cv1qs2e"
-path="res://.godot/imported/food_nouilles.png-ec8b2ab5a1e0851a77d65fb6ce21655f.ctex"
+uid="uid://dvlq5oqtvmo6n"
+path="res://.godot/imported/food_pancake.png-e10ff341f0b5dd50934477ecc256198d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/foods/food_nouilles.png"
-dest_files=["res://.godot/imported/food_nouilles.png-ec8b2ab5a1e0851a77d65fb6ce21655f.ctex"]
+source_file="res://assets/foods/food_pancake.png"
+dest_files=["res://.godot/imported/food_pancake.png-e10ff341f0b5dd50934477ecc256198d.ctex"]
 
 [params]
 

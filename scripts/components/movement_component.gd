@@ -33,3 +33,7 @@ func get_velocity_for_movement() -> Vector2:
 func _on_navigation_finished()-> void:
 	print("DEBUG: Arrivé !")
 	destination_reached.emit()
+	
+	
+func has_arrived() -> bool:
+	return not nav_agent or nav_agent.is_navigation_finished()

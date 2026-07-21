@@ -4,6 +4,7 @@ class_name BaseCustomerSkin
 @onready var sprite_customer: Sprite2D = $SpriteCustomer
 @onready var animated_customer: AnimatedSprite2D = $AnimatedCustomer
 
+
 func on_state_changed(new_state: GameEnums.CustomerState, target_pos: Vector2) -> void:
 	match new_state:
 		GameEnums.CustomerState.MOVING:
@@ -13,7 +14,7 @@ func on_state_changed(new_state: GameEnums.CustomerState, target_pos: Vector2) -
 			update_orientation(target_pos)
 			#animated_customer.play("sit")
 		#idle, eat
-		
+
 
 func update_orientation(target_position: Vector2) -> void:
 	# Mise à jour de l'orientation basée sur la position

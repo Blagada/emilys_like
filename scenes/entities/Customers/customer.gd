@@ -9,6 +9,7 @@ signal state_changed(new_state: GameEnums.CustomerState, target_pos: Vector2)
 
 var current_order: FoodData
 var customer_data: CustomerData
+var current_state: GameEnums.CustomerState
 
 func _physics_process(_delta: float) -> void:
 	velocity = movement_component.get_velocity_for_movement()
@@ -43,9 +44,14 @@ func apply_data(new_data: CustomerData) -> void:
 
 
 func change_state(new_state: GameEnums.CustomerState, target_pos: Vector2 = Vector2.ZERO) -> void:
+	current_state = new_state
 	state_changed.emit(new_state, target_pos)
 
 
+func set_order(food: FoodData)-> void:
+	current_order = food
+	
+	
 func move_to_table(table_marker: Marker2D, table_position: Vector2) -> void:
 	# Lancement du mouvement vers la table
 	change_state(GameEnums.CustomerState.MOVING) # change l'état du client pour Marcher
@@ -63,5 +69,7 @@ func move_to_table(table_marker: Marker2D, table_position: Vector2) -> void:
 	print("Client assis et collision désactivée.")
 
 
-func set_order(food: FoodData)-> void:
-	current_order = food
+func move_to(target_marker: Marker2D, state: GameEnums.CustomerState = GameEnums.CustomerState.MOVING) -> void:
+	change_state(state)
+	movement_component.set_target(target_marker.global_position)
+	await movement_component.destination_reached

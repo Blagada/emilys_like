@@ -4,7 +4,8 @@ class_name LevelComponent
 @export var tray_places: TrayComponent
 @export var customer_spawner: SpawnComponent
 @export var level_menu: LevelMenu
-
+@export var sitting_animation_delay: float = 0.3
+@export var payment_queue: PaymentQueueComponent
 @onready var spawn_button: Button = $"../../ZoneFixe/SpawnButton"
 
 func _ready():
@@ -23,8 +24,8 @@ func _ready():
 	for table_node: Node in get_tree().get_nodes_in_group("Table"):
 		var table_comp = table_node.get_node_or_null("TableComponent")
 		if table_comp:
-			table_comp.all_orders_served.connect(_on_all_orders_served.bind(table_comp))
-			
+			table_comp.order_component.all_orders_served.connect(_on_all_orders_served.bind(table_comp))
+
 
 func _on_customer_group_spawned(group: Array[Customer]) -> void:
 	var all_tables: Array[Node] = get_tree().get_nodes_in_group("Table")
@@ -43,37 +44,52 @@ func _on_customer_group_spawned(group: Array[Customer]) -> void:
 	if seats.size() == group_size:
 		for i: int in range(group_size):
 			var customer: Customer = group[i]
-			assigned_table.seated_customers.append(customer)
-			customer.state_changed.connect(_on_customer_seated.bind(customer))
+			assigned_table.order_component.seated_customers.append(customer)
 			customer.move_to_table(seats[i], assigned_table.global_position)
+		_handle_group_ordering(assigned_table, group)
 
 
-func _on_customer_seated(new_state: GameEnums.CustomerState, _target_pos: Vector2, customer: Customer) -> void:
-	if new_state != GameEnums.CustomerState.SITTING:
-		return
+func _handle_group_ordering(assigned_table: TableComponent, group: Array[Customer]) -> void:
+	for customer: Customer in group:
+		if not customer.movement_component.has_arrived():
+			await customer.movement_component.destination_reached
 
-	var order_delay: float = 500.0 / customer.customer_data.speed
+	await get_tree().create_timer(sitting_animation_delay).timeout
+	for customer: Customer in group:
+		customer.change_state(GameEnums.CustomerState.WAITING_TO_ORDER)
+	assigned_table.order_component.show_thinking()
+
+	var order_delay: float = 500.0 / group[0].customer_data.speed
 	await get_tree().create_timer(order_delay).timeout
 
-	customer.set_order(level_menu.get_random_food())
-	print(customer.name, " commande : ", customer.current_order.resource_path)
+	for customer: Customer in group:
+		customer.set_order(level_menu.get_random_food())
+		customer.change_state(GameEnums.CustomerState.ORDERING)
+		print(customer.name, " commande : ", customer.current_order.resource_path)
+
+	assigned_table.order_component.update_order_bubble()
 
 
 func _on_all_orders_served(table: TableComponent) -> void:
-	for customer: Customer in table.seated_customers:
-		_start_eating(customer)
+	table.current_state = GameEnums.TableState.IN_MEAL
+	var customers: Array[Customer] = table.order_component.seated_customers
 
+	for customer: Customer in customers:
+		customer.change_state(GameEnums.CustomerState.EATING)
 
-func _start_eating(customer: Customer) -> void:
-	customer.change_state(GameEnums.CustomerState.EATING)
-
-	var eating_delay: float = 800.0 / customer.customer_data.speed
+	var eating_delay: float = 800.0 / customers[0].customer_data.speed
 	await get_tree().create_timer(eating_delay).timeout
 
-	customer.change_state(GameEnums.CustomerState.WAITING_FOR_PAYMENT)
+	for customer: Customer in customers:
+		customer.change_state(GameEnums.CustomerState.WAITING_FOR_PAYMENT)
+
+	table.order_component.show_payment()
+	table.current_state = GameEnums.TableState.WAITING_FOR_PAYMENT
+	payment_queue.enqueue(customers[0], table)
+
 
 # TODO : BOUTON TEST. À effacer lorsque les clients entreront aléatoirement dans le restaurant
 func _on_spawn_button_pressed() -> void:
 	# Appelle ton spawn avec un groupe aléatoire pour tester
-	var random_size = randi_range(1, 4)
+	# var random_size = randi_range(1, 4)
 	customer_spawner.spawn_entity()

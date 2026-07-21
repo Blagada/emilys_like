@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="FoodData" format=3 uid="uid://bkgebied14hhc"]
+
+[ext_resource type="Script" uid="uid://cv00lidll5uk0" path="res://resources/foods/food_data.gd" id="1_urk3t"]
+[ext_resource type="Texture2D" uid="uid://b1lm8e6cmvl2j" path="res://assets/foods/food_salmon.png" id="2_mrvaw"]
+
+[resource]
+script = ExtResource("1_urk3t")
+name = "Saumon"
+sprite = ExtResource("2_mrvaw")
+preparation_time = 2.0
+price = 25
+metadata/_custom_type_script = "uid://cv00lidll5uk0"

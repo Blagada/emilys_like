@@ -1,13 +1,7 @@
 [gd_scene format=3 uid="uid://ef3q0rvptar7"]
 
 [ext_resource type="Script" uid="uid://cm4wis5ivh5wy" path="res://scenes/entities/Tray/tray_component.gd" id="1_2odtk"]
-
-[sub_resource type="Curve" id="Curve_ashcm"]
-_data = [Vector2(0.23547402, 0.32621956), 0.0, 0.0, 0, 0, Vector2(0.85932726, 0.75426835), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_2odtk"]
-curve = SubResource("Curve_ashcm")
+[ext_resource type="Texture2D" uid="uid://c5suymunjk48c" path="res://assets/furniture/tray.png" id="2_l2uke"]
 
 [node name="TrayComponent" type="Control" unique_id=298009879 groups=["Tray"]]
 layout_mode = 3
@@ -15,16 +9,34 @@ anchor_right = 0.44400004
 anchor_bottom = 0.19800001
 offset_right = -511.48804
 offset_bottom = -128.30402
+grow_horizontal = 2
+grow_vertical = 0
 script = ExtResource("1_2odtk")
+metadata/_edit_use_anchors_ = true
 
 [node name="TrayContainer" type="NinePatchRect" parent="." unique_id=28782819]
+custom_minimum_size = Vector2(100, 64)
 layout_mode = 0
-offset_right = 320.0
-offset_bottom = 96.0
-texture = SubResource("CurveTexture_2odtk")
+offset_right = 20.0
+offset_bottom = 20.0
+texture = ExtResource("2_l2uke")
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
 
-[node name="ZoneDepotFoods" type="GridContainer" parent="TrayContainer" unique_id=887182427]
-layout_mode = 0
-offset_right = 320.0
-offset_bottom = 96.0
-columns = 3
+[node name="MarginContainer" type="MarginContainer" parent="TrayContainer" unique_id=543864869]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ZoneDepotFoods" type="HBoxContainer" parent="TrayContainer/MarginContainer" unique_id=1251400569]
+layout_mode = 2
+theme_override_constants/separation = 6

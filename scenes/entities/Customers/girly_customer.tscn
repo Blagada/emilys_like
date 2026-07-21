@@ -5,7 +5,7 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ot5uo"]
 atlas = ExtResource("2_rvjbn")
-region = Rect2(72, 48, 32, 102)
+region = Rect2(64, 48, 40, 102)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
 
@@ -13,11 +13,11 @@ region = Rect2(72, 48, 32, 102)
 script = ExtResource("1_sgh6d")
 
 [node name="SpriteCustomer" type="Sprite2D" parent="." unique_id=1778173962]
-position = Vector2(2.3841858e-07, 4.7683716e-07)
-scale = Vector2(1.7421875, 1.7421875)
+position = Vector2(2.8437538, -31.348427)
+scale = Vector2(1.5421877, 1.5421877)
 texture = SubResource("AtlasTexture_ot5uo")
 
 [node name="AnimatedCustomer" type="AnimatedSprite2D" parent="." unique_id=782895180]
-position = Vector2(2.3841858e-07, 4.7683716e-07)
-scale = Vector2(1.7421875, 1.7421875)
+position = Vector2(2.8437538, -31.348427)
+scale = Vector2(1.5421877, 1.5421877)
 sprite_frames = SubResource("SpriteFrames_g4v7s")

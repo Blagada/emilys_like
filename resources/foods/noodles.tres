@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FoodData" format=3 uid="uid://dmo3cvmxn6cti"]
+
+[ext_resource type="Script" uid="uid://cv00lidll5uk0" path="res://resources/foods/food_data.gd" id="1_akv3s"]
+[ext_resource type="Texture2D" uid="uid://njl8cv1qs2e" path="res://assets/foods/food_nouilles.png" id="2_tcs2t"]
+
+[resource]
+script = ExtResource("1_akv3s")
+name = "Nouilles"
+sprite = ExtResource("2_tcs2t")
+metadata/_custom_type_script = "uid://cv00lidll5uk0"

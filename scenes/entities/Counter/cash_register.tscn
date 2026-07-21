@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b4rs3eptext0j"]
+
+[ext_resource type="Texture2D" uid="uid://bgac03pjid7i8" path="res://assets/furniture/caisse-enregistreuse.png" id="1_rog4u"]
+
+[node name="CashRegister" type="Node2D" unique_id=266037700]
+scale = Vector2(0.85, 0.85)
+
+[node name="CashRegisterTexture" type="TextureRect" parent="." unique_id=444656124]
+offset_right = 600.0
+offset_bottom = 730.0
+scale = Vector2(0.061038088, 0.061038088)
+texture = ExtResource("1_rog4u")
+stretch_mode = 3

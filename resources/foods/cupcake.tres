@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="FoodData" format=3 uid="uid://c7f4dnl7hrimb"]
 
 [ext_resource type="Script" uid="uid://cv00lidll5uk0" path="res://resources/foods/food_data.gd" id="1_g4wxu"]
-[ext_resource type="Texture2D" uid="uid://bb3l1prnpbb37" path="res://assets/foods/Gemini_Generated_Image_y700uky700uky700.png" id="2_xynma"]
+[ext_resource type="Texture2D" uid="uid://dqxt1irufdwgn" path="res://assets/foods/food_cupcake.png" id="2_xynma"]
 
 [resource]
 script = ExtResource("1_g4wxu")

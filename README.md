@@ -32,13 +32,23 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
   - `is_busy` qui restait bloqué après un clic sur le comptoir (rien n'écoutait `player_arrived`)
 - README du projet rédigé
 
+### Dernière session
+- Fix ratio images comptoir (aliments.gd) : scale calculé avec min(target/tex.x, target/tex.y) au lieu d'une division qui écrasait le ratio
+- Refactor table_component.gd → séparation des responsabilités :
+	- Nouveau order_component.gd : gère seated_customers, serve_food(), has_servable_customer(), signal all_orders_served
+	- table_component.gd : garde uniquement sièges/état de table, délègue à order_component
+- Phylactère de commande par table (order_bubble.gd + scène OrderBubble.tscn) :
+	- Une bulle par table (pas par client), positionnée via Marker2D (order_bubble_anchor) + bubble_offset ajustable en inspecteur
+	- Affichage "..." pendant la réflexion (show_thinking()), grid des commandes une fois prêtes (set_orders())
+	- Bugs réglés en cours de route : TextureRect.expand_mode, ancrages Control mal configurés, écrasement du ratio des icônes
+- Timer de commande groupé : démarre une fois que tout le groupe est assis (délégué à _handle_group_ordering dans level_manager.gd), basé sur la vitesse du groupe
+	- Délai avant "..." (sitting_animation_delay, exposé en @export) pour laisser de la place à une future animation d'assise
+	- Fix race condition : movement_component.has_arrived() ajouté pour éviter un await bloqué indéfiniment si le client est déjà arrivé avant que l'écoute du signal commence (bug touchant surtout les tables à 2)
 ---
 
 ## 🔧 En cours / prochaine étape discutée
 
-- **Timer de commande basé sur la vitesse du client** : le délai avant qu'un client commande dépend de sa `speed`. Décision prise : le timer démarre seulement une **fois que tout le groupe est assis** (pas individuellement). Comme un groupe = toujours un seul type de client, tout le groupe commande, mange, et sera impatient **en même temps**.
-  - *Statut : discussion entamée, aucun code écrit encore — à reprendre.*
-— **bulle de dialogue au-dessus des clients** (icône de la commande, "..." pendant qu'ils réfléchissent). Actuellement l'info n'existe qu'en `print` — besoin de la valider visuellement en jeu.
+- Aucun chantier ouvert non terminé — la feature "commande + phylactère" est fonctionnelle de bout en bout
 
 ---
 
@@ -59,6 +69,9 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - [ ] Délai différent par type de client, incluant le parcours complet vers le paiement (patience — mis de côté pour le niveau 1 pour l'instant, à revoir plus tard)
 - [ ] Délai/minuterie de la journée : heures d'ouverture définies pour le niveau (pas aléatoire), resto ferme une fois le dernier client sorti après l'heure de fermeture. Certains niveaux plus difficiles pourraient avoir plusieurs périodes d'ouverture (déjeuner, dîner, souper).
   - Menu choisi par le joueur en début de journée (par défaut, celui choisi la veille), avec une animation pour le changement d'aliments entre les services
+
+### Assets
+- [ ] Uniformiser tous les sprites d'aliments en 64x64 (évite les soucis de ratio/écrasement rencontrés avec le phylactère)
 
 ### Plus tard
 - [ ] Écran de menu (menu principal du jeu)
