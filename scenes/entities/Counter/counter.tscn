@@ -59,11 +59,16 @@ shape = SubResource("RectangleShape2D_7fxvm")
 debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)
 
 [node name="PaymentFeedbackLabel" type="Label" parent="." unique_id=199721748]
-offset_left = -95.0
-offset_top = -38.0
-offset_right = -21.0
-offset_bottom = -15.0
+visible = false
+offset_left = -96.0
+offset_top = -11.0
+offset_right = -22.0
+offset_bottom = 12.0
 theme = SubResource("Theme_g4v7s")
+theme_override_colors/font_color = Color(1, 0.7647059, 0.023529412, 1)
+theme_override_colors/font_shadow_color = Color(0.15294118, 0.015686275, 0.05490196, 0.77254903)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 12
 text = "$"
 horizontal_alignment = 1
 vertical_alignment = 1

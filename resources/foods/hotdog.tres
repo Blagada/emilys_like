@@ -8,5 +8,5 @@ script = ExtResource("1_4gngx")
 name = "Hot dog"
 sprite = ExtResource("2_vc8ht")
 preparation_time = 0.4
-price = 4
+price = 5
 metadata/_custom_type_script = "uid://cv00lidll5uk0"

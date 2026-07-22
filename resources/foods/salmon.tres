@@ -8,5 +8,5 @@ script = ExtResource("1_urk3t")
 name = "Saumon"
 sprite = ExtResource("2_mrvaw")
 preparation_time = 2.0
-price = 25
+price = 35
 metadata/_custom_type_script = "uid://cv00lidll5uk0"

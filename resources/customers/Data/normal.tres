@@ -5,4 +5,5 @@
 
 [resource]
 script = ExtResource("2_wbjqv")
+tip_multiplier = 0.15
 metadata/_custom_type_script = "uid://coyjgufjo44k3"

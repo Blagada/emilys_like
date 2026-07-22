@@ -22,30 +22,30 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - Système de commande complet : phylactère par table (icône "..." puis commandes), timer basé sur la vitesse du groupe
 - Renommage des dossiers en anglais, typage statique renforcé partout
 - Séparation des responsabilités : `OrderComponent` (commandes/service) distinct de `TableComponent` (sièges/état)
+- Cycle paiement + nettoyage + machine à états (1re passe) : file d'attente à la caisse (`PaymentQueueComponent`), `StaffComponent` (animations pilotées par état), machine à états clients complétée
 
-### Session la plus récente — Cycle paiement + nettoyage + machine à états complète
-- File d'attente à la caisse (`PaymentQueueComponent`) : les clients se placent aux markers devant le comptoir, le représentant du groupe se déplace et paie au clic du joueur sur la caisse
-- Cycle client complet, de bout en bout : commande → service → manger → attente de paiement (bulle `$`) → file d'attente → sortie du restaurant
-- Nettoyage de table : clic sur une table sale (`UNOCCUPIED_AND_DIRTY`) → le joueur nettoie (délai) → table redevient propre et réutilisable
-- `StaffComponent` créé (réutilisable joueur + futur staff) : gère un état (`WAITING`, `MOVING`, `FOOD_PREP`, `DELIVERING`, `CLEANING`)
-- Les animations du joueur sont maintenant pilotées par son état, plus par sa vélocité seule
-- Machine à états des clients complétée : tous les moments (commande, manger, paiement) déclenchent maintenant le bon `CustomerState`, visible en temps réel dans l'onglet Distant
-- Plusieurs bugs de navigation/timing corrigés (voir `ROADMAP.md` pour le détail technique)
+### Session la plus récente — Montant du paiement + nettoyage anticipé + polish visuel
+- **Nettoyage anticipé** : une table encore occupée (clients en attente de paiement) peut être nettoyée par le joueur ; si nettoyée en avance, elle redevient propre instantanément au départ des clients
+- **Calcul du montant réel** : le prix des commandes s'accumule par table, le pourboire se calcule à la caisse (`tip_rate`, un vrai pourcentage plutôt qu'un multiplicateur), affiché en feedback au-dessus de la caisse
+- **`OrderBubble` généralisée** : un seul composant de bulle (texte libre ou grille de commandes), réutilisé pour les tables, le `$` du représentant en file, et prêt pour les futures commandes au comptoir
+- **Suivi des montants** : `daily_earnings` (total du jour) et `tip_fund` (cagnotte pour la déco, persiste entre les journées) — accumulés à chaque paiement, pas encore affichés à l'écran
+- **Polish visuel** : animation de disparition (fade + shrink) sur les items retirés du tray, animation "pop" sur le feedback de montant à la caisse
+- Fix ratio d'affichage en plein écran (`project.godot`)
 
 ---
 
 ## 🔧 En cours / prochaine étape
 
-- **Paiement à la caisse** : calculer le montant dû selon le prix des aliments commandés à la table + le `tip_multiplier` du type de client. C'est la prochaine priorité.
+- **Affichage à l'écran** de `daily_earnings` et `tip_fund` (les variables sont prêtes côté `GameDataManager`, reste l'UI)
 
 ---
 
 ## 📋 À faire (basé sur les notes de conception)
 
 ### Boucle de jeu principale
-- [ ] Calcul du paiement (prix des commandes + pourboires selon type de client) — **priorité actuelle**
+- [ ] Affichage à l'écran des montants (`daily_earnings`, `tip_fund`) — **priorité actuelle**
 - [ ] Clients qui partent si aucune table disponible / bon nombre de places
-- [ ] Réinitialisation complète d'un groupe à une table (à valider une fois le paiement en place)
+- [ ] Réinitialisation complète d'un groupe à une table (à revalider avec le flow de nettoyage anticipé)
 
 ### Comptoir
 - [ ] Clarifier le comportement de `DELIVERING` (actuellement dérivé de `MOVING` + tray non vide plutôt qu'un état séparé)

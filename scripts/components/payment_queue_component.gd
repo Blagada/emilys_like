@@ -41,9 +41,11 @@ func _on_player_arrived() -> void:
 
 func _complete_payment(table: TableComponent, representative) -> void:
 	var bill: float = table.order_component.total_bill
-	var tip: float = bill * representative.customer_data.tip_multiplier
+	var tip: float = bill * representative.customer_data.tip_rate
 	var total_due: float = bill + tip
-
+	GameDataManager.daily_earnings += total_due
+	GameDataManager.tip_fund += tip
+	print(GameDataManager.daily_earnings, ", ", GameDataManager.tip_fund)
 	_show_payment_feedback(bill, tip, total_due)
 
 	table.occupied_seats.clear()
@@ -56,15 +58,27 @@ func _complete_payment(table: TableComponent, representative) -> void:
 		_send_customer_to_exit(customer)
 
 
-func _show_payment_feedback(bill: float, tip: float, total: float) -> void:
+func _show_payment_feedback(bill: float, tip: float, _total: float) -> void:
 	if not payment_feedback_label:
 		return
 
 	payment_feedback_label.text = "%.2f$ (+ %.2f$ tip)" % [bill, tip]
-	print("total du paiement : ", total)
+	payment_feedback_label.pivot_offset = payment_feedback_label.size / 2
+	payment_feedback_label.modulate.a = 0.0
+	payment_feedback_label.scale = Vector2.ZERO
 	payment_feedback_label.visible = true
 
+	var tween: Tween = create_tween()
+	tween.tween_property(payment_feedback_label, "scale", Vector2(1.1, 1.1), 0.15)
+	tween.parallel().tween_property(payment_feedback_label, "modulate:a", 1.0, 0.15)
+	tween.tween_property(payment_feedback_label, "scale", Vector2.ONE, 0.1)
+
 	await get_tree().create_timer(feedback_display_duration).timeout
+
+	var fade_out: Tween = create_tween()
+	fade_out.tween_property(payment_feedback_label, "modulate:a", 0.0, 0.3)
+	await fade_out.finished
+
 	payment_feedback_label.visible = false
 	
 
