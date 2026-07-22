@@ -5,6 +5,10 @@ class_name Customer
 @onready var movement_component: MovementComponent = $MovementComponent
 @onready var collision_customer: CollisionShape2D = $CollisionCustomer
 
+@export var order_bubble_anchor: Marker2D
+@export var order_bubble_scene: PackedScene
+
+var order_bubble: Node = null
 signal state_changed(new_state: GameEnums.CustomerState, target_pos: Vector2)
 
 var current_order: FoodData
@@ -45,7 +49,21 @@ func apply_data(new_data: CustomerData) -> void:
 
 func change_state(new_state: GameEnums.CustomerState, target_pos: Vector2 = Vector2.ZERO) -> void:
 	current_state = new_state
+
+	if new_state == GameEnums.CustomerState.PAYING:
+		_ensure_bubble_instance()
+		order_bubble.show_text("$")
+	elif order_bubble:
+		order_bubble.queue_free()
+		order_bubble = null
+
 	state_changed.emit(new_state, target_pos)
+
+
+func _ensure_bubble_instance() -> void:
+	if order_bubble == null:
+		order_bubble = order_bubble_scene.instantiate()
+		order_bubble_anchor.add_child(order_bubble)
 
 
 func set_order(food: FoodData)-> void:

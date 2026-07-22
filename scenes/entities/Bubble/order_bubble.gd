@@ -1,14 +1,18 @@
 extends MarginContainer
 class_name OrderBubble
 
+@export var status_label: Label
 @export var orders_grid: GridContainer
-@export var thinking_label: Label
-@export var payment_label: Label
 
 
-func set_orders(orders: Array[FoodData]) -> void:
-	thinking_label.visible = false
-	payment_label.visible = false
+func show_text(text: String) -> void:
+	orders_grid.visible = false
+	status_label.text = text
+	status_label.visible = true
+
+
+func show_orders(orders: Array[FoodData]) -> void:
+	status_label.visible = false
 	orders_grid.visible = true
 
 	for child: Node in orders_grid.get_children():
@@ -23,15 +27,3 @@ func set_orders(orders: Array[FoodData]) -> void:
 		order_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		order_icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		orders_grid.add_child(order_icon)
-
-
-func show_thinking() -> void:
-	orders_grid.visible = false
-	payment_label.visible = false
-	thinking_label.visible = true
-
-
-func show_payment() -> void:
-	orders_grid.visible = false
-	thinking_label.visible = false
-	payment_label.visible = true

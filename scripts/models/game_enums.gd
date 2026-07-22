@@ -6,7 +6,7 @@ enum TableState {
 	AWAITING_SERVICE, # Commande faite, en attente de service
 	IN_MEAL, # Tous servis, mangent
 	WAITING_FOR_PAYMENT, # Tous ont fini de manger, attendent le paiement
-	UNOCCUPIED_AND_DIRTY # Tous partis, mais besoin de nettoyage
+	WAITING_FOR_CLEANING # Tous partis, mais besoin de nettoyage
 }
 
 

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cg3oc1pl8lsjl"]
 
 [ext_resource type="Texture2D" uid="uid://c5u2rxmxxfawm" path="res://assets/customers/phylactere.png" id="1_0cipb"]
-[ext_resource type="Script" uid="uid://q0tq2quvmsi" path="res://scenes/entities/Tables/order_bubble.gd" id="1_iifam"]
+[ext_resource type="Script" uid="uid://q0tq2quvmsi" path="res://scenes/entities/Bubble/order_bubble.gd" id="1_iifam"]
 [ext_resource type="FontFile" uid="uid://cqqcrly8xbiyt" path="res://assets/fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf" id="3_b5lwo"]
 
 [sub_resource type="Theme" id="Theme_dnvie"]
@@ -12,7 +12,7 @@ font = ExtResource("3_b5lwo")
 font_size = 50
 font_color = Color(0, 0, 0, 1)
 
-[node name="OrderBubble" type="MarginContainer" unique_id=1798342269 node_paths=PackedStringArray("orders_grid", "thinking_label", "payment_label")]
+[node name="OrderBubble" type="MarginContainer" unique_id=1798342269 node_paths=PackedStringArray("status_label", "orders_grid")]
 z_index = 1
 y_sort_enabled = true
 custom_minimum_size = Vector2(0, 100)
@@ -31,9 +31,8 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 theme = SubResource("Theme_dnvie")
 script = ExtResource("1_iifam")
+status_label = NodePath("StatusLabel")
 orders_grid = NodePath("MarginContainer/GridContainer")
-thinking_label = NodePath("WaitingLabel")
-payment_label = NodePath("PaymentLabel")
 
 [node name="OrderBubbleTexture" type="NinePatchRect" parent="." unique_id=813537690]
 layout_mode = 2
@@ -55,16 +54,10 @@ clip_contents = true
 layout_mode = 2
 columns = 2
 
-[node name="WaitingLabel" type="Label" parent="." unique_id=212082438]
+[node name="StatusLabel" type="Label" parent="." unique_id=212082438]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 text = "..."
 label_settings = SubResource("LabelSettings_8ssq5")
 horizontal_alignment = 1
-
-[node name="PaymentLabel" type="Label" parent="." unique_id=1666016477]
-layout_mode = 2
-text = "$"
-label_settings = SubResource("LabelSettings_8ssq5")
-horizontal_alignment = 1
-vertical_alignment = 1

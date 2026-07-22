@@ -45,6 +45,8 @@ func _on_customer_group_spawned(group: Array[Customer]) -> void:
 		for i: int in range(group_size):
 			var customer: Customer = group[i]
 			assigned_table.order_component.seated_customers.append(customer)
+			assigned_table.is_dirty = true
+			assigned_table.order_component.total_bill = 0.0
 			customer.move_to_table(seats[i], assigned_table.global_position)
 		_handle_group_ordering(assigned_table, group)
 
@@ -63,7 +65,9 @@ func _handle_group_ordering(assigned_table: TableComponent, group: Array[Custome
 	await get_tree().create_timer(order_delay).timeout
 
 	for customer: Customer in group:
-		customer.set_order(level_menu.get_random_food())
+		var food: FoodData = level_menu.get_random_food()
+		customer.set_order(food)
+		assigned_table.order_component.total_bill += food.price
 		customer.change_state(GameEnums.CustomerState.ORDERING)
 		print(customer.name, " commande : ", customer.current_order.resource_path)
 
@@ -83,7 +87,7 @@ func _on_all_orders_served(table: TableComponent) -> void:
 	for customer: Customer in customers:
 		customer.change_state(GameEnums.CustomerState.WAITING_FOR_PAYMENT)
 
-	table.order_component.show_payment()
+	table.order_component.show_dirty()
 	table.current_state = GameEnums.TableState.WAITING_FOR_PAYMENT
 	payment_queue.enqueue(customers[0], table)
 

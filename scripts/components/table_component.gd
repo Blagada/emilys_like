@@ -10,7 +10,7 @@ class_name TableComponent
 @export var cleaning_duration: float = 3.0
 
 var occupied_seats: Array[Marker2D] = [] # Liste pour garder en mémoire quels sièges sont pris
-
+var is_dirty: bool = false
 
 func _ready() -> void:
 	if interaction_component:
@@ -20,12 +20,14 @@ func _ready() -> void:
 func _on_player_arrived()-> void:
 	var player: Node = get_tree().get_first_node_in_group("Player")
 
-	if current_state == GameEnums.TableState.UNOCCUPIED_AND_DIRTY:
+	var can_clean: bool = current_state == GameEnums.TableState.WAITING_FOR_CLEANING \
+		or (current_state == GameEnums.TableState.WAITING_FOR_PAYMENT and is_dirty)
+
+	if can_clean:
 		_start_cleaning(player)
-		print(current_state, " : état de la table")
 		return
 
-	order_component.serve_food() # Appel serve_food à partir de la composante Order
+	order_component.serve_food()
 	if player and player.has_method("set_busy"):
 		player.is_busy = false
 
@@ -37,8 +39,12 @@ func _start_cleaning(player: Node) -> void:
 	player.is_busy = true
 	await player.staff_component.start_task(GameEnums.StaffState.CLEANING, cleaning_duration)
 
-	occupied_seats.clear()
-	current_state = GameEnums.TableState.UNOCCUPIED_AND_CLEAN
+	is_dirty = false
+	order_component.hide_order_bubble()
+
+	if current_state == GameEnums.TableState.WAITING_FOR_CLEANING:
+		current_state = GameEnums.TableState.UNOCCUPIED_AND_CLEAN
+
 	player.is_busy = false
 
 

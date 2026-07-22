@@ -4,9 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/Interaction_component.tscn" id="3_7fxvm"]
 [ext_resource type="PackedScene" uid="uid://b4rs3eptext0j" path="res://scenes/entities/Counter/cash_register.tscn" id="3_nhco1"]
 [ext_resource type="PackedScene" uid="uid://ddsj0q2qq7sob" path="res://scripts/components/payment_queue_component.tscn" id="3_o58yy"]
+[ext_resource type="FontFile" uid="uid://cqqcrly8xbiyt" path="res://assets/fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf" id="5_7gn7i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fxvm"]
 size = Vector2(31, 51)
+
+[sub_resource type="Theme" id="Theme_g4v7s"]
+default_font = ExtResource("5_7gn7i")
 
 [node name="Comptoir" type="Node2D" unique_id=1212267104]
 
@@ -41,9 +45,10 @@ polygon = PackedVector2Array(-93, 19, -94, 46, 38, 47, 38, 95, 90, 95, 90, 18)
 [node name="CashRegister" parent="." unique_id=266037700 instance=ExtResource("3_nhco1")]
 position = Vector2(-74, -3.9999962)
 
-[node name="PaymentQueueComponent" parent="." unique_id=1700191971 node_paths=PackedStringArray("interaction_component") instance=ExtResource("3_o58yy")]
+[node name="PaymentQueueComponent" parent="." unique_id=1700191971 node_paths=PackedStringArray("interaction_component", "payment_feedback_label") instance=ExtResource("3_o58yy")]
 position = Vector2(0, 11)
 interaction_component = NodePath("../InteractionComponent")
+payment_feedback_label = NodePath("../PaymentFeedbackLabel")
 
 [node name="InteractionComponent" parent="." unique_id=1478060783 instance=ExtResource("3_7fxvm")]
 position = Vector2(-65, 47)
@@ -52,3 +57,13 @@ position = Vector2(-65, 47)
 position = Vector2(7, -26)
 shape = SubResource("RectangleShape2D_7fxvm")
 debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)
+
+[node name="PaymentFeedbackLabel" type="Label" parent="." unique_id=199721748]
+offset_left = -95.0
+offset_top = -38.0
+offset_right = -21.0
+offset_bottom = -15.0
+theme = SubResource("Theme_g4v7s")
+text = "$"
+horizontal_alignment = 1
+vertical_alignment = 1

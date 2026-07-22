@@ -7,6 +7,7 @@ class_name OrderComponent
 signal all_orders_served
 
 var seated_customers: Array[Customer] = [] # type de client assis à table
+var total_bill: float = 0.0
 var order_bubble: Node = null
 
 
@@ -47,8 +48,8 @@ func _all_customers_served() -> bool:
 		if customer.current_order != null:
 			return false
 	return true
-	
-	
+
+
 func update_order_bubble() -> void:
 	var orders: Array[FoodData] = []
 	for customer: Customer in seated_customers:
@@ -60,7 +61,17 @@ func update_order_bubble() -> void:
 		return
 
 	_ensure_bubble_instance()
-	order_bubble.set_orders(orders)
+	order_bubble.show_orders(orders)
+
+
+func show_thinking() -> void:
+	_ensure_bubble_instance()
+	order_bubble.show_text("...")
+
+
+func show_dirty() -> void:
+	_ensure_bubble_instance()
+	order_bubble.show_text("!")
 
 
 func hide_order_bubble() -> void:
@@ -68,15 +79,6 @@ func hide_order_bubble() -> void:
 		order_bubble.queue_free()
 		order_bubble = null
 
-
-func show_thinking() -> void:
-	_ensure_bubble_instance()
-	order_bubble.show_thinking()
-
-
-func show_payment() -> void:
-	_ensure_bubble_instance()
-	order_bubble.show_payment()
 
 func _ensure_bubble_instance() -> void:
 	if order_bubble == null:

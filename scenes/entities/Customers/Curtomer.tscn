@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://cnsjgwkj8i6mf" path="res://scenes/entities/Customers/customer.gd" id="1_ujya7"]
 [ext_resource type="PackedScene" uid="uid://beb8n78sa7hsm" path="res://scripts/components/movement_component.tscn" id="2_ht86k"]
+[ext_resource type="PackedScene" uid="uid://cg3oc1pl8lsjl" path="res://scenes/entities/Bubble/OrderBubble.tscn" id="2_mlkye"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 
-[node name="Customer" type="CharacterBody2D" unique_id=900058847]
+[node name="Customer" type="CharacterBody2D" unique_id=900058847 node_paths=PackedStringArray("order_bubble_anchor")]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_ujya7")
+order_bubble_anchor = NodePath("OrderBubbleAnchor")
+order_bubble_scene = ExtResource("2_mlkye")
 
 [node name="CollisionCustomer" type="CollisionShape2D" parent="." unique_id=611089329]
 position = Vector2(1, 0)
@@ -23,3 +26,6 @@ position = Vector2(0, -44)
 position = Vector2(0, -44)
 nav_agent = NodePath("../NavigationCustomer")
 character_body = NodePath("..")
+
+[node name="OrderBubbleAnchor" type="Marker2D" parent="." unique_id=1645694260]
+position = Vector2(0, -149)
