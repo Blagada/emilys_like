@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://ef3q0rvptar7" path="res://scenes/entities/Tray/tray.tscn" id="10_v6ha0"]
 [ext_resource type="PackedScene" uid="uid://boj0snxc5fiux" path="res://scripts/components/spawn_component.tscn" id="11_excbq"]
 [ext_resource type="PackedScene" uid="uid://bnioo1o1b4tm2" path="res://scenes/UI/earnings_gauge.tscn" id="11_wtwp4"]
+[ext_resource type="PackedScene" uid="uid://cminyncmj2pix" path="res://scenes/UI/tip_jar_display.tscn" id="14_bahl2"]
 
 [sub_resource type="Gradient" id="Gradient_bswci"]
 colors = PackedColorArray(0.3331272, 0.2804408, 0.29143158, 1, 0.9337711, 0.8549367, 0.8047589, 1)
@@ -228,6 +229,12 @@ offset_top = 10.0
 offset_right = 597.0
 offset_bottom = 41.0
 text = "Spawn clients"
+
+[node name="TipJarDisplay" parent="ZoneFixe" unique_id=1230685855 instance=ExtResource("14_bahl2")]
+offset_left = 399.0
+offset_top = 583.0
+offset_right = 439.0
+offset_bottom = 623.0
 
 [node name="Scripts" type="Node2D" parent="." unique_id=907658780]
 

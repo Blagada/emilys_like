@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://cminyncmj2pix"]
+
+[ext_resource type="Script" uid="uid://yu4l8ajtwqbf" path="res://scenes/UI/tip_jar_display.gd" id="1_ssh2t"]
+[ext_resource type="Texture2D" uid="uid://dtruapouivrl6" path="res://assets/UI/bocal-tip.png" id="1_vyc2l"]
+[ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="2_ssh2t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_np2pn"]
+atlas = ExtResource("1_vyc2l")
+region = Rect2(0, 0, 90, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6ha0"]
+atlas = ExtResource("1_vyc2l")
+region = Rect2(90, 0, 90, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmpev"]
+atlas = ExtResource("1_vyc2l")
+region = Rect2(180, 0, 90, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkypq"]
+atlas = ExtResource("1_vyc2l")
+region = Rect2(270, 0, 90, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndtll"]
+atlas = ExtResource("1_vyc2l")
+region = Rect2(360, 0, 90, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h2jl"]
+atlas = ExtResource("1_vyc2l")
+region = Rect2(450, 0, 90, 135)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mqh5v"]
+atlas = ExtResource("1_vyc2l")
+region = Rect2(540, 0, 90, 135)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g4v7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_np2pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6ha0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmpev")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkypq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndtll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7h2jl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mqh5v")
+}],
+"loop": 1,
+"name": &"tip_fund",
+"speed": 5.0
+}]
+
+[node name="TipJarDisplay" type="Control" unique_id=1230685855]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ssh2t")
+
+[node name="TipFundSprite" type="AnimatedSprite2D" parent="." unique_id=1984728566]
+position = Vector2(22.999998, 33.999996)
+scale = Vector2(0.50453717, 0.50453717)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+animation = &"tip_fund"
+
+[node name="TipFundLabel" type="Label" parent="." unique_id=1648852057]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 23.0
+offset_right = 31.0
+offset_bottom = 39.0
+theme = ExtResource("2_ssh2t")
+theme_override_colors/font_color = Color(0.14714196, 0.70863765, 0.6725423, 1)
+theme_override_font_sizes/font_size = 11
+text = "TIP"
