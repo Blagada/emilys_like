@@ -1,22 +1,26 @@
 [gd_scene format=3 uid="uid://w2tsxuaqqj4x"]
 
 [ext_resource type="Texture2D" uid="uid://c5suymunjk48c" path="res://assets/furniture/tray.png" id="1_bf6vh"]
-[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/Interaction_component.tscn" id="3_7fxvm"]
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="3_7fxvm"]
 [ext_resource type="PackedScene" uid="uid://b4rs3eptext0j" path="res://scenes/entities/Counter/cash_register.tscn" id="3_nhco1"]
 [ext_resource type="PackedScene" uid="uid://ddsj0q2qq7sob" path="res://scripts/components/payment_queue_component.tscn" id="3_o58yy"]
 [ext_resource type="FontFile" uid="uid://cqqcrly8xbiyt" path="res://assets/fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf" id="5_7gn7i"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fxvm"]
-size = Vector2(31, 51)
-
 [sub_resource type="Theme" id="Theme_g4v7s"]
 default_font = ExtResource("5_7gn7i")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fxvm"]
+size = Vector2(31, 51)
+
 [node name="Comptoir" type="Node2D" unique_id=1212267104]
 
-[node name="Comptoir" type="StaticBody2D" parent="." unique_id=332925225]
+[node name="Visuals" type="Node2D" parent="." unique_id=1505766415]
+y_sort_enabled = true
+position = Vector2(0, -35)
 
-[node name="ComptoirDroit" type="NinePatchRect" parent="Comptoir" unique_id=2082238279]
+[node name="Comptoir" type="StaticBody2D" parent="Visuals" unique_id=332925225]
+
+[node name="ComptoirDroit" type="NinePatchRect" parent="Visuals/Comptoir" unique_id=2082238279]
 offset_left = 38.0
 offset_top = 41.0
 offset_right = 90.0
@@ -27,7 +31,7 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="ComptoirLong" type="NinePatchRect" parent="Comptoir" unique_id=1468441700]
+[node name="ComptoirLong" type="NinePatchRect" parent="Visuals/Comptoir" unique_id=1468441700]
 offset_left = -94.0
 offset_right = 90.0
 offset_bottom = 47.0
@@ -39,36 +43,34 @@ patch_margin_top = 10
 patch_margin_right = 10
 patch_margin_bottom = 10
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Comptoir" unique_id=177311783]
-polygon = PackedVector2Array(-93, 19, -94, 46, 38, 47, 38, 95, 90, 95, 90, 18)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Visuals/Comptoir" unique_id=177311783]
+polygon = PackedVector2Array(-93, 35, -94, 41, 58, 41, 58, 94, 90, 95, 89, 35)
 
-[node name="CashRegister" parent="." unique_id=266037700 instance=ExtResource("3_nhco1")]
-position = Vector2(-74, -3.9999962)
+[node name="CashRegister" parent="Visuals" unique_id=266037700 instance=ExtResource("3_nhco1")]
+position = Vector2(-58, 34.000004)
 
-[node name="PaymentQueueComponent" parent="." unique_id=1700191971 node_paths=PackedStringArray("interaction_component", "payment_feedback_label") instance=ExtResource("3_o58yy")]
-position = Vector2(0, 11)
+[node name="PaymentQueueComponent" parent="Visuals" unique_id=1700191971 node_paths=PackedStringArray("interaction_component", "payment_feedback_label") instance=ExtResource("3_o58yy")]
+position = Vector2(0, 33)
 interaction_component = NodePath("../InteractionComponent")
 payment_feedback_label = NodePath("../PaymentFeedbackLabel")
 
-[node name="InteractionComponent" parent="." unique_id=1478060783 instance=ExtResource("3_7fxvm")]
-position = Vector2(-65, 47)
-
-[node name="caisse" type="CollisionShape2D" parent="InteractionComponent" unique_id=1758675681]
-position = Vector2(7, -26)
-shape = SubResource("RectangleShape2D_7fxvm")
-debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)
-
-[node name="PaymentFeedbackLabel" type="Label" parent="." unique_id=199721748]
+[node name="PaymentFeedbackLabel" type="Label" parent="Visuals" unique_id=199721748]
 visible = false
 offset_left = -96.0
-offset_top = -11.0
+offset_top = -24.0
 offset_right = -22.0
-offset_bottom = 12.0
+offset_bottom = -1.0
 theme = SubResource("Theme_g4v7s")
 theme_override_colors/font_color = Color(1, 0.7647059, 0.023529412, 1)
 theme_override_colors/font_shadow_color = Color(0.15294118, 0.015686275, 0.05490196, 0.77254903)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 12
 text = "$"
-horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="InteractionComponent" parent="Visuals" unique_id=1478060783 instance=ExtResource("3_7fxvm")]
+position = Vector2(-65, 47)
+
+[node name="caisse" type="CollisionShape2D" parent="Visuals/InteractionComponent" unique_id=1758675681]
+position = Vector2(7, -26)
+shape = SubResource("RectangleShape2D_7fxvm")
+debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)

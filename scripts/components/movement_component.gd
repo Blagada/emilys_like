@@ -31,7 +31,6 @@ func get_velocity_for_movement() -> Vector2:
 
 
 func _on_navigation_finished()-> void:
-	print("DEBUG: Arrivé !")
 	destination_reached.emit()
 	
 	

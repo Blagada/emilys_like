@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dii7yr8m0rbhm"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_g4v7s"]
+cull_mode = 1
+polygon = PackedVector2Array(-664, 46, -188, 47, -188, 153, -664, 153)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yf5fn"]
+polygon = PackedVector2Array(716, -5, 716, 98, 1214, 99, 1214, -8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_22c5x"]
+polygon = PackedVector2Array(459, -6, 459, 24, 716, 24, 716, -6)
+
+[node name="Wall" type="Node2D" unique_id=101296613]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=760475322]
+position = Vector2(646, -52)
+occluder = SubResource("OccluderPolygon2D_g4v7s")
+
+[node name="LightOccluder2D2" type="LightOccluder2D" parent="." unique_id=1620219006]
+occluder = SubResource("OccluderPolygon2D_yf5fn")
+
+[node name="LightOccluder2D3" type="LightOccluder2D" parent="." unique_id=974074691]
+visible = false
+occluder = SubResource("OccluderPolygon2D_22c5x")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="." unique_id=69602620]
+visible = false
+position = Vector2(0, 77)
+occluder = SubResource("OccluderPolygon2D_22c5x")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=199373684]
+offset_left = -17.0
+offset_top = -4.0000005
+offset_right = -1.1383066
+offset_bottom = 36.898643
+scale = Vector2(29.946362, 2.5184212)
+color = Color(0.39215687, 0.5294118, 0.4117647, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="." unique_id=1663281740]
+offset_left = 457.99997
+offset_top = -4.0000005
+offset_right = 466.6154
+offset_bottom = 7.5151534
+scale = Vector2(29.946362, 2.5184212)
+color = Color(0.39215687, 0.5294118, 0.4117647, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="." unique_id=783082985]
+offset_left = 458.00003
+offset_top = 70.0
+offset_right = 466.61545
+offset_bottom = 81.51515
+scale = Vector2(29.946362, 2.5184212)
+color = Color(0.39215687, 0.5294118, 0.4117647, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=1891295130]
+offset_left = 715.99994
+offset_top = -4.0
+offset_right = 732.6297
+offset_bottom = 36.898643
+scale = Vector2(29.946362, 2.5184212)
+color = Color(0.39215687, 0.5294118, 0.4117647, 1)

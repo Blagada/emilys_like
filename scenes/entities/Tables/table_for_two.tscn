@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b6fhc1adxpvw8" path="res://assets/furniture/table_for_two.png" id="1_c21dl"]
 [ext_resource type="Texture2D" uid="uid://dbfm1uh4fwcr3" path="res://assets/furniture/chair.png" id="2_jclyv"]
-[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/Interaction_component.tscn" id="3_68kwq"]
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="3_68kwq"]
 [ext_resource type="PackedScene" uid="uid://d3o6jvtspe4o1" path="res://scripts/components/table_component.tscn" id="4_74kbq"]
 [ext_resource type="PackedScene" uid="uid://dm15runckn1m6" path="res://scripts/components/order_component.tscn" id="5_ppnig"]
 
@@ -72,10 +72,10 @@ debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)
 position = Vector2(0, -47)
 
 [node name="LeftChair" type="Marker2D" parent="ChairPositions" unique_id=1757810520]
-position = Vector2(-61, 28)
+position = Vector2(-61, 47)
 
 [node name="RightChair" type="Marker2D" parent="ChairPositions" unique_id=804391825]
-position = Vector2(63, 28)
+position = Vector2(63, 47)
 
 [node name="TableComponent" parent="." unique_id=1795287937 node_paths=PackedStringArray("chair_positions", "interaction_component", "order_component") instance=ExtResource("4_74kbq")]
 position = Vector2(0, -47)

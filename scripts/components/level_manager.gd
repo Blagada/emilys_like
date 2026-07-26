@@ -4,12 +4,18 @@ class_name LevelComponent
 @export var tray_places: TrayComponent
 @export var customer_spawner: SpawnComponent
 @export var level_menu: LevelMenu
-@export var sitting_animation_delay: float = 0.3
 @export var payment_queue: PaymentQueueComponent
+@export var earnings_gauge: EarningsGauge
+
+@export var daily_goal: float = 100.0
+@export var expert_threshold_percent: float = 150.0 # % du goal pour "expert"
+@export var sitting_animation_delay: float = 0.3
+
 @onready var spawn_button: Button = $"../../ZoneFixe/SpawnButton"
 
 func _ready():
-	
+	earnings_gauge.setup(daily_goal, expert_threshold_percent)
+
 	# 1. Connexion des aliments
 	for food: Node in get_tree().get_nodes_in_group("Food"):
 		if food.has_signal("food_clicked"):

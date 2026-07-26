@@ -13,10 +13,11 @@ region = Rect2(32, 48, 32, 102)
 script = ExtResource("1_4w1pk")
 
 [node name="SpriteCustomer" type="Sprite2D" parent="." unique_id=1778173962]
-position = Vector2(0.4999999, -24.343746)
-scale = Vector2(1.71875, 1.71875)
+scale = Vector2(2, 2)
 texture = SubResource("AtlasTexture_ot5uo")
+offset = Vector2(1, -45)
 
 [node name="AnimatedCustomer" type="AnimatedSprite2D" parent="." unique_id=669088488]
-position = Vector2(0.5, -24.34375)
+scale = Vector2(1.7, 1.7)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
+offset = Vector2(1, -45)

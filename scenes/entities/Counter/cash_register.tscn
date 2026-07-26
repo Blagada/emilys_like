@@ -6,8 +6,10 @@
 scale = Vector2(0.85, 0.85)
 
 [node name="CashRegisterTexture" type="TextureRect" parent="." unique_id=444656124]
-offset_right = 600.0
-offset_bottom = 730.0
+offset_left = -18.823528
+offset_top = -44.70588
+offset_right = 581.17645
+offset_bottom = 685.2941
 scale = Vector2(0.061038088, 0.061038088)
 texture = ExtResource("1_rog4u")
 stretch_mode = 3

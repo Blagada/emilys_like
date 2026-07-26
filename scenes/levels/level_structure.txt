@@ -1,0 +1,49 @@
+Cette procédure explique comment structurer un niveau (scène de restaurant) pour que le tri visuel (Y-Sort) et la navigation des personnages fonctionnent correctement.
+
+# -- Structure de base d'un niveau -- #
+
+Chaque scène de niveau (ex: level_1.tscn) doit suivre cette hiérarchie :
+
+Level (Node2D)
+├── Plancher
+├── ZoneDeplacement (NavigationRegion2D)      → SEULEMENT le NavigationPolygon, aucun enfant visuel
+├── Entities (Node2D, Y Sort Enabled = ON)     → tables, comptoir, nourriture, joueur, clients
+│   ├── Tables
+│   ├── Comptoir
+│   ├── Nourritures (Node2D, Y Sort Enabled = ON aussi)
+│   │   └── (aliments du comptoir)
+│   └── player
+├── ZoneFixe (CanvasLayer)                      → HUD, pas de Y-Sort nécessaire
+└── Scripts
+    ├── LevelManager
+    └── CustomerSpawner (garde son Spawn Parent assigné à Entities, voir point 3)
+
+
+1. Créer un nouveau niveau
+
+Pour un nouveau restaurant/niveau, créer d'abord le nœud Entities (Node2D, Y Sort Enabled = ON) directement à la racine du niveau. Placer directement les tables, le comptoir, et le joueur comme enfants de ce nœud dès le départ (pas besoin de les mettre temporairement sous ZoneDeplacement).
+
+Pour le CustomerSpawner (sous Scripts, pour garder la logique lisible) :
+- Sélectionner le nœud CustomerSpawner
+- Dans l'inspecteur, assigner le champ "Spawn Parent" au nœud Entities
+- Les clients instanciés par le spawner vont alors atterrir sous Entities (tri visuel correct), même si le script du spawner reste sous Scripts
+
+2. Configurer le NavigationRegion2D pour détecter les obstacles par groupe
+
+Par défaut, Godot ne scanne que les enfants directs de ZoneDeplacement pour bâtir le NavigationPolygon (tables/comptoir = obstacles). Comme la structure ci-dessus sort les tables de ZoneDeplacement, il faut baser la détection sur un groupe plutôt que sur la hiérarchie :
+
+a) Sélectionner ZoneDeplacement (NavigationRegion2D)
+b) Dans l'inspecteur → Navigation Polygon → Geometry :
+   - Source Geometry Mode → "Group Explicit"
+   - Source Geometry Group Name → "nav_obstacles"
+c) Pour chaque table + le comptoir (les obstacles) :
+   - Sélectionner le nœud
+   - Panneau Scene (bas) → onglet Node → sous-onglet Groups
+   - Taper "nav_obstacles" dans le champ texte → Add
+d) Rebake la navigation (bouton "Bake NavigationPolygon" dans la barre d'outils)
+
+3. Rayon de navigation (agent_radius) et limites de la scène
+
+Le agent_radius (Navigation Polygon → Agents → Radius) érode uniformément TOUS les bords du polygone de navigation — les contours extérieurs autant que les obstacles internes. Impossible d'avoir une marge sélective (grande autour des tables, nulle sur les bords de la pièce).
+
+Pour garder une zone marchable jusqu'au bord de la scène (ex: jusqu'à un marker de sortie/spawn) tout en gardant un radius confortable autour des meubles : dessiner le contour extérieur (outlines) du NavigationPolygon plus grand que la pièce visuelle, pour compenser l'érosion. Si le marker doit être atteignable à une position X, dessiner le contour brut au moins jusqu'à X + agent_radius.

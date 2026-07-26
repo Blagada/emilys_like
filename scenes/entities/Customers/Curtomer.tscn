@@ -20,10 +20,8 @@ shape = SubResource("CircleShape2D_g4v7s")
 [node name="NavigationCustomer" type="NavigationAgent2D" parent="." unique_id=2032593416]
 
 [node name="VisualCustomer" type="Node2D" parent="." unique_id=318849360]
-position = Vector2(0, -44)
 
 [node name="MovementComponent" parent="." unique_id=904041681 node_paths=PackedStringArray("nav_agent", "character_body") instance=ExtResource("2_ht86k")]
-position = Vector2(0, -44)
 nav_agent = NodePath("../NavigationCustomer")
 character_body = NodePath("..")
 

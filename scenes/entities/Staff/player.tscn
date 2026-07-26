@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://l7dw2osgfq4u" path="res://scenes/entities/Staff/player.gd" id="1_dovo2"]
 [ext_resource type="PackedScene" uid="uid://beb8n78sa7hsm" path="res://scripts/components/movement_component.tscn" id="3_w3ybl"]
 [ext_resource type="PackedScene" uid="uid://dogg202ret5gx" path="res://scripts/components/staff_component.tscn" id="4_a3m7p"]
+[ext_resource type="PackedScene" uid="uid://dmsfdxerbwel3" path="res://scripts/components/action_queue_component.tscn" id="5_i654y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dovo2"]
 atlas = ExtResource("1_8afob")
@@ -166,3 +167,5 @@ nav_agent = NodePath("../NavigationAgent2D")
 character_body = NodePath("..")
 
 [node name="StaffComponent" parent="." unique_id=1221857103 instance=ExtResource("4_a3m7p")]
+
+[node name="ActionQueueComponent" parent="." unique_id=936468369 instance=ExtResource("5_i654y")]

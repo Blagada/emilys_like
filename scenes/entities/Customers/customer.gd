@@ -60,6 +60,11 @@ func change_state(new_state: GameEnums.CustomerState, target_pos: Vector2 = Vect
 	state_changed.emit(new_state, target_pos)
 
 
+func show_bill_amount(amount: float) -> void:
+	_ensure_bubble_instance()
+	order_bubble.show_text("%.2f$" % amount)
+
+
 func _ensure_bubble_instance() -> void:
 	if order_bubble == null:
 		order_bubble = order_bubble_scene.instantiate()
@@ -89,5 +94,6 @@ func move_to_table(table_marker: Marker2D, table_position: Vector2) -> void:
 
 func move_to(target_marker: Marker2D, state: GameEnums.CustomerState = GameEnums.CustomerState.MOVING) -> void:
 	change_state(state, target_marker.global_position)
+	collision_customer.set_deferred("disabled", false)
 	movement_component.set_target(target_marker.global_position)
 	await movement_component.destination_reached

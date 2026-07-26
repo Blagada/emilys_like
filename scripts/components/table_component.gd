@@ -17,26 +17,24 @@ func _ready() -> void:
 		interaction_component.player_arrived.connect(_on_player_arrived)
 
 
-func _on_player_arrived()-> void:
+func _on_player_arrived(action_id: int)-> void:
 	var player: Node = get_tree().get_first_node_in_group("Player")
 
 	var can_clean: bool = current_state == GameEnums.TableState.WAITING_FOR_CLEANING \
 		or (current_state == GameEnums.TableState.WAITING_FOR_PAYMENT and is_dirty)
 
 	if can_clean:
-		_start_cleaning(player)
+		_start_cleaning(player, action_id)
 		return
 
 	order_component.serve_food()
-	if player and player.has_method("set_busy"):
-		player.is_busy = false
+	interaction_component.complete_action(action_id)
 
 
-func _start_cleaning(player: Node) -> void:
+func _start_cleaning(player: Node, action_id: int) -> void:
 	if not player or not player.has_node("StaffComponent"):
 		return
 
-	player.is_busy = true
 	await player.staff_component.start_task(GameEnums.StaffState.CLEANING, cleaning_duration)
 
 	is_dirty = false
@@ -45,7 +43,7 @@ func _start_cleaning(player: Node) -> void:
 	if current_state == GameEnums.TableState.WAITING_FOR_CLEANING:
 		current_state = GameEnums.TableState.UNOCCUPIED_AND_CLEAN
 
-	player.is_busy = false
+	interaction_component.complete_action(action_id)
 
 
 # Retourne vrai si la table n'est pas occupé et a assez de chaises libres

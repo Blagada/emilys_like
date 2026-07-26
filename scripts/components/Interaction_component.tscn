@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dgtkpfv80rsoc"]
 
-[ext_resource type="Script" uid="uid://dqvrx2nngnfmt" path="res://scripts/components/Interaction_component.gd" id="1_u1f3o"]
+[ext_resource type="Script" uid="uid://dqvrx2nngnfmt" path="res://scripts/components/interaction_component.gd" id="1_u1f3o"]
 
 [node name="InteractionComponent" type="Area2D" unique_id=349743239]
 script = ExtResource("1_u1f3o")

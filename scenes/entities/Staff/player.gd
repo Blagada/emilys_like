@@ -5,8 +5,8 @@ class_name Player
 @onready var animation: AnimationPlayer = $body/Animation
 @onready var body: AnimatedSprite2D = $body
 @onready var staff_component: StaffComponent = $StaffComponent
+@onready var action_queue: ActionQueueComponent = $ActionQueueComponent
 
-var is_busy: bool = false
 
 const STATE_ANIMATIONS: Dictionary = {
 	GameEnums.StaffState.WAITING: "idle",

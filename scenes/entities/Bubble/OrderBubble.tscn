@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c5u2rxmxxfawm" path="res://assets/customers/phylactere.png" id="1_0cipb"]
 [ext_resource type="Script" uid="uid://q0tq2quvmsi" path="res://scenes/entities/Bubble/order_bubble.gd" id="1_iifam"]
+[ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="3_8wxo4"]
 [ext_resource type="FontFile" uid="uid://cqqcrly8xbiyt" path="res://assets/fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf" id="3_b5lwo"]
 
 [sub_resource type="Theme" id="Theme_dnvie"]
@@ -58,6 +59,7 @@ columns = 2
 visible = false
 layout_mode = 2
 size_flags_vertical = 0
+theme = ExtResource("3_8wxo4")
 text = "..."
 label_settings = SubResource("LabelSettings_8ssq5")
 horizontal_alignment = 1
