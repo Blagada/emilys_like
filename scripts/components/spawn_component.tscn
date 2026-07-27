@@ -2,16 +2,11 @@
 
 [ext_resource type="Script" uid="uid://cq3y1h7c2um6g" path="res://scripts/components/spawn_component.gd" id="1_rw5a1"]
 [ext_resource type="PackedScene" uid="uid://jgeaii7nbt5i" path="res://scenes/entities/Customers/Curtomer.tscn" id="2_pdtsv"]
-[ext_resource type="Script" uid="uid://coyjgufjo44k3" path="res://resources/customers/Data/customer_data.gd" id="3_64ies"]
-[ext_resource type="Resource" uid="uid://dt2s421p0vlsn" path="res://resources/customers/Data/normal.tres" id="4_tboi2"]
-[ext_resource type="Resource" uid="uid://rs4yvu30oo8g" path="res://resources/customers/Data/press.tres" id="5_64ies"]
-[ext_resource type="Resource" uid="uid://bdeloesawiw12" path="res://resources/customers/Data/calm.tres" id="6_3yptc"]
-[ext_resource type="Resource" uid="uid://cythqx6prwhxi" path="res://resources/customers/Data/vip.tres" id="7_5opn2"]
 
-[node name="SpawnComponent" type="Node2D" unique_id=1257491940]
+[node name="SpawnComponent" type="Node2D" unique_id=1257491940 node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("1_rw5a1")
 entity_scene = ExtResource("2_pdtsv")
-spawn_data_list = Array[ExtResource("3_64ies")]([ExtResource("4_tboi2"), ExtResource("5_64ies"), ExtResource("6_3yptc"), ExtResource("7_5opn2")])
+spawn_point = NodePath("SpawnPoint")
 
 [node name="SpawnPoint" type="Marker2D" parent="." unique_id=244288348]
 position = Vector2(-2, 1)

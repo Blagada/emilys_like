@@ -15,7 +15,7 @@ func _ready() -> void:
 	if food_data and aliment_sprite:
 		aliment_sprite.texture = food_data.sprite
 		var tex_size: Vector2 = aliment_sprite.texture.get_size()
-		var target_size = Vector2(GameDataManager.item_target_size, GameDataManager.item_target_size)
+		var target_size = Vector2(TrayManager.item_target_size, TrayManager.item_target_size)
 
 		if tex_size.x > 0 and tex_size.y > 0:
 			var scale_factor: float = min(target_size.x / tex_size.x, target_size.y / tex_size.y)
@@ -27,13 +27,13 @@ func _ready() -> void:
 
 
 func _on_action_queued(action_id: int) -> void:
-	GameDataManager.add_pending_item(action_id, food_data)
+	TrayManager.add_pending_item(action_id, food_data)
 
 
 func _on_player_arrived(action_id: int) -> void:
 	await player.staff_component.start_task(GameEnums.StaffState.FOOD_PREP, food_data.preparation_time)
 
-	var was_cancelled: bool = GameDataManager.consume_pending_item(action_id)
+	var was_cancelled: bool = TrayManager.consume_pending_item(action_id)
 
 	if not was_cancelled:
 		food_clicked.emit(food_data)
@@ -43,5 +43,5 @@ func _on_player_arrived(action_id: int) -> void:
 
 func _has_tray_space() -> bool:
 	# Vérifie si le tray est plein, avec des préparations faite et des préparations en attente
-	var occupied: int = GameDataManager.tray_items.size() + GameDataManager.pending_items.size()
-	return occupied < GameDataManager.current_max_capacity
+	var occupied: int = TrayManager.tray_items.size() + TrayManager.pending_items.size()
+	return occupied < TrayManager.current_max_capacity

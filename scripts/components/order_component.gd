@@ -14,7 +14,7 @@ var order_bubble: Node = null
 # Vérifie s'il y a au moins un client qu'on pourrait servir avec le plateau actuel
 func has_servable_customer() -> bool:
 	for customer: Customer in seated_customers:
-		if customer.current_order != null and GameDataManager.tray_items.has(customer.current_order):
+		if customer.current_order != null and TrayManager.tray_items.has(customer.current_order):
 			return true
 	return false
 
@@ -27,8 +27,8 @@ func serve_food() -> void:
 		if customer.current_order == null:
 			continue
 
-		if GameDataManager.tray_items.has(customer.current_order):
-			GameDataManager.tray_items.erase(customer.current_order)
+		if TrayManager.tray_items.has(customer.current_order):
+			TrayManager.tray_items.erase(customer.current_order)
 			customer.current_order = null
 			served_someone = true
 
@@ -36,7 +36,7 @@ func serve_food() -> void:
 		print("Rien à servir : aucun item du plateau ne correspond aux commandes en attente")
 		return
 
-	GameDataManager.tray_updated.emit()
+	TrayManager.tray_updated.emit()
 	update_order_bubble()
 
 	if _all_customers_served():

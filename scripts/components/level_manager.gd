@@ -3,9 +3,11 @@ class_name LevelComponent
 
 @export var tray_places: TrayComponent
 @export var customer_spawner: SpawnComponent
-@export var level_menu: LevelMenu
+@export var level_data: LevelData
 @export var payment_queue: PaymentQueueComponent
 @export var earnings_gauge: EarningsGauge
+@export var navigation_region: NavigationRegion2D
+@export var level_intro_screen: LevelIntroScreen
 
 @export var daily_goal: float = 100.0
 @export var expert_threshold_percent: float = 150.0 # % du goal pour "expert"
@@ -13,8 +15,20 @@ class_name LevelComponent
 
 @onready var spawn_button: Button = $"../../ZoneFixe/SpawnButton"
 
+var table_count: int = 0
+var total_seats: int = 0
+var avg_customer_travel_time: float = 0.0
+
 func _ready():
+	customer_spawner.set_spawn_data(level_data.possible_customers)
 	earnings_gauge.setup(daily_goal, expert_threshold_percent)
+	TrayManager.current_max_capacity = level_data.tray_max_capacity
+	
+	# Appel de notre helper pour calculer les métriques proprement
+	await _setup_level_metrics()
+
+	level_intro_screen.setup(level_data, table_count, total_seats)
+	level_intro_screen.day_started.connect(_on_day_started)
 
 	# 1. Connexion des aliments
 	for food: Node in get_tree().get_nodes_in_group("Food"):
@@ -31,6 +45,13 @@ func _ready():
 		var table_comp = table_node.get_node_or_null("TableComponent")
 		if table_comp:
 			table_comp.order_component.all_orders_served.connect(_on_all_orders_served.bind(table_comp))
+
+
+func _setup_level_metrics() -> void:
+	var metrics = await LevelMetricsHelper.compute_metrics(navigation_region, customer_spawner, level_data.possible_customers)
+	table_count = metrics["table_count"]
+	total_seats = metrics["total_seats"]
+	avg_customer_travel_time = metrics["avg_customer_travel_time"]
 
 
 func _on_customer_group_spawned(group: Array[Customer]) -> void:
@@ -71,7 +92,7 @@ func _handle_group_ordering(assigned_table: TableComponent, group: Array[Custome
 	await get_tree().create_timer(order_delay).timeout
 
 	for customer: Customer in group:
-		var food: FoodData = level_menu.get_random_food()
+		var food: FoodData = level_data.level_menu.get_random_food()
 		customer.set_order(food)
 		assigned_table.order_component.total_bill += food.price
 		customer.change_state(GameEnums.CustomerState.ORDERING)
@@ -96,6 +117,11 @@ func _on_all_orders_served(table: TableComponent) -> void:
 	table.order_component.show_dirty()
 	table.current_state = GameEnums.TableState.WAITING_FOR_PAYMENT
 	payment_queue.enqueue(customers[0], table)
+
+
+func _on_day_started() -> void:
+	print("Journée commencée — timer à venir à l'étape 3")
+	print("Tables : ", table_count, " | Places : ", total_seats, " | Temps de marche moyen : ", avg_customer_travel_time)
 
 
 # TODO : BOUTON TEST. À effacer lorsque les clients entreront aléatoirement dans le restaurant

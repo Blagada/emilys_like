@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RestaurantData" format=3 uid="uid://df3rp0cax6kgi"]
+
+[ext_resource type="Script" uid="uid://cqg728aoyqst8" path="res://resources/restaurants/restaurant_data.gd" id="1_di8k2"]
+
+[resource]
+script = ExtResource("1_di8k2")
+restaurant_name = "Ambroisie"
+metadata/_custom_type_script = "uid://cqg728aoyqst8"

@@ -22,7 +22,7 @@ Fichier de suivi complémentaire au README (idées, avancées détaillées, appr
 - **Cycle paiement + nettoyage + machine à états (1re passe)** : `PaymentQueueComponent` (file d'attente à la caisse), `StaffComponent` (états `WAITING`/`MOVING`/`FOOD_PREP`/`DELIVERING`/`CLEANING`, animations pilotées par état), machine à états clients complète (`WAITING_TO_ORDER`→`ORDERING`→`EATING`→`WAITING_FOR_PAYMENT`/`PAYING`), fix navmesh (sortie clients), fix orientation `flip_h` à la sortie
 - **Montant du paiement + nettoyage anticipé + bulle unifiée** : `is_dirty` sur `TableComponent`, `WAITING_FOR_CLEANING` (renommage), `OrderComponent.total_bill`, `OrderBubble` généralisée (`show_text`/`show_orders`), `tip_multiplier` → `tip_rate` (pourcentage réaliste), suivi `daily_earnings`/`tip_fund`, animations tray + feedback caisse, fix ratio plein écran
 
-### Session d'aujourd'hui — Structure de niveau (Y-Sort) + ambiance lumineuse + file d'action + paiement séquentiel
+### Structure de niveau (Y-Sort) + ambiance lumineuse + file d'action + paiement séquentiel
 - **Restructuration `level_1.tscn` pour le Y-Sort** : nouveau nœud `Entities` (`Y Sort Enabled`) regroupant tables/comptoir/nourriture/joueur/clients pour un tri de profondeur correct (avant : joueur et clients toujours dessinés par-dessus, peu importe leur position réelle, car branches séparées de l'arbre)
 - **`SpawnComponent`** : `spawn_parent` ajouté, clients désormais positionnés explicitement via `spawn_point.global_position` plutôt que de compter sur l'héritage de transform du parent (bug découvert en déplaçant le spawner sous `Entities`)
 - **`NavigationRegion2D` basé sur un groupe** (`Source Geometry Mode = Group Explicit`, groupe `nav_obstacles`) : permet aux tables/comptoir de vivre n'importe où dans l'arbre (Y-Sort) sans devoir être enfants directs de `ZoneDeplacement` pour être détectés au bake
@@ -44,12 +44,21 @@ Fichier de suivi complémentaire au README (idées, avancées détaillées, appr
   - **Bugs corrigés** :
 	- File bloquée en permanence si le même aliment est cliqué 2 fois rapidement (avant la fin de la 1re préparation) : `_current_action_id` était une seule variable partagée sur l'`Interactable`, écrasée par le 2e clic pendant que la 1re action tournait encore, causant un mismatch d'id à la complétion. Fix : id transmis en paramètre à travers toute la chaîne d'appels plutôt que stocké dans une variable partagée
 	- File bloquée si le même item est cliqué 2 fois **lentement** (cible identique) : `NavigationAgent2D` ne réémet pas toujours `navigation_finished` quand la nouvelle cible est identique à la précédente déjà atteinte (comportement documenté comme capricieux côté Godot). Fix : vérification de distance réelle (`global_position.distance_to`) avant d'attendre le signal, court-circuite l'attente si déjà sur place
+- **Bocal de pourboires visuel** (`TipJarDisplay`, `AnimatedSprite2D` piloté manuellement, pas de lecture d'animation) : frame affichée calculée par palier de `tip_fund` (`ceil(tip_fund / amount_per_frame)`, plafonné à `max_frame_index`), paliers ajustables en `@export`
 
 ---
 
 ## 🔧 En cours
 
-- Affichage à l'écran de `daily_earnings` et `tip_fund` (variables prêtes, UI à faire)
+- **Grand chantier : début/fin de journée** — plan en 7 étapes, dépendances dans l'ordre :
+  1. **Fondations de données** : `GameEnums.ServiceType` (matin/midi/soir) + nouvelle resource `LevelData` (référence `LevelMenu` existant plutôt que dupliquer, `possible_customers`, `active_services`)
+  2. **Mesures automatiques de la scène** : scan des tables/places (`get_nodes_in_group("Table")`), temps de marche réel mesuré via `NavigationServer2D` (pas de réglage manuel par niveau) — **+ écran de chargement et panneau de lancement de journée** affichant les infos calculées (type de clients, nombre de tables, services disponibles) pour préparer le joueur avant de commencer
+  3. **Timer de journée/service** : durée fixe par service, additionnée selon `active_services` — **+ position de la lumière du soleil à la fenêtre liée à l'heure de départ du service** (le mur/déco peut changer par resto, mais le mouvement du soleil reste universel ; position de départ différente selon le service actif, ex: soleil bas le matin)
+  4. **Calcul de `daily_goal`** : formule (places × cycle moyen × revenu moyen × % de difficulté linéaire par niveau, `lerp(40%, 80%, ...)`), connecte enfin la jauge de revenus à une vraie valeur calculée
+  5. **Spawn automatique des groupes** : intervalle dérivé du nombre de tables + cycle moyen, probabilité "groupe de 1 → comptoir" intégrée dès le départ
+  6. **Client qui repart si aucune table** : délai fixe (pas encore basé sur la patience réelle, prévu pour plus tard avec le reste du système de patience — ex: quitter une table si pas servi, pas de tip si trop long à la caisse)
+  7. **Fin de journée / résultats** : écran objectif atteint / raté / expert
+- Affichage à l'écran de `daily_earnings` — reste à faire (le bocal de tips, lui, est complété, voir Fait)
 
 ---
 
@@ -91,7 +100,7 @@ Fichier de suivi complémentaire au README (idées, avancées détaillées, appr
 
 ### Tier 2 — moyen terme, nouvelles mécaniques mais toujours cœur du gameplay
 - [ ] Groupes de 1 client : chance aléatoire de commander directement au comptoir plutôt qu'à table (probabilité élevée comptoir / faible à table) — `OrderBubble` déjà prête pour ça (`show_orders` multi-items)
-- [ ] Boîte de pourboires séparée (argent dédié à la déco) — fondation du système d'économie, `total_bill`/tip déjà calculés, reste à router vers une réserve dédiée
+- [x] Boîte de pourboires séparée (argent dédié à la déco) — fondation du système d'économie, `total_bill`/tip déjà calculés, reste à router vers une réserve dédiée
 
 ### Tier 3 — long terme, hors boucle de gameplay de base
 - [ ] Interface de décoration : achat + placement à position prédéfinie dans le resto

@@ -1,6 +1,6 @@
 class_name GameEnums
 
-
+# ---- ENUMS ----- #
 enum TableState {
 	UNOCCUPIED_AND_CLEAN, # État par défaut, libre et propre
 	AWAITING_SERVICE, # Commande faite, en attente de service
@@ -39,4 +39,26 @@ enum CustomerType {
 	CUSTOMER_VIP,
 	CUSTOMER_PRESS,
 	CUSTOMER_CALM
+}
+
+
+enum ServiceType {
+	NONE = 0,
+	BREAKFAST,
+	LUNCH,
+	DINNER
+}
+
+# ---- Dictionaire ---- #
+const SERVICE_TYPE_LABELS: Dictionary = {
+	ServiceType.BREAKFAST: "déjeuner",
+	ServiceType.LUNCH: "dîner",
+	ServiceType.DINNER: "souper",
+}
+
+const CUSTOMER_TYPE_LABELS: Dictionary = {
+	CustomerType.CUSTOMER_NORMAL: "régulier",
+	CustomerType.CUSTOMER_VIP: "VIP",
+	CustomerType.CUSTOMER_PRESS: "pressé",
+	CustomerType.CUSTOMER_CALM: "tranquille",
 }

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RestaurantData" format=3 uid="uid://di6u2apgsqh74"]
+
+[ext_resource type="Script" uid="uid://cqg728aoyqst8" path="res://resources/restaurants/restaurant_data.gd" id="1_klcc7"]
+
+[resource]
+script = ExtResource("1_klcc7")
+restaurant_name = "Ciselé"
+metadata/_custom_type_script = "uid://cqg728aoyqst8"

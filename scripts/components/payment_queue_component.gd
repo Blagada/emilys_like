@@ -103,7 +103,7 @@ func _process_queue_sequentially() -> void:
 	# 3. Une seule fois à la fin : on fait avancer ceux qui restent
 	_advance_queue()
 
-	GameDataManager.add_earnings(total_bill_batch, total_tip_batch)
+	EarningManager.add_earnings(total_bill_batch, total_tip_batch)
 	_show_payment_feedback(total_bill_batch, total_tip_batch, total_combo_bonus)
 
 # --- ANIMATION DU FEEDBACK DE PAIEMENT ---

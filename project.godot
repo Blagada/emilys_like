@@ -25,7 +25,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GameDataManager="*uid://df2e4eijik5ls"
+EarningManager="*uid://dhq5jk7bccc1v"
+TrayManager="*uid://dqujus4mgbvyt"
 
 [display]
 

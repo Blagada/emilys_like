@@ -43,7 +43,7 @@ func _on_staff_state_changed(new_state: GameEnums.StaffState) -> void:
 
 
 func _get_animation_for_state(state: GameEnums.StaffState) -> String:
-	if state == GameEnums.StaffState.MOVING and not GameDataManager.tray_items.is_empty():
+	if state == GameEnums.StaffState.MOVING and not TrayManager.tray_items.is_empty():
 		return "walk" # TODO: remplacer par delivering lorsque prête
 
 	return STATE_ANIMATIONS.get(state, "idle")

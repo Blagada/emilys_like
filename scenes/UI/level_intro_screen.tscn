@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://bw3au6rjcnudw"]
+
+[ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="1_a60tx"]
+[ext_resource type="Script" uid="uid://b3lrtum4i62d2" path="res://scenes/UI/level_intro_screen.gd" id="1_hv2q8"]
+
+[node name="LevelIntroScreen" type="Control" unique_id=1440735646 node_paths=PackedStringArray("restaurant_name_label", "level_number_label", "table_info_label", "services_label", "customers_list_label", "tray_label", "start_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_a60tx")
+script = ExtResource("1_hv2q8")
+restaurant_name_label = NodePath("VBoxContainer/RestaurantLabel")
+level_number_label = NodePath("VBoxContainer/LevelLabel")
+table_info_label = NodePath("VBoxContainer/TableInfoLabel")
+services_label = NodePath("VBoxContainer/ServicesLabel")
+customers_list_label = NodePath("VBoxContainer/CustomersListLabel")
+tray_label = NodePath("VBoxContainer/TrayLabel")
+start_button = NodePath("VBoxContainer/StartLevelButton")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1182549065]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 49.999996
+offset_top = 24.999998
+offset_right = 50.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9209957, 0.9209957)
+color = Color(1, 1, 0.8627451, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=757858541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -199.75
+offset_top = -95.5
+offset_right = 199.75
+offset_bottom = 95.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestaurantLabel" type="Label" parent="VBoxContainer" unique_id=2004122949]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+text = "Restaurant x"
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer" unique_id=458450065]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+text = "Niveau x"
+
+[node name="TableInfoLabel" type="Label" parent="VBoxContainer" unique_id=2083465889]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16919431, 0.29125696, 0.21558252, 1)
+text = "Nombre de table : x"
+
+[node name="ServicesLabel" type="Label" parent="VBoxContainer" unique_id=1516513861]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16919431, 0.29125696, 0.21558252, 1)
+text = "Services du"
+
+[node name="TrayLabel" type="Label" parent="VBoxContainer" unique_id=268438279]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16919431, 0.29125696, 0.21558252, 1)
+text = "Espace sur le plateau :"
+
+[node name="CustomersListLabel" type="Label" parent="VBoxContainer" unique_id=666841758]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16919431, 0.29125696, 0.21558252, 1)
+text = "Type de client : x"
+
+[node name="StartLevelButton" type="Button" parent="VBoxContainer" unique_id=1778547428]
+layout_mode = 2
+text = "Débuter la journée"

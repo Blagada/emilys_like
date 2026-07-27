@@ -21,7 +21,7 @@ func show_orders(orders: Array[FoodData]) -> void:
 	for order: FoodData in orders:
 		var order_icon: TextureRect = TextureRect.new()
 		order_icon.texture = order.sprite
-		order_icon.custom_minimum_size = Vector2(GameDataManager.item_target_size, GameDataManager.item_target_size)
+		order_icon.custom_minimum_size = Vector2(TrayManager.item_target_size, TrayManager.item_target_size)
 		order_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		order_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		order_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER

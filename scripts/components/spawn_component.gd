@@ -3,26 +3,29 @@ class_name SpawnComponent
 
 signal group_spawned(entities: Array[Customer])
 
-@onready var spawn_point: Marker2D = $SpawnPoint
 
 @export var entity_scene: PackedScene # Scène Customer
 # Liste de toutes les ressources CustomerData (doivent être glisser dans l'inspecteur)
-@export var spawn_data_list: Array[CustomerData]
 @export var spawn_parent: Node2D
+@export var spawn_point: Marker2D
 
+var spawn_data_list: Array[CustomerData] = []
 var _valid_types: Array[CustomerData] = []
 
-func _ready() -> void:
-	# On filtre la liste au démarrage pour ne garder que les types complets
+
+func set_spawn_data(data_list: Array[CustomerData]) -> void:
+	spawn_data_list = data_list
+	_refresh_valid_types()
+
+
+func _refresh_valid_types() -> void:
 	_valid_types = []
 	for data: CustomerData in spawn_data_list:
 		if data.possible_customers.size() > 0:
 			_valid_types.append(data)
 		else:
 			push_warning("Le type ", data.group_type, " n'a pas de visuels définis, il sera ignoré.")
-			
-	# TODO : Appel de test pour voir si ça fonctionne au démarrage, va devoir être sorti dans la mécanique de spawn des clients
-	spawn_entity()
+
 
 func spawn_entity() -> void:
 	if _valid_types.is_empty():

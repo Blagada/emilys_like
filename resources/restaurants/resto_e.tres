@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RestaurantData" format=3 uid="uid://dh4kjpptgie7x"]
+
+[ext_resource type="Script" uid="uid://cqg728aoyqst8" path="res://resources/restaurants/restaurant_data.gd" id="1_fk4vn"]
+
+[resource]
+script = ExtResource("1_fk4vn")
+restaurant_name = "Épicure"
+metadata/_custom_type_script = "uid://cqg728aoyqst8"
