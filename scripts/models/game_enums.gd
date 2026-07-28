@@ -34,7 +34,6 @@ enum StaffState {
 
 
 enum CustomerType {
-	NONE = 0,
 	CUSTOMER_NORMAL,
 	CUSTOMER_VIP,
 	CUSTOMER_PRESS,
@@ -43,7 +42,6 @@ enum CustomerType {
 
 
 enum ServiceType {
-	NONE = 0,
 	BREAKFAST,
 	LUNCH,
 	DINNER

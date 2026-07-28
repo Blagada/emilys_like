@@ -27,7 +27,7 @@ func _refresh_valid_types() -> void:
 			push_warning("Le type ", data.group_type, " n'a pas de visuels définis, il sera ignoré.")
 
 
-func spawn_entity() -> void:
+func spawn_entity(forced_group_size: int = -1) -> void:
 	if _valid_types.is_empty():
 		return
 
@@ -38,7 +38,7 @@ func spawn_entity() -> void:
 	var chosen_visual: CustomerVisual = chosen_type.possible_customers.pick_random()
 	
 	# 3. Choisir la taille du groupe (1 à 4)
-	var group_size: int = randi_range(1, 4)
+	var group_size: int = forced_group_size if forced_group_size > 0 else randi_range(1, 4)
 	print("Entité : ", chosen_type.group_type, " ", chosen_visual, " ", group_size)
 	
 	# 4. Spawner les personnages

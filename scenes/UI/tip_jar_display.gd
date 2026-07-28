@@ -8,11 +8,11 @@ class_name TipJarDisplay
 
 
 func _ready() -> void:
-	EarningManager.earnings_updated.connect(_update_frame)
+	EarningsManager.earnings_updated.connect(_update_frame)
 	tip_fund_sprite.stop() # on ne joue pas d'animation, on fige juste une frame
 	_update_frame()
 
 
 func _update_frame() -> void:
-	var target_frame: int = int(ceil(EarningManager.tip_fund / amount_per_frame))
+	var target_frame: int = int(ceil(EarningsManager.tip_fund / amount_per_frame))
 	tip_fund_sprite.frame = clampi(target_frame, 0, max_frame_index)

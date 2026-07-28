@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cjx11yg7jdmdt"]
+
+[ext_resource type="Script" uid="uid://dvdbddtj74e7s" path="res://scripts/components/day_cycle_component.gd" id="1_4ry54"]
+
+[node name="DayCycleComponent" type="Node2D" unique_id=1299101941]
+script = ExtResource("1_4ry54")

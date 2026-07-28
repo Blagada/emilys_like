@@ -247,16 +247,21 @@ visible = false
 
 [node name="Scripts" type="Node2D" parent="." unique_id=907658780]
 
-[node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "earnings_gauge", "navigation_region", "level_intro_screen", "day_cycle", "day_results_screen") instance=ExtResource("10_iav0o")]
+[node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "earnings_gauge", "navigation_region", "level_intro_screen", "day_cycle") instance=ExtResource("10_iav0o")]
+level_data = ExtResource("16_bahl2")
+expert_threshold_percent = null
+sitting_animation_delay = null
+counter_order_probability_percent = null
+spawn_interval_jitter_percent = null
+initial_spawn_delay_min = null
+initial_spawn_delay_max = null
 tray_places = NodePath("../../ZoneFixe/Tray_places")
 customer_spawner = NodePath("../CustomerSpawner")
-level_data = ExtResource("16_bahl2")
 payment_queue = NodePath("../../Entities/Comptoir/Visuals/PaymentQueueComponent")
 earnings_gauge = NodePath("../../ZoneFixe/EarningsGauge")
 navigation_region = NodePath("../../ZoneDeplacement")
 level_intro_screen = NodePath("../../ZoneFixe/LevelIntroScreen")
 day_cycle = NodePath("../DayCycleComponent")
-day_results_screen = NodePath("../../ZoneFixe/DayResultsScreen")
 
 [node name="DayCycleComponent" parent="Scripts" unique_id=1299101941 instance=ExtResource("18_v6ha0")]
 service_duration = 40.0

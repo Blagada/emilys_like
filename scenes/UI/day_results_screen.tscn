@@ -1,0 +1,92 @@
+[gd_scene format=3 uid="uid://djb2q2gqcpbf2"]
+
+[ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="1_7n43w"]
+[ext_resource type="Script" uid="uid://d3qsqh2goxi8l" path="res://scenes/UI/day_results_screen.gd" id="2_p3edu"]
+
+[node name="DayResultsScreen" type="Control" unique_id=1440735646 node_paths=PackedStringArray("restaurant_name_label", "level_number_label", "earnings_label", "goal_status_label", "expert_status_label", "tip_label", "continue_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_7n43w")
+script = ExtResource("2_p3edu")
+restaurant_name_label = NodePath("LevelDescContent/RestaurantLabel")
+level_number_label = NodePath("LevelDescContent/LevelLabel")
+earnings_label = NodePath("LevelDescContent/EarningsLabel")
+goal_status_label = NodePath("LevelDescContent/GoalStatusLabel")
+expert_status_label = NodePath("LevelDescContent/ExpertStatusLabel")
+tip_label = NodePath("LevelDescContent/TipLabel")
+continue_button = NodePath("LevelDescContent/ContinueButton")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1182549065]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 49.999996
+offset_top = 24.999998
+offset_right = 50.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.9209957, 0.9209957)
+color = Color(1, 1, 0.8627451, 1)
+
+[node name="LevelDescContent" type="VBoxContainer" parent="." unique_id=757858541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -356.0
+offset_top = -157.0
+offset_right = 354.0
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RestaurantLabel" type="Label" parent="LevelDescContent" unique_id=2004122949]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+text = "Restaurant x"
+horizontal_alignment = 1
+
+[node name="LevelLabel" type="Label" parent="LevelDescContent" unique_id=458450065]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.07450981, 0.07450981, 0.07450981, 1)
+text = "Jour x"
+horizontal_alignment = 1
+
+[node name="EarningsLabel" type="RichTextLabel" parent="LevelDescContent" unique_id=1058166707]
+layout_mode = 2
+bbcode_enabled = true
+text = "Montant gagné"
+fit_content = true
+
+[node name="GoalStatusLabel" type="RichTextLabel" parent="LevelDescContent" unique_id=850910235]
+layout_mode = 2
+bbcode_enabled = true
+text = "Goal"
+fit_content = true
+
+[node name="ExpertStatusLabel" type="RichTextLabel" parent="LevelDescContent" unique_id=595057347]
+layout_mode = 2
+bbcode_enabled = true
+text = "Expert goal"
+fit_content = true
+
+[node name="TipLabel" type="RichTextLabel" parent="LevelDescContent" unique_id=1152182010]
+layout_mode = 2
+bbcode_enabled = true
+text = "Tip"
+fit_content = true
+
+[node name="ContinueButton" type="Button" parent="LevelDescContent" unique_id=1778547428]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Continuer"

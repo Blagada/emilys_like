@@ -2,6 +2,22 @@
 
 [ext_resource type="FontFile" uid="uid://cqqcrly8xbiyt" path="res://assets/fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf" id="1_5r36e"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_a60tx"]
+grow_begin = 3.0
+grow_end = 3.0
+thickness = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eohg8"]
+bg_color = Color(0.078431375, 0.15294118, 0.105882354, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a60tx"]
+bg_color = Color(0.16862746, 0.2901961, 0.21568628, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.16862746, 0.2901961, 0.21568628, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eisdl"]
 bg_color = Color(0.6, 0.5411765, 0.4745098, 1)
 
@@ -10,8 +26,16 @@ bg_color = Color(0.82544726, 0.5834379, 0.18411377, 1)
 
 [resource]
 default_font = ExtResource("1_5r36e")
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/focus = SubResource("StyleBoxLine_a60tx")
+Button/styles/hover = SubResource("StyleBoxFlat_eohg8")
+Button/styles/normal = SubResource("StyleBoxFlat_a60tx")
+HBoxContainer/constants/separation = 50
 ProgressBar/colors/font_color = Color(0.9490196, 0.9490196, 0.21568628, 1)
 ProgressBar/constants/outline_size = 6
 ProgressBar/font_sizes/font_size = 21
 ProgressBar/styles/background = SubResource("StyleBoxFlat_eisdl")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_uocbs")
+RichTextLabel/colors/default_color = Color(0.16862746, 0.2901961, 0.21568628, 1)
+RichTextLabel/constants/line_separation = 5
+RichTextLabel/fonts/bold_font = ExtResource("1_5r36e")

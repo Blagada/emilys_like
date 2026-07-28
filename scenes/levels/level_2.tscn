@@ -1,25 +1,23 @@
-[gd_scene format=4 uid="uid://dm1md5v5vp5lu"]
+[gd_scene format=4 uid="uid://cwrycs3lpdn2h"]
 
-[ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://plancher.png" id="2_excbq"]
-[ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/foundation/wall.tscn" id="2_iwr0g"]
-[ext_resource type="PackedScene" uid="uid://dtxvvae0o7g7q" path="res://scenes/entities/Tables/table_for_four.tscn" id="3_iav0o"]
-[ext_resource type="PackedScene" uid="uid://blfuh5focianj" path="res://scenes/entities/Tables/table_for_two.tscn" id="4_dnkej"]
-[ext_resource type="PackedScene" uid="uid://w2tsxuaqqj4x" path="res://scenes/entities/Counter/counter.tscn" id="5_mm8aj"]
-[ext_resource type="PackedScene" uid="uid://drbeiqg2746sk" path="res://scenes/entities/Foods/aliments.tscn" id="6_wtwp4"]
-[ext_resource type="Resource" uid="uid://bmxa6rs11pctl" path="res://resources/foods/bouboule.tres" id="7_iwr0g"]
-[ext_resource type="Resource" uid="uid://c7f4dnl7hrimb" path="res://resources/foods/cupcake.tres" id="8_bahl2"]
-[ext_resource type="Resource" uid="uid://dp5ont1tbbvkh" path="res://resources/foods/hotdog.tres" id="8_dnkej"]
-[ext_resource type="Resource" uid="uid://dmo3cvmxn6cti" path="res://resources/foods/noodles.tres" id="9_mm8aj"]
-[ext_resource type="PackedScene" uid="uid://d3d62e0dcbxqc" path="res://scenes/entities/Staff/player.tscn" id="9_np2pn"]
-[ext_resource type="PackedScene" uid="uid://qvto3r4aka43" path="res://scripts/components/level_manager.tscn" id="10_iav0o"]
-[ext_resource type="PackedScene" uid="uid://ef3q0rvptar7" path="res://scenes/entities/Tray/tray.tscn" id="10_v6ha0"]
-[ext_resource type="PackedScene" uid="uid://boj0snxc5fiux" path="res://scripts/components/spawn_component.tscn" id="11_excbq"]
-[ext_resource type="PackedScene" uid="uid://bnioo1o1b4tm2" path="res://scenes/UI/earnings_gauge.tscn" id="11_wtwp4"]
-[ext_resource type="PackedScene" uid="uid://cminyncmj2pix" path="res://scenes/UI/tip_jar_display.tscn" id="14_bahl2"]
-[ext_resource type="PackedScene" uid="uid://bw3au6rjcnudw" path="res://scenes/UI/level_intro_screen.tscn" id="15_np2pn"]
-[ext_resource type="Resource" uid="uid://g5bilfmowkq6" path="res://resources/levels/level_data_restoA-j1.tres" id="16_bahl2"]
-[ext_resource type="PackedScene" uid="uid://djb2q2gqcpbf2" path="res://scenes/UI/day_results_screen.tscn" id="16_gmpev"]
-[ext_resource type="PackedScene" uid="uid://cjx11yg7jdmdt" path="res://scripts/components/day_cycle_component.tscn" id="18_v6ha0"]
+[ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://plancher.png" id="1_gw1l3"]
+[ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/foundation/wall.tscn" id="2_p4se4"]
+[ext_resource type="PackedScene" uid="uid://d3d62e0dcbxqc" path="res://scenes/entities/Staff/player.tscn" id="3_sibr7"]
+[ext_resource type="PackedScene" uid="uid://dtxvvae0o7g7q" path="res://scenes/entities/Tables/table_for_four.tscn" id="4_lkn2k"]
+[ext_resource type="PackedScene" uid="uid://blfuh5focianj" path="res://scenes/entities/Tables/table_for_two.tscn" id="5_sbygb"]
+[ext_resource type="PackedScene" uid="uid://w2tsxuaqqj4x" path="res://scenes/entities/Counter/counter.tscn" id="6_5niy6"]
+[ext_resource type="PackedScene" uid="uid://drbeiqg2746sk" path="res://scenes/entities/Foods/aliments.tscn" id="7_wikm6"]
+[ext_resource type="Resource" uid="uid://c7f4dnl7hrimb" path="res://resources/foods/cupcake.tres" id="8_1c1qw"]
+[ext_resource type="Resource" uid="uid://bmxa6rs11pctl" path="res://resources/foods/bouboule.tres" id="9_1a10c"]
+[ext_resource type="Resource" uid="uid://dp5ont1tbbvkh" path="res://resources/foods/hotdog.tres" id="10_mx6s3"]
+[ext_resource type="Resource" uid="uid://dmo3cvmxn6cti" path="res://resources/foods/noodles.tres" id="11_7d3nu"]
+[ext_resource type="PackedScene" uid="uid://ef3q0rvptar7" path="res://scenes/entities/Tray/tray.tscn" id="12_r6ket"]
+[ext_resource type="PackedScene" uid="uid://bnioo1o1b4tm2" path="res://scenes/UI/earnings_gauge.tscn" id="13_xworo"]
+[ext_resource type="PackedScene" uid="uid://cminyncmj2pix" path="res://scenes/UI/tip_jar_display.tscn" id="14_wwjag"]
+[ext_resource type="PackedScene" uid="uid://bw3au6rjcnudw" path="res://scenes/UI/level_intro_screen.tscn" id="15_rvwo1"]
+[ext_resource type="PackedScene" uid="uid://qvto3r4aka43" path="res://scripts/components/level_manager.tscn" id="16_yxkvy"]
+[ext_resource type="Resource" uid="uid://bcagnf6i62fvv" path="res://resources/levels/level_data_restoA-j2.tres" id="17_gw1l3"]
+[ext_resource type="PackedScene" uid="uid://boj0snxc5fiux" path="res://scripts/components/spawn_component.tscn" id="18_tn15g"]
 
 [sub_resource type="Gradient" id="Gradient_bswci"]
 colors = PackedColorArray(0.3331272, 0.2804408, 0.29143158, 1, 0.9337711, 0.8549367, 0.8047589, 1)
@@ -31,7 +29,7 @@ gradient = SubResource("Gradient_bswci")
 diffuse_texture = SubResource("GradientTexture1D_rus8k")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5xbjy"]
-atlas = ExtResource("2_excbq")
+atlas = ExtResource("1_gw1l3")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nkto"]
 texture = SubResource("AtlasTexture_5xbjy")
@@ -98,19 +96,19 @@ gradient = SubResource("Gradient_wtwp4")
 fill = 1
 fill_from = Vector2(0.50427353, 0.48290598)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_iwr0g"]
-polygon = PackedVector2Array(627, 383, 626, 454, 1000, 455, 998, 380, 771.82263, 381.82892, 768, 366, 683, 365, 681.81384, 382.55676)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bahl2"]
 polygon = PackedVector2Array(355, 445, 355, 531, 333, 514, 255, 516, 251, 376, 351, 375)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_rus8k"]
-vertices = PackedVector2Array(1011, 381.0078, 924.90625, 246.47656, 930.3594, 213.71875, 1034.9375, -8.03125, 907.8281, 267.8203, 491.9297, 381.0078, 891.0078, 272.02344, 883.22656, 273.3203, 874.7031, 274.53906, 809.8828, 279.53125, 901.0078, 184.35938, 879.3281, 186.36719, 879.53906, 163.25, 230.13281, 189.17188, 208.45313, 191.17969, 208.65625, 168.0625, 350.72656, 368.4297, 316.1797, 371.64063, 314.82813, 334.9922, 477.7578, 466.0078, 375.4297, 478.35156, 381.07813, 444.39063, 132, 279.53906, 132, 278.53906, 139, 278.53906, 139, 284.34375, 135.10156, 371.47656, 802.8828, 274.72656, 802.8828, 273.72656, 809.8828, 273.72656, 734.3906, 274.72656, 723.96875, 273.2422, 707.6172, 269.96875, 254.03125, 251.28906, 259.47656, 218.53125, 685.8828, 248.22656, 381.07813, 398.78906, 228.60156, 508.20313, 228.60156, 488.70313, 251, 488.70313, 251, 513.39844, 864.0781, 466.0078, 864.0781, 567, 357.54688, 500.6875, 1034.0469, 567, 1014.10156, 567, 685.8828, 220.46875, 734.21875, 159.85156, 734.4375, 186.35156, 717.3828, 187.21094, -34.367188, -8.9609375, 63.34375, 164.65625, 63.5625, 191.15625, 46.5, 192.02344, 160.39844, 337.39063, 160.39844, 370.21094, 372.7578, 436.0703, 375.4297, 432.75, 236.72656, 293.77344, 236.95313, 272.6328, 220.13281, 276.82813, 212.35156, 278.1328, 203.82031, 279.35156, 805.75, 112.171875, 696.1328, 199.96094, 134.86719, 116.97656, 102.203125, 434.89844, 107.8125, 440.5078, 102.203125, 451.7422, -40.617188, 567, 63.507813, 279.53906, 112.85156, 384.82813, 53.09375, 278.04688, 102.203125, 406.14063, 36.742188, 274.78125, 25.25, 204.77344, 15, 225.28125, 15, 253.03906, 102.203125, 480.5, 124.74219, 503.03906, 142.09375, 506.5078, 153.90625, 508.20313, 339.9297, 505.09375, 330.95313, 506.59375, 321.02344, 508.0078)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 1, 0), PackedInt32Array(4, 0, 5, 6), PackedInt32Array(7, 6, 5), PackedInt32Array(8, 7, 5), PackedInt32Array(9, 8, 5), PackedInt32Array(10, 11, 12, 3), PackedInt32Array(13, 14, 15), PackedInt32Array(16, 17, 18), PackedInt32Array(19, 20, 21, 5), PackedInt32Array(22, 23, 24, 25, 26), PackedInt32Array(27, 28, 29, 9), PackedInt32Array(27, 9, 5, 30), PackedInt32Array(31, 30, 5), PackedInt32Array(32, 31, 5), PackedInt32Array(33, 34, 35, 32, 5, 36, 16), PackedInt32Array(37, 38, 39, 40), PackedInt32Array(19, 41, 42, 43, 20), PackedInt32Array(3, 44, 45, 0), PackedInt32Array(3, 2, 10), PackedInt32Array(46, 35, 34, 13), PackedInt32Array(47, 48, 49, 50), PackedInt32Array(51, 52, 53, 50), PackedInt32Array(54, 55, 26, 25), PackedInt32Array(21, 56, 57, 5), PackedInt32Array(5, 57, 36), PackedInt32Array(33, 16, 18), PackedInt32Array(33, 18, 58, 59), PackedInt32Array(60, 59, 58, 54), PackedInt32Array(61, 60, 54), PackedInt32Array(62, 61, 54), PackedInt32Array(25, 62, 54), PackedInt32Array(3, 12, 63), PackedInt32Array(50, 3, 63), PackedInt32Array(50, 63, 47), PackedInt32Array(50, 49, 64), PackedInt32Array(50, 64, 46, 15, 65), PackedInt32Array(66, 67, 68, 69), PackedInt32Array(70, 22, 26, 71), PackedInt32Array(72, 70, 71, 73), PackedInt32Array(69, 74, 72, 73, 66), PackedInt32Array(46, 13, 15), PackedInt32Array(50, 65, 51), PackedInt32Array(50, 53, 75), PackedInt32Array(50, 75, 76), PackedInt32Array(69, 50, 76, 77), PackedInt32Array(69, 77, 74), PackedInt32Array(69, 68, 78), PackedInt32Array(69, 78, 79), PackedInt32Array(69, 79, 80), PackedInt32Array(69, 80, 81), PackedInt32Array(42, 69, 81, 40), PackedInt32Array(82, 43, 42), PackedInt32Array(83, 82, 42), PackedInt32Array(84, 83, 42), PackedInt32Array(81, 37, 40), PackedInt32Array(42, 40, 84)])
+vertices = PackedVector2Array(522.47656, 556.60156, 1034.0469, 567, -40.617188, 567, 371.8672, 551.8906, 884.8906, 230.14063, 1034.9375, -8.03125, 973.3594, 432.39844, 967.6875, 511.95313, 973.3594, 478, 330.03125, 160.54688, 319.78125, 181.0625, 269.9922, 169.92969, 240.64063, 140.57031, 616.6406, 170.60156, 606.02344, 191.92188, 564.2578, 174.3125, 534.90625, 144.95313, 558.8125, 207.07031, 606.02344, 220.63281, 513.22656, 146.96094, 513.4375, 123.84375, 664.21094, 123.140625, 218.96094, 142.57813, 219.17188, 119.46094, 368.1172, 120.4375, 854.53906, 154.17969, 819.9922, 157.39063, 818.6406, 120.74219, 943, 402.03906, 908.4531, 405.2422, 907.10156, 368.59375, 264.53906, 202.6875, 319.78125, 208.82031, 949.84375, 534.2578, 142.50781, 230.9375, 142.50781, 229.9375, 149.50781, 229.9375, 149.50781, 235.74219, 436.78125, 235.32031, 436.78125, 234.32031, 443.78125, 234.32031, 443.78125, 240.11719, 732.40625, 293.95313, 732.40625, 274.45313, 754.8125, 274.45313, 754.8125, 299.14063, 820.8672, 541.7969, 820.8672, 522.2969, 843.27344, 522.2969, 843.27344, 547, -14.453125, 420.46875, 371.8672, 420.46875, -0.28125, 335.46875, -34.367188, -8.9609375, 25.507813, 176.67969, 368.34375, 146.9375, 351.28125, 147.79688, 73.85156, 116.0625, 74.07031, 142.5625, 57.007813, 143.42188, 664.21094, 155.96094, 638.90625, 157.22656, 752.6719, 370.9922, 752.6719, 403.8125, 727.3672, 405.07813, 876.5703, 221.82031, 879.2422, 218.5, 884.8906, 184.53906, 965.03125, 469.67188, 967.6875, 466.35156, 694.46875, 468.53125, 700.0703, 474.1172, 694.46875, 485.34375, 611.6328, 226.25, 606.02344, 237.52344, 541.72656, 228.40625, 524.90625, 232.60938, 606.02344, 266.22656, 518.78906, 335.46875, 740.53906, 79.52344, 439.64844, 72.75781, 247.46094, 224.03125, 341.52344, 230.5625, 932.21094, 538.7031, 145.38281, 68.38281, 74.02344, 230.9375, 368.28906, 235.32031, 35.757813, 156.17188, 25.507813, 204.4375, 47.25, 226.17969, 63.601563, 229.45313, 214.32813, 230.75, 222.85938, 229.53125, 230.64063, 228.22656, 357.8672, 233.82813, 508.60156, 235.13281, 517.1328, 233.90625, 628.53906, 288.78906, 645.89844, 292.2578, 657.71875, 293.95313, 824.84375, 293.7578, 705.1094, 418.4375, 879.2422, 264.10156, 829, 327.3672, 861.3594, 286.4375, 843.7422, 290.84375, 834.77344, 292.34375, 923.2031, 540.1875, 694.46875, 439.7578, 694.46875, 514.0781, 717.02344, 536.6719, 913.28906, 541.6094, 734.3906, 540.1094, 746.1797, 541.7969)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 2), PackedInt32Array(4, 5, 1, 6), PackedInt32Array(7, 8, 1), PackedInt32Array(9, 10, 11, 12), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(17, 15, 14, 18), PackedInt32Array(16, 19, 20, 21), PackedInt32Array(12, 22, 23, 24), PackedInt32Array(25, 26, 27, 5), PackedInt32Array(28, 29, 30), PackedInt32Array(31, 11, 10, 32), PackedInt32Array(33, 7, 1), PackedInt32Array(34, 35, 36, 37), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(46, 47, 48, 49), PackedInt32Array(50, 51, 3, 2), PackedInt32Array(52, 50, 2, 53, 54), PackedInt32Array(24, 55, 56, 12), PackedInt32Array(57, 58, 59, 53), PackedInt32Array(21, 60, 61, 16), PackedInt32Array(62, 63, 64), PackedInt32Array(4, 65, 66), PackedInt32Array(5, 4, 66, 67), PackedInt32Array(5, 67, 25), PackedInt32Array(8, 68, 69), PackedInt32Array(70, 71, 72, 0), PackedInt32Array(17, 18, 73, 74, 75), PackedInt32Array(76, 75, 74, 77, 78), PackedInt32Array(5, 27, 79), PackedInt32Array(53, 5, 79, 80), PackedInt32Array(81, 31, 32, 82), PackedInt32Array(61, 13, 16), PackedInt32Array(56, 9, 12), PackedInt32Array(8, 69, 6, 1), PackedInt32Array(83, 33, 1), PackedInt32Array(21, 20, 80, 79), PackedInt32Array(53, 80, 24, 84), PackedInt32Array(85, 34, 37), PackedInt32Array(86, 38, 41, 78), PackedInt32Array(24, 23, 84), PackedInt32Array(53, 84, 57), PackedInt32Array(53, 59, 87), PackedInt32Array(53, 87, 54), PackedInt32Array(52, 54, 88), PackedInt32Array(52, 88, 89), PackedInt32Array(78, 52, 89, 90), PackedInt32Array(78, 90, 85), PackedInt32Array(78, 85, 37), PackedInt32Array(78, 37, 91), PackedInt32Array(78, 91, 92), PackedInt32Array(78, 92, 93), PackedInt32Array(78, 93, 81, 82, 94), PackedInt32Array(78, 94, 86), PackedInt32Array(78, 41, 95), PackedInt32Array(78, 95, 96), PackedInt32Array(78, 96, 76), PackedInt32Array(78, 77, 97, 0), PackedInt32Array(0, 97, 98), PackedInt32Array(0, 98, 99), PackedInt32Array(0, 99, 42, 45), PackedInt32Array(0, 45, 100, 62, 101), PackedInt32Array(4, 6, 28, 102), PackedInt32Array(102, 28, 30), PackedInt32Array(102, 30, 103, 104), PackedInt32Array(105, 104, 103), PackedInt32Array(106, 105, 103), PackedInt32Array(100, 106, 103, 62), PackedInt32Array(107, 83, 1), PackedInt32Array(62, 64, 101), PackedInt32Array(0, 101, 108), PackedInt32Array(0, 108, 70), PackedInt32Array(0, 72, 109), PackedInt32Array(0, 109, 110), PackedInt32Array(111, 107, 1), PackedInt32Array(0, 110, 112), PackedInt32Array(49, 111, 1), PackedInt32Array(49, 1, 0), PackedInt32Array(46, 49, 0, 113), PackedInt32Array(0, 112, 113)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-69, -44, 1070, -43, 1069, 602, -76, 602)])
 source_geometry_mode = 1
 source_geometry_group_name = &"nav_obstacles"
 agent_radius = 35.0
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_iwr0g"]
+polygon = PackedVector2Array(627, 383, 626, 454, 1000, 455, 998, 380, 771.82263, 381.82892, 768, 366, 683, 365, 681.81384, 382.55676)
 
 [node name="Level1" type="Node2D" unique_id=1649520290]
 
@@ -137,10 +135,7 @@ scale = Vector2(19.54502, 31.376507)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_yf5fn")
 
-[node name="Wall" parent="Ambiant" unique_id=101296613 instance=ExtResource("2_iwr0g")]
-
-[node name="ComptoirLightOccluder2D" type="LightOccluder2D" parent="Ambiant" unique_id=1094367787]
-occluder = SubResource("OccluderPolygon2D_iwr0g")
+[node name="Wall" parent="Ambiant" unique_id=101296613 instance=ExtResource("2_p4se4")]
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ambiant" unique_id=161568055]
 occluder = SubResource("OccluderPolygon2D_bahl2")
@@ -154,26 +149,35 @@ navigation_polygon = SubResource("NavigationPolygon_rus8k")
 [node name="Entities" type="Node2D" parent="." unique_id=613264836]
 y_sort_enabled = true
 
-[node name="player" parent="Entities" unique_id=1099117086 instance=ExtResource("9_np2pn")]
+[node name="player" parent="Entities" unique_id=1099117086 instance=ExtResource("3_sibr7")]
 y_sort_enabled = true
-position = Vector2(760.00006, 584)
+position = Vector2(225, 567.00006)
 scale = Vector2(1.3, 1.3)
 
-[node name="Table_for_four" parent="Entities" unique_id=1194541538 instance=ExtResource("3_iav0o")]
-position = Vector2(301.74774, 555.6298)
+[node name="Table_for_four" parent="Entities" unique_id=1194541538 groups=["nav_obstacles"] instance=ExtResource("4_lkn2k")]
+position = Vector2(978, 594)
 scale = Vector2(1.3701566, 1.3701566)
 
-[node name="Table_pour_deux2" parent="Entities" unique_id=184150909 instance=ExtResource("4_dnkej")]
-position = Vector2(183.00082, 292.4864)
+[node name="Table_for_four2" parent="Entities" unique_id=217408094 groups=["nav_obstacles"] instance=ExtResource("4_lkn2k")]
+position = Vector2(877, 311)
+scale = Vector2(1.3701566, 1.3701566)
+
+[node name="Table_pour_deux2" parent="Entities" unique_id=184150909 groups=["nav_obstacles"] instance=ExtResource("5_sbygb")]
+position = Vector2(531, 242)
 scale = Vector2(1.1417972, 1.1417972)
 
-[node name="Table_pour_deux" parent="Entities" unique_id=308863168 instance=ExtResource("4_dnkej")]
-position = Vector2(949, 287)
+[node name="Table_pour_deux" parent="Entities" unique_id=308863168 groups=["nav_obstacles"] instance=ExtResource("5_sbygb")]
+position = Vector2(195, 237)
 scale = Vector2(1.1417972, 1.1417972)
 
-[node name="Comptoir" parent="Entities" unique_id=574508684 instance=ExtResource("5_mm8aj")]
-position = Vector2(890.9999, 478.00003)
+[node name="Comptoir" parent="Entities" unique_id=574508684 groups=["nav_obstacles"] instance=ExtResource("6_5niy6")]
+position = Vector2(328.99994, 426.00003)
 scale = Vector2(2.854493, 2.854493)
+
+[node name="ComptoirLightOccluder2D" type="LightOccluder2D" parent="Entities/Comptoir" unique_id=1094367787]
+position = Vector2(-312.13947, -167.45532)
+scale = Vector2(0.35032493, 0.35032493)
+occluder = SubResource("OccluderPolygon2D_iwr0g")
 
 [node name="PaymentQueueComponent" parent="Entities/Comptoir/Visuals" parent_id_path=PackedInt32Array(574508684, 1505766415) index="2" unique_id=1700191971 node_paths=PackedStringArray("exit_marker")]
 position = Vector2(-1.2000244, 28.572426)
@@ -181,22 +185,22 @@ exit_marker = NodePath("../../../../Scripts/CustomerSpawner/SpawnPoint")
 
 [node name="Nourritures" type="Node2D" parent="Entities" unique_id=1343125253]
 y_sort_enabled = true
-position = Vector2(6.999939, 4)
+position = Vector2(-555, -48)
 
-[node name="Cupcake" parent="Entities/Nourritures" unique_id=1694997751 instance=ExtResource("6_wtwp4")]
+[node name="Cupcake" parent="Entities/Nourritures" unique_id=1694997751 instance=ExtResource("7_wikm6")]
 position = Vector2(841.00006, 483)
-food_data = ExtResource("8_bahl2")
+food_data = ExtResource("8_1c1qw")
 
-[node name="Bouboule" parent="Entities/Nourritures" unique_id=1600988212 instance=ExtResource("6_wtwp4")]
+[node name="Bouboule" parent="Entities/Nourritures" unique_id=1600988212 instance=ExtResource("7_wikm6")]
 position = Vector2(994.00006, 483)
-food_data = ExtResource("7_iwr0g")
+food_data = ExtResource("9_1a10c")
 
 [node name="InteractionPoint" parent="Entities/Nourritures/Bouboule/InteractionComponent" parent_id_path=PackedInt32Array(1600988212, 2030365436) index="1" unique_id=1962856339]
 position = Vector2(47, 159)
 
-[node name="Hotdog" parent="Entities/Nourritures" unique_id=1260087711 instance=ExtResource("6_wtwp4")]
+[node name="Hotdog" parent="Entities/Nourritures" unique_id=1260087711 instance=ExtResource("7_wikm6")]
 position = Vector2(1068, 571)
-food_data = ExtResource("8_dnkej")
+food_data = ExtResource("10_mx6s3")
 
 [node name="InteractionPoint" parent="Entities/Nourritures/Hotdog/InteractionComponent" parent_id_path=PackedInt32Array(1260087711, 2030365436) index="1" unique_id=1962856339]
 position = Vector2(-62.500107, 117.85606)
@@ -204,22 +208,22 @@ position = Vector2(-62.500107, 117.85606)
 [node name="ZoneDeClic" parent="Entities/Nourritures/Hotdog/InteractionComponent" parent_id_path=PackedInt32Array(1260087711, 2030365436) index="2" unique_id=1380196619]
 position = Vector2(76.78561, 24.99981)
 
-[node name="Nouilles" parent="Entities/Nourritures" unique_id=1272974996 instance=ExtResource("6_wtwp4")]
+[node name="Nouilles" parent="Entities/Nourritures" unique_id=1272974996 instance=ExtResource("7_wikm6")]
 position = Vector2(1068, 648)
-food_data = ExtResource("9_mm8aj")
+food_data = ExtResource("11_7d3nu")
 
 [node name="InteractionPoint" parent="Entities/Nourritures/Nouilles/InteractionComponent" parent_id_path=PackedInt32Array(1272974996, 2030365436) index="1" unique_id=1962856339]
 position = Vector2(-59.210938, 71.401115)
 
 [node name="ZoneFixe" type="CanvasLayer" parent="." unique_id=2067745205]
 
-[node name="Tray_places" parent="ZoneFixe" unique_id=1714887942 instance=ExtResource("10_v6ha0")]
+[node name="Tray_places" parent="ZoneFixe" unique_id=1714887942 instance=ExtResource("12_r6ket")]
 offset_left = 16.0
 offset_top = 536.0
 offset_right = -495.48804
 offset_bottom = 407.69598
 
-[node name="EarningsGauge" parent="ZoneFixe" unique_id=1098784311 instance=ExtResource("11_wtwp4")]
+[node name="EarningsGauge" parent="ZoneFixe" unique_id=1098784311 instance=ExtResource("13_xworo")]
 offset_left = 450.99997
 offset_top = 627.0
 offset_right = 172.61023
@@ -227,44 +231,38 @@ offset_bottom = 11.073486
 scale = Vector2(0.5300324, 0.5300324)
 
 [node name="SpawnButton" type="Button" parent="ZoneFixe" unique_id=2081987828]
-visible = false
 offset_left = 483.0
 offset_top = 10.0
 offset_right = 597.0
 offset_bottom = 41.0
 text = "Spawn clients"
 
-[node name="TipJarDisplay" parent="ZoneFixe" unique_id=1230685855 instance=ExtResource("14_bahl2")]
+[node name="TipJarDisplay" parent="ZoneFixe" unique_id=1230685855 instance=ExtResource("14_wwjag")]
 offset_left = 399.0
 offset_top = 583.0
 offset_right = 439.0
 offset_bottom = 623.0
 
-[node name="LevelIntroScreen" parent="ZoneFixe" unique_id=1440735646 instance=ExtResource("15_np2pn")]
-
-[node name="DayResultsScreen" parent="ZoneFixe" unique_id=310764926 instance=ExtResource("16_gmpev")]
-visible = false
+[node name="LevelIntroScreen" parent="ZoneFixe" unique_id=1440735646 instance=ExtResource("15_rvwo1")]
 
 [node name="Scripts" type="Node2D" parent="." unique_id=907658780]
 
-[node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "earnings_gauge", "navigation_region", "level_intro_screen", "day_cycle", "day_results_screen") instance=ExtResource("10_iav0o")]
+[node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "earnings_gauge", "navigation_region", "level_intro_screen") instance=ExtResource("16_yxkvy")]
 tray_places = NodePath("../../ZoneFixe/Tray_places")
 customer_spawner = NodePath("../CustomerSpawner")
-level_data = ExtResource("16_bahl2")
+level_data = ExtResource("17_gw1l3")
 payment_queue = NodePath("../../Entities/Comptoir/Visuals/PaymentQueueComponent")
 earnings_gauge = NodePath("../../ZoneFixe/EarningsGauge")
 navigation_region = NodePath("../../ZoneDeplacement")
 level_intro_screen = NodePath("../../ZoneFixe/LevelIntroScreen")
-day_cycle = NodePath("../DayCycleComponent")
-day_results_screen = NodePath("../../ZoneFixe/DayResultsScreen")
 
-[node name="DayCycleComponent" parent="Scripts" unique_id=1299101941 instance=ExtResource("18_v6ha0")]
-service_duration = 40.0
-
-[node name="CustomerSpawner" parent="Scripts" unique_id=1257491940 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("11_excbq")]
+[node name="CustomerSpawner" parent="Scripts" unique_id=1257491940 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("18_tn15g")]
 y_sort_enabled = true
 position = Vector2(1191, 94)
 spawn_parent = NodePath("../../Entities")
+
+[node name="SpawnPoint" parent="Scripts/CustomerSpawner" index="0" unique_id=244288348]
+position = Vector2(-471, 740)
 
 [editable path="Entities/Comptoir"]
 [editable path="Entities/Nourritures/Bouboule"]

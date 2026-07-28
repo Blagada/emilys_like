@@ -20,10 +20,12 @@ static func compute_metrics(navigation_region: NavigationRegion2D, customer_spaw
 	var total_seats: int = 0
 
 	var travel_times: Array[float] = []
+	var cleaning_durations: Array[float] = []
 	var reference_speed: float = _average_customer_speed(possible_customers)
 
 	for table_node: Node in tables:
 		var table_comp = table_node.get_node_or_null("TableComponent")
+		
 		if not table_comp:
 			continue
 
@@ -37,6 +39,8 @@ static func compute_metrics(navigation_region: NavigationRegion2D, customer_spaw
 		)
 		if travel_time > 0.0:
 			travel_times.append(travel_time)
+		
+		cleaning_durations.append(table_comp.cleaning_duration)
 
 	var avg_customer_travel_time: float = 0.0
 	if not travel_times.is_empty():
@@ -45,10 +49,19 @@ static func compute_metrics(navigation_region: NavigationRegion2D, customer_spaw
 			total += t
 		avg_customer_travel_time = total / travel_times.size()
 
+	var avg_cleaning_duration: float = 0.0
+	if not cleaning_durations.is_empty():
+		var total_cleaning: float = 0.0
+		for c: float in cleaning_durations:
+			total_cleaning += c
+		avg_cleaning_duration = total_cleaning / cleaning_durations.size()
+
 	return {
 		"table_count": table_count,
 		"total_seats": total_seats,
-		"avg_customer_travel_time": avg_customer_travel_time
+		"avg_customer_travel_time": avg_customer_travel_time,
+		"avg_customer_speed": reference_speed,
+		"avg_cleaning_duration": avg_cleaning_duration
 	}
 
 

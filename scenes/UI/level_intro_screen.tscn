@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="1_a60tx"]
 [ext_resource type="Script" uid="uid://b3lrtum4i62d2" path="res://scenes/UI/level_intro_screen.gd" id="1_hv2q8"]
 
-[node name="LevelIntroScreen" type="Control" unique_id=1440735646 node_paths=PackedStringArray("restaurant_name_label", "level_number_label", "table_info_label", "services_label", "customers_list_label", "tray_label", "start_button")]
+[node name="LevelIntroScreen" type="Control" unique_id=1440735646 node_paths=PackedStringArray("restaurant_name_label", "level_number_label", "table_info_label", "services_label", "customers_list_label", "tray_label", "goal_label", "start_button", "menu_list_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,13 +12,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_a60tx")
 script = ExtResource("1_hv2q8")
-restaurant_name_label = NodePath("VBoxContainer/RestaurantLabel")
-level_number_label = NodePath("VBoxContainer/LevelLabel")
-table_info_label = NodePath("VBoxContainer/TableInfoLabel")
-services_label = NodePath("VBoxContainer/ServicesLabel")
-customers_list_label = NodePath("VBoxContainer/CustomersListLabel")
-tray_label = NodePath("VBoxContainer/TrayLabel")
-start_button = NodePath("VBoxContainer/StartLevelButton")
+restaurant_name_label = NodePath("LevelDescContent/RestaurantLabel")
+level_number_label = NodePath("LevelDescContent/LevelLabel")
+table_info_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/TableInfoLabel")
+services_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/ServicesLabel")
+customers_list_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/CustomersListLabel")
+tray_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/TrayLabel")
+goal_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/GoalLabel")
+start_button = NodePath("LevelDescContent/StartLevelButton")
+menu_list_label = NodePath("LevelDescContent/LevelDesc/Menu/MenuTextLabel")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1182549065]
 layout_mode = 1
@@ -34,52 +36,84 @@ grow_vertical = 2
 scale = Vector2(0.9209957, 0.9209957)
 color = Color(1, 1, 0.8627451, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=757858541]
+[node name="LevelDescContent" type="VBoxContainer" parent="." unique_id=757858541]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -199.75
-offset_top = -95.5
-offset_right = 199.75
-offset_bottom = 95.5
+offset_left = -356.0
+offset_top = -157.0
+offset_right = 354.0
+offset_bottom = 208.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="RestaurantLabel" type="Label" parent="VBoxContainer" unique_id=2004122949]
+[node name="RestaurantLabel" type="Label" parent="LevelDescContent" unique_id=2004122949]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 theme_override_colors/font_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
 text = "Restaurant x"
+horizontal_alignment = 1
 
-[node name="LevelLabel" type="Label" parent="VBoxContainer" unique_id=458450065]
+[node name="LevelLabel" type="Label" parent="LevelDescContent" unique_id=458450065]
 layout_mode = 2
 theme_type_variation = &"HeaderMedium"
-theme_override_colors/font_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
-text = "Niveau x"
+theme_override_colors/font_color = Color(0.07450981, 0.07450981, 0.07450981, 1)
+text = "Jour x"
+horizontal_alignment = 1
 
-[node name="TableInfoLabel" type="Label" parent="VBoxContainer" unique_id=2083465889]
+[node name="LevelDesc" type="HBoxContainer" parent="LevelDescContent" unique_id=802041652]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.16919431, 0.29125696, 0.21558252, 1)
+
+[node name="LevelInfo" type="VBoxContainer" parent="LevelDescContent/LevelDesc" unique_id=1109137057]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TableInfoLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=1620785862]
+layout_mode = 2
+bbcode_enabled = true
 text = "Nombre de table : x"
+fit_content = true
 
-[node name="ServicesLabel" type="Label" parent="VBoxContainer" unique_id=1516513861]
+[node name="ServicesLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=1392022992]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.16919431, 0.29125696, 0.21558252, 1)
+bbcode_enabled = true
 text = "Services du"
+fit_content = true
 
-[node name="TrayLabel" type="Label" parent="VBoxContainer" unique_id=268438279]
+[node name="TrayLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=1762085820]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.16919431, 0.29125696, 0.21558252, 1)
+bbcode_enabled = true
 text = "Espace sur le plateau :"
+fit_content = true
 
-[node name="CustomersListLabel" type="Label" parent="VBoxContainer" unique_id=666841758]
+[node name="CustomersListLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=592567200]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.16919431, 0.29125696, 0.21558252, 1)
+bbcode_enabled = true
 text = "Type de client : x"
+fit_content = true
 
-[node name="StartLevelButton" type="Button" parent="VBoxContainer" unique_id=1778547428]
+[node name="GoalLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=1419703377]
 layout_mode = 2
+bbcode_enabled = true
+text = "Objectif : x"
+fit_content = true
+
+[node name="Menu" type="VBoxContainer" parent="LevelDescContent/LevelDesc" unique_id=1938496868]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MenuTextLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/Menu" unique_id=1667973324]
+layout_mode = 2
+theme_override_constants/line_separation = 5
+bbcode_enabled = true
+text = "Menu : "
+fit_content = true
+autowrap_mode = 0
+
+[node name="StartLevelButton" type="Button" parent="LevelDescContent" unique_id=1778547428]
+layout_mode = 2
+size_flags_horizontal = 4
 text = "Débuter la journée"

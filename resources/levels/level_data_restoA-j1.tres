@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://g5bilfmowkq6"]
+
+[ext_resource type="Resource" uid="uid://dnf5dnacueeen" path="res://resources/menus/level-menu-restoA-j1.tres" id="1_nqvbn"]
+[ext_resource type="Script" uid="uid://coyjgufjo44k3" path="res://resources/customers/Data/customer_data.gd" id="2_apoud"]
+[ext_resource type="Resource" uid="uid://cythqx6prwhxi" path="res://resources/customers/Data/vip.tres" id="3_mcsoc"]
+[ext_resource type="Resource" uid="uid://bdeloesawiw12" path="res://resources/customers/Data/calm.tres" id="4_f13e3"]
+[ext_resource type="Resource" uid="uid://df3rp0cax6kgi" path="res://resources/restaurants/resto_a.tres" id="5_8i4gc"]
+[ext_resource type="Script" uid="uid://duy54q18siryb" path="res://resources/levels/level_data.gd" id="6_q51y5"]
+
+[resource]
+script = ExtResource("6_q51y5")
+restaurant = ExtResource("5_8i4gc")
+level_menu = ExtResource("1_nqvbn")
+possible_customers = Array[ExtResource("2_apoud")]([ExtResource("3_mcsoc"), ExtResource("4_f13e3")])
+active_services = Array[int]([2])
+metadata/_custom_type_script = "uid://duy54q18siryb"
