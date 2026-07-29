@@ -20,7 +20,6 @@ func has_servable_customer() -> bool:
 
 
 func serve_food() -> void:
-	print("DEBUG: serve_food() appelée, ", seated_customers.size(), " client(s) à cette table")
 	var served_someone: bool = false
 
 	for customer: Customer in seated_customers:
@@ -33,7 +32,6 @@ func serve_food() -> void:
 			served_someone = true
 
 	if not served_someone:
-		print("Rien à servir : aucun item du plateau ne correspond aux commandes en attente")
 		return
 
 	TrayManager.tray_updated.emit()

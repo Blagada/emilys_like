@@ -1,6 +1,8 @@
 extends Node2D
 class_name PaymentQueueComponent
 
+signal customer_exited
+
 # --- EXPORTS & CONFIGURATIONS ---
 # Positions successives dans la file d'attente (index 0 = tout devant, directement à la caisse)
 @export var queue_positions: Array[Marker2D] = [] 
@@ -106,6 +108,7 @@ func _process_queue_sequentially() -> void:
 	EarningsManager.add_earnings(total_bill_batch, total_tip_batch)
 	_show_payment_feedback(total_bill_batch, total_tip_batch, total_combo_bonus)
 
+
 # --- ANIMATION DU FEEDBACK DE PAIEMENT ---
 func _show_payment_feedback(bill: float, tip: float, combo_bonus: float) -> void:
 	if not payment_feedback_label:
@@ -147,6 +150,7 @@ func _show_payment_feedback(bill: float, tip: float, combo_bonus: float) -> void
 # Fait marcher le client vers la sortie du restaurant puis supprime son instance de la mémoire
 func _send_customer_to_exit(customer: Customer) -> void:
 	await customer.move_to(exit_marker, GameEnums.CustomerState.MOVING)
+	customer_exited.emit()
 	customer.queue_free()
 
 

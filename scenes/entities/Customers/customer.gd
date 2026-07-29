@@ -44,7 +44,6 @@ func apply_data(new_data: CustomerData) -> void:
 	# TODO : Applique les propriétés (vitesse, etc.). Assigner les autres paramètres
 	customer_data = new_data
 	movement_component.speed = new_data.speed
-	print("Nouveau client de type : ", new_data.group_type)
 
 
 func change_state(new_state: GameEnums.CustomerState, target_pos: Vector2 = Vector2.ZERO) -> void:
@@ -88,8 +87,6 @@ func move_to_table(table_marker: Marker2D, table_position: Vector2) -> void:
 	# Création d'une animation douce (0.3 secondes)
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "global_position", table_marker.global_position, 0.3)
-	
-	print("Client assis et collision désactivée.")
 
 
 func move_to(target_marker: Marker2D, state: GameEnums.CustomerState = GameEnums.CustomerState.MOVING) -> void:

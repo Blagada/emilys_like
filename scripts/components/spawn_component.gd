@@ -39,7 +39,6 @@ func spawn_entity(forced_group_size: int = -1) -> void:
 	
 	# 3. Choisir la taille du groupe (1 à 4)
 	var group_size: int = forced_group_size if forced_group_size > 0 else randi_range(1, 4)
-	print("Entité : ", chosen_type.group_type, " ", chosen_visual, " ", group_size)
 	
 	# 4. Spawner les personnages
 	var group: Array[Customer] = []

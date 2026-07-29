@@ -20,7 +20,6 @@ func _ready() -> void:
 func add_item(item: FoodData) -> bool:
 	if TrayManager.tray_items.size() < TrayManager.current_max_capacity:
 		TrayManager.tray_items.append(item)
-		print("DEBUG : Succès ! Nouvel état du plateau : ", TrayManager.tray_items.size(), "/", TrayManager.current_max_capacity)
 		TrayManager.tray_updated.emit()
 		return true
 	return false

@@ -67,7 +67,6 @@ static func compute_metrics(navigation_region: NavigationRegion2D, customer_spaw
 
 static func _measure_travel_time(from: Vector2, to: Vector2, speed: float, nav_map: RID) -> float:
 	var path: PackedVector2Array = NavigationServer2D.map_get_path(nav_map, from, to, true)
-	print("nav_map valide : ", nav_map.is_valid(), " | from : ", from, " | to : ", to, " | path.size() : ", path.size())
 
 	if path.size() < 2 or speed <= 0.0:
 		return 0.0

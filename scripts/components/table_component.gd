@@ -75,9 +75,6 @@ func reserve_seats(group_size: int) -> Array[Marker2D]:
 			occupied_seats.append(seat) # On marque le siège comme pris
 			reserved.append(seat)       # On l'ajoute à la liste pour le LevelComponent
 			
-			# --- DEBUG ICI ---
-			print("Table [", name, "] : Siège assigné à la position : ", seat.position)
-			
 			# Si on a assez de sièges, on arrête de chercher
 			if reserved.size() == group_size:
 				break
@@ -89,7 +86,6 @@ func reserve_seats(group_size: int) -> Array[Marker2D]:
 
 	# 4. On met à jour l'état comme tu le faisais
 	current_state = GameEnums.TableState.AWAITING_SERVICE
-	print("Table [", name, "] : Réservée pour ", group_size, " personnes.")
 
 	# On renvoie bien les Marker2D, comme avant
 	return reserved

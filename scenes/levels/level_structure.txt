@@ -1,6 +1,6 @@
 Cette procédure explique comment structurer un niveau (scène de restaurant) pour que le tri visuel (Y-Sort) et la navigation des personnages fonctionnent correctement.
 
-# -- Structure de base d'un niveau -- #
+1. Structure de base d'un niveau
 
 Chaque scène de niveau (ex: level_1.tscn) doit suivre cette hiérarchie :
 
@@ -18,8 +18,13 @@ Level (Node2D)
     ├── LevelManager
     └── CustomerSpawner (garde son Spawn Parent assigné à Entities, voir point 3)
 
+2. Pourquoi cette structure
 
-1. Créer un nouveau niveau
+Godot dessine les nœuds selon leur ordre dans l'arbre de scène, pas selon leur position à l'écran. Si le joueur/les clients vivent dans une branche différente des tables, ils vont toujours se dessiner par-dessus (ou en-dessous) peu importe leur position réelle.
+
+En regroupant tout ce qui doit se trier par profondeur (meubles + personnages) sous UN SEUL parent avec Y Sort Enabled activé, Godot trie automatiquement selon la position Y globale de chaque enfant.
+
+3. Créer un nouveau niveau
 
 Pour un nouveau restaurant/niveau, créer d'abord le nœud Entities (Node2D, Y Sort Enabled = ON) directement à la racine du niveau. Placer directement les tables, le comptoir, et le joueur comme enfants de ce nœud dès le départ (pas besoin de les mettre temporairement sous ZoneDeplacement).
 
@@ -28,7 +33,7 @@ Pour le CustomerSpawner (sous Scripts, pour garder la logique lisible) :
 - Dans l'inspecteur, assigner le champ "Spawn Parent" au nœud Entities
 - Les clients instanciés par le spawner vont alors atterrir sous Entities (tri visuel correct), même si le script du spawner reste sous Scripts
 
-2. Configurer le NavigationRegion2D pour détecter les obstacles par groupe
+4. Configurer le NavigationRegion2D pour détecter les obstacles par groupe
 
 Par défaut, Godot ne scanne que les enfants directs de ZoneDeplacement pour bâtir le NavigationPolygon (tables/comptoir = obstacles). Comme la structure ci-dessus sort les tables de ZoneDeplacement, il faut baser la détection sur un groupe plutôt que sur la hiérarchie :
 
@@ -42,8 +47,61 @@ c) Pour chaque table + le comptoir (les obstacles) :
    - Taper "nav_obstacles" dans le champ texte → Add
 d) Rebake la navigation (bouton "Bake NavigationPolygon" dans la barre d'outils)
 
-3. Rayon de navigation (agent_radius) et limites de la scène
+Note : le champ "Source Geometry Group Name" ne fait que dire à Godot quel nom de groupe chercher — il ne crée pas le groupe. Le groupe n'existe réellement qu'une fois qu'au moins un nœud y a été ajouté via l'onglet Groups.
+
+5. Rayon de navigation (agent_radius) et limites de la scène
 
 Le agent_radius (Navigation Polygon → Agents → Radius) érode uniformément TOUS les bords du polygone de navigation — les contours extérieurs autant que les obstacles internes. Impossible d'avoir une marge sélective (grande autour des tables, nulle sur les bords de la pièce).
 
 Pour garder une zone marchable jusqu'au bord de la scène (ex: jusqu'à un marker de sortie/spawn) tout en gardant un radius confortable autour des meubles : dessiner le contour extérieur (outlines) du NavigationPolygon plus grand que la pièce visuelle, pour compenser l'érosion. Si le marker doit être atteignable à une position X, dessiner le contour brut au moins jusqu'à X + agent_radius.
+
+
+# -- Resources et câblage d'un niveau (LevelManager) -- #
+
+4. Resources à créer avant de câbler la scène
+
+- RestaurantData (une seule fois par restaurant, réutilisée par tous ses niveaux) :
+  - Restaurant Name
+  - Total Levels (nombre total de niveaux prévus pour ce resto, sert à la courbe de difficulté)
+
+- LevelData (une par niveau) :
+  - Level Menu → référence une LevelMenu existante (jamais dupliquer les aliments ici)
+  - Restaurant → référence le RestaurantData du resto
+  - Level Number (1, 2, 3...)
+  - Possible Customers → types de clients pour ce niveau
+  - Active Services → services actifs (Breakfast/Lunch/Dinner)
+  - Tray Max Capacity → taille du plateau pour ce niveau
+
+5. Champs à assigner dans l'inspecteur du LevelManager (une fois par scène de niveau)
+
+- Tray Places, Customer Spawner, Payment Queue, Earnings Gauge → nœuds de la scène
+- Level Data → la resource créée à l'étape 4
+- Navigation Region → ZoneDeplacement
+- Level Intro Screen, Day Cycle, Day Results Screen, End Of Service Panel → nœuds UI/composants de la scène (voir point 6)
+- Réglages ajustables (valeurs par défaut à garder sauf besoin spécifique) :
+  - Expert Threshold Percent (défaut 150.0) : seuil du score expert, en % de daily_goal (150% = doit gagner 50% de plus que l'objectif minimum). Volontairement laissé constant entre les niveaux, voir point 9.
+  - Sitting Animation Delay (défaut 0.3s) : délai après que les clients arrivent à table, avant que la bulle "..." apparaisse — laisse de la place pour une future animation d'assise. Pas un réglage de difficulté, purement cosmétique/timing.
+  - Counter Order Probability Percent (défaut 70.0) : % de chance qu'un groupe de 1 client soit destiné au comptoir plutôt qu'à une table (mécanique comptoir pas encore construite, actuellement juste un print de debug, le groupe va quand même à une table).
+  - Spawn Interval Jitter Percent (défaut 20.0) : variation aléatoire (± ce %) autour de l'intervalle de spawn calculé automatiquement, pour éviter un rythme d'arrivée trop mécanique/prévisible.
+  - Initial Spawn Delay Min/Max (défaut 1.0–2.0s) : délai aléatoire avant le tout premier groupe de la journée, pour laisser le joueur s'orienter après avoir cliqué "Commencer la journée".
+
+6. Nœuds à instancier dans chaque scène de niveau
+
+- Sous ZoneFixe (CanvasLayer, HUD) : LevelIntroScreen, DayResultsScreen, EndOfServicePanel, EarningsGauge, Tray
+- Sous Scripts (ou ailleurs, peu importe) : LevelManager, CustomerSpawner, DayCycleComponent (enfant de LevelManager), PaymentQueueComponent (sous le comptoir, dans Entities)
+
+7. Réglages qui influencent VRAIMENT la difficulté (à ajuster consciemment niveau par niveau)
+
+- Level Number → SEUL levier branché à la courbe de difficulté automatique (lerp 40%→80%). L'augmenter suffit pour la progression de base.
+- Tray Max Capacity → plus petit = plus de trajets au comptoir. PAS pris en compte par le calcul de daily_goal, donc un vrai ajout de difficulté "en pratique" si voulu.
+- Nombre de Active Services → allonge la session (endurance), le goal grandit proportionnellement donc ce n'est pas "plus dur en %", juste plus long.
+
+8. Réglages qui s'auto-équilibrent — pas besoin d'y toucher pour la difficulté
+
+- Prix du menu (Level Menu) : le calcul utilise le prix moyen du même menu, donc le changer ne rend pas le niveau plus dur en proportion, juste différent en valeur absolue.
+- Types de clients (tip_rate) : même principe, la moyenne est recalculée automatiquement.
+- Disposition physique des tables : temps de marche et nombre de places mesurés automatiquement au démarrage (LevelMetricsHelper), aucun réglage manuel requis.
+
+9. Réglage volontairement laissé constant entre les niveaux
+
+- Expert Threshold Percent reste à 150% sur tous les niveaux (décision prise consciemment, pas de courbe séparée pour l'expert pour l'instant).

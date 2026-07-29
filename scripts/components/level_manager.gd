@@ -10,6 +10,7 @@ class_name LevelComponent
 @export var level_intro_screen: LevelIntroScreen
 @export var day_cycle: DayCycleComponent
 @export var day_results_screen: DayResultsScreen
+@export var end_of_service_panel: EndOfServicePanel
 
 @export var expert_threshold_percent: float = 150.0 # % du goal pour "expert"
 @export var sitting_animation_delay: float = 0.3
@@ -29,11 +30,14 @@ var avg_customer_speed: float = 0.0
 var avg_cleaning_duration: float = 0.0
 var avg_cycle_duration: float = 0.0
 var _auto_spawning: bool = false
+var active_customer_count: int = 0
+var _closing_time_reached: bool = false
 
 func _ready():
 	customer_spawner.set_spawn_data(level_data.possible_customers)
 	TrayManager.current_max_capacity = level_data.tray_max_capacity
-	
+	level_intro_screen.visible = true
+
 	# Appel de notre helper pour calculer les métriques proprement
 	await _setup_level_metrics()
 	_setup_daily_goal()
@@ -89,6 +93,7 @@ func _on_customer_group_spawned(group: Array[Customer]) -> void:
 			assigned_table.is_dirty = true
 			assigned_table.order_component.total_bill = 0.0
 			customer.move_to_table(seats[i], assigned_table.global_position)
+			active_customer_count += 1
 		_handle_group_ordering(assigned_table, group)
 
 
@@ -110,7 +115,6 @@ func _handle_group_ordering(assigned_table: TableComponent, group: Array[Custome
 		customer.set_order(food)
 		assigned_table.order_component.total_bill += food.price
 		customer.change_state(GameEnums.CustomerState.ORDERING)
-		print(customer.name, " commande : ", customer.current_order.resource_path)
 
 	assigned_table.order_component.update_order_bubble()
 
@@ -137,7 +141,7 @@ func _on_day_started() -> void:
 	EarningsManager.reset_daily()
 	day_cycle.service_started.connect(_on_service_started)
 	day_cycle.closing_time.connect(_on_closing_time)
-	day_cycle.day_completed.connect(_on_day_completed)
+	payment_queue.customer_exited.connect(_on_customer_exited)
 	day_cycle.start_day(level_data.active_services)
 
 
@@ -151,12 +155,20 @@ func _on_service_started(service: GameEnums.ServiceType) -> void:
 func _on_closing_time() -> void:
 	print("Fermeture — plus de nouveaux clients")
 	_auto_spawning = false
+	_closing_time_reached = true
+	end_of_service_panel.show_panel()
+	_check_day_finished()
 
 
-func _on_day_completed() -> void:
-	print("Journée terminée")
-	day_results_screen.setup(level_data, EarningsManager.daily_earnings, daily_goal, expert_goal, EarningsManager.daily_tip)
+func _on_customer_exited() -> void:
+	active_customer_count -= 1
+	_check_day_finished()
 
+
+func _check_day_finished() -> void:
+	if _closing_time_reached and active_customer_count <= 0:
+		# TODO étape future : animation de sortie du staff avant d'afficher l'écran
+		day_results_screen.setup(level_data, EarningsManager.daily_earnings, daily_goal, expert_goal, EarningsManager.daily_tip)
 
 func _setup_daily_goal() -> void:
 	var day_duration: float = day_cycle.service_duration * level_data.active_services.size()

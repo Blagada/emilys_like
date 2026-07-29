@@ -54,7 +54,6 @@ func _format_menu(level_menu: LevelMenu) -> String:
 	var names: Array[String] = []
 	for food: FoodData in level_menu.available_foods:
 		names.append("%s (%.2f$)" % [food.name, food.price])
-
 	return " \n".join(names)
 
 
