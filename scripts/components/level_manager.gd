@@ -11,6 +11,7 @@ class_name LevelComponent
 @export var day_cycle: DayCycleComponent
 @export var day_results_screen: DayResultsScreen
 @export var end_of_service_panel: EndOfServicePanel
+@export var day_clock: DayClock
 
 @export var expert_threshold_percent: float = 150.0 # % du goal pour "expert"
 @export var sitting_animation_delay: float = 0.3
@@ -42,7 +43,7 @@ func _ready():
 	await _setup_level_metrics()
 	_setup_daily_goal()
 	
-	earnings_gauge.setup(daily_goal, expert_threshold_percent)
+	earnings_gauge.setup(daily_goal, expert_goal)
 	level_intro_screen.setup(level_data, table_count, total_seats, daily_goal, expert_goal)
 	level_intro_screen.day_started.connect(_on_day_started)
 
@@ -142,6 +143,7 @@ func _on_day_started() -> void:
 	day_cycle.service_started.connect(_on_service_started)
 	day_cycle.closing_time.connect(_on_closing_time)
 	payment_queue.customer_exited.connect(_on_customer_exited)
+	day_clock.setup_markers(level_data.active_services.size())
 	day_cycle.start_day(level_data.active_services)
 
 

@@ -1,9 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
-@onready var movement_component: MovementComponent = $MovementComponent
 @onready var animation: AnimationPlayer = $body/Animation
 @onready var body: AnimatedSprite2D = $body
+@onready var movement_component: MovementComponent = $MovementComponent
 @onready var staff_component: StaffComponent = $StaffComponent
 @onready var action_queue: ActionQueueComponent = $ActionQueueComponent
 

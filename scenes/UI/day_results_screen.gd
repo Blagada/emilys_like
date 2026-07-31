@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func setup(level_data: LevelData, earnings: float, daily_goal: float, expert_goal: float, tip_earned: float) -> void:
 	restaurant_name_label.text = "Restaurant %s" % level_data.restaurant.restaurant_name
-	earnings_label.text = "Montant fait : %.0f$" % earnings
+	earnings_label.text = "Montant fait : %.2f$" % earnings
 	goal_status_label.text = "Objectif (%.0f$)" % daily_goal
 
 	if earnings >= daily_goal:

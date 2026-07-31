@@ -5,14 +5,14 @@ signal action_started(action_id: int)
 signal action_completed(action_id: int)
 signal action_cancelled(action_id: int)
 
+@onready var player: Player = get_parent() as Player
+
 class QueuedAction:
 	var id: int
 	var target_marker: Marker2D
 	var on_execute: Callable
 	var cancelled: bool = false
 	var started: bool = false
-
-@onready var player: Player = get_parent() as Player
 
 var _queue: Array[QueuedAction] = []
 var _current_action: QueuedAction = null

@@ -2,7 +2,7 @@ class_name DailyGoalHelper
 
 const TABLE_ITEMS_PER_CUSTOMER: float = 1.0
 const AVERAGE_GROUP_SIZE: float = 2.5 # randi_range(1, 4), uniforme
-const ROUNDED_GOAL: float = 50.0
+const ROUNDED_GOAL: float = 25.0
 
 static func compute_daily_goal(
 	level_data: LevelData,

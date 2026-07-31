@@ -8,6 +8,7 @@ class_name TableComponent
 @export var current_state: GameEnums.TableState = GameEnums.TableState.UNOCCUPIED_AND_CLEAN # Par défaut, toutes les chaises sont libre et propre
 @export var order_component: OrderComponent
 @export var cleaning_duration: float = 3.0
+@export var serving_delay: float = 0.5
 
 var occupied_seats: Array[Marker2D] = [] # Liste pour garder en mémoire quels sièges sont pris
 var is_dirty: bool = false
@@ -26,6 +27,9 @@ func _on_player_arrived(action_id: int)-> void:
 	if can_clean:
 		_start_cleaning(player, action_id)
 		return
+
+	if order_component.has_servable_customer() and player and player.has_node("StaffComponent"):
+		await player.staff_component.start_task(GameEnums.StaffState.DELIVERING, serving_delay)
 
 	order_component.serve_food()
 	interaction_component.complete_action(action_id)

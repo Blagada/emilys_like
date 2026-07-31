@@ -27,6 +27,7 @@ grow_vertical = 2
 [node name="ProgressBar" type="ProgressBar" parent="HBoxContainer" unique_id=72886992]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 1
 theme = ExtResource("2_eisdl")
 
 [node name="GoalMarker" type="ColorRect" parent="HBoxContainer/ProgressBar" unique_id=1484544603]
@@ -40,11 +41,8 @@ color = Color(0.0030664, 0.0014679865, 0.00066476513, 1)
 
 [node name="AmountLabel" type="Label" parent="HBoxContainer" unique_id=1536720024]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 10
 theme = ExtResource("2_eisdl")
-theme_override_colors/font_color = Color(0.9974778, 0.9917672, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.85490197)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 25
+theme_type_variation = &"count_down"
 text = "Total"
 horizontal_alignment = 2

@@ -15,9 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://bnioo1o1b4tm2" path="res://scenes/UI/earnings_gauge.tscn" id="13_xworo"]
 [ext_resource type="PackedScene" uid="uid://cminyncmj2pix" path="res://scenes/UI/tip_jar_display.tscn" id="14_wwjag"]
 [ext_resource type="PackedScene" uid="uid://bw3au6rjcnudw" path="res://scenes/UI/level_intro_screen.tscn" id="15_rvwo1"]
+[ext_resource type="PackedScene" uid="uid://djb2q2gqcpbf2" path="res://scenes/UI/day_results_screen.tscn" id="16_lkn2k"]
 [ext_resource type="PackedScene" uid="uid://qvto3r4aka43" path="res://scripts/components/level_manager.tscn" id="16_yxkvy"]
 [ext_resource type="Resource" uid="uid://bcagnf6i62fvv" path="res://resources/levels/level_data_restoA-j2.tres" id="17_gw1l3"]
+[ext_resource type="PackedScene" uid="uid://c4u5j0o47c7ef" path="res://scenes/UI/end_of_service_panel.tscn" id="17_sbygb"]
 [ext_resource type="PackedScene" uid="uid://boj0snxc5fiux" path="res://scripts/components/spawn_component.tscn" id="18_tn15g"]
+[ext_resource type="PackedScene" uid="uid://cjx11yg7jdmdt" path="res://scripts/components/day_cycle_component.tscn" id="20_5niy6"]
 
 [sub_resource type="Gradient" id="Gradient_bswci"]
 colors = PackedColorArray(0.3331272, 0.2804408, 0.29143158, 1, 0.9337711, 0.8549367, 0.8047589, 1)
@@ -110,7 +113,7 @@ agent_radius = 35.0
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_iwr0g"]
 polygon = PackedVector2Array(627, 383, 626, 454, 1000, 455, 998, 380, 771.82263, 381.82892, 768, 366, 683, 365, 681.81384, 382.55676)
 
-[node name="Level1" type="Node2D" unique_id=1649520290]
+[node name="Level2" type="Node2D" unique_id=1649520290]
 
 [node name="Plancher" type="Node2D" parent="." unique_id=1918650931]
 position = Vector2(74, 45)
@@ -174,14 +177,14 @@ scale = Vector2(1.1417972, 1.1417972)
 position = Vector2(328.99994, 426.00003)
 scale = Vector2(2.854493, 2.854493)
 
+[node name="PaymentQueueComponent" parent="Entities/Comptoir/Visuals" parent_id_path=PackedInt32Array(574508684, 1505766415) index="2" unique_id=1700191971 node_paths=PackedStringArray("exit_marker")]
+position = Vector2(-1.2000244, 28.572426)
+exit_marker = NodePath("../../../../Scripts/CustomerSpawner/SpawnPoint")
+
 [node name="ComptoirLightOccluder2D" type="LightOccluder2D" parent="Entities/Comptoir" unique_id=1094367787]
 position = Vector2(-312.13947, -167.45532)
 scale = Vector2(0.35032493, 0.35032493)
 occluder = SubResource("OccluderPolygon2D_iwr0g")
-
-[node name="PaymentQueueComponent" parent="Entities/Comptoir/Visuals" parent_id_path=PackedInt32Array(574508684, 1505766415) index="2" unique_id=1700191971 node_paths=PackedStringArray("exit_marker")]
-position = Vector2(-1.2000244, 28.572426)
-exit_marker = NodePath("../../../../Scripts/CustomerSpawner/SpawnPoint")
 
 [node name="Nourritures" type="Node2D" parent="Entities" unique_id=1343125253]
 y_sort_enabled = true
@@ -245,9 +248,19 @@ offset_bottom = 623.0
 
 [node name="LevelIntroScreen" parent="ZoneFixe" unique_id=1440735646 instance=ExtResource("15_rvwo1")]
 
+[node name="DayResultsScreen" parent="ZoneFixe" unique_id=1214173653 instance=ExtResource("16_lkn2k")]
+visible = false
+
+[node name="EndOfServicePanel" parent="ZoneFixe" unique_id=537524400 instance=ExtResource("17_sbygb")]
+visible = false
+offset_left = 451.0
+offset_top = 55.0
+offset_right = -462.0
+offset_bottom = -519.0
+
 [node name="Scripts" type="Node2D" parent="." unique_id=907658780]
 
-[node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "earnings_gauge", "navigation_region", "level_intro_screen") instance=ExtResource("16_yxkvy")]
+[node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "earnings_gauge", "navigation_region", "level_intro_screen", "day_cycle", "day_results_screen", "end_of_service_panel") instance=ExtResource("16_yxkvy")]
 tray_places = NodePath("../../ZoneFixe/Tray_places")
 customer_spawner = NodePath("../CustomerSpawner")
 level_data = ExtResource("17_gw1l3")
@@ -255,6 +268,12 @@ payment_queue = NodePath("../../Entities/Comptoir/Visuals/PaymentQueueComponent"
 earnings_gauge = NodePath("../../ZoneFixe/EarningsGauge")
 navigation_region = NodePath("../../ZoneDeplacement")
 level_intro_screen = NodePath("../../ZoneFixe/LevelIntroScreen")
+day_cycle = NodePath("../DayCycleComponent")
+day_results_screen = NodePath("../../ZoneFixe/DayResultsScreen")
+end_of_service_panel = NodePath("../../ZoneFixe/EndOfServicePanel")
+
+[node name="DayCycleComponent" parent="Scripts" unique_id=1299101941 instance=ExtResource("20_5niy6")]
+service_duration = 140.0
 
 [node name="CustomerSpawner" parent="Scripts" unique_id=1257491940 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("18_tn15g")]
 y_sort_enabled = true

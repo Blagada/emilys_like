@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://vua2gey4w77a"]
+
+[ext_resource type="Texture2D" uid="uid://bw2w7kxt1ue8a" path="res://assets/UI/day_clock.png" id="1_6w2qx"]
+[ext_resource type="Script" uid="uid://dng6bsqv40av8" path="res://scenes/UI/day_clock.gd" id="1_kqaf5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fphfw"]
+atlas = ExtResource("1_6w2qx")
+region = Rect2(120, 0, 120, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqaf5"]
+atlas = ExtResource("1_6w2qx")
+region = Rect2(0, 0, 120, 120)
+
+[node name="DayClockTexture" type="TextureProgressBar" unique_id=1714067885 node_paths=PackedStringArray("markers_container")]
+offset_right = 120.0
+offset_bottom = 120.0
+scale = Vector2(0.8, 0.8)
+fill_mode = 4
+texture_under = SubResource("AtlasTexture_fphfw")
+texture_progress = SubResource("AtlasTexture_kqaf5")
+script = ExtResource("1_kqaf5")
+markers_container = NodePath("MarkersContainer")
+
+[node name="MarkersContainer" type="Control" parent="." unique_id=1918438746]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

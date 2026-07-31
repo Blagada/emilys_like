@@ -3,6 +3,8 @@ class_name StaffComponent
 
 signal state_changed(new_state: GameEnums.StaffState)
 
+@export var countdown_label: Label
+
 var current_state: GameEnums.StaffState = GameEnums.StaffState.WAITING:
 	set(value):
 		if current_state == value:
@@ -14,9 +16,16 @@ var current_state: GameEnums.StaffState = GameEnums.StaffState.WAITING:
 func start_task(state: GameEnums.StaffState, duration: float) -> void:
 	current_state = state
 
-	await get_tree().create_timer(duration).timeout
+	var elapsed: float = 0.0
+	_update_countdown(duration)
+
+	while elapsed < duration:
+		await get_tree().process_frame
+		elapsed += get_process_delta_time()
+		_update_countdown(max(duration - elapsed, 0.0))
 
 	current_state = GameEnums.StaffState.WAITING
+	_hide_countdown()
 
 
 func set_moving() -> void:
@@ -37,3 +46,14 @@ func _is_busy_with_task() -> bool:
 		GameEnums.StaffState.DELIVERING,
 		GameEnums.StaffState.CLEANING,
 	]
+
+
+func _update_countdown(remaining: float) -> void:
+	if countdown_label:
+		countdown_label.visible = true
+		countdown_label.text = "%.2f" % remaining
+
+
+func _hide_countdown() -> void:
+	if countdown_label:
+		countdown_label.visible = false

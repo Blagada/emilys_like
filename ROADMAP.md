@@ -22,7 +22,7 @@ Fichier de suivi complémentaire au README (idées, avancées détaillées, appr
 - **Cycle paiement + nettoyage + machine à états (1re passe)** : `PaymentQueueComponent` (file d'attente à la caisse), `StaffComponent` (états `WAITING`/`MOVING`/`FOOD_PREP`/`DELIVERING`/`CLEANING`, animations pilotées par état), machine à états clients complète (`WAITING_TO_ORDER`→`ORDERING`→`EATING`→`WAITING_FOR_PAYMENT`/`PAYING`), fix navmesh (sortie clients), fix orientation `flip_h` à la sortie
 - **Montant du paiement + nettoyage anticipé + bulle unifiée** : `is_dirty` sur `TableComponent`, `WAITING_FOR_CLEANING` (renommage), `OrderComponent.total_bill`, `OrderBubble` généralisée (`show_text`/`show_orders`), `tip_multiplier` → `tip_rate` (pourcentage réaliste), suivi `daily_earnings`/`tip_fund`, animations tray + feedback caisse, fix ratio plein écran
 
-### Structure de niveau (Y-Sort) + ambiance lumineuse + file d'action + paiement séquentiel
+### Session d'aujourd'hui — Structure de niveau (Y-Sort) + ambiance lumineuse + file d'action + paiement séquentiel
 - **Restructuration `level_1.tscn` pour le Y-Sort** : nouveau nœud `Entities` (`Y Sort Enabled`) regroupant tables/comptoir/nourriture/joueur/clients pour un tri de profondeur correct (avant : joueur et clients toujours dessinés par-dessus, peu importe leur position réelle, car branches séparées de l'arbre)
 - **`SpawnComponent`** : `spawn_parent` ajouté, clients désormais positionnés explicitement via `spawn_point.global_position` plutôt que de compter sur l'héritage de transform du parent (bug découvert en déplaçant le spawner sous `Entities`)
 - **`NavigationRegion2D` basé sur un groupe** (`Source Geometry Mode = Group Explicit`, groupe `nav_obstacles`) : permet aux tables/comptoir de vivre n'importe où dans l'arbre (Y-Sort) sans devoir être enfants directs de `ZoneDeplacement` pour être détectés au bake
@@ -48,17 +48,28 @@ Fichier de suivi complémentaire au README (idées, avancées détaillées, appr
 
 ---
 
+### Session d'aujourd'hui — Fermeture du chantier journée, test beta, export Windows
+- **Grand chantier début/fin de journée — complété (étapes 1, 2, 4, 5, 7)** :
+  1. **Fondations de données** : `GameEnums.ServiceType` (matin/midi/soir) + `LevelData` (référence `LevelMenu`, `RestaurantData`, `possible_customers`, `active_services`, `tray_max_capacity`, `level_number`)
+  2. **Mesures automatiques de la scène** : `LevelMetricsHelper` (extrait de `level_manager.gd`), scan tables/places, temps de marche réel via `NavigationServer2D` + écran d'intro (`LevelIntroScreen`) affichant les infos calculées, y compris objectif et menu
+  4. **Calcul de `daily_goal`** : `DailyGoalHelper` (places × cycle moyen × revenu moyen × % de difficulté linéaire par niveau), arrondi au `50$` près (`snapped`), connecté à la jauge de revenus et à `LevelIntroScreen` — **validé par un vrai test beta**
+  5. **Spawn automatique des groupes** : intervalle dérivé de `cycle_duration / table_count`, taille de groupe choisie dynamiquement selon les tables réellement disponibles à l'instant (`TableAssignmentService.get_valid_tables()` par taille testée), plus de spawn gaspillé sur une table déjà pleine
+  7. **Fin de journée / résultats** : `EndOfServicePanel` (alerte de fermeture, auto-masqué après timeout, stoppe le spawn sans affecter les clients en salle) + compteur `active_customer_count` sur `LevelManager` (incrémenté au spawn, décrémenté via nouveau signal `PaymentQueueComponent.customer_exited`) + vrai déclenchement de `DayResultsScreen` seulement quand fermeture atteinte **et** compteur à 0. `day_completed` retiré de `DayCycleComponent` (ce n'est pas son rôle de le savoir) — la décision de fin de journée vit maintenant entièrement dans `LevelManager`, qui combine timer + état des clients
+- **Fix pourboire à l'écran de résultats** : retrait de l'arrondi au `25$` sur `daily_tip` (pouvait afficher `0$` sur une petite journée) — l'objectif (`daily_goal`) garde son arrondi au `50$`, mais un montant réel gagné (pourboire du jour) s'affiche désormais brut
+- **Réflexion ouverte sur la récompense de décoration** : le modèle d'inspiration (montant fixe 100$/200$ selon réussi/expert) plafonne la motivation à rejouer une fois l'expert atteint. Pistes explorées, aucune tranchée encore : (A) tip réel avec plancher garanti si objectif atteint, (B) petit bonus fixe + tip réel cumulatif (pas de plafond), (C) découpler "débloquer une catégorie de déco" (via accomplissement) de "avoir l'argent pour l'acheter" (via tip réel) — **à trancher avant de construire le système de déco**
+- **Premier test beta réussi** : export Windows (`.exe`, PCK embarqué), un bug de collision mineur trouvé et corrigé rapidement, `daily_goal`/`expert_goal` validés comme atteignables et cohérents avec le calcul (niveau 1 volontairement clément : `expert_goal ≈ 60%` du maximum théorique via la formule `daily_goal(40%) × expert_threshold(150%)`)
+- **`level-structure.txt` complété** : nouvelle section couvrant le câblage complet d'un niveau (resources `LevelData`/`RestaurantData`, assignation des champs `LevelManager`, nœuds UI à instancier), plus une distinction claire des réglages qui influencent vraiment la difficulté (`level_number` = seul levier de la courbe automatique ; `tray_max_capacity` et nombre de services = leviers manuels non couverts par la formule) vs ce qui s'auto-équilibre (prix du menu, types de clients, disposition des tables) vs ce qui reste volontairement constant (`expert_threshold_percent`). Chaque variable ajustable du `LevelManager` documentée individuellement (rôle, valeur par défaut, impact ou non sur la difficulté)
+
+---
+
 ## 🔧 En cours
 
-- **Grand chantier : début/fin de journée** — plan en 7 étapes, dépendances dans l'ordre :
-  1. **Fondations de données** : `GameEnums.ServiceType` (matin/midi/soir) + nouvelle resource `LevelData` (référence `LevelMenu` existant plutôt que dupliquer, `possible_customers`, `active_services`)
-  2. **Mesures automatiques de la scène** : scan des tables/places (`get_nodes_in_group("Table")`), temps de marche réel mesuré via `NavigationServer2D` (pas de réglage manuel par niveau) — **+ écran de chargement et panneau de lancement de journée** affichant les infos calculées (type de clients, nombre de tables, services disponibles) pour préparer le joueur avant de commencer
-  3. **Timer de journée/service** : durée fixe par service, additionnée selon `active_services` — **+ position de la lumière du soleil à la fenêtre liée à l'heure de départ du service** (le mur/déco peut changer par resto, mais le mouvement du soleil reste universel ; position de départ différente selon le service actif, ex: soleil bas le matin)
-  4. **Calcul de `daily_goal`** : formule (places × cycle moyen × revenu moyen × % de difficulté linéaire par niveau, `lerp(40%, 80%, ...)`), connecte enfin la jauge de revenus à une vraie valeur calculée
-  5. **Spawn automatique des groupes** : intervalle dérivé du nombre de tables + cycle moyen, probabilité "groupe de 1 → comptoir" intégrée dès le départ
-  6. **Client qui repart si aucune table** : délai fixe (pas encore basé sur la patience réelle, prévu pour plus tard avec le reste du système de patience — ex: quitter une table si pas servi, pas de tip si trop long à la caisse)
-  7. **Fin de journée / résultats** : écran objectif atteint / raté / expert
+- **Reste du chantier journée** :
+  - Étape 3 (partielle) : durée de service (`4 min`) à retravailler — trop long dès 2 services actifs. Lumière du soleil à la fenêtre pas encore branchée sur `service_started`
+  - Étape 6 : client qui repart si aucune table — moins urgent maintenant que le spawn évite déjà la plupart des tentatives inutiles, reste pour une future passe sur la patience réelle
+- **Refactor prévu de `level_manager.gd`** (maintenant que le chantier journée est complété) : séparer le setup/démarrage du niveau de l'orchestration du cycle de commande (`_on_customer_group_spawned`/`_handle_group_ordering`/`_on_all_orders_served`) dans un composant dédié (ex: `OrderFlowComponent`), pour garder `LevelManager` comme simple coordinateur
 - Affichage à l'écran de `daily_earnings` — reste à faire (le bocal de tips, lui, est complété, voir Fait)
+- Décision à prendre sur le modèle de récompense de décoration (3 pistes proposées, voir Fait ci-dessus) avant de construire le système de déco (Tier 3)
 
 ---
 
@@ -100,7 +111,14 @@ Fichier de suivi complémentaire au README (idées, avancées détaillées, appr
 
 ### Tier 2 — moyen terme, nouvelles mécaniques mais toujours cœur du gameplay
 - [ ] Groupes de 1 client : chance aléatoire de commander directement au comptoir plutôt qu'à table (probabilité élevée comptoir / faible à table) — `OrderBubble` déjà prête pour ça (`show_orders` multi-items)
-- [x] Boîte de pourboires séparée (argent dédié à la déco) — fondation du système d'économie, `total_bill`/tip déjà calculés, reste à router vers une réserve dédiée
+- [ ] Boîte de pourboires séparée (argent dédié à la déco) — fondation du système d'économie, `total_bill`/tip déjà calculés, reste à router vers une réserve dédiée
+- [ ] **Système de bonus/humeur des clients** — un seul mécanisme central réutilisé à plusieurs endroits :
+  - `CustomerData.patience` (déjà présent, jamais utilisé) devient un minuteur démarré à la commande, comparé pour donner un état `HAPPY`/`NEUTRAL`/`UNHAPPY`
+  - Bonus vitesse de service : humeur au moment où `serve_food()` livre tout, affiché **dans la bulle de la table** quelques secondes avant qu'elle se masque (feedback pédagogique pour apprendre le mécanisme) — nécessite que l'info "commande complète en un seul service" soit connue plus tôt (avant la fermeture de la bulle), pas seulement au moment du paiement
+  - Bonus vitesse à la caisse : réutilise l'humeur **figée** au moment du service (pas recalculée à la caisse) — même fondation que l'idée déjà notée plus bas ("pas de tip si trop long à la caisse")
+  - Bonus "commande complète en un seul service" : indépendant de l'humeur, compteur simple sur `OrderComponent` (combien de fois `serve_food()` a réussi pour ce groupe, bonus si `1`)
+  - Bonus "pas d'attente pour une table" : dépend du futur système de patience *avant* d'être assis — lié à l'étape 6 du chantier journée (clients qui repartent), pas avant
+  - Découpage suggéré en 4 sous-étapes : (1) minuteur d'humeur seul, (2) bonus service, (3) bonus caisse, (4) bonus service complet
 
 ### Tier 3 — long terme, hors boucle de gameplay de base
 - [ ] Interface de décoration : achat + placement à position prédéfinie dans le resto
@@ -138,3 +156,6 @@ Fichier de suivi complémentaire au README (idées, avancées détaillées, appr
 - Une variable "id de l'action courante" stockée sur un nœud **réutilisé** (comme un `Interactable` cliqué plusieurs fois) est fragile : un 2e clic peut l'écraser pendant que la 1re action est encore active. Préférer transmettre l'id en paramètre à travers toute la chaîne d'appels plutôt que de le stocker dans une variable partagée
 - `NavigationAgent2D` peut ne pas réémettre `navigation_finished` si la nouvelle cible est identique à la précédente déjà atteinte — comportement interne capricieux, pas un bug de notre code. Se fier à une vérification de distance réelle (`global_position.distance_to`) est plus robuste que de dépendre du signal dans ce cas précis
 - Pour ajouter une restriction spécifique à un seul type d'usage d'un composant générique et réutilisé (ex: limiter seulement les aliments, pas les tables/caisse), un point d'extension optionnel (`Callable` vide par défaut, vérifié seulement si branché) évite de complexifier le composant générique pour tout le monde
+- `NavigationServer2D.map_get_path()` peut renvoyer un chemin vide juste après le chargement d'une scène même si la carte est "valide" (`RID.is_valid()`) — la synchronisation de la géométrie d'une région vers sa carte n'est pas instantanée, et 1 seule frame physique d'attente n'est pas toujours suffisante. Solution robuste : sonder activement avec `map_get_closest_point()` sur un point de référence connu navigable, en boucle jusqu'à ce qu'il soit bien reconnu, plutôt que de deviner un nombre fixe de frames à attendre
+- `map_get_closest_point()` renvoie `(0,0)` quand la carte ne contient encore aucune géométrie — un signe distinctif de carte non synchronisée plutôt que d'un point mal placé
+- Pour obtenir la carte de navigation utilisée par les agents réels en jeu, `get_world_2d().navigation_map` est plus fiable que `NavigationRegion2D.get_navigation_map()` — et comme `LevelComponent` (`Node`) n'a pas de `World2D` propre, il faut passer par un `Node2D` du bon arbre (ex: `navigation_region.get_world_2d()`) pour y accéder

@@ -9,6 +9,10 @@ thickness = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eohg8"]
 bg_color = Color(0.078431375, 0.15294118, 0.105882354, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a60tx"]
 bg_color = Color(0.16862746, 0.2901961, 0.21568628, 1)
@@ -17,12 +21,40 @@ border_width_top = 10
 border_width_right = 10
 border_width_bottom = 10
 border_color = Color(0.16862746, 0.2901961, 0.21568628, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eisdl"]
 bg_color = Color(0.6, 0.5411765, 0.4745098, 1)
+border_color = Color(0.32494807, 0.40775022, 0.36686108, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uocbs"]
 bg_color = Color(0.82544726, 0.5834379, 0.18411377, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xwlhl"]
+bg_color = Color(0.32494807, 0.40775022, 0.36686108, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
 
 [resource]
 default_font = ExtResource("1_5r36e")
@@ -39,3 +71,9 @@ ProgressBar/styles/fill = SubResource("StyleBoxFlat_uocbs")
 RichTextLabel/colors/default_color = Color(0.16862746, 0.2901961, 0.21568628, 1)
 RichTextLabel/constants/line_separation = 5
 RichTextLabel/fonts/bold_font = ExtResource("1_5r36e")
+count_down/base_type = &"Label"
+count_down/colors/font_color = Color(0.8352941, 0.8117647, 0, 1)
+count_down/colors/font_outline_color = Color(0, 0, 0, 1)
+count_down/constants/outline_size = 2
+count_down/font_sizes/font_size = 20
+count_down/styles/normal = SubResource("StyleBoxFlat_xwlhl")

@@ -8,9 +8,10 @@ class_name EarningsGauge
 var expert_amount: float = 0.0
 
 
-func setup(daily_goal: float, expert_threshold_percent: float) -> void:
-	expert_amount = daily_goal * (expert_threshold_percent / 100.0)
+func setup(daily_goal: float, expert_goal: float) -> void:
+	expert_amount = expert_goal
 	progress_bar.max_value = expert_amount
+	progress_bar.step = 0.0
 	progress_bar.value = EarningsManager.daily_earnings
 
 	var goal_ratio: float = daily_goal / expert_amount
@@ -23,4 +24,4 @@ func setup(daily_goal: float, expert_threshold_percent: float) -> void:
 
 func _on_earnings_updated() -> void:
 	progress_bar.value = EarningsManager.daily_earnings
-	amount_label.text = "%.2f$ / %.2f$" % [EarningsManager.daily_earnings, expert_amount]
+	amount_label.text = "%.2f$ / %.0f$" % [EarningsManager.daily_earnings, expert_amount]

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://beb8n78sa7hsm" path="res://scripts/components/movement_component.tscn" id="3_w3ybl"]
 [ext_resource type="PackedScene" uid="uid://dogg202ret5gx" path="res://scripts/components/staff_component.tscn" id="4_a3m7p"]
 [ext_resource type="PackedScene" uid="uid://dmsfdxerbwel3" path="res://scripts/components/action_queue_component.tscn" id="5_i654y"]
+[ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="6_xwlhl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dovo2"]
 atlas = ExtResource("1_8afob")
@@ -162,10 +163,25 @@ shape = SubResource("CapsuleShape2D_gmlin")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1363271275]
 
+[node name="CountDownLabel" type="Label" parent="." unique_id=1180316770]
+visible = false
+z_index = 2
+offset_left = 9.0
+offset_top = -170.0
+offset_right = 36.0
+offset_bottom = -150.0
+theme = ExtResource("6_xwlhl")
+theme_type_variation = &"count_down"
+theme_override_font_sizes/font_size = 14
+text = "0.00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="MovementComponent" parent="." unique_id=904041681 node_paths=PackedStringArray("nav_agent", "character_body") instance=ExtResource("3_w3ybl")]
 nav_agent = NodePath("../NavigationAgent2D")
 character_body = NodePath("..")
 
-[node name="StaffComponent" parent="." unique_id=1221857103 instance=ExtResource("4_a3m7p")]
+[node name="StaffComponent" parent="." unique_id=1221857103 node_paths=PackedStringArray("countdown_label") instance=ExtResource("4_a3m7p")]
+countdown_label = NodePath("../CountDownLabel")
 
 [node name="ActionQueueComponent" parent="." unique_id=936468369 instance=ExtResource("5_i654y")]

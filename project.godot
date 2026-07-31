@@ -46,6 +46,7 @@ folder_colors={
 Player=""
 Table=""
 Food=""
+nav_obstacles=""
 
 [layer_names]
 
