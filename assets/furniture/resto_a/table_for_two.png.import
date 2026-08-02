@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5suymunjk48c"
-path="res://.godot/imported/tray.png-56798455ad830ca904421387b4705c6b.ctex"
+uid="uid://b6fhc1adxpvw8"
+path="res://.godot/imported/table_for_two.png-f550a205645555bcdaa4698bd7279805.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/furniture/tray.png"
-dest_files=["res://.godot/imported/tray.png-56798455ad830ca904421387b4705c6b.ctex"]
+source_file="res://assets/furniture/resto_a/table_for_two.png"
+dest_files=["res://.godot/imported/table_for_two.png-f550a205645555bcdaa4698bd7279805.ctex"]
 
 [params]
 

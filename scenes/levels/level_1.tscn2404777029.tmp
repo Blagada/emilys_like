@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dm1md5v5vp5lu"]
 
-[ext_resource type="Script" uid="uid://c8gcmp34olkvo" path="res://scripts/components/sun_light_controller.gd" id="2_7h2jl"]
+[ext_resource type="PackedScene" uid="uid://c3avmyssjhcm1" path="res://scripts/components/sun_light_controller.tscn" id="2_7h2jl"]
 [ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://plancher.png" id="2_excbq"]
 [ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/foundation/wall.tscn" id="2_iwr0g"]
 [ext_resource type="PackedScene" uid="uid://dtxvvae0o7g7q" path="res://scenes/entities/Tables/table_for_four.tscn" id="3_iav0o"]
@@ -92,15 +92,6 @@ terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_4nkto")
 
-[sub_resource type="Gradient" id="Gradient_wtwp4"]
-offsets = PackedFloat32Array(0.2751678, 1)
-colors = PackedColorArray(0.6501072, 0.39768904, 0.27517343, 0.74509805, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_yf5fn"]
-gradient = SubResource("Gradient_wtwp4")
-fill = 1
-fill_from = Vector2(0.50427353, 0.48290598)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_iwr0g"]
 polygon = PackedVector2Array(627, 383, 626, 454, 1000, 455, 998, 380, 771.82263, 381.82892, 768, 366, 683, 365, 681.81384, 382.55676)
 
@@ -134,29 +125,12 @@ tile_set = SubResource("TileSet_fcfvj")
 [node name="LumiereAmbiance" type="CanvasModulate" parent="Ambiant" unique_id=442950378]
 color = Color(0.87493694, 0.8292844, 0.7533979, 1)
 
-[node name="SunLightController" type="Node2D" parent="Ambiant" unique_id=302604872 node_paths=PackedStringArray("light", "day_clock")]
-script = ExtResource("2_7h2jl")
-light = NodePath("DirectionalLight2D")
+[node name="SunLightController" parent="Ambiant" unique_id=863496824 node_paths=PackedStringArray("day_clock") instance=ExtResource("2_7h2jl")]
 day_clock = NodePath("../../ZoneFixe/DayClock")
-start_angle_degrees = -20.0
-end_angle_degrees = 20.0
-
-[node name="PointLight2D" type="PointLight2D" parent="Ambiant/SunLightController" unique_id=956912528]
-visible = false
-position = Vector2(717, -106)
-scale = Vector2(19.54502, 31.376507)
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_yf5fn")
-
-[node name="DirectionalLight2D" type="DirectionalLight2D" parent="Ambiant/SunLightController" unique_id=560546160]
-position = Vector2(588, -49)
-color = Color(1, 0.7254902, 0.14117648, 0.29411766)
-shadow_enabled = true
-shadow_filter = 1
 
 [node name="Wall" parent="Ambiant" unique_id=101296613 instance=ExtResource("2_iwr0g")]
 
-[node name="ComptoirLightOccluder2D" type="LightOccluder2D" parent="Ambiant" unique_id=1094367787]
+[node name="CounterLightOccluder2D" type="LightOccluder2D" parent="Ambiant" unique_id=1094367787]
 occluder = SubResource("OccluderPolygon2D_iwr0g")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Ambiant" unique_id=161568055]
@@ -306,6 +280,12 @@ day_cycle = NodePath("../DayCycleComponent")
 day_results_screen = NodePath("../../ZoneFixe/DayResultsScreen")
 end_of_service_panel = NodePath("../../ZoneFixe/EndOfServicePanel")
 day_clock = NodePath("../../ZoneFixe/DayClock")
+expert_threshold_percent = null
+sitting_animation_delay = null
+counter_order_probability_percent = null
+spawn_interval_jitter_percent = null
+initial_spawn_delay_min = null
+initial_spawn_delay_max = null
 
 [node name="DayCycleComponent" parent="Scripts" unique_id=1299101941 instance=ExtResource("18_v6ha0")]
 service_duration = 60.0
@@ -316,6 +296,7 @@ position = Vector2(1191, 94)
 spawn_parent = NodePath("../../Entities")
 
 [editable path="Entities/Comptoir"]
+[editable path="Entities/Comptoir/Visuals/CounterOrderComponent/InteractionComponent"]
 [editable path="Entities/Nourritures/Bouboule"]
 [editable path="Entities/Nourritures/Bouboule/InteractionComponent"]
 [editable path="Entities/Nourritures/Hotdog"]

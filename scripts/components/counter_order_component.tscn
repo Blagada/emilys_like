@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bpvokjn032wx2"]
+
+[ext_resource type="Script" uid="uid://cuvaqmvrr43ck" path="res://scripts/components/counter_order_component.gd" id="1_xev7m"]
+
+[node name="CounterOrderComponent" type="Node2D" unique_id=1482906281]
+script = ExtResource("1_xev7m")

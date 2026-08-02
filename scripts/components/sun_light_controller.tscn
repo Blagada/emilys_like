@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c3avmyssjhcm1"]
+
+[ext_resource type="Script" uid="uid://c8gcmp34olkvo" path="res://scripts/components/sun_light_controller.gd" id="1_kcawb"]
+
+[sub_resource type="Gradient" id="Gradient_wtwp4"]
+offsets = PackedFloat32Array(0.2751678, 1)
+colors = PackedColorArray(0.6501072, 0.39768904, 0.27517343, 0.74509805, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yf5fn"]
+gradient = SubResource("Gradient_wtwp4")
+fill = 1
+fill_from = Vector2(0.50427353, 0.48290598)
+
+[node name="SunLightController" type="Node2D" unique_id=863496824 node_paths=PackedStringArray("light", "day_clock")]
+script = ExtResource("1_kcawb")
+light = NodePath("DirectionalLight2D")
+day_clock = NodePath("")
+start_angle_degrees = -20.0
+end_angle_degrees = 20.0
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1875909688]
+visible = false
+position = Vector2(717, -106)
+scale = Vector2(19.54502, 31.376507)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_yf5fn")
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=975390227]
+position = Vector2(588, -49)
+color = Color(1, 0.7254902, 0.14117648, 0.29411766)
+shadow_enabled = true
+shadow_filter = 1

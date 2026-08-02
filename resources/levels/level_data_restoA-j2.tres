@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://coyjgufjo44k3" path="res://resources/customers/Data/customer_data.gd" id="2_hawfg"]
 [ext_resource type="Resource" uid="uid://dt2s421p0vlsn" path="res://resources/customers/Data/normal.tres" id="4_hawfg"]
 [ext_resource type="Resource" uid="uid://bdeloesawiw12" path="res://resources/customers/Data/calm.tres" id="4_otklw"]
-[ext_resource type="Resource" uid="uid://df3rp0cax6kgi" path="res://resources/restaurants/resto_a.tres" id="5_120ny"]
+[ext_resource type="Resource" uid="uid://df3rp0cax6kgi" path="res://resources/restaurants/resto_a/resto_a.tres" id="5_120ny"]
 [ext_resource type="Resource" uid="uid://rs4yvu30oo8g" path="res://resources/customers/Data/press.tres" id="5_lykkm"]
 [ext_resource type="Script" uid="uid://duy54q18siryb" path="res://resources/levels/level_data.gd" id="6_goif0"]
 

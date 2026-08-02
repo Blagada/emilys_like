@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://b4rs3eptext0j"]
 
-[ext_resource type="Texture2D" uid="uid://bgac03pjid7i8" path="res://assets/furniture/caisse-enregistreuse.png" id="1_rog4u"]
+[ext_resource type="Texture2D" uid="uid://bgac03pjid7i8" path="res://assets/furniture/resto_a/caisse-enregistreuse.png" id="1_rog4u"]
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="2_feymf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f6a3l"]
+size = Vector2(36.47059, 45.5)
 
 [node name="CashRegister" type="Node2D" unique_id=266037700]
 scale = Vector2(0.85, 0.85)
@@ -13,3 +17,12 @@ offset_bottom = 685.2941
 scale = Vector2(0.061038088, 0.061038088)
 texture = ExtResource("1_rog4u")
 stretch_mode = 3
+
+[node name="CaisseInteraction" parent="." unique_id=349743239 instance=ExtResource("2_feymf")]
+position = Vector2(7.6293945e-06, 17.647057)
+
+[node name="caisse" type="CollisionShape2D" parent="CaisseInteraction" unique_id=343815677]
+position = Vector2(-0.5882409, -39.602936)
+scale = Vector2(1.0000002, 1.0000002)
+shape = SubResource("RectangleShape2D_f6a3l")
+debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)

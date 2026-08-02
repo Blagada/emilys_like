@@ -2,20 +2,59 @@ extends Node
 class_name TableComponent
 
 # À besoin du Node ChairPositions avec des Marker2D pour gérer la position des chaises.
-@onready var all_chair_positions: Array[Node] = chair_positions.get_children()
-@export var chair_positions: Node2D
-@export var interaction_component: Interactable
-@export var current_state: GameEnums.TableState = GameEnums.TableState.UNOCCUPIED_AND_CLEAN # Par défaut, toutes les chaises sont libre et propre
+
 @export var order_component: OrderComponent
+@export var interaction_component: Interactable
+@export var chair_positions: Node2D
+@export var table_sprite_node: Sprite2D
+@export var custom_table_texture: AtlasTexture
+@export var custom_chair_texture: AtlasTexture
+
+@export var current_state: GameEnums.TableState = GameEnums.TableState.UNOCCUPIED_AND_CLEAN # Par défaut, toutes les chaises sont libre et propre
+
 @export var cleaning_duration: float = 3.0
 @export var serving_delay: float = 0.5
+@onready var all_chair_positions: Array[Node] = chair_positions.get_children()
+
 
 var occupied_seats: Array[Marker2D] = [] # Liste pour garder en mémoire quels sièges sont pris
 var is_dirty: bool = false
 
+
 func _ready() -> void:
 	if interaction_component:
 		interaction_component.player_arrived.connect(_on_player_arrived)
+	
+	if custom_table_texture and table_sprite_node:
+		table_sprite_node.texture = custom_table_texture
+	
+	# Applique la texture à toutes les chaises automatiquement au lancement
+	_apply_texture_to_chairs()
+
+
+func _apply_texture_to_chairs() -> void:
+	if not custom_chair_texture:
+		return
+		
+	for chair_node: Node in all_chair_positions:
+		# On cherche récursivement le premier Sprite2D présent dans les descendants de ce marqueur
+		var sprite = _find_sprite_recursive(chair_node)
+		if sprite:
+			sprite.texture = custom_chair_texture
+
+
+# Fonction auxiliaire récursive pour trouver un Sprite2D plus bas dans l'arbre
+func _find_sprite_recursive(node: Node) -> Sprite2D:
+	for child: Node in node.get_children():
+		if child is Sprite2D:
+			return child
+		
+		# Recherche plus bas s'il y a d'autres enfants
+		var found = _find_sprite_recursive(child)
+		if found:
+			return found
+			
+	return null
 
 
 func _on_player_arrived(action_id: int)-> void:

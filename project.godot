@@ -47,6 +47,7 @@ Player=""
 Table=""
 Food=""
 nav_obstacles=""
+LevelManager=""
 
 [layer_names]
 

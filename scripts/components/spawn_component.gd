@@ -3,7 +3,6 @@ class_name SpawnComponent
 
 signal group_spawned(entities: Array[Customer])
 
-
 @export var entity_scene: PackedScene # Scène Customer
 # Liste de toutes les ressources CustomerData (doivent être glisser dans l'inspecteur)
 @export var spawn_parent: Node2D
@@ -56,3 +55,20 @@ func spawn_entity(forced_group_size: int = -1) -> void:
 		group.append(new_entity) # On ajoute le client au tableau
 
 	group_spawned.emit(group) # On envoie le groupe au LevelComponent
+
+
+func spawn_single_customer() -> Customer:
+	if _valid_types.is_empty():
+		return null
+
+	var chosen_type: CustomerData = _valid_types.pick_random()
+	var chosen_visual: CustomerVisual = chosen_type.possible_customers.pick_random()
+
+	var new_entity: Customer = entity_scene.instantiate() as Customer
+	var parent: Node2D = spawn_parent if spawn_parent else self
+	parent.add_child(new_entity)
+
+	new_entity.setup(chosen_visual, chosen_type)
+	new_entity.global_position = spawn_point.global_position
+
+	return new_entity

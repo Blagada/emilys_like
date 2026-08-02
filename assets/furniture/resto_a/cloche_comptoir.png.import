@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6fhc1adxpvw8"
-path="res://.godot/imported/table_for_two.png-97493720e7b8bbaece3a3412b77c5336.ctex"
+uid="uid://dm6n7qw16wvoi"
+path="res://.godot/imported/cloche_comptoir.png-bfe760be0420cd648016a3e16682178f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/furniture/table_for_two.png"
-dest_files=["res://.godot/imported/table_for_two.png-97493720e7b8bbaece3a3412b77c5336.ctex"]
+source_file="res://assets/furniture/resto_a/cloche_comptoir.png"
+dest_files=["res://.godot/imported/cloche_comptoir.png-bfe760be0420cd648016a3e16682178f.ctex"]
 
 [params]
 

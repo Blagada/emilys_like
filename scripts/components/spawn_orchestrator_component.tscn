@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://btunx48di3onq"]
+
+[ext_resource type="Script" uid="uid://cdvwmh1f76jfs" path="res://scripts/components/spawn_orchestrator_component.gd" id="1_7n150"]
+
+[node name="SpawnOrchestratorComponent" type="Node2D" unique_id=2057923829]
+script = ExtResource("1_7n150")
+counter_order_probability_percent = null
+spawn_interval_jitter_percent = null
+initial_spawn_delay_min = null
+initial_spawn_delay_max = null

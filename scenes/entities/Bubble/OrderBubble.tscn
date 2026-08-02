@@ -16,15 +16,15 @@ font_color = Color(0, 0, 0, 1)
 [node name="OrderBubble" type="MarginContainer" unique_id=1798342269 node_paths=PackedStringArray("status_label", "orders_grid")]
 z_index = 1
 y_sort_enabled = true
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(85, 0)
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -75.0
-offset_top = -100.0
-offset_right = 75.0
+offset_left = -15.0
+offset_top = -39.0
+offset_right = 15.0
 grow_horizontal = 2
 grow_vertical = 0
 pivot_offset = Vector2(74, 100)
@@ -32,31 +32,26 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 theme = SubResource("Theme_dnvie")
 script = ExtResource("1_iifam")
-status_label = NodePath("StatusLabel")
+status_label = NodePath("MarginContainer/StatusLabel")
 orders_grid = NodePath("MarginContainer/GridContainer")
 
 [node name="OrderBubbleTexture" type="NinePatchRect" parent="." unique_id=813537690]
 layout_mode = 2
 texture = ExtResource("1_0cipb")
-patch_margin_left = 35
-patch_margin_top = 35
-patch_margin_right = 35
-patch_margin_bottom = 35
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1985245885]
 layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 22
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 20
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer" unique_id=263947911]
 clip_contents = true
 layout_mode = 2
 columns = 2
 
-[node name="StatusLabel" type="Label" parent="." unique_id=212082438]
-visible = false
+[node name="StatusLabel" type="Label" parent="MarginContainer" unique_id=212082438]
 layout_mode = 2
 size_flags_vertical = 0
 theme = ExtResource("3_8wxo4")

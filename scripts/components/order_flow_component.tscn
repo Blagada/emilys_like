@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://nj3wvps0qsqk"]
+
+[ext_resource type="Script" uid="uid://d2v6gc6wfivb6" path="res://scripts/components/order_flow_component.gd" id="1_57quu"]
+
+[node name="OrderFlowComponent" type="Node2D" unique_id=976148135]
+script = ExtResource("1_57quu")
