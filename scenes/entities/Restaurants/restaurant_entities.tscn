@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://byfohv3v2dfjt"]
+
+[ext_resource type="PackedScene" uid="uid://w2tsxuaqqj4x" path="res://scenes/entities/Counter/counter.tscn" id="1_hl255"]
+[ext_resource type="PackedScene" uid="uid://ms11luyd8oa5" path="res://scenes/entities/Counter/resto_a_counter.tscn" id="2_7461u"]
+[ext_resource type="PackedScene" uid="uid://boj0snxc5fiux" path="res://scripts/components/spawn_component.tscn" id="3_j22fb"]
+
+[node name="Entities" type="Node2D" unique_id=1316099999]
+y_sort_enabled = true
+
+[node name="Comptoir" parent="." unique_id=1212267104 groups=["nav_obstacles"] instance=ExtResource("1_hl255")]
+position = Vector2(890.9999, 478.00003)
+scale = Vector2(2.854493, 2.854493)
+visual_counter_scene = ExtResource("2_7461u")
+
+[node name="PaymentQueueComponent" parent="Comptoir/Visuals" parent_id_path=PackedInt32Array(1212267104, 1505766415) index="2" unique_id=1700191971 node_paths=PackedStringArray("exit_marker")]
+exit_marker = NodePath("../../../CustomerSpawner/SpawnPoint")
+
+[node name="CustomerSpawner" parent="." unique_id=1257491940 node_paths=PackedStringArray("spawn_parent") instance=ExtResource("3_j22fb")]
+y_sort_enabled = true
+position = Vector2(1191, 94)
+spawn_parent = NodePath("..")
+
+[editable path="Comptoir"]
+[editable path="Comptoir/Visuals/CashRegister"]
+[editable path="Comptoir/Visuals/CashRegister/CaisseInteraction"]
+[editable path="Comptoir/Visuals/PaymentQueueComponent"]
+[editable path="Comptoir/Visuals/CounterOrderComponent/ClocheInteraction"]
+[editable path="CustomerSpawner"]

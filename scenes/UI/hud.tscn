@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://xw2n88dw187x"]
+
+[ext_resource type="PackedScene" uid="uid://vua2gey4w77a" path="res://scenes/UI/day_clock.tscn" id="1_xh8q5"]
+[ext_resource type="PackedScene" uid="uid://ef3q0rvptar7" path="res://scenes/entities/Tray/tray.tscn" id="2_h03ao"]
+[ext_resource type="PackedScene" uid="uid://bnioo1o1b4tm2" path="res://scenes/UI/earnings_gauge.tscn" id="3_7wvwv"]
+[ext_resource type="PackedScene" uid="uid://cminyncmj2pix" path="res://scenes/UI/tip_jar_display.tscn" id="4_k00v8"]
+[ext_resource type="PackedScene" uid="uid://bw3au6rjcnudw" path="res://scenes/UI/level_intro_screen.tscn" id="5_t6axx"]
+[ext_resource type="PackedScene" uid="uid://djb2q2gqcpbf2" path="res://scenes/UI/day_results_screen.tscn" id="6_kj32l"]
+[ext_resource type="PackedScene" uid="uid://c4u5j0o47c7ef" path="res://scenes/UI/end_of_service_panel.tscn" id="7_0fcg2"]
+
+[node name="HUD" type="CanvasLayer" unique_id=1355160810]
+
+[node name="DayClock" parent="." unique_id=1714067885 node_paths=PackedStringArray("day_cycle") instance=ExtResource("1_xh8q5")]
+offset_left = 314.0
+offset_top = 576.0
+offset_right = 434.0
+offset_bottom = 696.0
+scale = Vector2(0.6, 0.6)
+day_cycle = NodePath("")
+
+[node name="Tray_places" parent="." unique_id=298009879 instance=ExtResource("2_h03ao")]
+offset_left = 16.0
+offset_top = 536.0
+offset_right = -495.48804
+offset_bottom = 407.69598
+
+[node name="EarningsGauge" parent="." unique_id=1098784311 instance=ExtResource("3_7wvwv")]
+offset_left = 450.99997
+offset_top = 627.0
+offset_right = 172.61023
+offset_bottom = 11.073486
+scale = Vector2(0.5300324, 0.5300324)
+
+[node name="SpawnButton" type="Button" parent="." unique_id=190827715]
+offset_left = 483.0
+offset_top = 10.0
+offset_right = 597.0
+offset_bottom = 41.0
+text = "Spawn clients"
+
+[node name="TipJarDisplay" parent="." unique_id=1230685855 instance=ExtResource("4_k00v8")]
+offset_left = 399.0
+offset_top = 583.0
+offset_right = 439.0
+offset_bottom = 623.0
+
+[node name="LevelIntroScreen" parent="." unique_id=1440735646 instance=ExtResource("5_t6axx")]
+visible = false
+
+[node name="DayResultsScreen" parent="." unique_id=2093262599 instance=ExtResource("6_kj32l")]
+visible = false
+
+[node name="EndOfServicePanel" parent="." unique_id=537524400 instance=ExtResource("7_0fcg2")]
+visible = false
+offset_left = 451.0
+offset_top = 55.0
+offset_right = -462.0
+offset_bottom = -519.0

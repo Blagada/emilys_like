@@ -15,11 +15,12 @@ class_name LevelComponent
 @export var day_clock: DayClock
 @export var order_flow: OrderFlowComponent
 @export var spawn_orchestrator: SpawnOrchestratorComponent
+@export var spawn_button: Button
 
 @export var expert_threshold_percent: float = 150.0 # % du goal pour "expert"
 @export var sitting_animation_delay: float = 0.3
 
-@onready var spawn_button: Button = $"../../ZoneFixe/SpawnButton"
+
 
 # --- MÉTRIQUES ET OBJECTIFS ---
 var table_count: int = 0
