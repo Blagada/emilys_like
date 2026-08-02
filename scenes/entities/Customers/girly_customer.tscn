@@ -13,7 +13,7 @@ region = Rect2(64, 48, 40, 102)
 script = ExtResource("1_sgh6d")
 
 [node name="SpriteCustomer" type="Sprite2D" parent="." unique_id=1778173962]
-scale = Vector2(2, 2)
+scale = Vector2(1.8256485, 1.8256485)
 texture = SubResource("AtlasTexture_ot5uo")
 offset = Vector2(-5, -48)
 

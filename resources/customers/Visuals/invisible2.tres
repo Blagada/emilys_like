@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CustomerVisual" format=3 uid="uid://cyr5mlj3stgju"]
+
+[ext_resource type="Script" uid="uid://b8cno6w8l0n5w" path="res://resources/customers/Visuals/customer_visual.gd" id="1_sbk1m"]
+[ext_resource type="PackedScene" uid="uid://bs3vce7dlokh2" path="res://scenes/entities/Customers/invisible_2_customer.tscn" id="2_sbk1m"]
+
+[resource]
+script = ExtResource("1_sbk1m")
+name = "Invisible"
+visual_scene = ExtResource("2_sbk1m")
+metadata/_custom_type_script = "uid://b8cno6w8l0n5w"

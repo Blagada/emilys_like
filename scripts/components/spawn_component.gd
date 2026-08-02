@@ -29,30 +29,33 @@ func _refresh_valid_types() -> void:
 func spawn_entity(forced_group_size: int = -1) -> void:
 	if _valid_types.is_empty():
 		return
-
-	# 1. Choisi un type parmi ceux qui ont des visuels associés
-	var chosen_type: CustomerData = _valid_types.pick_random()
 	
-	# 2. Choisi le look pour le type choisi (aléatoire)
-	var chosen_visual: CustomerVisual = chosen_type.possible_customers.pick_random()
-	
-	# 3. Choisir la taille du groupe (1 à 4)
-	var group_size: int = forced_group_size if forced_group_size > 0 else randi_range(1, 4)
+	# Si aucune taille de groupe n'est spécifiée, on en tire une aléatoirement (1 à 4)
+	if forced_group_size == -1:
+		forced_group_size = randi_range(1, 4)
 	
 	# 4. Spawner les personnages
 	var group: Array[Customer] = []
 
-	for i: int in range(group_size):
+	# On choisit un type de client (VIP, Calm, Normal, Press) pour le groupe
+	var chosen_type: CustomerData = _valid_types.pick_random()
+
+	for i: int in range(forced_group_size):
 		var new_entity: Customer = entity_scene.instantiate() as Customer
 		var parent: Node2D = spawn_parent if spawn_parent else self
 		parent.add_child(new_entity)
-		
-		# On initialise le client avec le look et les stats choisis
+				
+		# --- CHOIX INDIVIDUEL POUR CE CLIENT ---
+		# Choisit un visuel individuel 
+		# (totalement aléatoire parmi ses possibles -> type de client)
+		var chosen_visual: CustomerVisual = chosen_type.possible_customers.pick_random()
+
+		# On initialise le client avec ses propres caractéristiques
 		new_entity.setup(chosen_visual, chosen_type)
 		
-		# Positionnement du spawn sur le marker
+		# Positionnement du spawn sur le marker avec un décalage
 		new_entity.global_position = spawn_point.global_position + Vector2(i * 40, 0)
-		group.append(new_entity) # On ajoute le client au tableau
+		group.append(new_entity)
 
 	group_spawned.emit(group) # On envoie le groupe au LevelComponent
 

@@ -59,10 +59,6 @@ func _compute_spawn_interval() -> float:
 
 
 func _spawn_next_group() -> void:
-	if randf() * 100.0 < counter_order_probability_percent:
-		_spawn_counter_customer()
-		return
-
 	var all_tables: Array[Node] = get_tree().get_nodes_in_group("Table")
 	var valid_sizes: Array[int] = []
 
@@ -75,6 +71,11 @@ func _spawn_next_group() -> void:
 		return
 
 	var group_size: int = valid_sizes.pick_random()
+
+	if group_size == 1 and randf() * 100.0 < counter_order_probability_percent:
+		_spawn_counter_customer()
+		return
+
 	customer_spawner.spawn_entity(group_size)
 
 

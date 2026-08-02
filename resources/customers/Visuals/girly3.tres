@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CustomerVisual" format=3 uid="uid://bn4blbc3paavh"]
+
+[ext_resource type="Script" uid="uid://b8cno6w8l0n5w" path="res://resources/customers/Visuals/customer_visual.gd" id="1_l6aeg"]
+[ext_resource type="PackedScene" uid="uid://c1ol5rgetwpsv" path="res://scenes/entities/Customers/girly_3_customer.tscn" id="2_l6aeg"]
+
+[resource]
+script = ExtResource("1_l6aeg")
+name = "Girly"
+visual_scene = ExtResource("2_l6aeg")
+metadata/_custom_type_script = "uid://b8cno6w8l0n5w"

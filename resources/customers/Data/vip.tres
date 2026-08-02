@@ -3,11 +3,12 @@
 [ext_resource type="Script" uid="uid://b8cno6w8l0n5w" path="res://resources/customers/Visuals/customer_visual.gd" id="1_gyu1d"]
 [ext_resource type="Script" uid="uid://coyjgufjo44k3" path="res://resources/customers/Data/customer_data.gd" id="2_d8dvl"]
 [ext_resource type="Resource" uid="uid://b7s6pakltgtol" path="res://resources/customers/Visuals/girly.tres" id="2_oo4di"]
+[ext_resource type="Resource" uid="uid://1qwvsu3v5814" path="res://resources/customers/Visuals/girly2.tres" id="3_0b0jh"]
+[ext_resource type="Resource" uid="uid://bn4blbc3paavh" path="res://resources/customers/Visuals/girly3.tres" id="4_o8rwr"]
 
 [resource]
 script = ExtResource("2_d8dvl")
 group_type = 1
 patience = 40.0
-tip_multiplier = 0.3
-possible_customers = Array[ExtResource("1_gyu1d")]([ExtResource("2_oo4di")])
+possible_customers = Array[ExtResource("1_gyu1d")]([ExtResource("2_oo4di"), ExtResource("3_0b0jh"), ExtResource("4_o8rwr")])
 metadata/_custom_type_script = "uid://coyjgufjo44k3"

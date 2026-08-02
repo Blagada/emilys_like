@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://b8cno6w8l0n5w" path="res://resources/customers/Visuals/customer_visual.gd" id="1_q1ruk"]
 [ext_resource type="Resource" uid="uid://beljutjirjwun" path="res://resources/customers/Visuals/invisible.tres" id="2_lvvpw"]
 [ext_resource type="Script" uid="uid://coyjgufjo44k3" path="res://resources/customers/Data/customer_data.gd" id="2_nivx4"]
+[ext_resource type="Resource" uid="uid://cyr5mlj3stgju" path="res://resources/customers/Visuals/invisible2.tres" id="3_jlfpm"]
 
 [resource]
 script = ExtResource("2_nivx4")
 group_type = 3
 speed = 90.0
 patience = 120.0
-tip_multiplier = 0.2
-possible_customers = Array[ExtResource("1_q1ruk")]([ExtResource("2_lvvpw")])
+possible_customers = Array[ExtResource("1_q1ruk")]([ExtResource("2_lvvpw"), ExtResource("3_jlfpm")])
 metadata/_custom_type_script = "uid://coyjgufjo44k3"

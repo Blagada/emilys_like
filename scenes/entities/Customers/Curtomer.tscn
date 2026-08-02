@@ -25,4 +25,4 @@ nav_agent = NodePath("../NavigationCustomer")
 character_body = NodePath("..")
 
 [node name="OrderBubbleAnchor" type="Marker2D" parent="." unique_id=1645694260]
-position = Vector2(0, -149)
+position = Vector2(0, -205)
