@@ -8,7 +8,7 @@
 [resource]
 script = ExtResource("2_nivx4")
 group_type = 3
-speed = 90.0
+speed = 160.0
 patience = 120.0
 possible_customers = Array[ExtResource("1_q1ruk")]([ExtResource("2_lvvpw"), ExtResource("3_jlfpm")])
 metadata/_custom_type_script = "uid://coyjgufjo44k3"

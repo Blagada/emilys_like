@@ -2,6 +2,10 @@
 
 [ext_resource type="Script" uid="uid://clqblflb5cona" path="res://scenes/entities/Foods/aliments.gd" id="1_d0f31"]
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="2_35bts"]
+[ext_resource type="Shader" uid="uid://rpkh1dgvw5tk" path="res://scenes/entities/Foods/hover_aliments.gdshader" id="2_v03rv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l2uke"]
+shader = ExtResource("2_v03rv")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qisy3"]
 size = Vector2(152, 104)
@@ -10,6 +14,7 @@ size = Vector2(152, 104)
 script = ExtResource("1_d0f31")
 
 [node name="AlimentSprite" type="Sprite2D" parent="." unique_id=1781891285]
+material = SubResource("ShaderMaterial_l2uke")
 position = Vector2(1.5258789e-05, -53.999992)
 scale = Vector2(0.24695866, 0.24695866)
 

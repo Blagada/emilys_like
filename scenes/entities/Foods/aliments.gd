@@ -43,5 +43,5 @@ func _on_player_arrived(action_id: int) -> void:
 
 func _has_tray_space() -> bool:
 	# Vérifie si le tray est plein, avec des préparations faite et des préparations en attente
-	var occupied: int = TrayManager.tray_items.size() + TrayManager.pending_items.size()
+	var occupied: int = TrayManager.tray_items.size() + TrayManager.pending_items.size() - TrayManager.reserved_for_service
 	return occupied < TrayManager.current_max_capacity

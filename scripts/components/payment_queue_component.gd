@@ -95,32 +95,31 @@ func _on_player_arrived(action_id: int) -> void:
 
 
 func _process_queue_sequentially() -> void:
-	# 1. Inventaire figé : servis ET arrivés à leur position, AVANT de déplacer qui que ce soit
-	var to_process: Array[Dictionary] = []
-	for entry: Dictionary in _queue:
-		var customer: Customer = entry["customer"]
-		if entry["is_served"] and customer.movement_component.has_arrived():
-			to_process.append(entry)
-
-	if to_process.is_empty():
-		return
-
-	for entry: Dictionary in to_process:
-		_queue.erase(entry)
-
-	# 2. Traitement séquentiel de cette liste figée
 	var total_bill_batch: float = 0.0
 	var total_tip_batch: float = 0.0
 	var total_combo_bonus: float = 0.0
 	var combo_index: int = 0
 
-	for entry: Dictionary in to_process:
-		var customer: Customer = entry["customer"]
-		var table: TableComponent = entry["table"]
+	# On traite la file tant qu'il y a des clients prêts au début
+	while not _queue.is_empty():
+		var first_entry: Dictionary = _queue[0]
+		var customer: Customer = first_entry["customer"]
+		
+		# Si le premier client n'est pas prêt, on arrête le traitement du lot ici
+		if not (first_entry["is_served"] and customer.movement_component.has_arrived()):
+			break
 
+		# 1. On le retire de la file principale au moment où il commence son encaissement
+		_queue.pop_front()
+
+		_advance_queue()
+
+		var table: TableComponent = first_entry["table"]
+
+		# Le client se déplace vers la caisse (position 0)
 		await customer.move_to(queue_positions[0], GameEnums.CustomerState.PAYING)
 
-		var bill: float = table.order_component.total_bill if table != null else entry["order_price"]
+		var bill: float = table.order_component.total_bill if table != null else first_entry["order_price"]
 		var tip: float = bill * customer.customer_data.tip_rate
 
 		var combo_percent: float = min(combo_bonus_per_extra_table * combo_index, max_combo_bonus_percent)
@@ -146,13 +145,18 @@ func _process_queue_sequentially() -> void:
 			for seated_customer: Customer in seated_customers:
 				_send_customer_to_exit(seated_customer)
 
+		# 3. Le client quitte la caisse et sort
 		_send_customer_to_exit(customer)
+		
+		# Le client précédent vient de partir, on laisse passer un petit délai 
+		# avant que le prochain de la file ne s'élance vers la caisse libérée.
+		# TODO : si possible que le délai n'impacte que les clients dans la fil (pas celui à la caisse)
+		await get_tree().create_timer(0.4).timeout
+		_advance_queue()
 
-	# 3. Une seule fois à la fin : on fait avancer ceux qui restent
-	_advance_queue()
-
-	EarningsManager.add_earnings(total_bill_batch, total_tip_batch)
-	_show_payment_feedback(total_bill_batch, total_tip_batch, total_combo_bonus)
+	if total_bill_batch > 0.0:
+		EarningsManager.add_earnings(total_bill_batch, total_tip_batch)
+		_show_payment_feedback(total_bill_batch, total_tip_batch, total_combo_bonus)
 
 
 # --- ANIMATION DU FEEDBACK DE PAIEMENT ---
@@ -194,9 +198,11 @@ func _send_customer_to_exit(customer: Customer) -> void:
 
 # --- MISE À JOUR DE LA FILE D'ATTENTE ---
 func _advance_queue() -> void:
+	print("DEBUG: --- Exécution de _advance_queue() ---. Taille de _queue : ", _queue.size())
 	for i: int in range(_queue.size()):
 		var entry: Dictionary = _queue[i]
 		var customer: Customer = entry["customer"]
 		if i < queue_positions.size():
 			var state: GameEnums.CustomerState = GameEnums.CustomerState.PAYING if entry["is_served"] else GameEnums.CustomerState.MOVING
+			print("DEBUG: Client à l'index ", i, " déplacé vers position ", i)
 			customer.move_to(queue_positions[i], state)
