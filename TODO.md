@@ -12,7 +12,13 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 ## Rythme / difficulté
 
 - [ ] Clients qui entrent visuellement dans le restaurant et attendent qu'une table se libère (zone d'attente)
-- [ ] Patience par type de client — impact sur l'attente d'une table, la prise de commande, et le paiement (remplace l'ancien item "délai avant la commande", portée élargie)
+- [ ] Patience par type de client — Faire quitter du restaurant
+	- [x] Mécanique réutilisable de patience
+	- [ ] Patience à la table
+	- [ ] Patience à la caisse - commande
+	- [ ] Patience à la caisse - payment
+	- [ ] Patience dans la fil d'attente pour une table
+- [ ] Ajouter la bulle pour montrer que les tables doivent être nettoyer après qu'un groupe a quitté fâché
 
 ## Décision à prendre avant de continuer l'économie
 

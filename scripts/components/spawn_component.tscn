@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://boj0snxc5fiux"]
 
 [ext_resource type="Script" uid="uid://cq3y1h7c2um6g" path="res://scripts/components/spawn_component.gd" id="1_rw5a1"]
-[ext_resource type="PackedScene" uid="uid://jgeaii7nbt5i" path="res://scenes/entities/Customers/Curtomer.tscn" id="2_pdtsv"]
+[ext_resource type="PackedScene" uid="uid://jgeaii7nbt5i" path="res://scenes/entities/Customers/Customer.tscn" id="2_pdtsv"]
 
 [node name="SpawnComponent" type="Node2D" unique_id=1257491940 node_paths=PackedStringArray("spawn_point")]
 script = ExtResource("1_rw5a1")

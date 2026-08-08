@@ -48,7 +48,7 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - **Score / objectifs de niveau** : `daily_goal_helper.gd` + `level_metrics_helper.gd` calculent automatiquement `daily_goal`/`expert_goal` selon le niveau, le menu, la vitesse des clients et les temps de déplacement réels mesurés via la navigation
 - **`DELIVERING` clarifié** : l'état est bien déclenché au clic sur table/cloche (`start_task(DELIVERING, ...)` dans `table_component.gd`/`counter_order_component.gd`) — distinct de l'état "marche avec plateau en main" (`MOVING` + tray non-vide, dans `player.gd`), les deux pointent vers `walk` en placeholder pour l'instant
 - **Délai par type de client** + **minuterie de journée** (services, heures d'ouverture) : validés, déjà en place
-
+- **Patience** : création de la composante `CustomerExitService` ajouté à customer gestion de la sortie dans `payment_queue_component.gd`
 ---
 
 ## 📓 Journal d'apprentissage

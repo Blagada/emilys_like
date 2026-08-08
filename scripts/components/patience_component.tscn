@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bf8gen1g53k8f"]
+
+[ext_resource type="Script" uid="uid://dpib6d1a0agyk" path="res://scripts/components/patience_component.gd" id="1_66kit"]
+
+[node name="PatienceComponent" type="Node2D" unique_id=1815167752]
+script = ExtResource("1_66kit")

@@ -47,6 +47,12 @@ enum ServiceType {
 	DINNER
 }
 
+enum PatienceState {
+	HAPPY,   # 100% → seuil "impatient"
+	IMPATIENT, # seuil "impatient" → seuil "fâché"
+	ANGRY      # seuil "fâché" → 0%
+}
+
 # ---- Dictionaire ---- #
 const SERVICE_TYPE_LABELS: Dictionary = {
 	ServiceType.BREAKFAST: "déjeuner",

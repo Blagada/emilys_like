@@ -2,7 +2,11 @@
 
 > Projet d'apprentissage Godot — un *time management game* de gestion de restaurant, inspiré du style *Emily's* / *Diner Dash*.
 
-Le joueur incarne un membre du personnel qui doit accueillir les clients, les placer aux tables, préparer les plats et gérer un plateau de service, le tout en essayant de garder les clients satisfaits.
+Le joueur incarne un membre du personnel qui doit préparer les plats, servir les commandes, nettoyer les tables et faire payer les clients pour atteindre un objectif par jour (normal ou expert).
+
+Objectifs pour les niveaux : 
+- 10 niveaux par restaurant
+- 5 restautants
 
 ---
 

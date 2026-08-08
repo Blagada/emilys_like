@@ -28,7 +28,6 @@ func _on_customer_group_spawned(group: Array[Customer]) -> void:
 	var assigned_table: TableComponent = TableAssignmentService.choose_table(all_tables, group_size)
 
 	if assigned_table == null:
-		print("--- AUCUNE TABLE DISPONIBLE pour un groupe de ", group_size)
 		return
 
 	var seats: Array[Marker2D] = assigned_table.reserve_seats(group_size)
@@ -63,6 +62,10 @@ func _handle_group_ordering(assigned_table: TableComponent, group: Array[Custome
 		customer.set_order(food)
 		assigned_table.order_component.total_bill += food.price
 		customer.change_state(GameEnums.CustomerState.ORDERING)
+		customer.patience_component.start(customer.customer_data.patience)
+		customer.patience_component.patience_expired.connect(
+			_on_group_patience_expired.bind(group, assigned_table)
+		)
 
 	assigned_table.order_component.update_order_bubble()
 
@@ -84,3 +87,13 @@ func _on_all_orders_served(table: TableComponent) -> void:
 	table.order_component.show_dirty()
 	table.current_state = GameEnums.TableState.WAITING_FOR_PAYMENT
 	payment_queue.enqueue(customers[0], table)
+
+
+func _on_group_patience_expired(group: Array[Customer], table: TableComponent) -> void:
+	for customer: Customer in group:
+		customer.patience_component.cancel()
+
+	CustomerExitService.release_table(table)
+
+	for customer: Customer in group:
+		CustomerExitService.send_customer_to_exit(customer, payment_queue.exit_marker)

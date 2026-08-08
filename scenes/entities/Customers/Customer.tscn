@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://jgeaii7nbt5i"]
+
+[ext_resource type="Script" uid="uid://cnsjgwkj8i6mf" path="res://scenes/entities/Customers/customer.gd" id="1_v38u2"]
+[ext_resource type="PackedScene" uid="uid://cg3oc1pl8lsjl" path="res://scenes/entities/Bubble/OrderBubble.tscn" id="2_27pg8"]
+[ext_resource type="PackedScene" uid="uid://beb8n78sa7hsm" path="res://scripts/components/movement_component.tscn" id="3_ho5u3"]
+[ext_resource type="PackedScene" uid="uid://bf8gen1g53k8f" path="res://scripts/components/patience_component.tscn" id="4_rjh8d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+
+[node name="Customer" type="CharacterBody2D" unique_id=900058847 node_paths=PackedStringArray("order_bubble_anchor")]
+collision_layer = 4
+script = ExtResource("1_v38u2")
+order_bubble_anchor = NodePath("OrderBubbleAnchor")
+order_bubble_scene = ExtResource("2_27pg8")
+
+[node name="CollisionCustomer" type="CollisionShape2D" parent="." unique_id=611089329]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="NavigationCustomer" type="NavigationAgent2D" parent="." unique_id=2032593416]
+
+[node name="OrderBubbleAnchor" type="Marker2D" parent="." unique_id=1645694260]
+position = Vector2(0, -205)
+
+[node name="VisualCustomer" type="Node2D" parent="." unique_id=318849360]
+
+[node name="Scripts" type="Node" parent="." unique_id=199313089]
+
+[node name="MovementComponent" parent="Scripts" unique_id=904041681 node_paths=PackedStringArray("nav_agent", "character_body") instance=ExtResource("3_ho5u3")]
+nav_agent = NodePath("../../NavigationCustomer")
+character_body = NodePath("../..")
+
+[node name="PatienceComponent" parent="Scripts" unique_id=1815167752 instance=ExtResource("4_rjh8d")]

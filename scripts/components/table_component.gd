@@ -169,7 +169,6 @@ func reserve_seats(group_size: int) -> Array[Marker2D]:
 	
 	# 3. Sécurité : si on n'a pas trouvé assez de places libres, on annule tout
 	if reserved.size() < group_size:
-		print("Erreur : pas assez de places libres trouvées")
 		return []
 
 	# 4. On met à jour l'état de la table (elle passe en attente de service)

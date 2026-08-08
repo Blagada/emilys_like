@@ -96,7 +96,6 @@ func _on_item_in_tray_pressed(index: int) -> void:
 	tween.tween_property(button, "scale", Vector2.ZERO, 0.2)
 	tween.chain().tween_callback(func():
 		TrayManager.tray_items.remove_at(index)
-		print(index, " est supprimé du tray")
 		TrayManager.tray_updated.emit()
 	)
 

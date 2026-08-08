@@ -30,7 +30,6 @@ func count_servable_items() -> int:
 	for customer: Customer in seated_customers:
 		if customer.current_order != null and TrayManager.tray_items.has(customer.current_order):
 			count_servable_item += 1
-			print("count", count_servable_item)
 	return count_servable_item
 
 
@@ -47,6 +46,7 @@ func serve_food() -> void:
 		if TrayManager.tray_items.has(customer.current_order):
 			TrayManager.tray_items.erase(customer.current_order)
 			customer.current_order = null
+			customer.patience_component.cancel()
 			served_someone = true
 
 	# Si personne n'a pu être servi, on arrête ici

@@ -2,8 +2,9 @@ extends CharacterBody2D
 class_name Customer
 
 @onready var visual_customer: Node2D = $VisualCustomer
-@onready var movement_component: MovementComponent = $MovementComponent
 @onready var collision_customer: CollisionShape2D = $CollisionCustomer
+@onready var movement_component: MovementComponent = $Scripts/MovementComponent
+@onready var patience_component: PatienceComponent = $Scripts/PatienceComponent
 
 @export var order_bubble_anchor: Marker2D
 @export var order_bubble_scene: PackedScene
@@ -14,6 +15,7 @@ signal state_changed(new_state: GameEnums.CustomerState, target_pos: Vector2)
 var current_order: FoodData
 var customer_data: CustomerData
 var current_state: GameEnums.CustomerState
+
 
 func _physics_process(_delta: float) -> void:
 	velocity = movement_component.get_velocity_for_movement()

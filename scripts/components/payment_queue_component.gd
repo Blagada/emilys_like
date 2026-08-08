@@ -135,15 +135,13 @@ func _process_queue_sequentially() -> void:
 		total_combo_bonus += combo_bonus
 
 		if table != null:
-			table.occupied_seats.clear()
-			table.current_state = GameEnums.TableState.WAITING_FOR_CLEANING if table.is_dirty else GameEnums.TableState.UNOCCUPIED_AND_CLEAN
-
 			var seated_customers: Array[Customer] = table.order_component.seated_customers.duplicate()
 			seated_customers.erase(customer)
-			table.order_component.seated_customers.clear()
+
+			CustomerExitService.release_table(table)
 
 			for seated_customer: Customer in seated_customers:
-				_send_customer_to_exit(seated_customer)
+				CustomerExitService.send_customer_to_exit(seated_customer, exit_marker)
 
 		# 3. Le client quitte la caisse et sort
 		_send_customer_to_exit(customer)
@@ -191,9 +189,8 @@ func _show_payment_feedback(bill: float, tip: float, combo_bonus: float) -> void
 
 # --- SORTIE DU CLIENT ---
 func _send_customer_to_exit(customer: Customer) -> void:
-	await customer.move_to(exit_marker, GameEnums.CustomerState.MOVING)
+	await CustomerExitService.send_customer_to_exit(customer, exit_marker)
 	customer_exited.emit()
-	customer.queue_free()
 
 
 # --- MISE À JOUR DE LA FILE D'ATTENTE ---
