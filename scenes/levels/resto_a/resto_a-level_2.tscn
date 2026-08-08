@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cwrycs3lpdn2h"]
 
-[ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://plancher.png" id="1_gw1l3"]
-[ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/foundation/wall.tscn" id="2_p4se4"]
+[ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://assets/plancher.png" id="1_gw1l3"]
+[ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/entities/Restaurants/resto_a_wall.tscn" id="2_p4se4"]
 [ext_resource type="PackedScene" uid="uid://d3d62e0dcbxqc" path="res://scenes/entities/Staff/player.tscn" id="3_sibr7"]
 [ext_resource type="PackedScene" uid="uid://dtxvvae0o7g7q" path="res://scenes/entities/Tables/table_for_four.tscn" id="4_lkn2k"]
 [ext_resource type="PackedScene" uid="uid://blfuh5focianj" path="res://scenes/entities/Tables/table_for_two.tscn" id="5_sbygb"]

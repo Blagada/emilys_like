@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://d3o6jvtspe4o1" path="res://scripts/components/table_component.tscn" id="4_74kbq"]
 [ext_resource type="Texture2D" uid="uid://4balm81g7io1" path="res://resources/restaurants/resto_a/resto_a-chair.tres" id="4_crkvk"]
 [ext_resource type="PackedScene" uid="uid://dm15runckn1m6" path="res://scripts/components/order_component.tscn" id="5_ppnig"]
+[ext_resource type="PackedScene" uid="uid://f4prltr7yjfo" path="res://scripts/components/click_feedback_component.tscn" id="6_crkvk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fxvm"]
 size = Vector2(185, 94)
@@ -80,3 +81,7 @@ custom_chair_texture = ExtResource("4_crkvk")
 [node name="OrderComponent" parent="." unique_id=490812539 instance=ExtResource("5_ppnig")]
 y_sort_enabled = true
 position = Vector2(0, -107)
+
+[node name="ClickFeedbackComponent" parent="." unique_id=1144639532 node_paths=PackedStringArray("target_sprite", "interaction_component") instance=ExtResource("6_crkvk")]
+target_sprite = NodePath("../Table/TableSprite2D")
+interaction_component = NodePath("../InteractionComponent")

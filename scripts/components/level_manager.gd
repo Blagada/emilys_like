@@ -2,24 +2,31 @@ extends Node
 class_name LevelComponent
 
 # --- EXPORTS & CONFIGURATIONS DU NIVEAU ---
+@export_group("Scripts")
 @export var tray_places: TrayComponent
 @export var customer_spawner: SpawnComponent
-@export var level_data: LevelData
 @export var payment_queue: PaymentQueueComponent
-@export var earnings_gauge: EarningsGauge
-@export var navigation_region: NavigationRegion2D
-@export var level_intro_screen: LevelIntroScreen
 @export var day_cycle: DayCycleComponent
-@export var day_results_screen: DayResultsScreen
-@export var end_of_service_panel: EndOfServicePanel
-@export var day_clock: DayClock
 @export var order_flow: OrderFlowComponent
 @export var spawn_orchestrator: SpawnOrchestratorComponent
+
+@export_group("Scènes")
+@export var end_of_service_panel: EndOfServicePanel
+@export var level_intro_screen: LevelIntroScreen
+@export var day_results_screen: DayResultsScreen
+@export var earnings_gauge: EarningsGauge
+@export var day_clock: DayClock
+
+@export_group("Nodes")
+@export var navigation_region: NavigationRegion2D
 @export var spawn_button: Button
 
+@export_group("Data")
+@export var level_data: LevelData
+
+@export_group("Variables")
 @export var expert_threshold_percent: float = 150.0 # % du goal pour "expert"
 @export var sitting_animation_delay: float = 0.3
-
 
 
 # --- MÉTRIQUES ET OBJECTIFS ---

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://f4prltr7yjfo"]
+
+[ext_resource type="Script" uid="uid://cvgram7d3375k" path="res://scripts/components/click_feedback_component.gd" id="1_r3kgl"]
+
+[node name="ClickFeedbackComponent" type="Node2D" unique_id=889534943]
+script = ExtResource("1_r3kgl")

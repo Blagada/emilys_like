@@ -4,9 +4,10 @@
 
 Le joueur incarne un membre du personnel qui doit accueillir les clients, les placer aux tables, préparer les plats et gérer un plateau de service, le tout en essayant de garder les clients satisfaits.
 
----
+> Pour l'architecture du projet et comment le lancer, voir `README.md`.
+> Pour les tâches restantes, voir `TODO.md`.
 
-## 🎮 État actuel du projet
+---
 
 ## ✅ Fait
 
@@ -24,72 +25,29 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - Séparation des responsabilités : `OrderComponent` (commandes/service) distinct de `TableComponent` (sièges/état)
 - Cycle paiement + nettoyage + machine à états (1re passe) : file d'attente à la caisse (`PaymentQueueComponent`), `StaffComponent` (animations pilotées par état), machine à états clients complétée
 
-### Session la plus récente — Montant du paiement + nettoyage anticipé + polish visuel
+### Session — Montant du paiement + nettoyage anticipé + polish visuel
 - **Nettoyage anticipé** : une table encore occupée (clients en attente de paiement) peut être nettoyée par le joueur ; si nettoyée en avance, elle redevient propre instantanément au départ des clients
 - **Calcul du montant réel** : le prix des commandes s'accumule par table, le pourboire se calcule à la caisse (`tip_rate`, un vrai pourcentage plutôt qu'un multiplicateur), affiché en feedback au-dessus de la caisse
 - **`OrderBubble` généralisée** : un seul composant de bulle (texte libre ou grille de commandes), réutilisé pour les tables, le `$` du représentant en file, et prêt pour les futures commandes au comptoir
-- **Suivi des montants** : `daily_earnings` (total du jour) et `tip_fund` (cagnotte pour la déco, persiste entre les journées) — accumulés à chaque paiement, pas encore affichés à l'écran
+- **Suivi des montants** : `daily_earnings` (total du jour) et `tip_fund` (cagnotte pour la déco, persiste entre les journées)
 - **Polish visuel** : animation de disparition (fade + shrink) sur les items retirés du tray, animation "pop" sur le feedback de montant à la caisse
 - Fix ratio d'affichage en plein écran (`project.godot`)
 
----
+### Session — Feedback visuel des interactions (hover + clic)
+- **Curseur main au survol** : géré de façon centralisée dans `Interactable` (`interaction_component.gd`) via `mouse_entered`/`mouse_exited` → `Input.set_default_cursor_shape()`
+- **`ClickFeedbackComponent`** (réutilisable) : `SCALE_PUNCH` (cloche) et `COLOR_FLASH` (aliments/table) — flash simple au survol, répété (x3) au clic confirmé
+- **Contour noir au survol (shader) — tenté puis abandonné** : `hover_aliments.gdshader`, épaisseur incohérente selon la résolution des sprites → décision de renforcer le contour dans les assets plutôt que par shader
+- **Bug résolu — `Local to Scene`** : `ShaderMaterial` partagé entre instances ; fix via `material.duplicate()` en `_ready()`
+- **Bug résolu — ordre d'exécution `_ready()`** : fix via `call_deferred()` pour capturer les valeurs après tous les `_ready()` de la frame
+- **Bug résolu — curseur qui ne s'affichait pas systématiquement** : `Area2D` d'aliments qui se chevauchaient ; fix par espacement dans la scène, aucun changement de code
 
-## 🔧 En cours / prochaine étape
-
-- **Affichage à l'écran** de `daily_earnings` et `tip_fund` (les variables sont prêtes côté `GameDataManager`, reste l'UI)
-
----
-
-## 📋 À faire (basé sur les notes de conception)
-
-### Boucle de jeu principale
-- [ ] Affichage à l'écran des montants (`daily_earnings`, `tip_fund`) — **priorité actuelle**
-- [ ] Clients qui partent si aucune table disponible / bon nombre de places
-- [ ] Réinitialisation complète d'un groupe à une table (à revalider avec le flow de nettoyage anticipé)
-
-### Comptoir
-- [ ] Clarifier le comportement de `DELIVERING` (actuellement dérivé de `MOVING` + tray non vide plutôt qu'un état séparé)
-
-### Rythme / difficulté
-- [ ] Délai différent par type de client, incluant le parcours complet vers le paiement (patience — mis de côté pour le niveau 1 pour l'instant)
-- [ ] Délai/minuterie de la journée : heures d'ouverture, resto ferme après le dernier client, plusieurs services (déjeuner/dîner/souper)
-- [ ] Menu choisi par le joueur en début de journée
-
-### Plus tard
-- [ ] Écran de menu principal
-- [ ] Paramètres du jeu (taille de police, choix de police)
-- [ ] Feedback visuel quand une table ne peut pas être servie
-- [ ] Vraies animations des personnages (actuellement placeholders `walk`/`idle` pour `food_prep`/`cleaning`/`delivering`)
-- [ ] Score / objectifs de niveau
-- [ ] Multi-niveaux avec layouts différents
-- [ ] Joueur choisit lui-même les aliments de son resto par niveau
-- [ ] Uniformiser tous les sprites d'aliments en 64x64
-
----
-
-## 🏗️ Architecture
-
-Le projet suit une approche **orientée composants** plutôt que l'héritage classique :
-```
-scenes/
-├── components/     → Logique réutilisable (déplacement, interaction, tables, plateau)
-├── entities/        → Objets du jeu (clients, aliments, personnel)
-└── levels/           → Scènes de niveau
-resources/           → Données (Resource) : types de clients, aliments, visuels
-scripts/
-├── globals/          → Autoloads (état partagé, ex: GameDataManager)
-└── models/           → Enums et types partagés (GameEnums)
-```
-
-**Principe clé** : les entités (Customer, Player, Table) délèguent leur comportement à des composants indépendants (`MovementComponent`, `InteractionComponent`, `TableComponent`, `OrderComponent`, `StaffComponent`, `PaymentQueueComponent`...), ce qui permet de les réutiliser et de les tester séparément.
-
----
-
-## ▶️ Lancer le projet
-
-1. Ouvrir Godot 4.7 (ou plus récent)
-2. Importer le projet via `project.godot`
-3. Lancer la scène principale (`level_1.tscn`)
+### Session — Ménage de la boucle de jeu + validation des acquis
+- **Affichage à l'écran** de `daily_earnings`/`tip_fund` : `earnings_gauge.tscn` + `tip_jar_display.tscn` déjà en place au HUD
+- **Clients qui partent si aucune table disponible** : `_spawn_next_group()` vérifie la disponibilité avant même de faire apparaître un groupe — pas de spawn si aucune table valide
+- **Réinitialisation complète d'une table** : validé, le nettoyage anticipé (pendant l'attente du paiement) fonctionne correctement, la table n'est libérée qu'après paiement
+- **Score / objectifs de niveau** : `daily_goal_helper.gd` + `level_metrics_helper.gd` calculent automatiquement `daily_goal`/`expert_goal` selon le niveau, le menu, la vitesse des clients et les temps de déplacement réels mesurés via la navigation
+- **`DELIVERING` clarifié** : l'état est bien déclenché au clic sur table/cloche (`start_task(DELIVERING, ...)` dans `table_component.gd`/`counter_order_component.gd`) — distinct de l'état "marche avec plateau en main" (`MOVING` + tray non-vide, dans `player.gd`), les deux pointent vers `walk` en placeholder pour l'instant
+- **Délai par type de client** + **minuterie de journée** (services, heures d'ouverture) : validés, déjà en place
 
 ---
 
@@ -105,6 +63,6 @@ scripts/
 - Gestion des niveaux par restaurant : ajout d'une table, changement de menu, etc.
 - Piloter les animations par une machine à états plutôt que par la vélocité seule
 
-Pour les détails techniques, bugs corrigés et idées en vrac, voir `ROADMAP.md`.
+Pour les tâches restantes, voir `TODO.md`. Pour l'architecture, voir `README.md`.
 
 ---

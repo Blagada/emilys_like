@@ -1,19 +1,10 @@
 [gd_scene format=3 uid="uid://w2tsxuaqqj4x"]
 
 [ext_resource type="Script" uid="uid://c67ct54uk8xnu" path="res://scenes/entities/Counter/counter.gd" id="1_ud332"]
-[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="3_7fxvm"]
 [ext_resource type="PackedScene" uid="uid://b4rs3eptext0j" path="res://scenes/entities/Counter/cash_register.tscn" id="3_nhco1"]
 [ext_resource type="PackedScene" uid="uid://ddsj0q2qq7sob" path="res://scripts/components/payment_queue_component.tscn" id="3_o58yy"]
 [ext_resource type="PackedScene" uid="uid://bpvokjn032wx2" path="res://scripts/components/counter_order_component.tscn" id="4_ud332"]
 [ext_resource type="FontFile" uid="uid://cqqcrly8xbiyt" path="res://assets/fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf" id="5_7gn7i"]
-[ext_resource type="Texture2D" uid="uid://dm6n7qw16wvoi" path="res://assets/furniture/resto_a/cloche_comptoir.png" id="6_nlouk"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yf5fn"]
-size = Vector2(17, 13.5)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g4v7s"]
-atlas = ExtResource("6_nlouk")
-region = Rect2(0, 6, 64, 54)
 
 [sub_resource type="Theme" id="Theme_g4v7s"]
 default_font = ExtResource("5_7gn7i")
@@ -40,28 +31,10 @@ interaction_component = NodePath("../CashRegister/CaisseInteraction")
 payment_feedback_label = NodePath("../PaymentFeedbackLabel")
 
 [node name="CounterOrderComponent" parent="Visuals" unique_id=1482906281 node_paths=PackedStringArray("interaction_component", "payment_queue") instance=ExtResource("4_ud332")]
-position = Vector2(0, 35)
+position = Vector2(-83, 22)
 interaction_component = NodePath("ClocheInteraction")
 payment_queue = NodePath("../PaymentQueueComponent")
 serving_delay = 0.3
-
-[node name="ClocheInteraction" parent="Visuals/CounterOrderComponent" unique_id=913349617 instance=ExtResource("3_7fxvm")]
-
-[node name="CollisionShape2D" parent="Visuals/CounterOrderComponent/ClocheInteraction" index="0" unique_id=478167018]
-position = Vector2(-82.5, -25.25)
-shape = SubResource("RectangleShape2D_yf5fn")
-debug_color = Color(0.8602228, 0.22659692, 0.70539856, 0.41960785)
-
-[node name="InteractionPoint" parent="Visuals/CounterOrderComponent/ClocheInteraction" index="1" unique_id=1962856339]
-position = Vector2(-100, 21)
-
-[node name="ClocheTexture" type="TextureRect" parent="Visuals/CounterOrderComponent/ClocheInteraction" unique_id=231560131]
-offset_left = -88.0
-offset_top = -31.0
-offset_right = -24.0
-offset_bottom = 23.0
-scale = Vector2(0.19160943, 0.19160943)
-texture = SubResource("AtlasTexture_g4v7s")
 
 [node name="PaymentFeedbackLabel" type="Label" parent="Visuals" unique_id=199721748]
 visible = false
@@ -79,4 +52,5 @@ vertical_alignment = 1
 [editable path="Visuals/CashRegister"]
 [editable path="Visuals/CashRegister/CaisseInteraction"]
 [editable path="Visuals/PaymentQueueComponent"]
+[editable path="Visuals/CounterOrderComponent"]
 [editable path="Visuals/CounterOrderComponent/ClocheInteraction"]

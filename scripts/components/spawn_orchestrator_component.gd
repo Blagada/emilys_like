@@ -1,10 +1,12 @@
 extends Node
 class_name SpawnOrchestratorComponent
 
+@export_group("Scripts")
 @export var customer_spawner: SpawnComponent
 @export var payment_queue: PaymentQueueComponent
 @export var day_cycle: DayCycleComponent
 
+@export_group("Variables")
 @export var counter_order_probability_percent: float = 70.0
 @export var spawn_interval_jitter_percent: float = 20.0
 @export var initial_spawn_delay_min: float = 1.0

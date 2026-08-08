@@ -30,6 +30,9 @@ day_clock = NodePath("../../../HUD/DayClock")
 
 [node name="Entities" parent="." unique_id=1316099999 instance=ExtResource("2_l3q6y")]
 
+[node name="CounterOrderComponent" parent="Entities/Comptoir/Visuals" parent_id_path=PackedInt32Array(1316099999, 1212267104, 1505766415) index="3" unique_id=1482906281]
+position = Vector2(-84.07794, 5.9230175)
+
 [node name="player" parent="Entities" unique_id=660937136 instance=ExtResource("4_i14kd")]
 y_sort_enabled = true
 position = Vector2(760.00006, 584)
@@ -57,8 +60,11 @@ position = Vector2(6.999939, 4)
 
 [node name="Cupcake" parent="Entities/Nourritures" unique_id=1694997751 instance=ExtResource("9_nue30")]
 position = Vector2(842.00006, 475.00003)
-scale = Vector2(0.7312654, 0.75285375)
 food_data = ExtResource("10_7m12l")
+
+[node name="ZoneDeClic" parent="Entities/Nourritures/Cupcake/InteractionComponent" parent_id_path=PackedInt32Array(1694997751, 2030365436) index="2" unique_id=1380196619]
+position = Vector2(80, 63.99997)
+scale = Vector2(0.76, 0.67999756)
 
 [node name="Bouboule" parent="Entities/Nourritures" unique_id=269495307 instance=ExtResource("9_nue30")]
 position = Vector2(994.00006, 483)
@@ -68,7 +74,7 @@ food_data = ExtResource("11_4sgo5")
 position = Vector2(47, 159)
 
 [node name="ZoneDeClic" parent="Entities/Nourritures/Bouboule/InteractionComponent" parent_id_path=PackedInt32Array(269495307, 2030365436) index="2" unique_id=1380196619]
-position = Vector2(51, 57)
+position = Vector2(61, 55)
 scale = Vector2(0.7555621, 0.75062853)
 
 [node name="Hotdog" parent="Entities/Nourritures" unique_id=1092501770 instance=ExtResource("9_nue30")]
@@ -79,7 +85,7 @@ food_data = ExtResource("12_ao8jy")
 position = Vector2(-62.500107, 117.85606)
 
 [node name="ZoneDeClic" parent="Entities/Nourritures/Hotdog/InteractionComponent" parent_id_path=PackedInt32Array(1092501770, 2030365436) index="2" unique_id=1380196619]
-position = Vector2(69.99996, 44.999992)
+position = Vector2(67.99996, 42.999992)
 scale = Vector2(0.64621234, 0.65662307)
 
 [node name="Nouilles" parent="Entities/Nourritures" unique_id=1064632917 instance=ExtResource("9_nue30")]
@@ -106,19 +112,19 @@ day_cycle = NodePath("../../GameplayCore/DayCycleComponent")
 
 [node name="GameplayCore" parent="." unique_id=839634176 instance=ExtResource("12_kqvg7")]
 
-[node name="LevelManager" parent="GameplayCore" index="0" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "earnings_gauge", "navigation_region", "level_intro_screen", "day_cycle", "day_results_screen", "end_of_service_panel", "day_clock", "order_flow", "spawn_orchestrator", "spawn_button")]
+[node name="LevelManager" parent="GameplayCore" index="0" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "day_cycle", "order_flow", "spawn_orchestrator", "end_of_service_panel", "level_intro_screen", "day_results_screen", "earnings_gauge", "day_clock", "navigation_region", "spawn_button")]
 tray_places = NodePath("../../HUD/Tray_places")
 customer_spawner = NodePath("../../Entities/CustomerSpawner")
 payment_queue = NodePath("../../Entities/Comptoir/Visuals/PaymentQueueComponent")
-earnings_gauge = NodePath("../../HUD/EarningsGauge")
-navigation_region = NodePath("../../ZoneDeplacement")
-level_intro_screen = NodePath("../../HUD/LevelIntroScreen")
 day_cycle = NodePath("../DayCycleComponent")
-day_results_screen = NodePath("../../HUD/DayResultsScreen")
-end_of_service_panel = NodePath("../../HUD/EndOfServicePanel")
-day_clock = NodePath("../../HUD/DayClock")
 order_flow = NodePath("../OrderFlowComponent")
 spawn_orchestrator = NodePath("../SpawnOrchestratorComponent")
+end_of_service_panel = NodePath("../../HUD/EndOfServicePanel")
+level_intro_screen = NodePath("../../HUD/LevelIntroScreen")
+day_results_screen = NodePath("../../HUD/DayResultsScreen")
+earnings_gauge = NodePath("../../HUD/EarningsGauge")
+day_clock = NodePath("../../HUD/DayClock")
+navigation_region = NodePath("../../ZoneDeplacement")
 spawn_button = NodePath("../../HUD/SpawnButton")
 
 [node name="OrderFlowComponent" parent="GameplayCore" index="1" unique_id=976148135 node_paths=PackedStringArray("customer_spawner", "payment_queue", "day_cycle")]
@@ -140,8 +146,11 @@ payment_queue = NodePath("../../Entities/Comptoir/Visuals/PaymentQueueComponent"
 [editable path="Entities/Comptoir/Visuals/CashRegister"]
 [editable path="Entities/Comptoir/Visuals/CashRegister/CaisseInteraction"]
 [editable path="Entities/Comptoir/Visuals/PaymentQueueComponent"]
+[editable path="Entities/Comptoir/Visuals/CounterOrderComponent"]
 [editable path="Entities/Comptoir/Visuals/CounterOrderComponent/ClocheInteraction"]
 [editable path="Entities/CustomerSpawner"]
+[editable path="Entities/Nourritures/Cupcake"]
+[editable path="Entities/Nourritures/Cupcake/InteractionComponent"]
 [editable path="Entities/Nourritures/Bouboule"]
 [editable path="Entities/Nourritures/Bouboule/InteractionComponent"]
 [editable path="Entities/Nourritures/Hotdog"]

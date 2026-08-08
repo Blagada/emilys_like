@@ -1,6 +1,35 @@
 [gd_scene format=3 uid="uid://bpvokjn032wx2"]
 
 [ext_resource type="Script" uid="uid://cuvaqmvrr43ck" path="res://scripts/components/counter_order_component.gd" id="1_xev7m"]
+[ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="2_esj28"]
+[ext_resource type="Texture2D" uid="uid://dm6n7qw16wvoi" path="res://assets/furniture/resto_a/cloche_comptoir.png" id="3_gvnca"]
+[ext_resource type="PackedScene" uid="uid://f4prltr7yjfo" path="res://scripts/components/click_feedback_component.tscn" id="4_tdo2a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27mgu"]
+size = Vector2(17, 13.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mn031"]
+atlas = ExtResource("3_gvnca")
+region = Rect2(0, 6, 64, 54)
 
 [node name="CounterOrderComponent" type="Node2D" unique_id=1482906281]
 script = ExtResource("1_xev7m")
+
+[node name="ClocheInteraction" parent="." unique_id=349743239 instance=ExtResource("2_esj28")]
+
+[node name="CollisionShape2D" parent="ClocheInteraction" index="0" unique_id=478167018]
+shape = SubResource("RectangleShape2D_27mgu")
+debug_color = Color(0.8602228, 0.22659692, 0.70539856, 0.41960785)
+
+[node name="InteractionPoint" parent="ClocheInteraction" index="1" unique_id=1962856339]
+position = Vector2(-29, 33)
+
+[node name="ClocheTexture" type="Sprite2D" parent="ClocheInteraction" unique_id=1928396432]
+scale = Vector2(0.19160943, 0.19160943)
+texture = SubResource("AtlasTexture_mn031")
+
+[node name="ClickFeedbackComponent" parent="." unique_id=889534943 node_paths=PackedStringArray("target_sprite", "interaction_component") instance=ExtResource("4_tdo2a")]
+target_sprite = NodePath("../ClocheInteraction/ClocheTexture")
+interaction_component = NodePath("../ClocheInteraction")
+
+[editable path="ClocheInteraction"]

@@ -11,13 +11,15 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 Le projet suit une approche **orientée composants** plutôt que l'héritage classique :
 ```
 scenes/
-├── components/     → Logique réutilisable (déplacement, interaction, tables, plateau)
+├── components/      → Logique réutilisable (déplacement, interaction, tables, plateau)
 ├── entities/        → Objets du jeu (clients, aliments, personnel)
-└── levels/           → Scènes de niveau
-resources/           → Données (Resource) : types de clients, aliments, visuels
+├── levels/          → Scènes de niveaux, par restaurants
+└── UI/              → Scènes des contrôles (qui ne bougent pas à l'écran)
+resources/           → Données (Resource) : clients, aliments, restaurants, menus, niveaux
 scripts/
-├── globals/          → Autoloads (état partagé, ex: GameDataManager)
-└── models/           → Enums et types partagés (GameEnums)
+├── components/      → Composantes réutilisables dans n'importe quel scène
+├── globals/         → Autoloads (état partagé, ex: GameDataManager)
+└── models/          → Enums et types partagés (GameEnums)
 ```
 
 **Principe clé** : les entités (Customer, Player, Table) délèguent leur comportement à des composants indépendants (`MovementComponent`, `InteractionComponent`, `TableComponent`, `OrderComponent`, `StaffComponent`, `PaymentQueueComponent`...), ce qui permet de les réutiliser et de les tester séparément.
@@ -28,4 +30,4 @@ scripts/
 
 1. Ouvrir Godot 4.7 (ou plus récent)
 2. Importer le projet via `project.godot`
-3. Lancer la scène principale (`level_1.tscn`)
+3. Lancer la scène principale (`resto_a-level_1.tscn`)

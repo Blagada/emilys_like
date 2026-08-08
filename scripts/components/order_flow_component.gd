@@ -1,9 +1,12 @@
 extends Node
 class_name OrderFlowComponent
 
+@export_group("Scripts")
 @export var customer_spawner: SpawnComponent
 @export var payment_queue: PaymentQueueComponent
 @export var day_cycle: DayCycleComponent
+
+@export_group("Variables")
 @export var sitting_animation_delay: float = 0.3
 
 @onready var level_manager: LevelComponent = get_tree().get_first_node_in_group("LevelManager")

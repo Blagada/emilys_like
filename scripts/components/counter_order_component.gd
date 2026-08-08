@@ -1,8 +1,11 @@
 extends Node2D
 class_name CounterOrderComponent
 
+@export_group("Scripts")
 @export var interaction_component: Interactable
 @export var payment_queue: PaymentQueueComponent
+
+@export_group("Variables")
 @export var serving_delay: float = 0.5
 
 

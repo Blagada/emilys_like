@@ -2,10 +2,9 @@
 
 [ext_resource type="Script" uid="uid://clqblflb5cona" path="res://scenes/entities/Foods/aliments.gd" id="1_d0f31"]
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="2_35bts"]
-[ext_resource type="Shader" uid="uid://rpkh1dgvw5tk" path="res://scenes/entities/Foods/hover_aliments.gdshader" id="2_v03rv"]
+[ext_resource type="PackedScene" uid="uid://f4prltr7yjfo" path="res://scripts/components/click_feedback_component.tscn" id="4_cn3ul"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l2uke"]
-shader = ExtResource("2_v03rv")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qisy3"]
 size = Vector2(152, 104)
@@ -16,7 +15,6 @@ script = ExtResource("1_d0f31")
 [node name="AlimentSprite" type="Sprite2D" parent="." unique_id=1781891285]
 material = SubResource("ShaderMaterial_l2uke")
 position = Vector2(1.5258789e-05, -53.999992)
-scale = Vector2(0.24695866, 0.24695866)
 
 [node name="InteractionComponent" parent="." unique_id=2030365436 instance=ExtResource("2_35bts")]
 position = Vector2(-76, -105)
@@ -28,6 +26,10 @@ position = Vector2(76, 162)
 position = Vector2(76, 52)
 shape = SubResource("RectangleShape2D_qisy3")
 debug_color = Color(0.8177201, 0.21578583, 0.84252006, 0.41960785)
+
+[node name="ClickFeedbackComponent" parent="." unique_id=889534943 node_paths=PackedStringArray("target_sprite", "interaction_component") instance=ExtResource("4_cn3ul")]
+target_sprite = NodePath("../AlimentSprite")
+interaction_component = NodePath("../InteractionComponent")
 
 [connection signal="input_event" from="InteractionComponent" to="." method="_on_interaction_component_input_event"]
 

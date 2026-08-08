@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bgac03pjid7i8" path="res://assets/furniture/resto_a/caisse-enregistreuse.png" id="1_rog4u"]
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="2_feymf"]
+[ext_resource type="PackedScene" uid="uid://f4prltr7yjfo" path="res://scripts/components/click_feedback_component.tscn" id="3_f6a3l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6a3l"]
 size = Vector2(36.47059, 45.5)
@@ -9,14 +10,10 @@ size = Vector2(36.47059, 45.5)
 [node name="CashRegister" type="Node2D" unique_id=266037700]
 scale = Vector2(0.85, 0.85)
 
-[node name="CashRegisterTexture" type="TextureRect" parent="." unique_id=444656124]
-offset_left = -18.823528
-offset_top = -44.70588
-offset_right = 581.17645
-offset_bottom = 685.2941
+[node name="CashRegisterTexture" type="Sprite2D" parent="." unique_id=134480758]
+position = Vector2(0, -22.35294)
 scale = Vector2(0.061038088, 0.061038088)
 texture = ExtResource("1_rog4u")
-stretch_mode = 3
 
 [node name="CaisseInteraction" parent="." unique_id=349743239 instance=ExtResource("2_feymf")]
 position = Vector2(7.6293945e-06, 17.647057)
@@ -26,3 +23,7 @@ position = Vector2(-0.5882409, -39.602936)
 scale = Vector2(1.0000002, 1.0000002)
 shape = SubResource("RectangleShape2D_f6a3l")
 debug_color = Color(0.8947215, 0.22122571, 0.5840029, 0.41960785)
+
+[node name="ClickFeedbackComponent" parent="." unique_id=889534943 node_paths=PackedStringArray("target_sprite", "interaction_component") instance=ExtResource("3_f6a3l")]
+target_sprite = NodePath("../CashRegisterTexture")
+interaction_component = NodePath("../CaisseInteraction")

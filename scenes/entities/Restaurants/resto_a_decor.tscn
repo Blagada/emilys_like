@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://dpmj0x12v3q5e"]
 
-[ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://plancher.png" id="1_sepqk"]
+[ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://assets/plancher.png" id="1_sepqk"]
 [ext_resource type="PackedScene" uid="uid://c3avmyssjhcm1" path="res://scripts/components/sun_light_controller.tscn" id="2_a42i4"]
-[ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/foundation/wall.tscn" id="3_hbl0c"]
+[ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/entities/Restaurants/resto_a_wall.tscn" id="3_hbl0c"]
 
 [sub_resource type="Gradient" id="Gradient_k2nkm"]
 colors = PackedColorArray(0.3331272, 0.2804408, 0.29143158, 1, 0.9337711, 0.8549367, 0.8047589, 1)
