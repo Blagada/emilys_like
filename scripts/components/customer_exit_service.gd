@@ -6,11 +6,16 @@ static func release_table(table: TableComponent) -> void:
 	table.occupied_seats.clear()
 	table.order_component.seated_customers.clear()
 	table.order_component.hide_order_bubble()
-	table.current_state = GameEnums.TableState.WAITING_FOR_CLEANING if table.is_dirty else GameEnums.TableState.UNOCCUPIED_AND_CLEAN
-	print("table.current_state ", table.current_state)
+	
+	if table.is_dirty:
+		table.current_state = GameEnums.TableState.WAITING_FOR_CLEANING
+		table.order_component.show_dirty()
+	else:
+		table.current_state = GameEnums.TableState.UNOCCUPIED_AND_CLEAN
 
 
 # --- FAIT SORTIR UN CLIENT PAR LE MARKER DE SORTIE, PUIS LE RETIRE DE LA SCÈNE ---
 static func send_customer_to_exit(customer: Customer, exit_marker: Marker2D) -> void:
+	customer.hide_bubble()
 	await customer.move_to(exit_marker, GameEnums.CustomerState.MOVING)
 	customer.queue_free()

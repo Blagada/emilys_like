@@ -49,6 +49,17 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - **`DELIVERING` clarifié** : l'état est bien déclenché au clic sur table/cloche (`start_task(DELIVERING, ...)` dans `table_component.gd`/`counter_order_component.gd`) — distinct de l'état "marche avec plateau en main" (`MOVING` + tray non-vide, dans `player.gd`), les deux pointent vers `walk` en placeholder pour l'instant
 - **Délai par type de client** + **minuterie de journée** (services, heures d'ouverture) : validés, déjà en place
 - **Patience** : création de la composante `CustomerExitService` ajouté à customer gestion de la sortie dans `payment_queue_component.gd`
+
+### Session — Système de patience (service + caisse/comptoir)
+- **`PatienceComponent`** créé : composant réutilisable, décompte générique avec paliers `HAPPY`/`IMPATIENT`/`ANGRY` (en %, seuils exportables), signaux `patience_expired` et `patience_state_changed`
+- **`CustomerExitService`** créé (suivant le pattern statique de `TableAssignmentService`) : `release_table()` (libère sièges/commande, remet la table sale ou propre selon `is_dirty`) + `send_customer_to_exit()` (cache la bulle, sort le client, le libère de la scène) — réutilisé partout où un client doit sortir
+- **Branché sur l'attente du service à table** (`order_flow_component.gd`) : patience démarrée à la prise de commande, annulée si servi à temps ; si expirée, le groupe entier quitte sans payer, table marquée sale
+- **Branché sur la file de caisse/comptoir** (`payment_queue_component.gd`) : même file pour les clients de comptoir (`table == null`) et les représentants de groupe à table — patience démarrée à l'entrée dans la file, annulée une fois pris en charge à la caisse ; si expirée, malus voulu : perte du montant de la commande + table à nettoyer
+- **`payment_queue_component.gd` refactoré** pour utiliser `CustomerExitService` au lieu de dupliquer la logique de sortie
+- **Bug résolu — écran de fin de journée qui semblait ne plus s'afficher** : en fait un faux bug, le temps du service n'était simplement pas encore écoulé (`active_customer_count` fonctionnait correctement)
+- **Bug résolu — collision visuelle à la caisse** : le client suivant dans la file avançait avant que le client en train de payer ait commencé à sortir ; fix en déplaçant l'appel à `_advance_queue()` juste avant la sortie du client payé plutôt qu'immédiatement après son retrait de la file — le combo de paiement groupé dépend de ce timing, ajusté à `0.9s` pour laisser le temps d'arriver
+- Durée d'un service réduite de 4 à 3 minutes (`day_cycle_component.gd`, `service_duration`)
+
 ---
 
 ## 📓 Journal d'apprentissage

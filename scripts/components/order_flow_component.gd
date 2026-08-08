@@ -96,4 +96,9 @@ func _on_group_patience_expired(group: Array[Customer], table: TableComponent) -
 	CustomerExitService.release_table(table)
 
 	for customer: Customer in group:
-		CustomerExitService.send_customer_to_exit(customer, payment_queue.exit_marker)
+		_send_customer_away(customer)
+
+
+func _send_customer_away(customer: Customer) -> void:
+	await CustomerExitService.send_customer_to_exit(customer, payment_queue.exit_marker)
+	payment_queue.customer_exited.emit()

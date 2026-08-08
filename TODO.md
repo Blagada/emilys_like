@@ -14,11 +14,12 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 - [ ] Clients qui entrent visuellement dans le restaurant et attendent qu'une table se libère (zone d'attente)
 - [ ] Patience par type de client — Faire quitter du restaurant
 	- [x] Mécanique réutilisable de patience
-	- [ ] Patience à la table
-	- [ ] Patience à la caisse - commande
-	- [ ] Patience à la caisse - payment
+	- [x] Patience à la table
+	- [x] Patience à la caisse - commande
+	- [x] Patience à la caisse - payment
 	- [ ] Patience dans la fil d'attente pour une table
-- [ ] Ajouter la bulle pour montrer que les tables doivent être nettoyer après qu'un groupe a quitté fâché
+- [x] Ajouter la bulle pour montrer que les tables doivent être nettoyer après qu'un groupe a quitté fâché
+- [x] Enlever la bulle après qu'il quitte le restaurant
 
 ## Décision à prendre avant de continuer l'économie
 

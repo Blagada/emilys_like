@@ -5,7 +5,7 @@ class_name DayCycleComponent
 @export var payment_queue: PaymentQueueComponent
 
 @export_group("Variables")
-@export var service_duration: float = 240.0 # 4 minutes, fixe peu importe le niveau
+@export var service_duration: float = 180.0 # 3 minutes, fixe peu importe le niveau
 
 signal service_started(service_type: GameEnums.ServiceType)
 signal closing_time

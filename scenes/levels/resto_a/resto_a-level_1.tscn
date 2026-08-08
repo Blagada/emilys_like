@@ -139,6 +139,7 @@ day_cycle = NodePath("../DayCycleComponent")
 
 [node name="DayCycleComponent" parent="GameplayCore" index="3" unique_id=1299101941 node_paths=PackedStringArray("payment_queue")]
 payment_queue = NodePath("../../Entities/Comptoir/Visuals/PaymentQueueComponent")
+service_duration = 25.0
 
 [editable path="RestoADecor"]
 [editable path="Entities"]

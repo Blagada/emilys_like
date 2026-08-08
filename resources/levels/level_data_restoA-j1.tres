@@ -12,5 +12,5 @@ script = ExtResource("6_q51y5")
 restaurant = ExtResource("5_8i4gc")
 level_menu = ExtResource("1_nqvbn")
 possible_customers = Array[ExtResource("2_apoud")]([ExtResource("3_mcsoc"), ExtResource("4_f13e3")])
-active_services = Array[int]([2])
+active_services = Array[int]([2, 1, 0])
 metadata/_custom_type_script = "uid://duy54q18siryb"

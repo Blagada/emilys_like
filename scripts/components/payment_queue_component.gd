@@ -30,6 +30,11 @@ func enqueue(customer: Customer, table: TableComponent) -> void:
 	_queue.append({"customer": customer, "table": table, "order_price": 0.0, "is_served": true})
 
 	customer.show_waiting_payment_bubble()
+	# Patience du client activé
+	customer.patience_component.start(customer.customer_data.patience)
+	customer.patience_component.patience_expired.connect(
+		_on_queue_patience_expired.bind(customer, table)
+	)
 
 	if queue_index < queue_positions.size():
 		customer.move_to(queue_positions[queue_index], GameEnums.CustomerState.PAYING)
@@ -64,6 +69,11 @@ func enqueue_counter_customer(customer: Customer, level_menu: LevelMenu) -> void
 	# affiche la bulle avec l'icône de l'aliment choisi + changement d'état.
 	customer.change_state(GameEnums.CustomerState.ORDERING)
 	customer.show_order_bubble(food)
+	# Patience du client activé
+	customer.patience_component.start(customer.customer_data.patience)
+	customer.patience_component.patience_expired.connect(
+		_on_queue_patience_expired.bind(customer, null)
+	)
 
 
 # --- SERVICE AU COMPTOIR (cloche) ---
@@ -111,8 +121,8 @@ func _process_queue_sequentially() -> void:
 
 		# 1. On le retire de la file principale au moment où il commence son encaissement
 		_queue.pop_front()
-
-		_advance_queue()
+		# Pris en charge, arrête le timer de patience
+		customer.patience_component.cancel()
 
 		var table: TableComponent = first_entry["table"]
 
@@ -144,12 +154,14 @@ func _process_queue_sequentially() -> void:
 				CustomerExitService.send_customer_to_exit(seated_customer, exit_marker)
 
 		# 3. Le client quitte la caisse et sort
+		# Le client précédent commence tout juste à sortir — les suivants peuvent avancer maintenant
+		_advance_queue()
 		_send_customer_to_exit(customer)
 		
 		# Le client précédent vient de partir, on laisse passer un petit délai 
 		# avant que le prochain de la file ne s'élance vers la caisse libérée.
 		# TODO : si possible que le délai n'impacte que les clients dans la fil (pas celui à la caisse)
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.9).timeout
 		_advance_queue()
 
 	if total_bill_batch > 0.0:
@@ -185,6 +197,29 @@ func _show_payment_feedback(bill: float, tip: float, combo_bonus: float) -> void
 	await fade_out.finished
 
 	payment_feedback_label.visible = false
+
+
+func _on_queue_patience_expired(customer: Customer, table: TableComponent) -> void:
+	_remove_customer_from_queue(customer)
+
+	if table != null:
+		var group: Array[Customer] = table.order_component.seated_customers.duplicate()
+		for member: Customer in group:
+			member.patience_component.cancel()
+		CustomerExitService.release_table(table)
+		for member: Customer in group:
+			_send_customer_to_exit(member)
+	else:
+		_send_customer_to_exit(customer)
+
+	_advance_queue()
+
+
+func _remove_customer_from_queue(customer: Customer) -> void:
+	for i: int in range(_queue.size()):
+		if _queue[i]["customer"] == customer:
+			_queue.remove_at(i)
+			return
 
 
 # --- SORTIE DU CLIENT ---
