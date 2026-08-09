@@ -4,10 +4,17 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 
 ---
 
+## 🐛 Bug prioritaire — à régler avant de continuer la patience
+
+- [ ] **Journée qui ne termine plus** : `active_customer_count` reste bloqué positif quand un client passe par 2 phases de patience (ex: impatient à table, puis en caisse). Cause probable : `patience_component.patience_expired.connect(...)` s'accumule à chaque `start()` sans jamais être déconnecté — un client ayant vécu 2 phases se retrouve avec 2 handlers actifs sur le même signal, ce qui semble bloquer un `await` quelque part côté sortie du client
+  → piste : nettoyer les anciennes connexions de `patience_expired` au début de `start()`, dans `patience_component.gd`, avant d'en ajouter une nouvelle (voir `get_connections()`/`disconnect()`)
+- [ ] **Patience qui ne persiste pas entre les phases** : un client impatient à table redevient "content" (palier réinitialisé) en entrant dans une nouvelle phase (ex: file de caisse). Comportement voulu, une fois le bug ci-dessus réglé : repartir au **début du palier actuel** (pas à 0%, pas non plus garder le % exact précédent)
+
+
 ## Prochaines tâches (aucune dépendance bloquante)
 
 - [ ] Rendre la cloche du comptoir plus évidente visuellement (pas assez clair que c'est là qu'il faut servir)
-- [ ] Revoir la durée d'un service (`4 min` trop long dès 2 services actifs)
+- [x] Revoir la durée d'un service (`4 min` trop long dès 2 services actifs) -> 3 min ça convient
 
 ## Rythme / difficulté
 
@@ -18,9 +25,12 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 	- [x] Patience à la caisse - commande
 	- [x] Patience à la caisse - payment
 	- [ ] Patience dans la fil d'attente pour une table
-- [ ] Ajouter indicateur dans la bulle du niveau de patience des clients : heureux, impatient, faché (emoji?)
+- [x] Ajouter indicateur dans la bulle du niveau de patience des clients pour impatient et faché (emoji?)
 - [x] Ajouter la bulle pour montrer que les tables doivent être nettoyer après qu'un groupe a quitté fâché
 - [x] Enlever la bulle après qu'il quitte le restaurant
+- [ ] Valider comment le timer est géré si on a servi une partie de la commande
+- [ ] Lorsqu'en fil à la caisse et que le joueur à cliqué (combo), la patience doit pauser
+- [ ] Si était a une table, la patience retourne à happy rendu à la caisse
 
 ## Décision à prendre avant de continuer l'économie
 

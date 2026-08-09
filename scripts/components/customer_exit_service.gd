@@ -15,7 +15,10 @@ static func release_table(table: TableComponent) -> void:
 
 
 # --- FAIT SORTIR UN CLIENT PAR LE MARKER DE SORTIE, PUIS LE RETIRE DE LA SCÈNE ---
-static func send_customer_to_exit(customer: Customer, exit_marker: Marker2D) -> void:
+static func send_customer_to_exit(customer: Customer, exit_marker: Marker2D, on_complete: Callable = Callable()) -> void:
 	customer.hide_bubble()
 	await customer.move_to(exit_marker, GameEnums.CustomerState.MOVING)
 	customer.queue_free()
+
+	if on_complete.is_valid():
+		on_complete.call()

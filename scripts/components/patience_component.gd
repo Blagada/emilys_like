@@ -20,6 +20,9 @@ var _current_state: GameEnums.PatienceState = GameEnums.PatienceState.HAPPY
 # TODO: réinitialiser _elapsed à 0, assigner _duration, remettre _current_state à HAPPY,
 # et activer _is_active à true
 func start(duration: float) -> void:
+	for x in patience_expired.get_connections():
+		patience_expired.disconnect(x.callable)
+
 	_elapsed = 0
 	_duration = duration
 	_current_state = GameEnums.PatienceState.HAPPY

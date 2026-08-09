@@ -60,6 +60,12 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - **Bug résolu — collision visuelle à la caisse** : le client suivant dans la file avançait avant que le client en train de payer ait commencé à sortir ; fix en déplaçant l'appel à `_advance_queue()` juste avant la sortie du client payé plutôt qu'immédiatement après son retrait de la file — le combo de paiement groupé dépend de ce timing, ajusté à `0.9s` pour laisser le temps d'arriver
 - Durée d'un service réduite de 4 à 3 minutes (`day_cycle_component.gd`, `service_duration`)
 
+### Session — Icône visuelle de patience + bug de connexions multiples découvert
+- **`PatienceIndicatorComponent` visuel** : icône emoji (via `AtlasTexture`) ajoutée dans `OrderBubble.tscn`, en enfant de `OrderBubbleTexture` (pas de la racine `MarginContainer`, pour éviter l'étirement automatique des `Container`)
+- **`order_bubble.gd`** : nouvelle méthode `set_patience_icon(state)` — cachée pour `HAPPY`, visible pour `IMPATIENT`/`ANGRY` (choix de design : bruit visuel seulement quand ça compte)
+- **Branché sur les deux contextes** : bulle personnelle du client (`customer.gd`, comptoir/caisse) et bulle partagée de table (`order_component.gd`, représentée par `group[0]`)
+- **Bug découvert — la patience repart à zéro entre les phases** : un client déjà impatient à table redevient "content" en arrivant en caisse, au lieu de garder son palier
+- **Bug découvert — journée qui ne se termine plus** : `active_customer_count` reste bloqué (jamais `<= 0`) après qu'un client soit passé par 2 phases de patience (table → caisse) ; hypothèse : `patience_expired` accumule plusieurs connexions non nettoyées entre les `start()` successifs, causant un comportement dupliqué/bloquant à l'expiration
 ---
 
 ## 📓 Journal d'apprentissage

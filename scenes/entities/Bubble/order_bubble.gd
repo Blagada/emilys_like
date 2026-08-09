@@ -39,8 +39,11 @@ func show_orders(orders: Array[FoodData]) -> void:
 func set_patience_icon(state: GameEnums.PatienceState) -> void:
 	match state:
 		GameEnums.PatienceState.HAPPY:
-			patience_indicator.texture = happy_texture
+			patience_indicator.visible = false
+			#patience_indicator.texture = happy_texture
 		GameEnums.PatienceState.IMPATIENT:
+			patience_indicator.visible = true
 			patience_indicator.texture = impatient_texture
 		GameEnums.PatienceState.ANGRY:
+			patience_indicator.visible = true
 			patience_indicator.texture = angry_texture

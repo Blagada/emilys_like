@@ -151,7 +151,7 @@ func _process_queue_sequentially() -> void:
 			CustomerExitService.release_table(table)
 
 			for seated_customer: Customer in seated_customers:
-				CustomerExitService.send_customer_to_exit(seated_customer, exit_marker)
+				_send_customer_to_exit(seated_customer)
 
 		# 3. Le client quitte la caisse et sort
 		# Le client précédent commence tout juste à sortir — les suivants peuvent avancer maintenant
@@ -224,17 +224,17 @@ func _remove_customer_from_queue(customer: Customer) -> void:
 
 # --- SORTIE DU CLIENT ---
 func _send_customer_to_exit(customer: Customer) -> void:
-	await CustomerExitService.send_customer_to_exit(customer, exit_marker)
-	customer_exited.emit()
+	CustomerExitService.send_customer_to_exit(
+		customer, exit_marker,
+		func() -> void: customer_exited.emit()
+	)
 
 
 # --- MISE À JOUR DE LA FILE D'ATTENTE ---
 func _advance_queue() -> void:
-	print("DEBUG: --- Exécution de _advance_queue() ---. Taille de _queue : ", _queue.size())
 	for i: int in range(_queue.size()):
 		var entry: Dictionary = _queue[i]
 		var customer: Customer = entry["customer"]
 		if i < queue_positions.size():
 			var state: GameEnums.CustomerState = GameEnums.CustomerState.PAYING if entry["is_served"] else GameEnums.CustomerState.MOVING
-			print("DEBUG: Client à l'index ", i, " déplacé vers position ", i)
 			customer.move_to(queue_positions[i], state)
