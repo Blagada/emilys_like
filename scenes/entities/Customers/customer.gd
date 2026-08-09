@@ -17,11 +17,20 @@ var customer_data: CustomerData
 var current_state: GameEnums.CustomerState
 
 
+func _ready() -> void:
+	patience_component.patience_state_changed.connect(_on_patience_state_changed)
+
+
 func _physics_process(_delta: float) -> void:
 	velocity = movement_component.get_velocity_for_movement()
 
 	if velocity != Vector2.ZERO:
 		move_and_slide()
+
+
+func _on_patience_state_changed(new_state: GameEnums.PatienceState) -> void:
+	if order_bubble:
+		order_bubble.set_patience_icon(new_state)
 
 
 func setup(visual: CustomerVisual, data: CustomerData) -> void:

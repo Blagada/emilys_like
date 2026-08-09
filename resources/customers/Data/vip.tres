@@ -9,7 +9,7 @@
 [resource]
 script = ExtResource("2_d8dvl")
 group_type = 1
-speed = 200.0
-patience = 20.0
+speed = 150.0
+patience = 25.0
 possible_customers = Array[ExtResource("1_gyu1d")]([ExtResource("2_oo4di"), ExtResource("3_0b0jh"), ExtResource("4_o8rwr")])
 metadata/_custom_type_script = "uid://coyjgufjo44k3"

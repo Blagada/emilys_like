@@ -18,6 +18,7 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 	- [x] Patience à la caisse - commande
 	- [x] Patience à la caisse - payment
 	- [ ] Patience dans la fil d'attente pour une table
+- [ ] Ajouter indicateur dans la bulle du niveau de patience des clients : heureux, impatient, faché (emoji?)
 - [x] Ajouter la bulle pour montrer que les tables doivent être nettoyer après qu'un groupe a quitté fâché
 - [x] Enlever la bulle après qu'il quitte le restaurant
 

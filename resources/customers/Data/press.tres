@@ -6,7 +6,6 @@
 [resource]
 script = ExtResource("2_j8goq")
 group_type = 2
-speed = 120.0
-patience = 20.0
-tip_multiplier = 0.12
+speed = 150.0
+patience = 25.0
 metadata/_custom_type_script = "uid://coyjgufjo44k3"

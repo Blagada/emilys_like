@@ -114,3 +114,8 @@ func _ensure_bubble_instance() -> void:
 	if order_bubble == null:
 		order_bubble = order_bubble_scene.instantiate()
 		order_bubble_anchor.add_child(order_bubble)
+
+
+func update_patience_icon(state: GameEnums.PatienceState) -> void:
+	if order_bubble:
+		order_bubble.set_patience_icon(state)

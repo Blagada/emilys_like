@@ -66,6 +66,11 @@ func _handle_group_ordering(assigned_table: TableComponent, group: Array[Custome
 		customer.patience_component.patience_expired.connect(
 			_on_group_patience_expired.bind(group, assigned_table)
 		)
+		
+		if customer == group[0]:
+			customer.patience_component.patience_state_changed.connect(
+				assigned_table.order_component.update_patience_icon
+			)
 
 	assigned_table.order_component.update_order_bubble()
 

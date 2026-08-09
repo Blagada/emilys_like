@@ -4,6 +4,13 @@ class_name OrderBubble
 @export var status_label: Label
 @export var orders_grid: GridContainer
 
+@export_group("Patience")
+@export var patience_indicator: TextureRect
+@export var happy_texture: Texture2D
+@export var impatient_texture: Texture2D
+@export var angry_texture: Texture2D
+
+const PATIENCE_TEXTURES: Dictionary = {}  # rempli en _ready() une fois les exports en main
 
 func show_text(text: String) -> void:
 	orders_grid.visible = false
@@ -27,3 +34,13 @@ func show_orders(orders: Array[FoodData]) -> void:
 		order_icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		order_icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		orders_grid.add_child(order_icon)
+
+
+func set_patience_icon(state: GameEnums.PatienceState) -> void:
+	match state:
+		GameEnums.PatienceState.HAPPY:
+			patience_indicator.texture = happy_texture
+		GameEnums.PatienceState.IMPATIENT:
+			patience_indicator.texture = impatient_texture
+		GameEnums.PatienceState.ANGRY:
+			patience_indicator.texture = angry_texture
