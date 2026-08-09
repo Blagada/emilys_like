@@ -22,6 +22,7 @@ var _queue: Array[Dictionary] = []
 func _ready() -> void:
 	if interaction_component:
 		interaction_component.player_arrived.connect(_on_player_arrived)
+		interaction_component.action_queued.connect(_on_action_queued)
 
 
 # --- GESTION DE LA FILE (ENQUEUE) — clients de table, déjà servis ---
@@ -31,7 +32,12 @@ func enqueue(customer: Customer, table: TableComponent) -> void:
 
 	customer.show_waiting_payment_bubble()
 	# Patience du client activé
-	customer.patience_component.start(customer.customer_data.patience)
+	var current_patience_state = customer.patience_component.get_current_state()
+	
+	for connection: Dictionary in customer.patience_component.patience_expired.get_connections():
+		customer.patience_component.patience_expired.disconnect(connection["callable"])
+	
+	customer.patience_component.start(customer.customer_data.patience, current_patience_state)
 	customer.patience_component.patience_expired.connect(
 		_on_queue_patience_expired.bind(customer, table)
 	)
@@ -238,3 +244,9 @@ func _advance_queue() -> void:
 		if i < queue_positions.size():
 			var state: GameEnums.CustomerState = GameEnums.CustomerState.PAYING if entry["is_served"] else GameEnums.CustomerState.MOVING
 			customer.move_to(queue_positions[i], state)
+
+
+# Pause la patience lorsque le queue est actif
+func _on_action_queued(_action_id: int) -> void:
+	for entry: Dictionary in _queue:
+		entry["customer"].patience_component.cancel()

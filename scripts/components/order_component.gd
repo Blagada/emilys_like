@@ -60,7 +60,13 @@ func serve_food() -> void:
 	# Si tous les clients de la table ont reçu leur plat, on émet le signal correspondant
 	if _all_customers_served():
 		all_orders_served.emit()
-
+	else:
+		# Certain client on été servi, mais pas tous
+		for customer: Customer in seated_customers:
+			if customer:
+				var current_patience_state = customer.patience_component.get_current_state()
+				customer.patience_component.start(customer.customer_data.patience, current_patience_state)
+				update_patience_icon(current_patience_state)
 
 # --- VÉRIFIE SI TOUS LES CLIENTS ONT ÉTÉ SERVIS ---
 # Retourne vrai si aucun client de la table n'a de commande en attente
