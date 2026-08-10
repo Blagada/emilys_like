@@ -63,7 +63,7 @@ func serve_food() -> void:
 	else:
 		# Certain client on été servi, mais pas tous
 		for customer: Customer in seated_customers:
-			if customer:
+			if customer and customer.current_order != null:
 				var current_patience_state = customer.patience_component.get_current_state()
 				customer.patience_component.start(customer.customer_data.patience, current_patience_state)
 				update_patience_icon(current_patience_state)

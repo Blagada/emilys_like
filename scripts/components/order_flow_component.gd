@@ -92,7 +92,8 @@ func _on_group_patience_expired(group: Array[Customer], table: TableComponent) -
 	CustomerExitService.release_table(table)
 
 	for customer: Customer in group:
-		_send_customer_away(customer)
+		if is_instance_valid(customer):
+			_send_customer_away(customer)
 
 
 func _send_customer_away(customer: Customer) -> void:

@@ -75,6 +75,19 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - **Patience gelée au clic sur la caisse** : `payment_queue_component.gd` écoute maintenant `action_queued` (émis immédiatement au clic, avant le déplacement du joueur) en plus de `player_arrived` — tous les clients déjà dans la file au moment du clic voient leur patience figée pour de bon, pour ne pas perdre un client à cause du temps de trajet du joueur
 - **Service partiel de commande** : si seulement une partie des plats d'un groupe est servie, les clients encore en attente relancent leur patience au début de leur palier actuel (`order_component.gd`, dans `serve_food()`) — laisse une chance au joueur plutôt que de garder un timer qui tournait déjà pendant toute la préparation
 - **Bug résolu — nettoyage des connexions mal placé** : le nettoyage de `patience_expired` (ajouté il y a 2 jours) était fait à l'intérieur de `start()`, ce qui supprimait aussi les connexions valides lors d'un simple redémarrage dans la même phase (ex: service partiel). Déplacé vers le seul appelant qui change réellement d'écouteur (`payment_queue_component.gd`, dans `enqueue()`), juste avant sa propre reconnexion
+
+### Session — File d'attente pour tables + refonte du comptoir
+- **`WaitingQueueComponent`** créé (même pattern que `PaymentQueueComponent`) : groupes sans table disponible spawnent quand même et le représentant attend visuellement à l'entrée, avec bulle "Groupe de X" (`Customer.show_group_size()`)
+- **Signal `table_freed`** ajouté sur `TableComponent`, émis dans `_start_cleaning()` et `CustomerExitService.release_table()` — seul moyen fiable de savoir qu'une table redevient libre
+- **Sélection "best fit"** : à la libération d'une table, la file est parcourue dans l'ordre d'arrivée pour trouver le premier groupe dont la taille convient à *cette* table précise
+- **`OrderFlowComponent.seat_group()`** extrait de `_on_customer_group_spawned()` — logique d'assise réutilisable, appelée directement au spawn (table libre) ou depuis la file (table libérée plus tard)
+- **`SpawnOrchestratorComponent`** ne filtre plus les tailles de groupe selon les tables disponibles ; spawn même sans table, sauf si la file d'attente est pleine (`has_capacity()`)
+- **Hygiène des signaux appliquée dès la conception** : `patience_expired` du représentant en file est explicitement déconnecté avant l'assise, pour éviter d'empiler un handler par-dessus celui de la phase de commande (même bug que celui déjà corrigé côté caisse)
+- **Bug résolu — comptoir jamais reconnu comme obstacle de navigation** : root cause identifiée — le comptoir visuel était instancié *au runtime* (`counter.gd`, `_ready()`), donc invisible au moment du bake statique de `ZoneDeplacement` (`source_geometry_mode = 1`, scan des `nav_obstacles` présents dans la scène éditée). Les tables fonctionnaient car leur collision est physiquement présente dans la scène
+- **Refonte du comptoir en composant réutilisable** : `CounterComponent` créé (parité avec `TableComponent`) ; `counter.tscn` devient un gabarit de base, chaque comptoir de restaurant est une **scène héritée** (`New Inherited Scene`) ne redéfinissant que la géométrie physique (`CounterBody`) — `PaymentQueueComponent`/`CashRegister`/`CounterOrderComponent` restent hérités, sans duplication
+- **Bake de `ZoneDeplacement`** : validé que c'est fonctionnel sur le comptoir resto A après la refonte
+- **Attente d'une table** : pondération du spawn selon la composition réelle des tables (fix du "resto qui ne se remplit pas en début de partie")
+- **Bug résolu** : bug de patience fantôme dans serve_food() (relance de patience sur des clients déjà servis) + le garde is_instance_valid() manquant dans _on_group_patience_expired
 ---
 
 ## 📓 Journal d'apprentissage

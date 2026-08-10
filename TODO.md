@@ -10,8 +10,9 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 
 ## Rythme / difficulté
 
-- [x] Clients qui entrent visuellement dans le restaurant et attendent qu'une table se libère (zone d'attente)
-  - [x] Patience dans cette file d'attente (dernière phase manquante — service, caisse/comptoir déjà faits)
+## Rythme / difficulté
+
+- [ ] Tester en jeu le flux complet de la file d'attente de tables (`WaitingQueueComponent`) — codé mais pas encore validé en conditions réelles (représentant visible, bulle "Groupe de X", assignation best-fit, patience, sortie si expirée))
 
 ## Décision à prendre avant de continuer l'économie
 
@@ -21,6 +22,7 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 ## Comptoir et commandes
 
 - [ ] Servir plusieurs clients de comptoir à la fois (actuellement un seul via la cloche)
+- [ ] Créer les scènes héritées de comptoir pour les restos B/C/D/E (pattern en place depuis resto A, `CounterComponent` + `New Inherited Scene`)
 - [ ] Idée exploratoire : commandes en ligne (reçues à la caisse/cloche, livreur qui entre/sort) — pas encore de plan technique
 - [ ] Créer un 2e/3e restaurant avec `RestaurantEntities.tscn`/`RestaurantDecor.tscn` pour valider le système de scènes réutilisables
 - [ ] Menu choisi par le joueur en début de journée (dépend du joueur choisissant lui-même les aliments de son resto par niveau)
