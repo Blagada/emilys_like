@@ -1,13 +1,15 @@
 extends CharacterBody2D
 class_name Customer
 
-@onready var visual_customer: Node2D = $VisualCustomer
-@onready var collision_customer: CollisionShape2D = $CollisionCustomer
-@onready var movement_component: MovementComponent = $Scripts/MovementComponent
-@onready var patience_component: PatienceComponent = $Scripts/PatienceComponent
-
+@export var collision_customer: CollisionShape2D
+@export var visual_customer: Node2D
 @export var order_bubble_anchor: Marker2D
 @export var order_bubble_scene: PackedScene
+
+@export_group("Scripts")
+@export var movement_component: MovementComponent
+@export var patience_component: PatienceComponent
+
 
 var order_bubble: Node = null
 signal state_changed(new_state: GameEnums.CustomerState, target_pos: Vector2)
@@ -75,6 +77,9 @@ func show_bill_amount(amount: float) -> void:
 	_ensure_bubble_instance()
 	order_bubble.show_text("%.2f$" % amount)
 
+func show_group_size(size: int) -> void:
+	_ensure_bubble_instance()
+	order_bubble.show_text("%d places" % size)
 
 func hide_bubble() -> void:
 	if order_bubble:

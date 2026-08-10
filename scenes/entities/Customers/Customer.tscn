@@ -7,11 +7,15 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 
-[node name="Customer" type="CharacterBody2D" unique_id=900058847 node_paths=PackedStringArray("order_bubble_anchor")]
+[node name="Customer" type="CharacterBody2D" unique_id=900058847 node_paths=PackedStringArray("collision_customer", "visual_customer", "order_bubble_anchor", "movement_component", "patience_component")]
 collision_layer = 4
 script = ExtResource("1_v38u2")
+collision_customer = NodePath("CollisionCustomer")
+visual_customer = NodePath("VisualCustomer")
 order_bubble_anchor = NodePath("OrderBubbleAnchor")
 order_bubble_scene = ExtResource("2_27pg8")
+movement_component = NodePath("Scripts/MovementComponent")
+patience_component = NodePath("Scripts/PatienceComponent")
 
 [node name="CollisionCustomer" type="CollisionShape2D" parent="." unique_id=611089329]
 position = Vector2(1, 0)

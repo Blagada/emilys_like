@@ -6,12 +6,12 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 
 ## Prochaines tâches (aucune dépendance bloquante)
 
-- [ ] Rendre la cloche du comptoir plus évidente visuellement (pas assez clair que c'est là qu'il faut servir)
+- [ ] Rendre la cloche du comptoir plus évidente visuellement (pas assez clair que c'est là qu'il faut servir) -> idée de mettre la bulle avec les commandes au dessus de la cloche et mettre une icône pour emporter dans la bulle du client. Pourrait être le départ des commandes par livraison (multiplicateur supérieur).
 
 ## Rythme / difficulté
 
-- [ ] Clients qui entrent visuellement dans le restaurant et attendent qu'une table se libère (zone d'attente)
-  - [ ] Patience dans cette file d'attente (dernière phase manquante — service, caisse/comptoir déjà faits)
+- [x] Clients qui entrent visuellement dans le restaurant et attendent qu'une table se libère (zone d'attente)
+  - [x] Patience dans cette file d'attente (dernière phase manquante — service, caisse/comptoir déjà faits)
 
 ## Décision à prendre avant de continuer l'économie
 
@@ -40,6 +40,7 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 - [ ] Système de bonus lorsque le service à la table est complété en 1 fois (perdu si complété en plusieurs services)
 - [ ] Si plusieurs tables servies en 1 déplacement (pas de préparation entre-temps), bonus combo
 - [ ] Pourboires différents dépendant de l'état de patience du groupe de client (aucun pourboire si angry)
+- [ ] Plus qu'un aliment par client au comptoir (entre 1 et 2)
 
 ## UI
 

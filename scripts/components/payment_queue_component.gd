@@ -241,6 +241,10 @@ func _advance_queue() -> void:
 	for i: int in range(_queue.size()):
 		var entry: Dictionary = _queue[i]
 		var customer: Customer = entry["customer"]
+		
+		if not is_instance_valid(customer):
+			continue # Ignore ce client, il n'existe plus en mémoire
+		
 		if i < queue_positions.size():
 			var state: GameEnums.CustomerState = GameEnums.CustomerState.PAYING if entry["is_served"] else GameEnums.CustomerState.MOVING
 			customer.move_to(queue_positions[i], state)

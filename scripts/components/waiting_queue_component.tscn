@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c824381wpwag"]
+
+[ext_resource type="Script" uid="uid://cxidid8ey67cb" path="res://scripts/components/waiting_queue_component.gd" id="1_ebu06"]
+
+[node name="WaitingQueueComponent" type="Node2D" unique_id=1557171716 node_paths=PackedStringArray("queue_positions")]
+script = ExtResource("1_ebu06")
+queue_positions = [NodePath("QueuePosition/Position1"), NodePath("QueuePosition/Position2"), NodePath("QueuePosition/Position3")]
+
+[node name="QueuePosition" type="Node2D" parent="." unique_id=1596960747]
+
+[node name="Position1" type="Marker2D" parent="QueuePosition" unique_id=1648854224]
+position = Vector2(-36, -10)
+
+[node name="Position2" type="Marker2D" parent="QueuePosition" unique_id=232349310]
+position = Vector2(0, -10)
+
+[node name="Position3" type="Marker2D" parent="QueuePosition" unique_id=1580195958]
+position = Vector2(32, -10)

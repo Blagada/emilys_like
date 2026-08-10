@@ -12,6 +12,7 @@ static func release_table(table: TableComponent) -> void:
 		table.order_component.show_dirty()
 	else:
 		table.current_state = GameEnums.TableState.UNOCCUPIED_AND_CLEAN
+		table.table_freed.emit()
 
 
 # --- FAIT SORTIR UN CLIENT PAR LE MARKER DE SORTIE, PUIS LE RETIRE DE LA SCÈNE ---

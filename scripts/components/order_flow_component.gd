@@ -4,6 +4,7 @@ class_name OrderFlowComponent
 @export_group("Scripts")
 @export var customer_spawner: SpawnComponent
 @export var payment_queue: PaymentQueueComponent
+@export var waiting_queue: WaitingQueueComponent
 @export var day_cycle: DayCycleComponent
 
 @export_group("Variables")
@@ -23,24 +24,13 @@ func _ready() -> void:
 # --- GESTION DE L'ARRIVÉE D'UN GROUPE DE CLIENTS ---
 func _on_customer_group_spawned(group: Array[Customer]) -> void:
 	var all_tables: Array[Node] = get_tree().get_nodes_in_group("Table")
-	var group_size: int = group.size()
-
-	var assigned_table: TableComponent = TableAssignmentService.choose_table(all_tables, group_size)
+	var assigned_table: TableComponent = TableAssignmentService.choose_table(all_tables, group.size())
 
 	if assigned_table == null:
+		waiting_queue.enqueue_group(group)
 		return
 
-	var seats: Array[Marker2D] = assigned_table.reserve_seats(group_size)
-
-	if seats.size() == group_size:
-		for i: int in range(group_size):
-			var customer: Customer = group[i]
-			assigned_table.order_component.seated_customers.append(customer)
-			assigned_table.is_dirty = true
-			assigned_table.order_component.total_bill = 0.0
-			customer.move_to_table(seats[i], assigned_table.global_position)
-			day_cycle.register_customer_spawned()
-		_handle_group_ordering(assigned_table, group)
+	seat_group(assigned_table, group)
 
 
 # --- DÉROULEMENT DE LA COMMANDE À TABLE ---
@@ -96,7 +86,8 @@ func _on_all_orders_served(table: TableComponent) -> void:
 
 func _on_group_patience_expired(group: Array[Customer], table: TableComponent) -> void:
 	for customer: Customer in group:
-		customer.patience_component.cancel()
+		if is_instance_valid(customer):
+			customer.patience_component.cancel()
 
 	CustomerExitService.release_table(table)
 
@@ -110,3 +101,21 @@ func _send_customer_away(customer: Customer) -> void:
 		payment_queue.exit_marker,
 		func() -> void: payment_queue.customer_exited.emit()
 	)
+
+
+# --- ASSIGNE UN GROUPE À UNE TABLE DÉJÀ CHOISIE (réutilisable : spawn direct OU file d'attente) ---
+func seat_group(assigned_table: TableComponent, group: Array[Customer]) -> void:
+	var seats: Array[Marker2D] = assigned_table.reserve_seats(group.size())
+
+	if seats.size() != group.size():
+		return
+
+	for i: int in range(group.size()):
+		var customer: Customer = group[i]
+		assigned_table.order_component.seated_customers.append(customer)
+		assigned_table.is_dirty = true
+		assigned_table.order_component.total_bill = 0.0
+		customer.move_to_table(seats[i], assigned_table.global_position)
+		day_cycle.register_customer_spawned()
+
+	_handle_group_ordering(assigned_table, group)

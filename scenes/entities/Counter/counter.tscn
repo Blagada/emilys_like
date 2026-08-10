@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://w2tsxuaqqj4x"]
 
-[ext_resource type="Script" uid="uid://c67ct54uk8xnu" path="res://scenes/entities/Counter/counter.gd" id="1_ud332"]
 [ext_resource type="PackedScene" uid="uid://b4rs3eptext0j" path="res://scenes/entities/Counter/cash_register.tscn" id="3_nhco1"]
 [ext_resource type="PackedScene" uid="uid://ddsj0q2qq7sob" path="res://scripts/components/payment_queue_component.tscn" id="3_o58yy"]
 [ext_resource type="PackedScene" uid="uid://bpvokjn032wx2" path="res://scripts/components/counter_order_component.tscn" id="4_ud332"]
@@ -9,15 +8,13 @@
 [sub_resource type="Theme" id="Theme_g4v7s"]
 default_font = ExtResource("5_7gn7i")
 
-[node name="Comptoir" type="Node2D" unique_id=1212267104 node_paths=PackedStringArray("visual_counter")]
-script = ExtResource("1_ud332")
-visual_counter = NodePath("Visuals/VisualCounter")
+[node name="Comptoir" type="Node2D" unique_id=1212267104]
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1505766415]
 y_sort_enabled = true
 position = Vector2(0, -35)
 
-[node name="VisualCounter" type="Node2D" parent="Visuals" unique_id=1901920173]
+[node name="CounterBody" type="Node2D" parent="Visuals" unique_id=1901920173]
 
 [node name="CashRegister" parent="Visuals" unique_id=266037700 instance=ExtResource("3_nhco1")]
 position = Vector2(-58, 34.000004)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://b5xquemqtns51"]
+
+[ext_resource type="Script" uid="uid://bmphkpk6sbcth" path="res://scripts/components/counter_component.gd" id="1_7q60b"]
+
+[node name="CounterComponent" type="Node2D" unique_id=1433267441]
+script = ExtResource("1_7q60b")

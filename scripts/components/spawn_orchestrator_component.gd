@@ -4,6 +4,7 @@ class_name SpawnOrchestratorComponent
 @export_group("Scripts")
 @export var customer_spawner: SpawnComponent
 @export var payment_queue: PaymentQueueComponent
+@export var waiting_queue: WaitingQueueComponent
 @export var day_cycle: DayCycleComponent
 
 @export_group("Variables")
@@ -61,21 +62,17 @@ func _compute_spawn_interval() -> float:
 
 
 func _spawn_next_group() -> void:
-	var all_tables: Array[Node] = get_tree().get_nodes_in_group("Table")
-	var valid_sizes: Array[int] = []
-
-	for size: int in range(1, 5):
-		if not TableAssignmentService.get_valid_tables(all_tables, size).is_empty():
-			valid_sizes.append(size)
-
-	if valid_sizes.is_empty():
-		print("Aucune table disponible actuellement, spawn ignoré ce tour-ci")
-		return
-
-	var group_size: int = valid_sizes.pick_random()
+	var group_size: int = randi_range(1, 4)
 
 	if group_size == 1 and randf() * 100.0 < counter_order_probability_percent:
 		_spawn_counter_customer()
+		return
+
+	var all_tables: Array[Node] = get_tree().get_nodes_in_group("Table")
+	var table_available: bool = not TableAssignmentService.get_valid_tables(all_tables, group_size).is_empty()
+
+	if not table_available and not waiting_queue.has_capacity():
+		print("File d'attente pleine, spawn ignoré ce tour-ci")
 		return
 
 	customer_spawner.spawn_entity(group_size)

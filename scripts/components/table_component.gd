@@ -1,6 +1,8 @@
 extends Node
 class_name TableComponent
 
+signal table_freed
+
 # --- EXPORTS & CONFIGURATIONS ---
 @export var order_component: OrderComponent
 @export var interaction_component: Interactable
@@ -126,6 +128,7 @@ func _start_cleaning(player: Node, action_id: int) -> void:
 	# Si la table attendait d'être nettoyée, elle redevient entièrement libre et propre
 	if current_state == GameEnums.TableState.WAITING_FOR_CLEANING:
 		current_state = GameEnums.TableState.UNOCCUPIED_AND_CLEAN
+		table_freed.emit()
 
 	# Termine l'interaction en cours
 	interaction_component.complete_action(action_id)
