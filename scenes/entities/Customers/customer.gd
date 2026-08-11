@@ -79,7 +79,7 @@ func show_bill_amount(amount: float) -> void:
 
 func show_group_size(size: int) -> void:
 	_ensure_bubble_instance()
-	order_bubble.show_text("%d places" % size)
+	order_bubble.show_waiting_text("Table pour %d" % size)
 
 func hide_bubble() -> void:
 	if order_bubble:

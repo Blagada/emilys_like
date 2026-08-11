@@ -1,6 +1,7 @@
 extends MarginContainer
 class_name OrderBubble
 
+@export var waiting_label: Label
 @export var status_label: Label
 @export var orders_grid: GridContainer
 
@@ -16,10 +17,19 @@ func show_text(text: String) -> void:
 	orders_grid.visible = false
 	status_label.text = text
 	status_label.visible = true
+	waiting_label.visible = false
+
+
+func show_waiting_text(text: String) -> void:
+	orders_grid.visible = false
+	waiting_label.text = text
+	waiting_label.visible = true
+	status_label.visible = false
 
 
 func show_orders(orders: Array[FoodData]) -> void:
 	status_label.visible = false
+	waiting_label.visible = false
 	orders_grid.visible = true
 
 	for child: Node in orders_grid.get_children():

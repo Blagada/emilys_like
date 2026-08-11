@@ -29,6 +29,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
 theme = ExtResource("2_eisdl")
+theme_override_font_sizes/font_size = 35
 
 [node name="GoalMarker" type="ColorRect" parent="HBoxContainer/ProgressBar" unique_id=1484544603]
 custom_minimum_size = Vector2(5, 0)
@@ -44,5 +45,6 @@ layout_mode = 2
 size_flags_horizontal = 10
 theme = ExtResource("2_eisdl")
 theme_type_variation = &"count_down"
+theme_override_font_sizes/font_size = 35
 text = "Total"
 horizontal_alignment = 2

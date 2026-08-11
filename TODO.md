@@ -10,9 +10,6 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 
 ## Rythme / difficulté
 
-## Rythme / difficulté
-
-- [ ] Tester en jeu le flux complet de la file d'attente de tables (`WaitingQueueComponent`) — codé mais pas encore validé en conditions réelles (représentant visible, bulle "Groupe de X", assignation best-fit, patience, sortie si expirée))
 
 ## Décision à prendre avant de continuer l'économie
 
@@ -26,6 +23,15 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 - [ ] Idée exploratoire : commandes en ligne (reçues à la caisse/cloche, livreur qui entre/sort) — pas encore de plan technique
 - [ ] Créer un 2e/3e restaurant avec `RestaurantEntities.tscn`/`RestaurantDecor.tscn` pour valider le système de scènes réutilisables
 - [ ] Menu choisi par le joueur en début de journée (dépend du joueur choisissant lui-même les aliments de son resto par niveau)
+
+## Mécaniques de préparation avancées (nourriture)
+
+Ordre suggéré : four → combo → plaque de cuisson → four à pizza (le dernier combine les deux patterns précédents)
+
+- [ ] Four : nombre limité d'aliments, délai de cuisson (clic pour lancer, clic pour sortir), aliments brûlés si trop long
+- [ ] Aliments combo (ex : pain + fromage/saucisson) : clic sur 1er ingrédient affiche un "+" transparent dans le tray, clic sur le 2e ingrédient valide confirme, clic ailleurs annule
+- [ ] Plaque de cuisson : délai avant qu'il faille brasser, sinon état raté qui bloque les aliments adjacents
+- [ ] Four à pizza : combine four + combo (combo d'aliments avant de lancer la cuisson)
 
 ## Ambiance
 

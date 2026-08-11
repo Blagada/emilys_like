@@ -9,10 +9,10 @@ queue_positions = [NodePath("QueuePosition/Position1"), NodePath("QueuePosition/
 [node name="QueuePosition" type="Node2D" parent="." unique_id=1596960747]
 
 [node name="Position1" type="Marker2D" parent="QueuePosition" unique_id=1648854224]
-position = Vector2(-36, -10)
+position = Vector2(-49, -10)
 
 [node name="Position2" type="Marker2D" parent="QueuePosition" unique_id=232349310]
 position = Vector2(0, -10)
 
 [node name="Position3" type="Marker2D" parent="QueuePosition" unique_id=1580195958]
-position = Vector2(32, -10)
+position = Vector2(59, -11)

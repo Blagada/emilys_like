@@ -88,6 +88,16 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - **Bake de `ZoneDeplacement`** : validé que c'est fonctionnel sur le comptoir resto A après la refonte
 - **Attente d'une table** : pondération du spawn selon la composition réelle des tables (fix du "resto qui ne se remplit pas en début de partie")
 - **Bug résolu** : bug de patience fantôme dans serve_food() (relance de patience sur des clients déjà servis) + le garde is_instance_valid() manquant dans _on_group_patience_expired
+
+### Session — Stabilisation de la file d'attente : pondération, best fit, fermeture
+- **Bug corrigé — patience fantôme après service partiel** : `serve_food()` relançait la patience de *tous* les `seated_customers`, y compris ceux déjà servis (`current_order == null`). Un client déjà parti (payé, sorti) pouvait donc faire ressurgir un timer expiré bien plus tard, appelant `_on_group_patience_expired` avec un `group` contenant des clients déjà libérés → crash. Fix : filtrer sur `current_order != null` avant de relancer la patience
+- **Garde-fou ajouté** dans `_on_group_patience_expired` (`is_instance_valid(customer)` avant `_send_customer_away`), en cohérence avec le garde déjà présent sur `cancel()`
+- **Pondération du spawn selon la composition réelle des tables** (`_pick_weighted_group_size`) pour éviter que plusieurs groupes de 4 d'affilée saturent la file pendant que les petites tables restent vides — résout le "resto qui ne se remplit pas en début de partie"
+- **Régression détectée et corrigée** : cette pondération empêchait `group_size == 1` d'être tiré si le resto n'a pas de table pour 1 seule personne → plus aucun client au comptoir. Le tirage "client au comptoir" (`counter_order_probability_percent`) a été découplé du tirage de taille de groupe pour tables, testé indépendamment en premier
+- **Recalibration** de `counter_order_probability_percent` (70 → ~18) suite au changement de sémantique : la valeur représente maintenant directement la probabilité réelle, plus une probabilité conditionnelle à `group_size == 1`
+- **Vraie sélection "best fit"** dans `WaitingQueueComponent._on_table_freed()` : à la libération d'une table, on prend le plus grand groupe compatible en file (pas juste le premier compatible) — une table de 4 qui se libère sert d'abord un groupe de 4 en attente, même arrivé après un groupe de 2
+- **Fermeture propre de la file d'attente** : `WaitingQueueComponent` écoute maintenant `day_cycle.closing_time` et vide la file (`_on_closing_time`), renvoyant tous les groupes encore en attente. Logique de désinscription de patience extraite dans `_detach_patience()`, réutilisée entre l'assignation de table et la fermeture — évite la duplication
+
 ---
 
 ## 📓 Journal d'apprentissage

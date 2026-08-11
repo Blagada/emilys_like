@@ -28,7 +28,7 @@ interaction_component = NodePath("../CashRegister/CaisseInteraction")
 payment_feedback_label = NodePath("../PaymentFeedbackLabel")
 
 [node name="CounterOrderComponent" parent="Visuals" unique_id=1482906281 node_paths=PackedStringArray("interaction_component", "payment_queue") instance=ExtResource("4_ud332")]
-position = Vector2(-83, 22)
+position = Vector2(-85, 17)
 interaction_component = NodePath("ClocheInteraction")
 payment_queue = NodePath("../PaymentQueueComponent")
 serving_delay = 0.3
