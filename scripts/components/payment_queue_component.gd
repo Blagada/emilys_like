@@ -6,6 +6,7 @@ signal customer_exited
 # --- EXPORTS & CONFIGURATIONS ---
 @export var interaction_component: Interactable
 @export var feedback_display: PaymentFeedbackDisplay
+@export var counter_order_flow: CounterOrderFlowComponent
 @export var exit_marker: Marker2D
 
 @export var queue_positions: Array[Marker2D] = []
@@ -38,7 +39,7 @@ func enqueue(customer: Customer, table: TableComponent) -> void:
 	
 	customer.patience_component.start(customer.customer_data.patience, current_patience_state)
 	customer.patience_component.patience_expired.connect(
-		_on_queue_patience_expired.bind(customer, table)
+		on_queue_patience_expired.bind(customer, table)
 	)
 
 	if queue_index < queue_positions.size():
@@ -55,30 +56,7 @@ func enqueue_counter_customer(customer: Customer, level_menu: LevelMenu) -> void
 	if queue_index < queue_positions.size():
 		await customer.move_to(queue_positions[queue_index])
 
-	# affiche la bulle "..." sur ce client.
-	customer.change_state(GameEnums.CustomerState.WAITING_TO_ORDER)
-	customer.show_thinking()
-
-	# attendre un court délai avant de révéler la commande.
-	# la durée concorde avec la vitesse du client 400 / 100 = 4 secondes (le client à une vitesse sur 100)
-	var thinking_delay: float = 400.0 / customer.customer_data.speed
-	await get_tree().create_timer(thinking_delay).timeout
-
-	# choisi un aliment aléatoire à partir de level_menu.
-	var food: FoodData = level_menu.get_random_food()
-
-	# assigne cet aliment au client + mettre à jour entry["order_price"] avec son prix.
-	customer.set_order(food)
-	entry["order_price"] = food.price
-
-	# affiche la bulle avec l'icône de l'aliment choisi + changement d'état.
-	customer.change_state(GameEnums.CustomerState.ORDERING)
-	customer.show_order_bubble(food)
-	# Patience du client activé
-	customer.patience_component.start(customer.customer_data.patience)
-	customer.patience_component.patience_expired.connect(
-		_on_queue_patience_expired.bind(customer, null)
-	)
+	counter_order_flow.take_order(customer, level_menu, entry)
 
 
 # --- SERVICE AU COMPTOIR (cloche) ---
@@ -176,7 +154,7 @@ func _process_queue_sequentially() -> void:
 		feedback_display.show_payment(total_bill_batch, total_tip_batch, total_combo_bonus)
 
 
-func _on_queue_patience_expired(customer: Customer, table: TableComponent) -> void:
+func on_queue_patience_expired(customer: Customer, table: TableComponent) -> void:
 	_remove_customer_from_queue(customer)
 
 	if table != null:

@@ -7,14 +7,8 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 ## Prochaines tâches (aucune dépendance bloquante)
 
 - [ ] Rendre la cloche du comptoir plus évidente visuellement (pas assez clair que c'est là qu'il faut servir) -> idée de mettre la bulle avec les commandes au dessus de la cloche et mettre une icône pour emporter dans la bulle du client. Pourrait être le départ des commandes par livraison (multiplicateur supérieur).
-
-## Refactor architecture (en cours)
-
-- [x] `payment_queue_component.gd` → `BonusService`, `BillingService`, `PaymentFeedbackDisplay`
-- [x] `order_component.gd` → `OrderBubbleComponent`
-- [ ] Déplacer `_pick_weighted_group_size()` de `spawn_orchestrator_component.gd` vers `TableAssignmentService`
-- [x] Déplacer `table_assignment_service.gd` + `customer_exit_service.gd` vers nouveau dossier `scripts/services/`
-
+- [x] Ajustement du positionnement du joueur devant les comptoirs en L ou en U (séparation `FoodMarker` / `InteractionPoint`)
+- [x] Rapatriement de la configuration de jeu dans les ressources `LevelData` et `RestaurantData` (source unique de vérité)
 
 ## Décision à prendre avant de continuer l'économie
 
@@ -27,7 +21,9 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 - [ ] Créer les scènes héritées de comptoir pour les restos B/C/D/E (pattern en place depuis resto A, `CounterComponent` + `New Inherited Scene`)
 - [ ] Idée exploratoire : commandes en ligne (reçues à la caisse/cloche, livreur qui entre/sort) — pas encore de plan technique
 - [ ] Créer un 2e/3e restaurant avec `RestaurantEntities.tscn`/`RestaurantDecor.tscn` pour valider le système de scènes réutilisables
-- [ ] Menu choisi par le joueur en début de journée (dépend du joueur choisissant lui-même les aliments de son resto par niveau)
+- [x] Les aliments dans la resource Menu du niveau se positionne automatiquement dans les zones de nourriture du comptoir (marker de position)
+- [ ] Assigner des zones d'aliments avec des types (ex: si c'est un aliment de type four, ne peux pas être placé n'importe où sur le comptoir)
+- [ ] Menu choisi par le joueur en début de journée (dépend du joueur choisissant lui-même les aliments de son resto par niveau) -> mécanique de débloquage des aliments
 
 ## Mécaniques de préparation avancées (nourriture)
 

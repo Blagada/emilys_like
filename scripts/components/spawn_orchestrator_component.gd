@@ -1,22 +1,19 @@
 extends Node
 class_name SpawnOrchestratorComponent
 
-@export_group("Scripts")
 @export var customer_spawner: SpawnComponent
 @export var payment_queue: PaymentQueueComponent
 @export var waiting_queue: WaitingQueueComponent
 @export var day_cycle: DayCycleComponent
 
-@export_group("Variables")
-@export var counter_order_probability_percent: float = 70.0
-@export var spawn_interval_jitter_percent: float = 20.0
-@export var initial_spawn_delay_min: float = 1.0
-@export var initial_spawn_delay_max: float = 2.0
-
 @onready var level_manager: LevelComponent = get_tree().get_first_node_in_group("LevelManager")
 
 var table_count: int = 0
 var avg_cycle_duration: float = 0.0
+var counter_order_probability_percent: float = 70.0
+var spawn_interval_jitter_percent: float = 20.0
+var initial_spawn_delay_min: float = 1.0
+var initial_spawn_delay_max: float = 2.0
 var _auto_spawning: bool = false
 
 
@@ -66,7 +63,7 @@ func _spawn_next_group() -> void:
 		return
 
 	var all_tables: Array[Node] = get_tree().get_nodes_in_group("Table")
-	var group_size: int = _pick_weighted_group_size(all_tables)
+	var group_size: int = TableAssignmentService.pick_weighted_group_size(all_tables)
 
 	var table_available: bool = not TableAssignmentService.get_valid_tables(all_tables, group_size).is_empty()
 
@@ -75,32 +72,6 @@ func _spawn_next_group() -> void:
 		return
 
 	customer_spawner.spawn_entity(group_size)
-
-
-# --- TIRE UNE TAILLE DE GROUPE PROPORTIONNELLE AU NOMBRE DE TABLES DE CHAQUE TAILLE ---
-func _pick_weighted_group_size(all_tables: Array[Node]) -> int:
-	var weights: Array[int] = [0, 0, 0, 0] # index 0 = taille 1, ... index 3 = taille 4
-
-	for table_node: Node in all_tables:
-		var table_comp: TableComponent = table_node.get_node_or_null("TableComponent")
-		if table_comp == null:
-			continue
-		var capacity: int = table_comp.all_chair_positions.size()
-		if capacity >= 1 and capacity <= 4:
-			weights[capacity - 1] += 1
-
-	var total: int = weights[0] + weights[1] + weights[2] + weights[3]
-	if total == 0:
-		return randi_range(1, 4)
-
-	var roll: int = randi_range(1, total)
-	var cumulative: int = 0
-	for size: int in range(1, 5):
-		cumulative += weights[size - 1]
-		if roll <= cumulative:
-			return size
-
-	return 4
 
 
 func _spawn_counter_customer() -> void:

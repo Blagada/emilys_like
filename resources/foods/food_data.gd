@@ -5,3 +5,4 @@ class_name FoodData
 @export var sprite: Texture2D
 @export var preparation_time: float = 1.0
 @export var price: int = 10
+@export var type: GameEnums.foodType

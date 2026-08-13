@@ -10,6 +10,16 @@ enum TableState {
 }
 
 
+# Enum pour les états du staff (dont le joueur) : prévision des animations
+enum StaffState {
+	WAITING, # idle
+	MOVING, # walk
+	FOOD_PREP, # préparation de la nourriture
+	DELIVERING, # apporter la nourriture à table
+	CLEANING # Nettoyage de la table (du comptoir peut-être aussi?)
+}
+
+
 # Enum pour les états de clients : prévision des animations
 enum CustomerState {
 	WAITING_FOR_TABLE, # attend une table
@@ -22,17 +32,6 @@ enum CustomerState {
 	PAYING # Animation du représentant au comptoir pour payer
 }
 
-
-# Enum pour les états du staff (dont le joueur) : prévision des animations
-enum StaffState {
-	WAITING, # idle
-	MOVING, # walk
-	FOOD_PREP, # préparation de la nourriture
-	DELIVERING, # apporter la nourriture à table
-	CLEANING # Nettoyage de la table (du comptoir peut-être aussi?)
-}
-
-
 enum CustomerType {
 	CUSTOMER_NORMAL,
 	CUSTOMER_VIP,
@@ -40,17 +39,23 @@ enum CustomerType {
 	CUSTOMER_CALM
 }
 
+enum PatienceState {
+	HAPPY,   # 100% → seuil "impatient"
+	IMPATIENT, # seuil "impatient" → seuil "fâché"
+	ANGRY      # seuil "fâché" → 0%
+}
+
+enum foodType {
+	PREPARED, # déjà préparé
+	COMBO, # doit être assemblé avec 2 ou plus aliments
+	OVEN, # prend une cuisson au four
+	COOKTOP # prend une cuisson sur la plaque
+}
 
 enum ServiceType {
 	BREAKFAST,
 	LUNCH,
 	DINNER
-}
-
-enum PatienceState {
-	HAPPY,   # 100% → seuil "impatient"
-	IMPATIENT, # seuil "impatient" → seuil "fâché"
-	ANGRY      # seuil "fâché" → 0%
 }
 
 # ---- Dictionaire ---- #

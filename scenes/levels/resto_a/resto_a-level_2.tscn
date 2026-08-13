@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://cwrycs3lpdn2h"]
+[gd_scene format=4 uid="uid://d4lmoy4igl3x7"]
 
 [ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://assets/plancher.png" id="1_gw1l3"]
 [ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/entities/Restaurants/resto_a_wall.tscn" id="2_p4se4"]
@@ -177,9 +177,8 @@ scale = Vector2(1.1417972, 1.1417972)
 position = Vector2(328.99994, 426.00003)
 scale = Vector2(2.854493, 2.854493)
 
-[node name="PaymentQueueComponent" parent="Entities/Comptoir/Visuals" parent_id_path=PackedInt32Array(574508684, 1505766415) index="2" unique_id=1700191971 node_paths=PackedStringArray("exit_marker")]
+[node name="PaymentQueueComponent" parent="Entities/Comptoir" index="1" unique_id=1700191971]
 position = Vector2(-1.2000244, 28.572426)
-exit_marker = NodePath("../../../../Scripts/CustomerSpawner/SpawnPoint")
 
 [node name="ComptoirLightOccluder2D" type="LightOccluder2D" parent="Entities/Comptoir" unique_id=1094367787]
 position = Vector2(-312.13947, -167.45532)
@@ -247,6 +246,7 @@ offset_right = 439.0
 offset_bottom = 623.0
 
 [node name="LevelIntroScreen" parent="ZoneFixe" unique_id=1440735646 instance=ExtResource("15_rvwo1")]
+visible = false
 
 [node name="DayResultsScreen" parent="ZoneFixe" unique_id=1214173653 instance=ExtResource("16_lkn2k")]
 visible = false
@@ -260,17 +260,16 @@ offset_bottom = -519.0
 
 [node name="Scripts" type="Node2D" parent="." unique_id=907658780]
 
-[node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "earnings_gauge", "navigation_region", "level_intro_screen", "day_cycle", "day_results_screen", "end_of_service_panel") instance=ExtResource("16_yxkvy")]
+[node name="LevelManager" parent="Scripts" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "day_cycle", "end_of_service_panel", "level_intro_screen", "day_results_screen", "earnings_gauge", "navigation_region") instance=ExtResource("16_yxkvy")]
 tray_places = NodePath("../../ZoneFixe/Tray_places")
 customer_spawner = NodePath("../CustomerSpawner")
-level_data = ExtResource("17_gw1l3")
-payment_queue = NodePath("../../Entities/Comptoir/Visuals/PaymentQueueComponent")
+day_cycle = NodePath("../DayCycleComponent")
+end_of_service_panel = NodePath("../../ZoneFixe/EndOfServicePanel")
+level_intro_screen = NodePath("../../ZoneFixe/LevelIntroScreen")
+day_results_screen = NodePath("../../ZoneFixe/DayResultsScreen")
 earnings_gauge = NodePath("../../ZoneFixe/EarningsGauge")
 navigation_region = NodePath("../../ZoneDeplacement")
-level_intro_screen = NodePath("../../ZoneFixe/LevelIntroScreen")
-day_cycle = NodePath("../DayCycleComponent")
-day_results_screen = NodePath("../../ZoneFixe/DayResultsScreen")
-end_of_service_panel = NodePath("../../ZoneFixe/EndOfServicePanel")
+level_data = ExtResource("17_gw1l3")
 
 [node name="DayCycleComponent" parent="Scripts" unique_id=1299101941 instance=ExtResource("20_5niy6")]
 service_duration = 140.0
@@ -284,6 +283,11 @@ spawn_parent = NodePath("../../Entities")
 position = Vector2(-471, 740)
 
 [editable path="Entities/Comptoir"]
+[editable path="Entities/Comptoir/Visuals/CounterOrderComponent"]
+[editable path="Entities/Comptoir/Visuals/CounterOrderComponent/ClocheInteraction"]
+[editable path="Entities/Comptoir/Visuals/CashRegister"]
+[editable path="Entities/Comptoir/Visuals/CashRegister/CaisseInteraction"]
+[editable path="Entities/Comptoir/PaymentQueueComponent"]
 [editable path="Entities/Nourritures/Bouboule"]
 [editable path="Entities/Nourritures/Bouboule/InteractionComponent"]
 [editable path="Entities/Nourritures/Hotdog"]

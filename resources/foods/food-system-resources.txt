@@ -1,5 +1,5 @@
 Fiche Mémo : Système de Ressources "Aliment"
-Objectif : Centraliser les propriétés des aliments (visuel, prix, nom).
+Objectif : Centraliser les propriétés des aliments (visuel, prix, nom, type).
 
 1. Création d'un nouvel aliment :
 	

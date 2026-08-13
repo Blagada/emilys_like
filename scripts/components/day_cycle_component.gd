@@ -1,11 +1,7 @@
 extends Node2D
 class_name DayCycleComponent
 
-@export_group("Scripts")
 @export var payment_queue: PaymentQueueComponent
-
-@export_group("Variables")
-@export var service_duration: float = 180.0 # 3 minutes, fixe peu importe le niveau
 
 signal service_started(service_type: GameEnums.ServiceType)
 signal closing_time
@@ -15,6 +11,7 @@ var active_services: Array[GameEnums.ServiceType] = []
 var total_day_duration: float = 0.0
 var elapsed_time: float = 0.0
 var active_customer_count: int = 0
+var service_duration: float
 
 var _is_running: bool = false
 var _closing_time_reached: bool = false

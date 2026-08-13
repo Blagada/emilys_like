@@ -143,9 +143,11 @@ customer_spawner = NodePath("../../Entities/CustomerSpawner")
 payment_queue = NodePath("../../Entities/Comptoir/PaymentQueueComponent")
 waiting_queue = NodePath("../WaitingQueueComponent")
 day_cycle = NodePath("../DayCycleComponent")
+counter_order_probability_percent = 18.0
 
 [node name="DayCycleComponent" parent="GameplayCore" index="3" unique_id=1299101941 node_paths=PackedStringArray("payment_queue")]
 payment_queue = NodePath("../../Entities/Comptoir/PaymentQueueComponent")
+service_duration = 180.0
 
 [node name="WaitingQueueComponent" parent="GameplayCore" index="4" unique_id=1557171716 node_paths=PackedStringArray("order_flow", "exit_marker", "day_cycle")]
 position = Vector2(1239.0001, 341.00003)

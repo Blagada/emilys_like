@@ -45,3 +45,8 @@ func _has_tray_space() -> bool:
 	# Vérifie si le tray est plein, avec des préparations faite et des préparations en attente
 	var occupied: int = TrayManager.tray_items.size() + TrayManager.pending_items.size() - TrayManager.reserved_for_service
 	return occupied < TrayManager.current_max_capacity
+	
+
+func set_interaction_point(global_pos: Vector2) -> void:
+	if interaction_component and interaction_component.has_node("InteractionPoint"):
+		interaction_component.get_node("InteractionPoint").global_position = global_pos

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ms11luyd8oa5"]
 
 [ext_resource type="Texture2D" uid="uid://c5suymunjk48c" path="res://assets/UI/tray.png" id="1_j3deo"]
+[ext_resource type="PackedScene" uid="uid://ccsp6ein3krej" path="res://scenes/entities/Foods/counter_food_item.tscn" id="2_yyawt"]
 
 [node name="RestoACounter" type="Node2D" unique_id=1602640409]
 
@@ -31,3 +32,40 @@ patch_margin_bottom = 10
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Comptoir" unique_id=1950357837]
 polygon = PackedVector2Array(-93, 35, -94, 41, 58, 41, 58, 94, 90, 95, 89, 35)
+
+[node name="CounterFoodItem" parent="." unique_id=1631497471 node_paths=PackedStringArray("level_manager") groups=["nav_obstacles"] instance=ExtResource("2_yyawt")]
+position = Vector2(-28.376312, 40.60521)
+scale = Vector2(0.35032493, 0.35032493)
+level_manager = NodePath("")
+
+[node name="FoodMarker" parent="CounterFoodItem/PositionsContainer/Slot1" parent_id_path=PackedInt32Array(1631497471, 1445183406) index="0" unique_id=1193386233]
+position = Vector2(16, -2)
+
+[node name="InteractionPoint" parent="CounterFoodItem/PositionsContainer/Slot1" parent_id_path=PackedInt32Array(1631497471, 1445183406) index="1" unique_id=775135320]
+position = Vector2(16, 52)
+
+[node name="FoodMarker" parent="CounterFoodItem/PositionsContainer/Slot2" parent_id_path=PackedInt32Array(1631497471, 30553327) index="0" unique_id=210251845]
+position = Vector2(118, -4)
+
+[node name="InteractionPoint" parent="CounterFoodItem/PositionsContainer/Slot2" parent_id_path=PackedInt32Array(1631497471, 30553327) index="1" unique_id=938290136]
+position = Vector2(119, 53)
+
+[node name="FoodMarker" parent="CounterFoodItem/PositionsContainer/Slot3" parent_id_path=PackedInt32Array(1631497471, 1554330978) index="0" unique_id=609758597]
+position = Vector2(229, -3)
+
+[node name="InteractionPoint" parent="CounterFoodItem/PositionsContainer/Slot3" parent_id_path=PackedInt32Array(1631497471, 1554330978) index="1" unique_id=798863496]
+position = Vector2(156, 53)
+
+[node name="FoodMarker" parent="CounterFoodItem/PositionsContainer/Slot4" parent_id_path=PackedInt32Array(1631497471, 2000961490) index="0" unique_id=1107986245]
+position = Vector2(231, 97)
+
+[node name="InteractionPoint" parent="CounterFoodItem/PositionsContainer/Slot4" parent_id_path=PackedInt32Array(1631497471, 2000961490) index="1" unique_id=1377177315]
+position = Vector2(170, 98)
+
+[node name="FoodMarker" parent="CounterFoodItem/PositionsContainer/Slot5" parent_id_path=PackedInt32Array(1631497471, 1901464442) index="0" unique_id=642662816]
+position = Vector2(224, 127)
+
+[node name="InteractionPoint" parent="CounterFoodItem/PositionsContainer/Slot5" parent_id_path=PackedInt32Array(1631497471, 1901464442) index="1" unique_id=1256787380]
+position = Vector2(163, 131)
+
+[editable path="CounterFoodItem"]

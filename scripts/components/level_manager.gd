@@ -2,6 +2,8 @@ extends Node
 class_name LevelComponent
 
 # --- EXPORTS & CONFIGURATIONS DU NIVEAU ---
+@export var level_data: LevelData
+
 @export_group("Scripts")
 @export var tray_places: TrayComponent
 @export var customer_spawner: SpawnComponent
@@ -21,13 +23,6 @@ class_name LevelComponent
 @export var navigation_region: NavigationRegion2D
 @export var spawn_button: Button
 
-@export_group("Data")
-@export var level_data: LevelData
-
-@export_group("Variables")
-@export var expert_threshold_percent: float = 150.0 # % du goal pour "expert"
-@export var sitting_animation_delay: float = 0.3
-
 
 # --- MÉTRIQUES ET OBJECTIFS ---
 var table_count: int = 0
@@ -38,10 +33,24 @@ var avg_cleaning_duration: float = 0.0
 var avg_cycle_duration: float = 0.0
 var daily_goal: float = 0.0
 var expert_goal: float = 0.0
+var expert_threshold_percent: float = 150.0
+var sitting_animation_delay: float = 0.3
 
 
 # --- INITIALISATION PRINCIPALE ---
 func _ready() -> void:
+	# --- Injections depuis les Ressources ---
+	expert_threshold_percent = level_data.expert_threshold_percent
+
+	spawn_orchestrator.counter_order_probability_percent = level_data.counter_order_probability_percent
+	spawn_orchestrator.spawn_interval_jitter_percent = level_data.spawn_interval_jitter_percent
+	spawn_orchestrator.initial_spawn_delay_min = level_data.initial_spawn_delay_min
+	spawn_orchestrator.initial_spawn_delay_max = level_data.initial_spawn_delay_max
+
+	if level_data.restaurant:
+		sitting_animation_delay = level_data.restaurant.sitting_animation_delay
+		day_cycle.service_duration = level_data.restaurant.service_duration
+
 	customer_spawner.set_spawn_data(level_data.possible_customers)
 	TrayManager.current_max_capacity = level_data.tray_max_capacity
 	level_intro_screen.visible = true

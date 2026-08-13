@@ -103,6 +103,22 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - **`payment_queue_component.gd` (256 → allégé)** : extraction de `BonusService` (calcul pur des bonus, point d'entrée unique pour les futurs bonus économiques), `BillingService` (assemble bill/tip), `PaymentFeedbackDisplay` (`scenes/entities/Counter/`, gère le tween d'affichage du montant)
 - **`order_component.gd` (127 → allégé)** : extraction de `OrderBubbleComponent`, vit en nœud enfant à côté de `OrderBubbleAnchor` ; `OrderComponent` garde des méthodes déléguées minces pour ne pas casser les appels externes
 - **Bug résolu — bulle qui ne se cachait plus** : `show_orders()` vérifiait `orders == null` au lieu de `orders.is_empty()` (un `Array[FoodData]` vide n'est jamais `null`)
+- **`_pick_weighted_group_size()`** déplacé de `spawn_orchestrator_component.gd` vers `TableAssignmentService.pick_weighted_group_size()`
+- **`CounterOrderFlowComponent`** (nouveau) : extrait de `payment_queue_component.gd`, prend en charge la décision de commande au comptoir (délai de réflexion, choix du plat, bulle) ; `PaymentQueueComponent` garde uniquement la gestion de la file et de l'encaissement
+- **Parallèle architectural établi** : `OrderFlowComponent` (flow de commande à table) / `CounterOrderFlowComponent` (flow de commande au comptoir), tous deux distincts de `PaymentQueueComponent`
+- **`on_queue_patience_expired`** rendue publique sur `PaymentQueueComponent` (retrait du `_`) pour permettre la connexion depuis `CounterOrderFlowComponent`
+- **Refactor architecture (components/services) officiellement clos** — toutes les cases de la liste sont maintenant cochées
+
+### Session — Marqueurs du comptoir (Slot) & Centralisation des données dans les Ressources
+- **Affichage des aliments auto dépendant du menu** : va chercher la resource dans le menu et l'assigner au position (marker) du comptoir.
+- **Fix positionnement au comptoir (`CounterSlot`)** : Séparation du marqueur de l'aliment (`FoodMarker` sur la table) et du point d'arrêt du joueur (`InteractionPoint` au sol dans la zone marchable) pour gérer proprement les comptoirs en L ou en U sans que le personnage ne marche sur le meuble.
+- **Injection dynamique de la marche** : Ajout de `set_interaction_point()` dans `FoodItem`, appelée par `counter_food_item.gd` juste après l'instanciation de l'aliment.
+- **Centralisation des données dans les Ressources (Source unique de vérité)** : Suppression des `@export` dispersés dans les scènes et composants au profit des fichiers de ressources `.tres`.
+- **Répartition `RestaurantData` vs `LevelData`** :
+  - `RestaurantData` : contient les données constantes du resto (`service_duration`, `sitting_animation_delay`).
+  - `LevelData` : contient la configuration et difficulté du niveau (`expert_threshold_percent`, `counter_order_probability_percent`, `spawn_interval_jitter_percent`, `initial_spawn_delay_min/max`).
+- **Injection automatique** : `LevelManager` lit les ressources et alimente directement `DayCycleComponent`, `SpawnOrchestratorComponent` et `OrderFlowComponent` à son `_ready()`, éliminant les réglages manuels dans l'inspecteur.
+
 ---
 
 ## 📓 Journal d'apprentissage

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://ccsp6ein3krej"]
+
+[ext_resource type="Script" uid="uid://uhdwghhq1cd" path="res://scenes/entities/Foods/counter_food_item.gd" id="1_30edn"]
+[ext_resource type="PackedScene" uid="uid://drbeiqg2746sk" path="res://scenes/entities/Foods/aliments.tscn" id="1_60msb"]
+
+[node name="CounterFoodItem" type="Node2D" unique_id=1631497471 node_paths=PackedStringArray("positions_container")]
+y_sort_enabled = true
+script = ExtResource("1_30edn")
+aliment_scene = ExtResource("1_60msb")
+positions_container = NodePath("PositionsContainer")
+
+[node name="PositionsContainer" type="Node2D" parent="." unique_id=864271036]
+
+[node name="Slot1" type="Node2D" parent="PositionsContainer" unique_id=1445183406]
+
+[node name="FoodMarker" type="Marker2D" parent="PositionsContainer/Slot1" unique_id=1193386233]
+
+[node name="InteractionPoint" type="Marker2D" parent="PositionsContainer/Slot1" unique_id=775135320]
+
+[node name="Slot2" type="Node2D" parent="PositionsContainer" unique_id=30553327]
+
+[node name="FoodMarker" type="Marker2D" parent="PositionsContainer/Slot2" unique_id=210251845]
+position = Vector2(131, -1)
+
+[node name="InteractionPoint" type="Marker2D" parent="PositionsContainer/Slot2" unique_id=938290136]
+
+[node name="Slot3" type="Node2D" parent="PositionsContainer" unique_id=1554330978]
+
+[node name="FoodMarker" type="Marker2D" parent="PositionsContainer/Slot3" unique_id=609758597]
+position = Vector2(131, -1)
+
+[node name="InteractionPoint" type="Marker2D" parent="PositionsContainer/Slot3" unique_id=798863496]
+
+[node name="Slot4" type="Node2D" parent="PositionsContainer" unique_id=2000961490]
+
+[node name="FoodMarker" type="Marker2D" parent="PositionsContainer/Slot4" unique_id=1107986245]
+position = Vector2(131, -1)
+
+[node name="InteractionPoint" type="Marker2D" parent="PositionsContainer/Slot4" unique_id=1377177315]
+
+[node name="Slot5" type="Node2D" parent="PositionsContainer" unique_id=1901464442]
+
+[node name="FoodMarker" type="Marker2D" parent="PositionsContainer/Slot5" unique_id=642662816]
+position = Vector2(131, -1)
+
+[node name="InteractionPoint" type="Marker2D" parent="PositionsContainer/Slot5" unique_id=1256787380]
+
+[node name="Slot6" type="Node2D" parent="PositionsContainer" unique_id=1774922743]
+
+[node name="FoodMarker" type="Marker2D" parent="PositionsContainer/Slot6" unique_id=994161427]
+position = Vector2(131, -1)
+
+[node name="InteractionPoint" type="Marker2D" parent="PositionsContainer/Slot6" unique_id=1537774704]
+
+[node name="Slot7" type="Node2D" parent="PositionsContainer" unique_id=1018008681]
+
+[node name="FoodMarker" type="Marker2D" parent="PositionsContainer/Slot7" unique_id=1018054630]
+position = Vector2(131, -1)
+
+[node name="InteractionPoint" type="Marker2D" parent="PositionsContainer/Slot7" unique_id=1006252063]

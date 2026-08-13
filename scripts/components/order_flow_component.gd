@@ -7,8 +7,6 @@ class_name OrderFlowComponent
 @export var waiting_queue: WaitingQueueComponent
 @export var day_cycle: DayCycleComponent
 
-@export_group("Variables")
-@export var sitting_animation_delay: float = 0.3
 
 @onready var level_manager: LevelComponent = get_tree().get_first_node_in_group("LevelManager")
 
@@ -39,7 +37,7 @@ func _handle_group_ordering(assigned_table: TableComponent, group: Array[Custome
 		if not customer.movement_component.has_arrived():
 			await customer.movement_component.destination_reached
 
-	await get_tree().create_timer(sitting_animation_delay).timeout
+	await get_tree().create_timer(level_manager.sitting_animation_delay).timeout
 	for customer: Customer in group:
 		customer.change_state(GameEnums.CustomerState.WAITING_TO_ORDER)
 	assigned_table.order_component.show_thinking()

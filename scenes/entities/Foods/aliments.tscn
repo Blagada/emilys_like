@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l2uke"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qisy3"]
-size = Vector2(152, 104)
+size = Vector2(73, 90)
 
 [node name="Aliments" type="Node2D" unique_id=1694997751 groups=["Food"]]
 script = ExtResource("1_d0f31")
@@ -20,10 +20,11 @@ position = Vector2(1.5258789e-05, -53.999992)
 position = Vector2(-76, -105)
 
 [node name="InteractionPoint" parent="InteractionComponent" index="1" unique_id=1962856339]
+visible = false
 position = Vector2(76, 162)
 
 [node name="ZoneDeClic" type="CollisionShape2D" parent="InteractionComponent" unique_id=1380196619]
-position = Vector2(76, 52)
+position = Vector2(76, 61)
 shape = SubResource("RectangleShape2D_qisy3")
 debug_color = Color(0.8177201, 0.21578583, 0.84252006, 0.41960785)
 
