@@ -8,7 +8,12 @@ Liste des tâches restantes, dans un ordre suggéré. Le détail technique de ce
 
 - [ ] Rendre la cloche du comptoir plus évidente visuellement (pas assez clair que c'est là qu'il faut servir) -> idée de mettre la bulle avec les commandes au dessus de la cloche et mettre une icône pour emporter dans la bulle du client. Pourrait être le départ des commandes par livraison (multiplicateur supérieur).
 
-## Rythme / difficulté
+## Refactor architecture (en cours)
+
+- [x] `payment_queue_component.gd` → `BonusService`, `BillingService`, `PaymentFeedbackDisplay`
+- [x] `order_component.gd` → `OrderBubbleComponent`
+- [ ] Déplacer `_pick_weighted_group_size()` de `spawn_orchestrator_component.gd` vers `TableAssignmentService`
+- [x] Déplacer `table_assignment_service.gd` + `customer_exit_service.gd` vers nouveau dossier `scripts/services/`
 
 
 ## Décision à prendre avant de continuer l'économie

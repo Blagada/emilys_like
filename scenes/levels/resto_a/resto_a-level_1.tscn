@@ -158,6 +158,7 @@ offset_right = 213.15955
 offset_bottom = 6.192871
 
 [node name="SpawnButton" parent="HUD" index="3" unique_id=190827715]
+visible = false
 offset_left = 624.0
 offset_top = 12.0
 offset_right = 738.0

@@ -98,6 +98,11 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - **Vraie sélection "best fit"** dans `WaitingQueueComponent._on_table_freed()` : à la libération d'une table, on prend le plus grand groupe compatible en file (pas juste le premier compatible) — une table de 4 qui se libère sert d'abord un groupe de 4 en attente, même arrivé après un groupe de 2
 - **Fermeture propre de la file d'attente** : `WaitingQueueComponent` écoute maintenant `day_cycle.closing_time` et vide la file (`_on_closing_time`), renvoyant tous les groupes encore en attente. Logique de désinscription de patience extraite dans `_detach_patience()`, réutilisée entre l'assignation de table et la fermeture — évite la duplication
 
+### Session — Refactor architecture : séparation components/services
+- **Nouvelle convention** : `scripts/services/` pour les classes statiques, séparé de `scripts/components/` (Node attachables)
+- **`payment_queue_component.gd` (256 → allégé)** : extraction de `BonusService` (calcul pur des bonus, point d'entrée unique pour les futurs bonus économiques), `BillingService` (assemble bill/tip), `PaymentFeedbackDisplay` (`scenes/entities/Counter/`, gère le tween d'affichage du montant)
+- **`order_component.gd` (127 → allégé)** : extraction de `OrderBubbleComponent`, vit en nœud enfant à côté de `OrderBubbleAnchor` ; `OrderComponent` garde des méthodes déléguées minces pour ne pas casser les appels externes
+- **Bug résolu — bulle qui ne se cachait plus** : `show_orders()` vérifiait `orders == null` au lieu de `orders.is_empty()` (un `Array[FoodData]` vide n'est jamais `null`)
 ---
 
 ## 📓 Journal d'apprentissage

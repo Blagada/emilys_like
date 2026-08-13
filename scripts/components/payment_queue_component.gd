@@ -4,12 +4,11 @@ class_name PaymentQueueComponent
 signal customer_exited
 
 # --- EXPORTS & CONFIGURATIONS ---
-@export var queue_positions: Array[Marker2D] = []
-@export var exit_marker: Marker2D
 @export var interaction_component: Interactable
-@export var payment_feedback_label: Label
+@export var feedback_display: PaymentFeedbackDisplay
+@export var exit_marker: Marker2D
 
-@export var feedback_display_duration: float = 3.0
+@export var queue_positions: Array[Marker2D] = []
 @export var combo_bonus_per_extra_table: float = 0.10
 @export var max_combo_bonus_percent: float = 0.50
 @export var bill_display_duration: float = 0.5
@@ -135,12 +134,14 @@ func _process_queue_sequentially() -> void:
 		# Le client se déplace vers la caisse (position 0)
 		await customer.move_to(queue_positions[0], GameEnums.CustomerState.PAYING)
 
-		var bill: float = table.order_component.total_bill if table != null else first_entry["order_price"]
-		var tip: float = bill * customer.customer_data.tip_rate
-
-		var combo_percent: float = min(combo_bonus_per_extra_table * combo_index, max_combo_bonus_percent)
-		var combo_bonus: float = bill * combo_percent
-		bill += combo_bonus
+		var base_price: float = table.order_component.total_bill if table != null else first_entry["order_price"]
+		var transaction: Dictionary = BillingService.compute_transaction(
+			base_price, customer.customer_data.tip_rate, combo_index,
+			combo_bonus_per_extra_table, max_combo_bonus_percent
+		)
+		var bill: float = transaction["bill"]
+		var tip: float = transaction["tip"]
+		var combo_bonus: float = transaction["combo_bonus"]
 		combo_index += 1
 
 		customer.show_bill_amount(bill)
@@ -172,37 +173,7 @@ func _process_queue_sequentially() -> void:
 
 	if total_bill_batch > 0.0:
 		EarningsManager.add_earnings(total_bill_batch, total_tip_batch)
-		_show_payment_feedback(total_bill_batch, total_tip_batch, total_combo_bonus)
-
-
-# --- ANIMATION DU FEEDBACK DE PAIEMENT ---
-func _show_payment_feedback(bill: float, tip: float, combo_bonus: float) -> void:
-	if not payment_feedback_label:
-		return
-
-	var feedback_text: String = "%.2f$ (+ %.2f$ tip)" % [bill, tip]
-
-	if combo_bonus > 0.0:
-		feedback_text += " + combo : %.2f$" % [combo_bonus]
-
-	payment_feedback_label.text = feedback_text
-	payment_feedback_label.pivot_offset = payment_feedback_label.size / 2
-	payment_feedback_label.modulate.a = 0.0
-	payment_feedback_label.scale = Vector2.ZERO
-	payment_feedback_label.visible = true
-
-	var tween: Tween = create_tween()
-	tween.tween_property(payment_feedback_label, "scale", Vector2(1.1, 1.1), 0.15)
-	tween.parallel().tween_property(payment_feedback_label, "modulate:a", 1.0, 0.15)
-	tween.tween_property(payment_feedback_label, "scale", Vector2.ONE, 0.1)
-
-	await get_tree().create_timer(feedback_display_duration).timeout
-
-	var fade_out: Tween = create_tween()
-	fade_out.tween_property(payment_feedback_label, "modulate:a", 0.0, 0.3)
-	await fade_out.finished
-
-	payment_feedback_label.visible = false
+		feedback_display.show_payment(total_bill_batch, total_tip_batch, total_combo_bonus)
 
 
 func _on_queue_patience_expired(customer: Customer, table: TableComponent) -> void:

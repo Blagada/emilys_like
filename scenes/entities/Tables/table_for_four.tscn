@@ -125,3 +125,5 @@ position = Vector2(0, -141)
 [node name="ClickFeedbackComponent" parent="." unique_id=1144639532 node_paths=PackedStringArray("target_sprite", "interaction_component") instance=ExtResource("6_oes8e")]
 target_sprite = NodePath("../Table/TableSprite2D")
 interaction_component = NodePath("../InteractionComponent")
+
+[editable path="OrderComponent"]

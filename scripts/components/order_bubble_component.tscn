@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://gfxj35w58gdd"]
+
+[ext_resource type="Script" uid="uid://cqdmtyrctbtsk" path="res://scripts/components/order_bubble_component.gd" id="1_823dg"]
+
+[node name="OrderBubbleComponent" type="Node2D" unique_id=41407613]
+script = ExtResource("1_823dg")

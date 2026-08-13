@@ -2,10 +2,14 @@
 
 [ext_resource type="Script" uid="uid://cxijo8u2pyowo" path="res://scripts/components/order_component.gd" id="1_xxqls"]
 [ext_resource type="PackedScene" uid="uid://cg3oc1pl8lsjl" path="res://scenes/entities/Bubble/OrderBubble.tscn" id="2_ie0xq"]
+[ext_resource type="PackedScene" uid="uid://gfxj35w58gdd" path="res://scripts/components/order_bubble_component.tscn" id="3_qhtn1"]
 
-[node name="OrderComponent" type="Node2D" unique_id=490812539 node_paths=PackedStringArray("order_bubble_anchor")]
+[node name="OrderComponent" type="Node2D" unique_id=490812539 node_paths=PackedStringArray("order_bubble")]
 script = ExtResource("1_xxqls")
-order_bubble_anchor = NodePath("OrderBubbleAnchor")
-order_bubble_scene = ExtResource("2_ie0xq")
+order_bubble = NodePath("OrderBubbleComponent")
 
 [node name="OrderBubbleAnchor" type="Marker2D" parent="." unique_id=1178491824]
+
+[node name="OrderBubbleComponent" parent="." unique_id=41407613 node_paths=PackedStringArray("order_bubble_anchor") instance=ExtResource("3_qhtn1")]
+order_bubble_anchor = NodePath("../OrderBubbleAnchor")
+order_bubble_scene = ExtResource("2_ie0xq")

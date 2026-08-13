@@ -2,8 +2,7 @@ extends Node2D
 class_name OrderComponent
 
 # --- EXPORTS & CONFIGURATIONS ---
-@export var order_bubble_anchor: Marker2D
-@export var order_bubble_scene: PackedScene
+@export var order_bubble: OrderBubbleComponent
 
 # --- SIGNAUX ---
 signal all_orders_served
@@ -11,7 +10,6 @@ signal all_orders_served
 # --- VARIABLES D'ÉTAT ---
 var seated_customers: Array[Customer] = [] # Liste des clients assis à cette table
 var total_bill: float = 0.0                # Montant total de l'addition pour cette table
-var order_bubble: Node = null              # Instance actuelle de la bulle de commande/texte
 
 
 # --- VÉRIFICATION DE LA PRÉSENCE D'UN CLIENT SERVABLE ---
@@ -84,44 +82,23 @@ func update_order_bubble() -> void:
 	for customer: Customer in seated_customers:
 		if customer.current_order != null:
 			orders.append(customer.current_order)
-
-	# S'il n'y a plus de commandes, on cache la bulle
-	if orders.is_empty():
-		hide_order_bubble()
-		return
-
-	# Sinon, on s'assure que la bulle existe et on lui envoie la liste des plats à afficher
-	_ensure_bubble_instance()
 	order_bubble.show_orders(orders)
 
 
 # --- AFFICHAGE DE L'ÉTAT DE RÉFLEXION ("...") ---
 func show_thinking() -> void:
-	_ensure_bubble_instance()
-	order_bubble.show_text("...")
+	order_bubble.show_thinking()
 
 
 # --- AFFICHAGE DE L'ÉTAT SALE/ATTENTE DE PAIEMENT ("!") ---
 func show_dirty() -> void:
-	_ensure_bubble_instance()
-	order_bubble.show_text("!")
+	order_bubble.show_dirty()
 
 
 # --- SUPPRESSION DE LA BULLE DE L'ÉCRAN ---
 func hide_order_bubble() -> void:
-	if order_bubble:
-		order_bubble.queue_free()
-		order_bubble = null
-
-
-# --- GARANTIE D'INSTANCIATION DE LA BULLE ---
-# Crée et attache la bulle de dialogue/commande si elle n'existe pas encore
-func _ensure_bubble_instance() -> void:
-	if order_bubble == null:
-		order_bubble = order_bubble_scene.instantiate()
-		order_bubble_anchor.add_child(order_bubble)
+	order_bubble.hide_bubble()
 
 
 func update_patience_icon(state: GameEnums.PatienceState) -> void:
-	if order_bubble:
-		order_bubble.set_patience_icon(state)
+	order_bubble.update_patience_icon(state)

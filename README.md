@@ -22,6 +22,8 @@ scenes/
 resources/           → Données (Resource) : clients, aliments, restaurants, menus, niveaux
 scripts/
 ├── components/      → Composantes réutilisables dans n'importe quel scène
+├── services/
+├── helpers/
 ├── globals/         → Autoloads (état partagé, ex: GameDataManager)
 └── models/          → Enums et types partagés (GameEnums)
 ```

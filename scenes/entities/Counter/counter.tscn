@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ddsj0q2qq7sob" path="res://scripts/components/payment_queue_component.tscn" id="3_o58yy"]
 [ext_resource type="PackedScene" uid="uid://bpvokjn032wx2" path="res://scripts/components/counter_order_component.tscn" id="4_ud332"]
 [ext_resource type="FontFile" uid="uid://cqqcrly8xbiyt" path="res://assets/fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf" id="5_7gn7i"]
+[ext_resource type="Script" uid="uid://87gw4yh38554" path="res://scenes/entities/Counter/payment_feedback_display.gd" id="5_pnbgu"]
 
 [sub_resource type="Theme" id="Theme_g4v7s"]
 default_font = ExtResource("5_7gn7i")
@@ -22,10 +23,10 @@ position = Vector2(-58, 34.000004)
 [node name="CaisseInteraction" parent="Visuals/CashRegister" index="1" unique_id=349743239 node_paths=PackedStringArray("interaction_point")]
 interaction_point = NodePath("InteractionPoint")
 
-[node name="PaymentQueueComponent" parent="Visuals" unique_id=1700191971 node_paths=PackedStringArray("interaction_component", "payment_feedback_label") instance=ExtResource("3_o58yy")]
+[node name="PaymentQueueComponent" parent="Visuals" unique_id=1700191971 node_paths=PackedStringArray("interaction_component", "feedback_display") instance=ExtResource("3_o58yy")]
 position = Vector2(0, 33)
 interaction_component = NodePath("../CashRegister/CaisseInteraction")
-payment_feedback_label = NodePath("../PaymentFeedbackLabel")
+feedback_display = NodePath("../PaymentFeedbackLabel")
 
 [node name="CounterOrderComponent" parent="Visuals" unique_id=1482906281 node_paths=PackedStringArray("interaction_component", "payment_queue") instance=ExtResource("4_ud332")]
 position = Vector2(-85, 17)
@@ -45,6 +46,7 @@ theme_override_colors/font_shadow_color = Color(0.15294118, 0.015686275, 0.05490
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 text = "$"
 vertical_alignment = 1
+script = ExtResource("5_pnbgu")
 
 [editable path="Visuals/CashRegister"]
 [editable path="Visuals/CashRegister/CaisseInteraction"]
