@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://blfuh5focianj"]
 
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="3_68kwq"]
-[ext_resource type="Texture2D" uid="uid://ua4dvxo560ib" path="res://resources/restaurants/resto_a/resto_a-table_for_two.tres" id="3_ppnig"]
+[ext_resource type="Resource" uid="uid://mt7d3a37ueg4" path="res://resources/restaurants/resto_a/furnitures/table_for_two-data-resto_a.tres" id="3_ppnig"]
 [ext_resource type="PackedScene" uid="uid://d3o6jvtspe4o1" path="res://scripts/components/table_component.tscn" id="4_74kbq"]
-[ext_resource type="Texture2D" uid="uid://4balm81g7io1" path="res://resources/restaurants/resto_a/resto_a-chair.tres" id="4_crkvk"]
 [ext_resource type="PackedScene" uid="uid://dm15runckn1m6" path="res://scripts/components/order_component.tscn" id="5_ppnig"]
 [ext_resource type="PackedScene" uid="uid://f4prltr7yjfo" path="res://scripts/components/click_feedback_component.tscn" id="6_crkvk"]
 
@@ -69,15 +68,6 @@ polygon = PackedVector2Array(-28, -10.75, -28, 6.25, -2, 4.25, 5, 3.25, 11, 2.25
 scale = Vector2(1.5, 1.5)
 flip_h = true
 
-[node name="TableComponent" parent="." unique_id=1795287937 node_paths=PackedStringArray("order_component", "interaction_component", "chair_positions", "table_sprite_node") instance=ExtResource("4_74kbq")]
-position = Vector2(0, -47)
-order_component = NodePath("../OrderComponent")
-interaction_component = NodePath("../InteractionComponent")
-chair_positions = NodePath("../ChairPositions")
-table_sprite_node = NodePath("../Table/TableSprite2D")
-custom_table_texture = ExtResource("3_ppnig")
-custom_chair_texture = ExtResource("4_crkvk")
-
 [node name="OrderComponent" parent="." unique_id=490812539 instance=ExtResource("5_ppnig")]
 y_sort_enabled = true
 position = Vector2(0, -107)
@@ -85,3 +75,11 @@ position = Vector2(0, -107)
 [node name="ClickFeedbackComponent" parent="." unique_id=1144639532 node_paths=PackedStringArray("target_sprite", "interaction_component") instance=ExtResource("6_crkvk")]
 target_sprite = NodePath("../Table/TableSprite2D")
 interaction_component = NodePath("../InteractionComponent")
+
+[node name="TableComponent" parent="." unique_id=1795287937 node_paths=PackedStringArray("order_component", "interaction_component", "chair_positions", "table_sprite_node") instance=ExtResource("4_74kbq")]
+position = Vector2(0, -47)
+order_component = NodePath("../OrderComponent")
+interaction_component = NodePath("../InteractionComponent")
+chair_positions = NodePath("../ChairPositions")
+table_sprite_node = NodePath("../Table/TableSprite2D")
+data = ExtResource("3_ppnig")

@@ -45,17 +45,37 @@ enum PatienceState {
 	ANGRY      # seuil "fâché" → 0%
 }
 
-enum foodType {
+enum FoodType {
 	PREPARED, # déjà préparé
 	COMBO, # doit être assemblé avec 2 ou plus aliments
 	OVEN, # prend une cuisson au four
-	COOKTOP # prend une cuisson sur la plaque
+	PIZZA_OVEN, # prend une cuisson dans un four à pizza
+	SAUTE, # poêle : il faut faire sauter. Prend une cuisson sur la plaque
+	SIMMER, # chaudron : il faut brasser. Prend une cuisson sur la plaque
+	GRIDDLE, # Plaque de cuisson
+	DRINK # délai différent possible (café, chocolat chaud, bière)
+}
+
+enum FoodTag {
+	VEGETARIAN,
+	SPICY,
+	CAFFEINATED,
+	ALCOHOL,
+	RAW
 }
 
 enum ServiceType {
 	BREAKFAST,
 	LUNCH,
 	DINNER
+}
+
+enum WeatherState {
+	CLEAR,
+	CLOUDY,
+	FOG,
+	RAIN,
+	SNOW
 }
 
 # ---- Dictionaire ---- #
@@ -70,4 +90,12 @@ const CUSTOMER_TYPE_LABELS: Dictionary = {
 	CustomerType.CUSTOMER_VIP: "VIP",
 	CustomerType.CUSTOMER_PRESS: "pressé",
 	CustomerType.CUSTOMER_CALM: "tranquille",
+}
+
+const POLICES: Dictionary = {
+	"GistPixel": preload("res://assets/fonts/Geist_Pixel/GeistPixel-Regular-VariableFont_ELSH.ttf"),
+	"AtkinsonHyperlegible": preload("res://assets/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.ttf"),
+	"Averia": preload("res://assets/fonts/Averia_Serif_Libre/AveriaSerifLibre-Light.ttf"),	
+	"Lora": preload("res://assets/fonts/Lora/Lora-VariableFont_wght.ttf"),
+	"RadioCanada": preload("res://assets/fonts/Radio_Canada/RadioCanada-VariableFont_wdth,wght.ttf")
 }

@@ -1,10 +1,15 @@
 [gd_resource type="Resource" script_class="RestaurantData" format=3 uid="uid://df3rp0cax6kgi"]
 
 [ext_resource type="Script" uid="uid://cqg728aoyqst8" path="res://resources/restaurants/restaurant_data.gd" id="1_di8k2"]
+[ext_resource type="Script" uid="uid://duy54q18siryb" path="res://resources/restaurants/level_data.gd" id="1_h6y1s"]
+[ext_resource type="Resource" uid="uid://g5bilfmowkq6" path="res://resources/restaurants/resto_a/levels/j1-data-resto_a.tres" id="2_pnnhu"]
+[ext_resource type="Resource" uid="uid://bcagnf6i62fvv" path="res://resources/restaurants/resto_a/levels/j2-data-resto_a.tres" id="3_bbj30"]
 
 [resource]
 script = ExtResource("1_di8k2")
-restaurant_name = "Ambroisie"
+restaurant_name = "NAME_RESTO_A"
+restaurant_desc = "DESC_RESTO_A"
 service_duration = 25.0
 sitting_animation_delay = 1.0
+levels = Array[ExtResource("1_h6y1s")]([ExtResource("2_pnnhu"), ExtResource("3_bbj30")])
 metadata/_custom_type_script = "uid://cqg728aoyqst8"

@@ -64,22 +64,23 @@ animations = [{
 [node name="TipJarDisplay" type="Control" unique_id=1230685855]
 layout_mode = 3
 anchors_preset = 0
+rotation = -0.05235988
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_ssh2t")
 
 [node name="TipFundSprite" type="AnimatedSprite2D" parent="." unique_id=1984728566]
-position = Vector2(22.999998, 33.999996)
+position = Vector2(-0.29582596, -33.943733)
 scale = Vector2(0.50453717, 0.50453717)
 sprite_frames = SubResource("SpriteFrames_g4v7s")
 animation = &"tip_fund"
 
 [node name="TipFundLabel" type="Label" parent="." unique_id=1648852057]
 layout_mode = 0
-offset_left = 15.0
-offset_top = 23.0
-offset_right = 31.0
-offset_bottom = 39.0
+offset_left = -8.295826
+offset_top = -44.94374
+offset_right = 7.704174
+offset_bottom = -28.94374
 theme = ExtResource("2_ssh2t")
 theme_override_colors/font_color = Color(0.14714196, 0.70863765, 0.6725423, 1)
 theme_override_font_sizes/font_size = 11

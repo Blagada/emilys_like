@@ -2,11 +2,17 @@
 
 [ext_resource type="Script" uid="uid://cv00lidll5uk0" path="res://resources/foods/food_data.gd" id="1_4tqs7"]
 [ext_resource type="Texture2D" uid="uid://bqfwdnhhoy212" path="res://assets/foods/food_bouboule.png" id="2_th8hj"]
+[ext_resource type="Script" uid="uid://c2w5u0v834258" path="res://resources/foods/food_preparation_data.gd" id="2_twtnf"]
+
+[sub_resource type="Resource" id="Resource_twtnf"]
+script = ExtResource("2_twtnf")
+metadata/_custom_type_script = "uid://c2w5u0v834258"
 
 [resource]
 script = ExtResource("1_4tqs7")
 name = "Bouboule"
 sprite = ExtResource("2_th8hj")
-preparation_time = 0.5
 price = 15
+tags = Array[int]([1, 0])
+preparation = SubResource("Resource_twtnf")
 metadata/_custom_type_script = "uid://cv00lidll5uk0"

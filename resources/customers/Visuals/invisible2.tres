@@ -7,4 +7,5 @@
 script = ExtResource("1_sbk1m")
 name = "Invisible"
 visual_scene = ExtResource("2_sbk1m")
+forbidden_tags = Array[int]([4])
 metadata/_custom_type_script = "uid://b8cno6w8l0n5w"

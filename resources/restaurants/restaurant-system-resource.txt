@@ -1,0 +1,12 @@
+Fiche Mémo : Système de Ressources « Restaurant »
+
+Objectif : données constantes d’un restaurant, communes à tous ses niveaux.
+
+Dans le dossier du restaurant ou après avoir créé un dossier pour ce nouveau restaurant, clic droit > Nouvelle ressource > RestaurantData, nomme-la (ex : resto_a.tres).
+Remplis l’Inspecteur :
+Restaurant Name : nom du restaurant
+Total Levels : nombre de niveaux (10)
+Service Duration : durée d’un service, en secondes
+Sitting Animation Delay : temps pour s’asseoir, en secondes
+Max Waiting Customers : nombre de places dans la file d’attente
+Assigne la ressource au champ Restaurant de chaque LevelData du restaurant. LevelManager en distribue les valeurs aux composants au démarrage.

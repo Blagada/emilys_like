@@ -1,0 +1,52 @@
+keys,fr,en
+LANGUAGE_NAME,Français,English
+RESTAURANT_TITLE,Restaurant [br][font_size=64]%s[/font_size] ,[font_size=64]%s[/font_size][br]Restaurant
+LEVEL_DAY,Jour %d,Day %d
+TABLES_INFO,[b]Nombre de tables[/b] : %d (%d places),[b]Number of tables[/b]: %d (%d seats)
+SERVICES_INFO,[b]Service[/b] du %s,[b]Service:[/b] %s
+TRAY_INFO,[b]Espace sur le plateau[/b] : %d,[b]Tray space[/b]: %d
+END_SERVICE,Fin du service,End of service
+DAY_REACHED,Jour %d atteint,Day %d reached
+DAY_MISSED,Jour %d manqué,Day %d missed
+EARNINGS_MADE,Montant fait : %s ,Earned: %s 
+GOAL_INFO,[b]Objectif[/b] : %s (expert : %s),[b]Goal[/b]: %s (expert: %s)
+GOAL_STATUS,Objectif (%s),Goal (%s)
+EXPERT_REACHED,Score expert atteint (%s),Expert score reached (%s)
+EXPERT_MISSED,Score expert manqué (%s),Expert score missed (%s)
+TIPS_EARNED,Pourboires gagnés : %s,Tips earned: %s
+TIPS_DOUBLED,Pourboires gagnés : %s x 2 = %s,Tips earned: %s x 2 = %s
+BUTTON_END_LEVEL,Clore la journée,Closing out the day
+BUTTON_BEGIN_LEVEL,Débuter la journée,Start the day
+TABLE_FOR,Table pour %d,Table for %d
+CURRENCY_FORMAT,{amount} {symbol},{symbol}{amount}
+CURRENCY_SYMBOL,¤,$
+FEEDBACK_TIP,(+ %s de pourboire),(+ %s tip)
+FEEDBACK_COMBO,combo : + %s,Combo: + %s
+BUTTON_MENU,Menu,Menu
+BUTTON_CATALOG,Catalogue,Catalog
+BUTTON_VISIT,Visite,Visit
+TOOLTIP_VISIT,Pour se familiariser avec le restaurant avant de lancer la journée.,Get familiar with the restaurant before starting the day.
+TOOLTIP_CATALOG,Débloquer de nouveaux plats et décorer le restaurant.,Unlock new dishes and decorate the restaurant.
+BUTTON_SETTING,Réglages,Settings
+BUTTON_RETURN_HOME,Retour à la carte,Go to map
+BUTTON_RESTART,Recommencer,Restart
+LEVEL_CONTROL_TITLE,[b]%s[/b][br] Jour %d,[b]%s[/b][br] Day %d
+PAUSED,Sur pause,Pause
+SETTING_WEATHER,Météo réelle,Real weather
+SETTING_SEASON,Saisons et événements,Seasons and events
+SETTING_LANGUAGES,Langues,Languages
+SETTING_FONTS,Polices de caractère,Fonts
+SETTING_FONT_SIZE,Taille de la police,Font size
+SETTING_AMBIANCE,Ambiance,Ambiance
+SETTING_SOUND,Son,Sound
+BUTTON_SETTING_CLOSE,Fermer les réglages,Close settings
+NAME_RESTO_A,Ambroisie,Ambroisie
+DESC_RESTO_A,"Accueil chaleureux, assiettes généreuses","A warm plate, a warm welcome "
+NAME_RESTO_B,Bistronomia,Bistronomia
+DESC_RESTO_B,Bistronomia resto bar grill. Quel festin et toute une ambiance.,Description of Bistronomia resto
+NAME_RESTO_C,Ciselé,Ciselé
+DESC_RESTO_C,Description du resto Ciselé,Description of Ciselé resto
+NAME_RESTO_D,Dérive,Dérive
+DESC_RESTO_D,Description du resto Dérive,Description of Dérive resto
+NAME_RESTO_E,Épicure,Épicure
+DESC_RESTO_E,Description du resto Épicure,Description of Épicure resto

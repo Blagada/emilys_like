@@ -5,12 +5,7 @@
 
 [node name="TrayComponent" type="Control" unique_id=298009879 groups=["Tray"]]
 layout_mode = 3
-anchor_right = 0.44400004
-anchor_bottom = 0.19800001
-offset_right = -511.48804
-offset_bottom = -128.30402
-grow_horizontal = 0
-grow_vertical = 0
+anchors_preset = 0
 script = ExtResource("1_2odtk")
 
 [node name="TrayContainer" type="NinePatchRect" parent="." unique_id=28782819]

@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://ty26kooxtsea"]
+
+[ext_resource type="Script" uid="uid://cdefcjv7eeync" path="res://scenes/UI/menu/game_menu.gd" id="1_vmynm"]
+[ext_resource type="PackedScene" uid="uid://b2c7tvw3bpi7o" path="res://scenes/UI/menu/setting_menu_panel.tscn" id="3_o72wk"]
+
+[node name="GameMenu" type="Control" unique_id=847829885 node_paths=PackedStringArray("menu_button", "menu_panel", "backdrop", "setting_menu")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_vmynm")
+menu_button = NodePath("MenuPanel/MenuButton")
+menu_panel = NodePath("MenuPanel/VBoxContainer")
+backdrop = NodePath("Backdrop")
+setting_menu = NodePath("SettingMenuPanel")
+
+[node name="Backdrop" type="ColorRect" parent="." unique_id=33883145]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.99607843, 0.17254902, 1, 0)
+
+[node name="SettingMenuPanel" parent="." unique_id=1440735646 instance=ExtResource("3_o72wk")]
+visible = false
+layout_mode = 1
+
+[node name="MenuPanel" type="MarginContainer" parent="." unique_id=1587644227]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 551.0
+offset_right = -1042.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuPanel" unique_id=243809743]
+visible = false
+layout_mode = 2
+
+[node name="SettingButton" type="Button" parent="MenuPanel/VBoxContainer" unique_id=894302646]
+layout_mode = 2
+text = "BUTTON_SETTING"
+alignment = 0
+
+[node name="RestartButton" type="Button" parent="MenuPanel/VBoxContainer" unique_id=528885192]
+layout_mode = 2
+text = "BUTTON_RESTART"
+alignment = 0
+
+[node name="ReturnHomeButton" type="Button" parent="MenuPanel/VBoxContainer" unique_id=1268884053]
+layout_mode = 2
+text = "BUTTON_RETURN_HOME"
+alignment = 0
+
+[node name="MenuButton" type="Button" parent="MenuPanel" unique_id=585483039]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+toggle_mode = true
+text = "BUTTON_MENU"
+
+[connection signal="gui_input" from="Backdrop" to="." method="_on_backdrop_gui_input"]
+[connection signal="pressed" from="MenuPanel/VBoxContainer/SettingButton" to="." method="_on_setting_button_pressed"]
+[connection signal="toggled" from="MenuPanel/MenuButton" to="." method="_on_menu_button_toggled"]

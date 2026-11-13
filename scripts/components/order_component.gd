@@ -10,6 +10,7 @@ signal all_orders_served
 # --- VARIABLES D'ÉTAT ---
 var seated_customers: Array[Customer] = [] # Liste des clients assis à cette table
 var total_bill: float = 0.0                # Montant total de l'addition pour cette table
+var service_visit_count: int = 0   # à côté de total_bill
 
 
 # --- VÉRIFICATION DE LA PRÉSENCE D'UN CLIENT SERVABLE ---
@@ -22,7 +23,7 @@ func has_servable_customer() -> bool:
 
 
 # --- COMPTE LE NOMBRE D'ÉLÉMENTS SERVABLES ---
-# Parcourt les clients et compte combien d'entre eux peuvent être servis immédiatement avec les plats du plateau
+# Parcours les clients et compte combien d'entre eux peuvent être servis immédiatement avec les plats du plateau
 func count_servable_items() -> int:
 	var count_servable_item: int = 0
 	for customer: Customer in seated_customers:
@@ -65,6 +66,9 @@ func serve_food() -> void:
 				var current_patience_state = customer.patience_component.get_current_state()
 				customer.patience_component.start(customer.customer_data.patience, current_patience_state)
 				update_patience_icon(current_patience_state)
+	
+	if "served_someone = true":
+		service_visit_count += 1
 
 # --- VÉRIFIE SI TOUS LES CLIENTS ONT ÉTÉ SERVIS ---
 # Retourne vrai si aucun client de la table n'a de commande en attente
@@ -74,6 +78,10 @@ func _all_customers_served() -> bool:
 			return false
 	return true
 
+
+func is_single_trip_service() -> bool:
+	return service_visit_count == 1
+	
 
 # --- MISE À JOUR DE LA BULLE DE COMMANDE ---
 # Rassemble toutes les commandes en cours des clients et les affiche dans la bulle

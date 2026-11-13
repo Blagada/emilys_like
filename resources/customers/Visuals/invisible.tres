@@ -7,4 +7,5 @@
 script = ExtResource("1_pkcpm")
 name = "Invisible"
 visual_scene = ExtResource("2_7xbrg")
+forbidden_tags = Array[int]([4])
 metadata/_custom_type_script = "uid://b8cno6w8l0n5w"

@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cnxtktxd0idbl" path="res://assets/plancher.png" id="1_sepqk"]
 [ext_resource type="PackedScene" uid="uid://c3avmyssjhcm1" path="res://scripts/components/sun_light_controller.tscn" id="2_a42i4"]
+[ext_resource type="PackedScene" uid="uid://cn7efjltwtxob" path="res://scenes/ambiance/ambiant_light_color.tscn" id="2_hbl0c"]
 [ext_resource type="PackedScene" uid="uid://dii7yr8m0rbhm" path="res://scenes/entities/Restaurants/resto_a_wall.tscn" id="3_hbl0c"]
 
 [sub_resource type="Gradient" id="Gradient_k2nkm"]
@@ -94,11 +95,9 @@ tile_set = SubResource("TileSet_1huh8")
 
 [node name="Ambiant" type="Node2D" parent="." unique_id=1464737262]
 
-[node name="LumiereAmbiance" type="CanvasModulate" parent="Ambiant" unique_id=475124131]
-color = Color(0.87493694, 0.8292844, 0.7533979, 1)
+[node name="AmbiantLightColor" parent="Ambiant" unique_id=1254623280 instance=ExtResource("2_hbl0c")]
 
-[node name="SunLightController" parent="Ambiant" unique_id=863496824 node_paths=PackedStringArray("day_clock") instance=ExtResource("2_a42i4")]
-day_clock = NodePath("")
+[node name="SunLightController" parent="Ambiant" unique_id=863496824 instance=ExtResource("2_a42i4")]
 
 [node name="Wall" parent="Ambiant" unique_id=101296613 instance=ExtResource("3_hbl0c")]
 

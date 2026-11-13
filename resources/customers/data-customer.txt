@@ -9,6 +9,7 @@ S'il n'est pas présent il ne sera pas sélectionnable lors de la création de l
 
 clic droit > Create New Resource dans le dossier /ressources/clients/data.
 Cherche CustomerData et nomme ton fichier (ex: vip.tres).
+Restrictions de commande (optionnel, vide = aucune restriction)
 
 3. Remplir la ressource
 
@@ -18,6 +19,8 @@ Speed : vitesse de déplacement
 Patience : patience avant que les clients ne se fâchent
 Tip multiplier : multiplication du tip par défaut
 Possible Customers : c'est un tableau de CustomerVisual. Faire Ajouter un élément pour tous les "look" associé à ce type de client.
+Required Tags : tags que l’aliment doit tous avoir (ex : VEGE)
+Forbidden Tags : tags interdits (ex : CAFFEINATED pour un enfant)
 
 4. SpawnComponent
 

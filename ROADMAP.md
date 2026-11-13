@@ -83,8 +83,7 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - **`OrderFlowComponent.seat_group()`** extrait de `_on_customer_group_spawned()` — logique d'assise réutilisable, appelée directement au spawn (table libre) ou depuis la file (table libérée plus tard)
 - **`SpawnOrchestratorComponent`** ne filtre plus les tailles de groupe selon les tables disponibles ; spawn même sans table, sauf si la file d'attente est pleine (`has_capacity()`)
 - **Hygiène des signaux appliquée dès la conception** : `patience_expired` du représentant en file est explicitement déconnecté avant l'assise, pour éviter d'empiler un handler par-dessus celui de la phase de commande (même bug que celui déjà corrigé côté caisse)
-- **Bug résolu — comptoir jamais reconnu comme obstacle de navigation** : root cause identifiée — le comptoir visuel était instancié *au runtime* (`counter.gd`, `_ready()`), donc invisible au moment du bake statique de `ZoneDeplacement` (`source_geometry_mode = 1`, scan des `nav_obstacles` présents dans la scène éditée). Les tables fonctionnaient car leur collision est physiquement présente dans la scène
-- **Refonte du comptoir en composant réutilisable** : `CounterComponent` créé (parité avec `TableComponent`) ; `counter.tscn` devient un gabarit de base, chaque comptoir de restaurant est une **scène héritée** (`New Inherited Scene`) ne redéfinissant que la géométrie physique (`CounterBody`) — `PaymentQueueComponent`/`CashRegister`/`CounterOrderComponent` restent hérités, sans duplication
+- **Bug résolu — comptoir jamais reconnu comme obstacle de navigation** : root cause identifiée — le comptoir visuel était instancié *au runtime* (`counter.gd`, `_ready()`), donc invisible au moment du bake statique de `ZoneDeplacement` (`source_geometry_mode = 1`, scan des `nav_obstacles` présents dans la scène éditée). Les tables fonctionnaient car leur - **collision est physiquement présente dans la scène** : refonte du comptoir en scène réutilisable : counter.tscn devient un gabarit de base, chaque comptoir de restaurant est une scène héritée (New Inherited Scene) ne redéfinissant que la géométrie physique (CounterBody) — PaymentQueueComponent/CashRegister/CounterOrderComponent restent hérités, sans duplication (le CounterComponent créé à ce moment a depuis été supprimé : inutilisé)
 - **Bake de `ZoneDeplacement`** : validé que c'est fonctionnel sur le comptoir resto A après la refonte
 - **Attente d'une table** : pondération du spawn selon la composition réelle des tables (fix du "resto qui ne se remplit pas en début de partie")
 - **Bug résolu** : bug de patience fantôme dans serve_food() (relance de patience sur des clients déjà servis) + le garde is_instance_valid() manquant dans _on_group_patience_expired
@@ -111,6 +110,7 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 
 ### Session — Marqueurs du comptoir (Slot) & Centralisation des données dans les Ressources
 - **Affichage des aliments auto dépendant du menu** : va chercher la resource dans le menu et l'assigner au position (marker) du comptoir.
+- **Type d'aliment** : associe les aliments avec le même type que le slot
 - **Fix positionnement au comptoir (`CounterSlot`)** : Séparation du marqueur de l'aliment (`FoodMarker` sur la table) et du point d'arrêt du joueur (`InteractionPoint` au sol dans la zone marchable) pour gérer proprement les comptoirs en L ou en U sans que le personnage ne marche sur le meuble.
 - **Injection dynamique de la marche** : Ajout de `set_interaction_point()` dans `FoodItem`, appelée par `counter_food_item.gd` juste après l'instanciation de l'aliment.
 - **Centralisation des données dans les Ressources (Source unique de vérité)** : Suppression des `@export` dispersés dans les scènes et composants au profit des fichiers de ressources `.tres`.
@@ -119,7 +119,39 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
   - `LevelData` : contient la configuration et difficulté du niveau (`expert_threshold_percent`, `counter_order_probability_percent`, `spawn_interval_jitter_percent`, `initial_spawn_delay_min/max`).
 - **Injection automatique** : `LevelManager` lit les ressources et alimente directement `DayCycleComponent`, `SpawnOrchestratorComponent` et `OrderFlowComponent` à son `_ready()`, éliminant les réglages manuels dans l'inspecteur.
 
+### Session — Refonte des Ressources (aliments, clients, tables, comptoir, niveaux)
+- **`FoodData` restructurée** en groupes (Identité, Économie, Placement, Restrictions, Préparation avancée) ; `tags: Array[GameEnums.FoodTag]` (enum, pas de texte libre : aucune faute de frappe possible)
+- **`PreparationData`** (nouvelle ressource, jamais `null`, `PreparationData.new()` par défaut) : contient le `type` (`FoodType`), `preparation_time`, cuisson (`cook_time`, `burn_delay`, `burned_sprite`), brassage (`stir_interval`) et combo (`ingredients`). `@tool` + `_validate_property()` n'affichent dans l'Inspecteur que les champs pertinents selon le type ; `FoodData.type` est un accesseur en lecture seule vers `preparation.type`
+- **`FoodType` étendu** : `SAUTE` (poêle, préparation + cuisson, joueur occupé), `SIMMER` (chaudron déjà prêt, brassage), `PIZZA_OVEN`, `GRIDDLE` (plaque, peut brûler). Règle apprise : toujours ajouter les valeurs **à la fin** d'un enum, car les `.tres` sauvegardent des nombres
+- **`FoodContainerData`** (`sprite`, `food_offset`) référencé par `FoodData.container` : récipient affiché sur le comptoir (bol, planche, chaudron), distinct de l'image de service. Le récipient de cuisson (poêle, four) est lié à l'**emplacement**, pas à l'aliment ; `CookingSlot` prévu (jamais rempli au démarrage), `CounterSlot.accepted_types` devient un tableau
+- **Restrictions de commande sur la personne** : `required_tags` / `forbidden_tags` sur `CustomerVisual` (un même groupe famille peut avoir des parents qui prennent du café et des enfants qui n'en prennent pas), pas sur `CustomerData`. `allowed_food_types` appartient à l'**emplacement**, jamais au client
+- **`TableData`** (`allowed_food_types`, `cleaning_duration`, `serving_delay`, textures table et chaises) assigné via `data` sur `TableComponent`
+- **`CounterData`** (`allowed_food_types` défaut `PREPARED`, `serving_delay`) assigné directement sur `CounterOrderComponent` ; `CounterComponent` supprimé (script et scène jamais utilisés)
+- **`LevelData` : groupes Économie et Caisse** : bonus de combo et de service en un voyage (`_rate` = fraction, `_percent` = 0 à 100) et `queue_advance_delay` (défaut 0.9). `PaymentQueueComponent` lit directement `level_data`, fourni par `LevelManager` (une seule ligne : `payment_queue.level_data = level_data`), sans valeur dupliquée dans le composant
+- **`CustomerData.thinking_time`** remplace le calcul `400 / speed` du délai de réflexion
+- **Météo — décisions** : WeatherAPI.com (plan gratuit, usage commercial permis) à la place d'Open-Meteo et d'`ip-api.com` (non commerciaux) ; une seule requête `current.json?q=auto:ip` ; clé dans `res://secrets.cfg` (dans `.gitignore`) ; 5 états `WeatherState` (`CLEAR`, `CLOUDY`, `RAIN`, `SNOW`, `FOG`, orages dans `RAIN` pour rester cosy) ; une ressource `WeatherData` partagée (`api_codes`, `overlay_scene`, lumière, son) ; fond de fenêtre par resto dans `RestaurantData.window_backgrounds: Dictionary[WeatherState, PackedScene]` (scènes, pour permettre des animations)
+- **`WeatherComponent`** (scène autoload avec `HTTPRequest`) : clé lue via `ConfigFile`, requête envoyée, JSON validé, dictionnaire inversé `_weather_by_code` (60 codes de l'API répartis dans 5 ressources, protection contre les doublons), signal `weather_changed(weather)` et `current_weather` (soleil par défaut)
+- **Bug évité — `var x = default_export`** : une variable initialisée avec un `@export` prend la valeur avant que l'Inspecteur l'applique ; il faut l'assigner dans `_ready()`
+- **Concept appris — signaux** : `emit()` émet, `connect()` écoute ; sans `connect()`, l'émission part dans le vide sans erreur
+
+### Session — Écran de début de journée + traduction (fr/en)
+- **Conception de l'interface** : croquis validé (nom du resto, carnet-menu avec swap d'aliments à gauche/droite, barre du bas Menu / Catalogue / Visite / Jouer, catalogue par resto par-dessus tout). Décisions : swap dans le carnet, déblocage dans le catalogue, menu choisi persistant d'une journée à l'autre
+- **Système de traduction** : `resources/localization/translations.csv` (colonnes `fr`, `en`, clés en MAJUSCULES), édité dans LibreOffice en UTF-8. Dans l'inspecteur, la clé seule ; dans le code, `tr("CLE") % valeurs`. Une phrase = une clé (pas d'assemblage de morceaux). Test via Paramètres du projet > Internationalization > Locale > Test
+- **`CurrencyService`** (`scripts/services/currency_service.gd`, statique) : formate tous les montants via `CURRENCY_SYMBOL` et `CURRENCY_FORMAT` (`{amount} {symbol}` en fr, `{symbol}{amount}` en en). Les clés de phrases reçoivent un `%s` déjà formaté. Convertis : écran d'intro, fin de journée, jauge, bulles, feedback à la caisse
+- **`PaymentFeedbackDisplay`** : texte construit par morceaux (`parts` + `"\n".join()`), un morceau par clé (`FEEDBACK_COMBO`, `FEEDBACK_TIP`), ordre montant / combo / pourboire
+- **Titre du resto** : `RichTextLabel` dans un `PanelContainer` (fond, marges), `[font_size]` et `[br]` dans la clé `RESTAURANT_TITLE` pour que chaque langue place « Restaurant » où elle veut
+- **Infobulles** : clés `TOOLTIP_VISIT` / `TOOLTIP_CATALOG`, styles `TooltipPanel` / `TooltipLabel` dans le `Theme`. Pas de tooltip sur Jouer et Menu (libellé assez clair)
+- **Navigation clavier** : `grab_focus()` sur un bouton à l'ouverture, style `focus` visible dans le `Theme`, `Focus Mode = None` sur les `RichTextLabel` (focalisables par défaut, contrairement aux `Label`)
+- **`LevelBar`** (`class_name LevelBar`, `PanelContainer`) : barre du bas réutilisable sur les écrans Start et End. Signal `primary_pressed` fonctionnel : bouton → barre (`pressed.connect`) → écran (`primary_pressed.connect`). La barre émet seulement, chaque écran décide de l'action
+- **Concept appris — signaux relais** : on écoute le signal d'un autre nœud (`connect`), mais on n'émet que **son propre** signal. Émettre `bouton.pressed` depuis sa propre fonction crée une boucle infinie
+- **Concept appris — `@export` + `_ready()`** : une valeur exportée se lit dans `_ready()`, jamais avant
+
+
+
+
 ---
+
+
 
 ## 📓 Journal d'apprentissage
 
@@ -132,6 +164,7 @@ Le joueur incarne un membre du personnel qui doit accueillir les clients, les pl
 - Au clic, ajouter un aliment dans le tray, et le servir à table (suppression du tray)
 - Gestion des niveaux par restaurant : ajout d'une table, changement de menu, etc.
 - Piloter les animations par une machine à états plutôt que par la vélocité seule
+- Se connecter à un API et faire afficher une information/changer un visuel en conséquence (choix sur WeatherAPI)
 
 Pour les tâches restantes, voir `TODO.md`. Pour l'architecture, voir `README.md`.
 

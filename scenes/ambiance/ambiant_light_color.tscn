@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cn7efjltwtxob"]
+
+[ext_resource type="Script" uid="uid://ctbqtcxxmumgf" path="res://scenes/ambiance/ambiant_light_color.gd" id="1_6p8yo"]
+
+[node name="AmbiantLightColor" type="Node2D" unique_id=1254623280 node_paths=PackedStringArray("light_canvas")]
+script = ExtResource("1_6p8yo")
+light_canvas = NodePath("LumiereAmbiance")
+
+[node name="LumiereAmbiance" type="CanvasModulate" parent="." unique_id=1248113377]

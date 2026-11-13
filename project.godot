@@ -27,6 +27,8 @@ config/icon="res://icon.svg"
 
 TrayManager="*uid://dqujus4mgbvyt"
 EarningsManager="*uid://dhq5jk7bccc1v"
+WeatherComponent="*uid://dqth3lme014s7"
+SaveManager="*uid://6xo48ysq0vlg"
 
 [display]
 
@@ -50,6 +52,14 @@ Table=""
 Food=""
 nav_obstacles=""
 LevelManager=""
+
+[gui]
+
+theme/custom="uid://d143nc48cfivq"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://resources/localization/translations.en.translation", "res://resources/localization/translations.fr.translation")
 
 [layer_names]
 

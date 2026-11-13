@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cuvaqmvrr43ck" path="res://scripts/components/counter_order_component.gd" id="1_xev7m"]
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="2_esj28"]
-[ext_resource type="Texture2D" uid="uid://dm6n7qw16wvoi" path="res://assets/furniture/resto_a/cloche_comptoir.png" id="3_gvnca"]
+[ext_resource type="Texture2D" uid="uid://dm6n7qw16wvoi" path="res://assets/restaurants/resto_a/cloche_comptoir.png" id="3_gvnca"]
 [ext_resource type="PackedScene" uid="uid://f4prltr7yjfo" path="res://scripts/components/click_feedback_component.tscn" id="4_tdo2a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_27mgu"]

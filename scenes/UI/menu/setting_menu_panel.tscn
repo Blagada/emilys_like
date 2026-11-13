@@ -1,0 +1,213 @@
+[gd_scene format=3 uid="uid://b2c7tvw3bpi7o"]
+
+[ext_resource type="Script" uid="uid://b2tl2wbv2k7xe" path="res://scenes/UI/menu/setting_menu_panel.gd" id="2_x33hm"]
+[ext_resource type="PackedScene" uid="uid://eb2mpv6l4wta" path="res://scenes/UI/colored_panel.tscn" id="3_cju1d"]
+[ext_resource type="Shader" uid="uid://bl3tc61bn0h1t" path="res://resources/ambiance/panel_dither.gdshader" id="4_c5m8l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bs0ga"]
+resource_local_to_scene = true
+shader = ExtResource("4_c5m8l")
+shader_parameter/base_color = Color(1, 1, 0.7607843, 1)
+shader_parameter/panel_size = Vector2(468.5973, 664.66376)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.499
+shader_parameter/corner_radius = 12.0
+shader_parameter/gradient_angle = 118.818
+
+[node name="SettingMenuPanel" type="Control" unique_id=1440735646 node_paths=PackedStringArray("weather_check", "season_event_check", "language_options", "font_options", "font_size_options", "font_size_value")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_x33hm")
+weather_check = NodePath("LevelDescContent/LevelDesc/Ambiance/WeatherCheckButton")
+season_event_check = NodePath("LevelDescContent/LevelDesc/Ambiance/SeasonEventCheckButton")
+language_options = NodePath("LevelDescContent/LevelDesc/Language/LanguageOptions")
+font_options = NodePath("LevelDescContent/LevelDesc/Fonts/FontOptions")
+font_size_options = NodePath("LevelDescContent/LevelDesc/Fonts/FontSizeBar/FontSizeSlider")
+font_size_value = NodePath("LevelDescContent/LevelDesc/Fonts/FontSizeBar/FontSizeValueLabel")
+
+[node name="ColoredPanel" parent="." unique_id=944903130 instance=ExtResource("3_cju1d")]
+material = SubResource("ShaderMaterial_bs0ga")
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -32.0
+offset_top = 64.00001
+offset_right = 436.5973
+offset_bottom = 728.66376
+grow_horizontal = 1
+grow_vertical = 1
+rotation = -0.034906585
+scale = Vector2(0.921, 0.921)
+panel_color = Color(1, 1, 0.7607843, 1)
+gradient_strength = 0.499
+gradient_angle = 118.818
+
+[node name="LevelDescContent" type="VBoxContainer" parent="." unique_id=757858541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -639.15405
+offset_top = -276.94757
+offset_right = -306.15414
+offset_bottom = 257.25134
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.0052359877
+
+[node name="LevelLabel" type="Label" parent="LevelDescContent" unique_id=458450065]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.07450981, 0.07450981, 0.07450981, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 0.8627451, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
+text = "BUTTON_SETTING"
+
+[node name="Spacer2" type="Control" parent="LevelDescContent" unique_id=616410158]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelDesc" type="VBoxContainer" parent="LevelDescContent" unique_id=1665553160]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Ambiance" type="VBoxContainer" parent="LevelDescContent/LevelDesc" unique_id=1109137057]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="WeatherLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/Ambiance" unique_id=1620785862]
+visible = false
+layout_mode = 2
+focus_mode = 0
+bbcode_enabled = true
+text = "SETTING_AMBIANCE"
+fit_content = true
+
+[node name="WeatherCheckButton" type="CheckButton" parent="LevelDescContent/LevelDesc/Ambiance" unique_id=1041884859]
+visible = false
+layout_mode = 2
+text = "SETTING_WEATHER"
+
+[node name="Control" type="Control" parent="LevelDescContent/LevelDesc/Ambiance" unique_id=1421623336]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SeasonEventCheckButton" type="CheckButton" parent="LevelDescContent/LevelDesc/Ambiance" unique_id=598569591]
+visible = false
+layout_mode = 2
+text = "SETTING_SEASON"
+
+[node name="Control2" type="Control" parent="LevelDescContent/LevelDesc/Ambiance" unique_id=1968732647]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SoundLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/Ambiance" unique_id=786889329]
+layout_mode = 2
+focus_mode = 0
+bbcode_enabled = true
+text = "SETTING_SOUND"
+fit_content = true
+
+[node name="Sound" type="HBoxContainer" parent="LevelDescContent/LevelDesc/Ambiance" unique_id=111397659]
+layout_mode = 2
+alignment = 1
+
+[node name="SoundSlider" type="HSlider" parent="LevelDescContent/LevelDesc/Ambiance/Sound" unique_id=5226903]
+layout_mode = 2
+size_flags_horizontal = 3
+accessibility_name = "SETTING_FONT_SIZE"
+min_value = 10.0
+max_value = 22.0
+value = 16.0
+
+[node name="SoundValueLabel" type="Label" parent="LevelDescContent/LevelDesc/Ambiance/Sound" unique_id=1604324136]
+layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+
+[node name="HSeparator2" type="HSeparator" parent="LevelDescContent/LevelDesc" unique_id=1630026449]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Language" type="VBoxContainer" parent="LevelDescContent/LevelDesc" unique_id=1438605447]
+layout_mode = 2
+
+[node name="LanguageLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/Language" unique_id=1667973324]
+layout_mode = 2
+focus_mode = 0
+theme_override_constants/line_separation = 5
+bbcode_enabled = true
+text = "SETTING_LANGUAGES"
+fit_content = true
+autowrap_mode = 0
+
+[node name="LanguageOptions" type="OptionButton" parent="LevelDescContent/LevelDesc/Language" unique_id=626472380]
+layout_mode = 2
+accessibility_name = "SETTING_LANGUAGES"
+
+[node name="Fonts" type="VBoxContainer" parent="LevelDescContent/LevelDesc" unique_id=1938496868]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FontLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/Fonts" unique_id=651142351]
+layout_mode = 2
+focus_mode = 0
+bbcode_enabled = true
+text = "SETTING_FONTS"
+fit_content = true
+
+[node name="FontOptions" type="OptionButton" parent="LevelDescContent/LevelDesc/Fonts" unique_id=249178721]
+layout_mode = 2
+accessibility_name = "SETTING_FONTS"
+
+[node name="Control3" type="Control" parent="LevelDescContent/LevelDesc/Fonts" unique_id=1668715054]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FontSizeLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/Fonts" unique_id=563677651]
+layout_mode = 2
+focus_mode = 0
+bbcode_enabled = true
+text = "SETTING_FONT_SIZE"
+fit_content = true
+
+[node name="FontSizeBar" type="HBoxContainer" parent="LevelDescContent/LevelDesc/Fonts" unique_id=74918669]
+layout_mode = 2
+alignment = 1
+
+[node name="FontSizeSlider" type="HSlider" parent="LevelDescContent/LevelDesc/Fonts/FontSizeBar" unique_id=1690613051]
+layout_mode = 2
+size_flags_horizontal = 3
+accessibility_name = "SETTING_FONT_SIZE"
+min_value = 10.0
+max_value = 22.0
+value = 16.0
+
+[node name="FontSizeValueLabel" type="Label" parent="LevelDescContent/LevelDesc/Fonts/FontSizeBar" unique_id=1868824659]
+layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+
+[node name="CloseButton" type="Button" parent="." unique_id=705768322]
+layout_mode = 0
+offset_left = 356.0
+offset_top = 61.0
+offset_right = 386.0
+offset_bottom = 103.0
+tooltip_text = "BUTTON_SETTING_CLOSE"
+accessibility_name = "BUTTON_SETTING_CLOSE"
+text = "X"
+
+[connection signal="item_selected" from="LevelDescContent/LevelDesc/Fonts/FontOptions" to="." method="_on_font_options_item_selected"]
+[connection signal="value_changed" from="LevelDescContent/LevelDesc/Fonts/FontSizeBar/FontSizeSlider" to="." method="_on_font_size_slider_value_changed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

@@ -4,10 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://cg3oc1pl8lsjl" path="res://scenes/entities/Bubble/OrderBubble.tscn" id="2_27pg8"]
 [ext_resource type="PackedScene" uid="uid://beb8n78sa7hsm" path="res://scripts/components/movement_component.tscn" id="3_ho5u3"]
 [ext_resource type="PackedScene" uid="uid://bf8gen1g53k8f" path="res://scripts/components/patience_component.tscn" id="4_rjh8d"]
+[ext_resource type="PackedScene" uid="uid://bqkm2ulyytx71" path="res://scripts/components/bonus_star_component.tscn" id="5_27pg8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
 
-[node name="Customer" type="CharacterBody2D" unique_id=900058847 node_paths=PackedStringArray("collision_customer", "visual_customer", "order_bubble_anchor", "movement_component", "patience_component")]
+[node name="Customer" type="CharacterBody2D" unique_id=900058847 node_paths=PackedStringArray("collision_customer", "visual_customer", "order_bubble_anchor", "movement_component", "patience_component", "bonus_star")]
 collision_layer = 4
 script = ExtResource("1_v38u2")
 collision_customer = NodePath("CollisionCustomer")
@@ -16,6 +17,7 @@ order_bubble_anchor = NodePath("OrderBubbleAnchor")
 order_bubble_scene = ExtResource("2_27pg8")
 movement_component = NodePath("Scripts/MovementComponent")
 patience_component = NodePath("Scripts/PatienceComponent")
+bonus_star = NodePath("Scripts/BonusStarComponent")
 
 [node name="CollisionCustomer" type="CollisionShape2D" parent="." unique_id=611089329]
 position = Vector2(1, 0)
@@ -35,3 +37,12 @@ nav_agent = NodePath("../../NavigationCustomer")
 character_body = NodePath("../..")
 
 [node name="PatienceComponent" parent="Scripts" unique_id=1815167752 instance=ExtResource("4_rjh8d")]
+
+[node name="BonusStarComponent" parent="Scripts" unique_id=1358580722 instance=ExtResource("5_27pg8")]
+
+[node name="TextureBonusStar" parent="Scripts/BonusStarComponent" index="0" unique_id=504675447]
+position = Vector2(34.999985, 1.5258789e-05)
+rotation = 0.31762806
+scale = Vector2(0.28137323, 0.28137323)
+
+[editable path="Scripts/BonusStarComponent"]

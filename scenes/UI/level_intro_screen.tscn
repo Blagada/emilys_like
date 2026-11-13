@@ -1,119 +1,172 @@
 [gd_scene format=3 uid="uid://bw3au6rjcnudw"]
 
-[ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="1_a60tx"]
 [ext_resource type="Script" uid="uid://b3lrtum4i62d2" path="res://scenes/UI/level_intro_screen.gd" id="1_hv2q8"]
+[ext_resource type="PackedScene" uid="uid://e1spwrdn4r53" path="res://scenes/UI/menu/level_bar.tscn" id="3_eohg8"]
+[ext_resource type="PackedScene" uid="uid://eb2mpv6l4wta" path="res://scenes/UI/colored_panel.tscn" id="4_w2wbs"]
+[ext_resource type="Shader" uid="uid://bl3tc61bn0h1t" path="res://resources/ambiance/panel_dither.gdshader" id="5_fan4a"]
 
-[node name="LevelIntroScreen" type="Control" unique_id=1440735646 node_paths=PackedStringArray("restaurant_name_label", "level_number_label", "table_info_label", "services_label", "customers_list_label", "tray_label", "goal_label", "start_button", "menu_list_label")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6u0kk"]
+resource_local_to_scene = true
+shader = ExtResource("5_fan4a")
+shader_parameter/base_color = Color(1, 1, 0.8627451, 1)
+shader_parameter/panel_size = Vector2(424.0182, 585.5924)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.499
+shader_parameter/corner_radius = 12.0
+shader_parameter/gradient_angle = 118.818
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t5m65"]
+resource_local_to_scene = true
+shader = ExtResource("5_fan4a")
+shader_parameter/base_color = Color(1, 1, 0.8627451, 1)
+shader_parameter/panel_size = Vector2(1344, 62)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.5
+shader_parameter/corner_radius = 0.0
+shader_parameter/gradient_angle = 24.828
+
+[node name="LevelIntroScreen" type="Control" unique_id=1440735646 node_paths=PackedStringArray("level_bar", "level_number_label", "table_info_label", "services_label", "customers_list_label", "tray_label", "goal_label", "menu_list_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_a60tx")
 script = ExtResource("1_hv2q8")
-restaurant_name_label = NodePath("LevelDescContent/RestaurantLabel")
-level_number_label = NodePath("LevelDescContent/LevelLabel")
-table_info_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/TableInfoLabel")
-services_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/ServicesLabel")
-customers_list_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/CustomersListLabel")
-tray_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/TrayLabel")
-goal_label = NodePath("LevelDescContent/LevelDesc/LevelInfo/GoalLabel")
-start_button = NodePath("LevelDescContent/StartLevelButton")
-menu_list_label = NodePath("LevelDescContent/LevelDesc/Menu/MenuTextLabel")
+level_bar = NodePath("LevelBar")
+level_number_label = NodePath("LevelInfo/LevelDescContent/LevelLabel")
+table_info_label = NodePath("LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo/TableInfoLabel")
+services_label = NodePath("LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo/ServicesLabel")
+customers_list_label = NodePath("LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo/CustomersListLabel")
+tray_label = NodePath("LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo/TrayLabel")
+goal_label = NodePath("LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo/GoalLabel")
+menu_list_label = NodePath("LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/Menu/MenuTextLabel")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1182549065]
+[node name="LevelInfo" type="Control" parent="." unique_id=343702230]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 49.999996
-offset_top = 24.999998
-offset_right = 50.0
-offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.9209957, 0.9209957)
-color = Color(1, 1, 0.8627451, 1)
 
-[node name="LevelDescContent" type="VBoxContainer" parent="." unique_id=757858541]
+[node name="ColoredPanel" parent="LevelInfo" unique_id=944903130 instance=ExtResource("4_w2wbs")]
+material = SubResource("ShaderMaterial_6u0kk")
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 856.7733
+offset_top = 55.0
+offset_right = 1280.7915
+offset_bottom = 640.5924
+grow_horizontal = 1
+grow_vertical = 1
+rotation = 0.017453292
+scale = Vector2(0.921, 0.921)
+panel_color = Color(1, 1, 0.8627451, 1)
+gradient_strength = 0.499
+gradient_angle = 118.818
+
+[node name="LevelDescContent" type="VBoxContainer" parent="LevelInfo" unique_id=757858541]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -356.0
-offset_top = -157.0
-offset_right = 354.0
-offset_bottom = 208.0
+offset_left = 217.0
+offset_top = -286.0
+offset_right = 549.9999
+offset_bottom = 207.0
 grow_horizontal = 2
 grow_vertical = 2
+rotation = 0.017453292
 
-[node name="RestaurantLabel" type="Label" parent="LevelDescContent" unique_id=2004122949]
+[node name="LevelLabel" type="Label" parent="LevelInfo/LevelDescContent" unique_id=458450065]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-theme_override_colors/font_color = Color(0.072842635, 0.072842635, 0.072842635, 1)
-text = "Restaurant x"
-horizontal_alignment = 1
-
-[node name="LevelLabel" type="Label" parent="LevelDescContent" unique_id=458450065]
-layout_mode = 2
-theme_type_variation = &"HeaderMedium"
 theme_override_colors/font_color = Color(0.07450981, 0.07450981, 0.07450981, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 0.8627451, 1)
+theme_override_constants/outline_size = 5
 text = "Jour x"
-horizontal_alignment = 1
 
-[node name="LevelDesc" type="HBoxContainer" parent="LevelDescContent" unique_id=802041652]
-layout_mode = 2
-
-[node name="LevelInfo" type="VBoxContainer" parent="LevelDescContent/LevelDesc" unique_id=1109137057]
+[node name="Spacer2" type="Control" parent="LevelInfo/LevelDescContent" unique_id=616410158]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TableInfoLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=1620785862]
+[node name="ScrollContainer" type="ScrollContainer" parent="LevelInfo/LevelDescContent" unique_id=557212500]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelDesc" type="VBoxContainer" parent="LevelInfo/LevelDescContent/ScrollContainer" unique_id=1665553160]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LevelInfo" type="VBoxContainer" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc" unique_id=1109137057]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TableInfoLabel" type="RichTextLabel" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo" unique_id=1620785862]
+layout_mode = 2
+focus_mode = 0
 bbcode_enabled = true
 text = "Nombre de table : x"
 fit_content = true
 
-[node name="ServicesLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=1392022992]
+[node name="ServicesLabel" type="RichTextLabel" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo" unique_id=1392022992]
 layout_mode = 2
+focus_mode = 0
 bbcode_enabled = true
 text = "Services du"
 fit_content = true
 
-[node name="TrayLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=1762085820]
+[node name="TrayLabel" type="RichTextLabel" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo" unique_id=1762085820]
 layout_mode = 2
+focus_mode = 0
 bbcode_enabled = true
 text = "Espace sur le plateau :"
 fit_content = true
 
-[node name="CustomersListLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=592567200]
+[node name="CustomersListLabel" type="RichTextLabel" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo" unique_id=592567200]
 layout_mode = 2
+focus_mode = 0
 bbcode_enabled = true
 text = "Type de client : x"
 fit_content = true
 
-[node name="GoalLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/LevelInfo" unique_id=1419703377]
+[node name="GoalLabel" type="RichTextLabel" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/LevelInfo" unique_id=1419703377]
 layout_mode = 2
+focus_mode = 0
 bbcode_enabled = true
 text = "Objectif : x"
 fit_content = true
 
-[node name="Menu" type="VBoxContainer" parent="LevelDescContent/LevelDesc" unique_id=1938496868]
+[node name="HSeparator" type="HSeparator" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc" unique_id=944116915]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Menu" type="VBoxContainer" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc" unique_id=1938496868]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MenuTextLabel" type="RichTextLabel" parent="LevelDescContent/LevelDesc/Menu" unique_id=1667973324]
+[node name="MenuTextLabel" type="RichTextLabel" parent="LevelInfo/LevelDescContent/ScrollContainer/LevelDesc/Menu" unique_id=1667973324]
 layout_mode = 2
+focus_mode = 0
 theme_override_constants/line_separation = 5
 bbcode_enabled = true
 text = "Menu : "
 fit_content = true
 autowrap_mode = 0
 
-[node name="StartLevelButton" type="Button" parent="LevelDescContent" unique_id=1778547428]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "Débuter la journée"
+[node name="LevelBar" parent="." unique_id=1603993807 instance=ExtResource("3_eohg8")]
+layout_mode = 1
+
+[node name="ColoredPanel" parent="LevelBar" index="0" unique_id=777529434]
+material = SubResource("ShaderMaterial_t5m65")
+
+[editable path="LevelBar"]

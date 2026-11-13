@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://c1hn2kcdgsnd1"]
+
+[ext_resource type="Script" uid="uid://cxuerng7jhqjp" path="res://scenes/UI/restaurant_panel.gd" id="1_j7cnd"]
+[ext_resource type="PackedScene" uid="uid://eb2mpv6l4wta" path="res://scenes/UI/colored_panel.tscn" id="1_sj36f"]
+[ext_resource type="Shader" uid="uid://bl3tc61bn0h1t" path="res://resources/ambiance/panel_dither.gdshader" id="2_j7cnd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w2wbs"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j7cnd"]
+resource_local_to_scene = true
+shader = ExtResource("2_j7cnd")
+shader_parameter/base_color = Color(0.50980395, 0.40784314, 0.3372549, 1)
+shader_parameter/panel_size = Vector2(126, 52)
+shader_parameter/pixel_size = 2.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.655
+shader_parameter/corner_radius = 6.0
+shader_parameter/gradient_angle = 12.414
+
+[node name="RestaurantPanel" type="PanelContainer" unique_id=164400363 node_paths=PackedStringArray("restaurant_name_label")]
+offset_left = 35.0
+offset_top = 25.0
+offset_right = 161.0
+offset_bottom = 77.0
+rotation = -0.017453292
+theme_override_styles/panel = SubResource("StyleBoxEmpty_w2wbs")
+script = ExtResource("1_j7cnd")
+restaurant_name_label = NodePath("MarginContainer/RestaurantLabel")
+
+[node name="ColoredPanel" parent="." unique_id=777529434 instance=ExtResource("1_sj36f")]
+material = SubResource("ShaderMaterial_j7cnd")
+layout_mode = 2
+panel_color = Color(0.50980395, 0.40784314, 0.3372549, 1)
+pixel_size = 2.0
+gradient_strength = 0.655
+corner_radius = 6.0
+gradient_angle = 12.414
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=400317785]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="RestaurantLabel" type="RichTextLabel" parent="MarginContainer" unique_id=664944622]
+layout_mode = 2
+focus_mode = 0
+theme_type_variation = &"HeaderLarge"
+theme_override_colors/font_outline_color = Color(0.50980395, 0.40784314, 0.3372549, 1)
+theme_override_constants/line_separation = -10
+theme_override_constants/outline_size = 5
+bbcode_enabled = true
+text = "Restaurant x"
+fit_content = true
+autowrap_mode = 0
+tab_size = 2
+vertical_alignment = 1

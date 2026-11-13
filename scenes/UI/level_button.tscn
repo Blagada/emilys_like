@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://n8rr16dpchl3"]
+
+[ext_resource type="Script" uid="uid://byy7mo4xiols1" path="res://scenes/UI/level_button.gd" id="1_djhdf"]
+
+[node name="LevelButton" type="Button" unique_id=1781154238]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+script = ExtResource("1_djhdf")
+
+[connection signal="pressed" from="." to="." method="_on_level_button_pressed"]

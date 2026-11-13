@@ -5,6 +5,7 @@ const AVERAGE_GROUP_SIZE: float = 2.5 # randi_range(1, 4), uniforme
 const ROUNDED_GOAL: float = 25.0
 
 static func compute_daily_goal(
+	restaurant_data: RestaurantData,
 	level_data: LevelData,
 	table_count: int,
 	avg_travel_time: float,
@@ -28,8 +29,7 @@ static func compute_daily_goal(
 		cycles_possible = day_duration / cycle_duration
 
 	var max_theoretical_revenue: float = cycles_possible * table_count * revenue_per_group
-
-	var difficulty_percent: float = _difficulty_percent(level_data.level_number, level_data.restaurant.total_levels)
+	var difficulty_percent: float = _difficulty_percent(level_data.level_number, restaurant_data.levels.size())
 	var daily_goal: float = snapped(max_theoretical_revenue * difficulty_percent, ROUNDED_GOAL)
 	var expert_goal: float = snapped(daily_goal * (expert_threshold_percent / 100.0), ROUNDED_GOAL)
 

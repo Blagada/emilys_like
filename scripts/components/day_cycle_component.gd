@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 func _run_services() -> void:
 	for service: GameEnums.ServiceType in active_services:
 		service_started.emit(service)
-		await get_tree().create_timer(service_duration).timeout
+		await get_tree().create_timer(service_duration, false).timeout
 
 	closing_time.emit()
 	_is_running = false

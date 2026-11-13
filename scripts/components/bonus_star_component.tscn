@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bqkm2ulyytx71"]
+
+[ext_resource type="Script" uid="uid://cns7x6pt24j2v" path="res://scripts/components/bonus_star_component.gd" id="1_3w0ve"]
+[ext_resource type="Texture2D" uid="uid://c2duk42od7iku" path="res://assets/customers/star.png" id="2_iv0ci"]
+
+[node name="BonusStarComponent" type="Node2D" unique_id=1358580722]
+script = ExtResource("1_3w0ve")
+
+[node name="TextureBonusStar" type="Sprite2D" parent="." unique_id=504675447]
+texture = ExtResource("2_iv0ci")

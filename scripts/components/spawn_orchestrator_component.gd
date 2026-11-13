@@ -40,12 +40,12 @@ func _start_auto_spawn() -> void:
 	_auto_spawning = true
 
 	var initial_delay: float = randf_range(initial_spawn_delay_min, initial_spawn_delay_max)
-	await get_tree().create_timer(initial_delay).timeout
+	await get_tree().create_timer(initial_delay, false).timeout
 
 	while _auto_spawning:
 		_spawn_next_group()
 		var interval: float = _compute_spawn_interval()
-		await get_tree().create_timer(interval).timeout
+		await get_tree().create_timer(interval, false).timeout
 
 
 func _compute_spawn_interval() -> float:

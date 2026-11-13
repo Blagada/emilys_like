@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://eb2mpv6l4wta"]
+
+[ext_resource type="Shader" uid="uid://bl3tc61bn0h1t" path="res://resources/ambiance/panel_dither.gdshader" id="1_3kh1s"]
+[ext_resource type="Script" uid="uid://c3x7q0pqwp2lo" path="res://scenes/UI/colored_panel.gd" id="1_3lqok"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3lqok"]
+resource_local_to_scene = true
+shader = ExtResource("1_3kh1s")
+shader_parameter/base_color = Color(0.1, 0.5, 0.25, 1)
+shader_parameter/panel_size = Vector2(1344, 756)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.5
+shader_parameter/corner_radius = 12.0
+shader_parameter/gradient_angle = 0.0
+
+[node name="ColoredPanel" type="ColorRect" unique_id=777529434]
+material = SubResource("ShaderMaterial_3lqok")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_3lqok")

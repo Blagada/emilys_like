@@ -8,13 +8,9 @@ signal table_freed
 @export var interaction_component: Interactable
 @export var chair_positions: Node2D
 @export var table_sprite_node: Sprite2D
-@export var custom_table_texture: AtlasTexture
-@export var custom_chair_texture: AtlasTexture
-
+@export var data: TableData = TableData.new()
 @export var current_state: GameEnums.TableState = GameEnums.TableState.UNOCCUPIED_AND_CLEAN # Par défaut, toutes les chaises sont libres et propres
 
-@export var cleaning_duration: float = 3.0
-@export var serving_delay: float = 0.5
 
 # --- VARIABLES D'ÉTAT & RÉFÉRENCES ---
 # À besoin du Node ChairPositions avec des Marker2D pour gérer la position des chaises.
@@ -33,8 +29,8 @@ func _ready() -> void:
 		interaction_component.action_queued.connect(_on_action_queued)
 	
 	# Applique la texture personnalisée de la table si elle est définie
-	if custom_table_texture and table_sprite_node:
-		table_sprite_node.texture = custom_table_texture
+	if data.table_texture and table_sprite_node:
+		table_sprite_node.texture = data.table_texture
 	
 	# Applique la texture à toutes les chaises automatiquement au lancement
 	_apply_texture_to_chairs()
@@ -43,14 +39,14 @@ func _ready() -> void:
 # --- APPLICATION AUTOMATIQUE DES TEXTURES AUX CHAISES ---
 # Parcourt les positions de chaises et leur assigne la texture personnalisée de chaise
 func _apply_texture_to_chairs() -> void:
-	if not custom_chair_texture:
+	if not data.chair_texture:
 		return
 		
 	for chair_node: Node in all_chair_positions:
 		# On cherche récursivement le premier Sprite2D présent dans les descendants de ce marqueur
 		var sprite = _find_sprite_recursive(chair_node)
 		if sprite:
-			sprite.texture = custom_chair_texture
+			sprite.texture = data.chair_texture
 
 
 # --- RECHERCHE RÉCURSIVE DE SPRITE ---
@@ -84,7 +80,7 @@ func _on_player_arrived(action_id: int)-> void:
 
 	# Si la table a des clients servables et que le joueur possède un composant de staff, on simule un délai de livraison
 	if order_component.has_servable_customer() and player and player.has_node("StaffComponent"):
-		await player.staff_component.start_task(GameEnums.StaffState.DELIVERING, serving_delay)
+		await player.staff_component.start_task(GameEnums.StaffState.DELIVERING, data.serving_delay)
 
 	# S'il y a une action réservée, on envoie le nombre d'action et on réinitialise _reserved_by_action
 	if action_id in _reserved_by_action:
@@ -119,7 +115,7 @@ func _start_cleaning(player: Node, action_id: int) -> void:
 		return
 
 	# Lance l'animation/tâche de nettoyage avec la durée requise
-	await player.staff_component.start_task(GameEnums.StaffState.CLEANING, cleaning_duration)
+	await player.staff_component.start_task(GameEnums.StaffState.CLEANING, data.cleaning_duration)
 
 	# Nettoyage terminé : met à jour l'état de la table et cache la bulle
 	is_dirty = false

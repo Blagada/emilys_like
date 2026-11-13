@@ -3,35 +3,53 @@ class_name LevelIntroScreen
 
 signal day_started
 
-@export var restaurant_name_label: Label
+@export var level_bar: LevelBar
+
 @export var level_number_label: Label
 @export var table_info_label: RichTextLabel
 @export var services_label: RichTextLabel
 @export var customers_list_label: RichTextLabel
 @export var tray_label: RichTextLabel
 @export var goal_label: RichTextLabel
-@export var start_button: Button
 @export var menu_list_label: RichTextLabel
 
 
 func _ready() -> void:
-	start_button.pressed.connect(_on_start_pressed)
+	# Se connecte au signal des boutons de la bar de menu
+	level_bar.primary_pressed.connect(_on_primary_pressed)
+	level_bar.catalog_pressed.connect(_on_catalog_pressed)
+	level_bar.visit_pressed.connect(_on_visit_pressed)
+	# Envoie le focus sur le primary button
+	level_bar.primary_button.grab_focus()
+	visible = false
 
 
 func setup(level_data: LevelData, table_count: int, total_seats: int, daily_goal: float, expert_goal: float) -> void:
-	restaurant_name_label.text = "Restaurant %s" % level_data.restaurant.restaurant_name
-	level_number_label.text = "Jour %d" % level_data.level_number
-	table_info_label.text = "[b]Nombre de tables[/b] : %d tables (%d places)" % [table_count, total_seats]
-	services_label.text = "[b]Service[/b] du %s" % _format_services(level_data.active_services)
-	tray_label.text = "[b]Espace sur le plateau[/b] : %d" % level_data.tray_max_capacity
+	texts_setup(level_data, table_count, total_seats, daily_goal, expert_goal)
+	visible = true
+
+
+func texts_setup(level_data: LevelData, table_count: int, total_seats: int, daily_goal: float, expert_goal: float) -> void:
+	level_number_label.text = tr("LEVEL_DAY") % level_data.level_number
+	table_info_label.text = tr("TABLES_INFO") % [table_count, total_seats]
+	services_label.text = tr("SERVICES_INFO") % _format_services(level_data.active_services)
+	tray_label.text = tr("TRAY_INFO") % level_data.tray_max_capacity
+	goal_label.text = tr("GOAL_INFO") % [CurrencyService.format(daily_goal, 0), CurrencyService.format(expert_goal, 0)]
 	customers_list_label.text = "[b]Type de clients[/b] : %s" % _format_customers(level_data.possible_customers)
-	goal_label.text = "[b]Objectif[/b] : %.0f$ (expert : %.0f$)" % [daily_goal, expert_goal]
 	menu_list_label.text = "[b]Menu[/b] :\n" + _format_menu(level_data.level_menu)
 
 
-func _on_start_pressed() -> void:
+func _on_primary_pressed() -> void:
 	day_started.emit()
 	queue_free()
+
+
+func _on_catalog_pressed() -> void:
+	print("Ouvrir le catalogue")
+
+	
+func _on_visit_pressed() -> void:
+	print("Lancer la visite")
 
 
 # Vérifie les types de services disponible et les énumères

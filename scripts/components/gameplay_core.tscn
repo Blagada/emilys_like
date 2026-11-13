@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dswrv82v1yo5o"]
 
 [ext_resource type="PackedScene" uid="uid://qvto3r4aka43" path="res://scripts/components/level_manager.tscn" id="1_utnis"]
-[ext_resource type="Resource" uid="uid://g5bilfmowkq6" path="res://resources/levels/level_data_restoA-j1.tres" id="2_j0jqj"]
+[ext_resource type="Resource" uid="uid://g5bilfmowkq6" path="res://resources/restaurants/resto_a/levels/j1-data-resto_a.tres" id="2_j0jqj"]
 [ext_resource type="PackedScene" uid="uid://nj3wvps0qsqk" path="res://scripts/components/order_flow_component.tscn" id="3_3wajp"]
 [ext_resource type="PackedScene" uid="uid://btunx48di3onq" path="res://scripts/components/spawn_orchestrator_component.tscn" id="4_s30j6"]
 [ext_resource type="PackedScene" uid="uid://cjx11yg7jdmdt" path="res://scripts/components/day_cycle_component.tscn" id="5_6osng"]
@@ -15,12 +15,7 @@ level_data = ExtResource("2_j0jqj")
 [node name="OrderFlowComponent" parent="." unique_id=976148135 instance=ExtResource("3_3wajp")]
 
 [node name="SpawnOrchestratorComponent" parent="." unique_id=2057923829 instance=ExtResource("4_s30j6")]
-counter_order_probability_percent = 70.0
-spawn_interval_jitter_percent = 20.0
-initial_spawn_delay_min = 1.0
-initial_spawn_delay_max = 2.0
 
 [node name="DayCycleComponent" parent="." unique_id=1299101941 instance=ExtResource("5_6osng")]
-service_duration = 60.0
 
 [node name="WaitingQueueComponent" parent="." unique_id=1557171716 instance=ExtResource("6_j0jqj")]

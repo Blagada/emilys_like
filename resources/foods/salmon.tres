@@ -1,12 +1,19 @@
 [gd_resource type="Resource" script_class="FoodData" format=3 uid="uid://bkgebied14hhc"]
 
 [ext_resource type="Script" uid="uid://cv00lidll5uk0" path="res://resources/foods/food_data.gd" id="1_urk3t"]
+[ext_resource type="Script" uid="uid://c2w5u0v834258" path="res://resources/foods/food_preparation_data.gd" id="2_d7eqo"]
 [ext_resource type="Texture2D" uid="uid://b1lm8e6cmvl2j" path="res://assets/foods/food_salmon.png" id="2_mrvaw"]
+
+[sub_resource type="Resource" id="Resource_kntqd"]
+script = ExtResource("2_d7eqo")
+preparation_time = 3.0
+metadata/_custom_type_script = "uid://c2w5u0v834258"
 
 [resource]
 script = ExtResource("1_urk3t")
-name = "Saumon"
+name = "Sashimi de saumon"
 sprite = ExtResource("2_mrvaw")
-preparation_time = 1.3
 price = 35
+tags = Array[int]([4])
+preparation = SubResource("Resource_kntqd")
 metadata/_custom_type_script = "uid://cv00lidll5uk0"

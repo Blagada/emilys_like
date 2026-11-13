@@ -7,4 +7,5 @@
 script = ExtResource("1_l6aeg")
 name = "Girly"
 visual_scene = ExtResource("2_l6aeg")
+required_tags = Array[int]([0])
 metadata/_custom_type_script = "uid://b8cno6w8l0n5w"

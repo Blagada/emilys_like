@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://dtxvvae0o7g7q"]
 
-[ext_resource type="Texture2D" uid="uid://d2jrm4myo8th7" path="res://resources/restaurants/resto_a/resto_a-table_for_four.tres" id="3_2yr1b"]
+[ext_resource type="Resource" uid="uid://r2dmnw0g614j" path="res://resources/restaurants/resto_a/furnitures/table_for_four-data-resto_a.tres" id="3_2yr1b"]
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="3_jsdr8"]
-[ext_resource type="Texture2D" uid="uid://4balm81g7io1" path="res://resources/restaurants/resto_a/resto_a-chair.tres" id="4_oes8e"]
 [ext_resource type="PackedScene" uid="uid://d3o6jvtspe4o1" path="res://scripts/components/table_component.tscn" id="4_ssdlv"]
 [ext_resource type="PackedScene" uid="uid://dm15runckn1m6" path="res://scripts/components/order_component.tscn" id="5_2yr1b"]
 [ext_resource type="PackedScene" uid="uid://f4prltr7yjfo" path="res://scripts/components/click_feedback_component.tscn" id="6_oes8e"]
@@ -115,8 +114,8 @@ order_component = NodePath("../OrderComponent")
 interaction_component = NodePath("../InteractionComponent")
 chair_positions = NodePath("../ChairPositions")
 table_sprite_node = NodePath("../Table/TableSprite2D")
-custom_table_texture = ExtResource("3_2yr1b")
-custom_chair_texture = ExtResource("4_oes8e")
+data = ExtResource("3_2yr1b")
+current_state = 0
 
 [node name="OrderComponent" parent="." unique_id=490812539 instance=ExtResource("5_2yr1b")]
 y_sort_enabled = true

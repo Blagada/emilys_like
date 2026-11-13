@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="TableData" format=3 uid="uid://mt7d3a37ueg4"]
+
+[ext_resource type="Texture2D" uid="uid://4balm81g7io1" path="res://resources/restaurants/resto_a/furnitures/chair-resto_a.tres" id="1_egc13"]
+[ext_resource type="Script" uid="uid://2ojb5jlbb3nt" path="res://resources/furnitures/table_data.gd" id="2_b6rhs"]
+[ext_resource type="Texture2D" uid="uid://ua4dvxo560ib" path="res://resources/restaurants/resto_a/furnitures/two_places_table-resto_a.tres" id="3_egc13"]
+
+[resource]
+script = ExtResource("2_b6rhs")
+allowed_food_types = Array[int]([2])
+cleaning_duration = 2.0
+table_texture = ExtResource("3_egc13")
+chair_texture = ExtResource("1_egc13")
+metadata/_custom_type_script = "uid://2ojb5jlbb3nt"

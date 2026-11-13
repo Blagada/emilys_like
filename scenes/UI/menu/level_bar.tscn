@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://e1spwrdn4r53"]
+
+[ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="1_5b65o"]
+[ext_resource type="Script" uid="uid://dr3dvtlpummrd" path="res://scenes/UI/menu/level_bar.gd" id="2_8wguo"]
+[ext_resource type="PackedScene" uid="uid://eb2mpv6l4wta" path="res://scenes/UI/colored_panel.tscn" id="3_1pcv3"]
+[ext_resource type="Shader" uid="uid://bl3tc61bn0h1t" path="res://resources/ambiance/panel_dither.gdshader" id="4_w0sj6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_clt4n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1pcv3"]
+resource_local_to_scene = true
+shader = ExtResource("4_w0sj6")
+shader_parameter/base_color = Color(1, 1, 0.8627451, 1)
+shader_parameter/panel_size = Vector2(1344, 62)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.5
+shader_parameter/corner_radius = 0.0
+shader_parameter/gradient_angle = 24.828
+
+[node name="LevelBar" type="PanelContainer" unique_id=1603993807 node_paths=PackedStringArray("primary_button", "catalog_button", "visit_button")]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -62.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_5b65o")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_clt4n")
+script = ExtResource("2_8wguo")
+primary_button = NodePath("MarginContainer/BarContainer/PrimaryButton")
+catalog_button = NodePath("MarginContainer/BarContainer/CatalogButton")
+visit_button = NodePath("MarginContainer/BarContainer/VisitButton")
+
+[node name="ColoredPanel" parent="." unique_id=777529434 instance=ExtResource("3_1pcv3")]
+material = SubResource("ShaderMaterial_1pcv3")
+layout_mode = 2
+panel_color = Color(1, 1, 0.8627451, 1)
+corner_radius = 0.0
+gradient_angle = 24.828
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1936240721]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="BarContainer" type="HBoxContainer" parent="MarginContainer" unique_id=2042873740]
+layout_mode = 2
+alignment = 2
+
+[node name="CatalogButton" type="Button" parent="MarginContainer/BarContainer" unique_id=134839240]
+layout_mode = 2
+tooltip_text = "TOOLTIP_CATALOG"
+text = "BUTTON_CATALOG"
+
+[node name="VisitButton" type="Button" parent="MarginContainer/BarContainer" unique_id=1131665560]
+layout_mode = 2
+tooltip_text = "TOOLTIP_VISIT"
+text = "BUTTON_VISIT"
+
+[node name="PrimaryButton" type="Button" parent="MarginContainer/BarContainer" unique_id=245790867]
+layout_mode = 2
+text = "BUTTON_BEGIN_LEVEL"

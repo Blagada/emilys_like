@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelData" format=3 uid="uid://g5bilfmowkq6"]
+
+[ext_resource type="Resource" uid="uid://dnf5dnacueeen" path="res://resources/restaurants/resto_a/levels/j1-menu-resto_a.tres" id="1_538uj"]
+[ext_resource type="Script" uid="uid://coyjgufjo44k3" path="res://resources/customers/Data/customer_data.gd" id="2_5hqqi"]
+[ext_resource type="Resource" uid="uid://cythqx6prwhxi" path="res://resources/customers/Data/vip.tres" id="3_8evyy"]
+[ext_resource type="Resource" uid="uid://bdeloesawiw12" path="res://resources/customers/Data/calm.tres" id="4_6q6yd"]
+[ext_resource type="Script" uid="uid://duy54q18siryb" path="res://resources/restaurants/level_data.gd" id="6_5mcu4"]
+
+[resource]
+script = ExtResource("6_5mcu4")
+level_path = "uid://dm1md5v5vp5lu"
+level_menu = ExtResource("1_538uj")
+possible_customers = Array[ExtResource("2_5hqqi")]([ExtResource("3_8evyy"), ExtResource("4_6q6yd")])
+active_services = Array[int]([2, 1])
+tray_max_capacity = 4
+expert_threshold_percent = 110.0
+metadata/_custom_type_script = "uid://duy54q18siryb"

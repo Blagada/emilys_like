@@ -12,10 +12,9 @@ func take_order(customer: Customer, level_menu: LevelMenu, entry: Dictionary) ->
 	customer.change_state(GameEnums.CustomerState.WAITING_TO_ORDER)
 	customer.show_thinking()
 
-	# attendre un court délai avant de révéler la commande.
-	# la durée concorde avec la vitesse du client 400 / 100 = 4 secondes (le client à une vitesse sur 100)
-	var thinking_delay: float = 400.0 / customer.customer_data.speed
-	await get_tree().create_timer(thinking_delay).timeout
+	# délai de réflexion du client avant de révéler la commande.
+	var thinking_delay: float = customer.customer_data.thinking_time
+	await get_tree().create_timer(thinking_delay, false).timeout
 
 	# choisi un aliment aléatoire à partir de level_menu.
 	var food: FoodData = level_menu.get_random_food()

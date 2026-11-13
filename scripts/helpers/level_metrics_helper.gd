@@ -40,7 +40,7 @@ static func compute_metrics(navigation_region: NavigationRegion2D, customer_spaw
 		if travel_time > 0.0:
 			travel_times.append(travel_time)
 		
-		cleaning_durations.append(table_comp.cleaning_duration)
+		cleaning_durations.append(table_comp.data.cleaning_duration)
 
 	var avg_customer_travel_time: float = 0.0
 	if not travel_times.is_empty():

@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="RestaurantData" format=3 uid="uid://dl4s1wu5mor3x"]
 
 [ext_resource type="Script" uid="uid://cqg728aoyqst8" path="res://resources/restaurants/restaurant_data.gd" id="1_c43gq"]
+[ext_resource type="Script" uid="uid://duy54q18siryb" path="res://resources/restaurants/level_data.gd" id="1_gcgwc"]
 
 [resource]
 script = ExtResource("1_c43gq")
-restaurant_name = "Dérive"
+restaurant_name = "NAME_RESTO_D"
+restaurant_desc = "DESC_RESTO_D"
 metadata/_custom_type_script = "uid://cqg728aoyqst8"

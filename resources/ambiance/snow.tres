@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="WeatherData" format=3 uid="uid://dgv7wwx2gw847"]
+
+[ext_resource type="Script" uid="uid://bnw3uadx1gtvs" path="res://resources/ambiance/weather_data.gd" id="1_sqgk8"]
+
+[resource]
+script = ExtResource("1_sqgk8")
+state = 4
+api_codes = Array[int]([1066, 1069, 1114, 1117, 1204, 1207, 1210, 1213, 1216, 1219, 1222, 1225, 1237, 1249, 1252, 1255, 1258, 1261, 1264, 1279, 1282])
+light_energy = 5.0
+metadata/_custom_type_script = "uid://bnw3uadx1gtvs"

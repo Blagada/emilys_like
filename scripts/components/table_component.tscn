@@ -4,3 +4,6 @@
 
 [node name="TableComponent" type="Node2D" unique_id=1795287937]
 script = ExtResource("1_ku1pd")
+current_state = null
+cleaning_duration = null
+serving_delay = null

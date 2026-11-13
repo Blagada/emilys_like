@@ -5,16 +5,17 @@
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fphfw"]
 atlas = ExtResource("1_6w2qx")
-region = Rect2(120, 0, 120, 120)
+region = Rect2(0, 0, 60, 60)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqaf5"]
 atlas = ExtResource("1_6w2qx")
-region = Rect2(0, 0, 120, 120)
+region = Rect2(62, 0, 57, 60)
 
 [node name="DayClockTexture" type="TextureProgressBar" unique_id=1714067885 node_paths=PackedStringArray("markers_container")]
-offset_right = 120.0
-offset_bottom = 120.0
-scale = Vector2(0.8, 0.8)
+custom_minimum_size = Vector2(60, 60)
+offset_right = 60.0
+offset_bottom = 60.0
+size_flags_horizontal = 0
 fill_mode = 4
 texture_under = SubResource("AtlasTexture_fphfw")
 texture_progress = SubResource("AtlasTexture_kqaf5")

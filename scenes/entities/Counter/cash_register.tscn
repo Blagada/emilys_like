@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b4rs3eptext0j"]
 
-[ext_resource type="Texture2D" uid="uid://bgac03pjid7i8" path="res://assets/furniture/resto_a/caisse-enregistreuse.png" id="1_rog4u"]
+[ext_resource type="Texture2D" uid="uid://bgac03pjid7i8" path="res://assets/restaurants/resto_a/caisse-enregistreuse.png" id="1_rog4u"]
 [ext_resource type="PackedScene" uid="uid://dgtkpfv80rsoc" path="res://scripts/components/interaction_component.tscn" id="2_feymf"]
 [ext_resource type="PackedScene" uid="uid://f4prltr7yjfo" path="res://scripts/components/click_feedback_component.tscn" id="3_f6a3l"]
 

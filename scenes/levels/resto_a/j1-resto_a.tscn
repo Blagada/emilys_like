@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://dm1md5v5vp5lu"]
+
+[ext_resource type="PackedScene" uid="uid://dpmj0x12v3q5e" path="res://scenes/entities/Restaurants/resto_a_decor.tscn" id="1_jdaeq"]
+[ext_resource type="PackedScene" uid="uid://byfohv3v2dfjt" path="res://scenes/entities/Restaurants/restaurant_entities.tscn" id="2_l3q6y"]
+[ext_resource type="PackedScene" uid="uid://ms11luyd8oa5" path="res://scenes/entities/Counter/resto_a_counter.tscn" id="3_l3q6y"]
+[ext_resource type="PackedScene" uid="uid://d3d62e0dcbxqc" path="res://scenes/entities/Staff/player.tscn" id="4_i14kd"]
+[ext_resource type="PackedScene" uid="uid://dtxvvae0o7g7q" path="res://scenes/entities/Tables/table_for_four.tscn" id="5_m52fl"]
+[ext_resource type="PackedScene" uid="uid://blfuh5focianj" path="res://scenes/entities/Tables/table_for_two.tscn" id="6_8q153"]
+[ext_resource type="Shader" uid="uid://bl3tc61bn0h1t" path="res://resources/ambiance/panel_dither.gdshader" id="8_kfiho"]
+[ext_resource type="Resource" uid="uid://df3rp0cax6kgi" path="res://resources/restaurants/resto_a/resto_a.tres" id="10_kfiho"]
+[ext_resource type="PackedScene" uid="uid://xw2n88dw187x" path="res://scenes/UI/hud.tscn" id="11_tm2ii"]
+[ext_resource type="PackedScene" uid="uid://dswrv82v1yo5o" path="res://scripts/components/gameplay_core.tscn" id="12_kqvg7"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_rus8k"]
+vertices = PackedVector2Array(664.1094, 395.89063, 1170.6172, 151.32813, 1167.2813, 476.47656, 665.3281, 476.47656, 658.65625, 428.64844, 129.46875, 147.10156, 301.6797, 147.79688, 274.40625, 165.97656, 389.0703, 148.14844, 707.7578, 149.45313, 671.14844, 173.85938, 419.72656, 169.38281, 816.46875, 177.25781, 776.7031, 149.72656, 641.5781, 449.9922, 543.6328, 461.70313, 651.15625, 561.47656, 382.1797, 477.1172, 373.85938, 468.79688, 376.53125, 465.47656, 468.14063, 456.89844, 376.53125, 511.07813, 837.9375, 198.36719, 816.2578, 200.38281, 867.28906, 227.72656, 671.3203, 288.7422, 634.7578, 366.53125, 613.0781, 368.53906, 613.28906, 345.42188, 660.89844, 287.25, 441.20313, 190.49219, 419.52344, 192.5, 470.54688, 219.85156, 654.3125, 201.21875, 633.0625, 213.96875, 351.82813, 401.15625, 317.28125, 404.3672, 315.9297, 367.71875, 343.0703, 280.85938, 343.0703, 279.85938, 350.0703, 279.85938, 350.0703, 285.65625, 739.8125, 288.7422, 739.8125, 287.7422, 746.8125, 287.7422, 746.8125, 293.53906, 536.6328, 456.89844, 536.6328, 455.89844, 543.6328, 455.89844, 229.70313, 540.9297, 229.70313, 521.4297, 252.09375, 521.4297, 252.09375, 546.1172, 1037.4766, 561.47656, 1037.4766, 676.4922, -39.289063, 678.71094, -36.96875, 146.38281, 236.32031, 206.09375, 113.953125, 417.5625, 671.3672, 200.35938, 622.8125, 234.47656, 465.10156, 252.60938, 423.42188, 279.45313, 467.96875, 342.02344, 468.1875, 368.52344, 451.1328, 369.3828, 414.89063, 280.67188, 274.6328, 192.47656, 257.5703, 193.34375, 161.5, 370.1172, 161.5, 402.9375, 136.20313, 404.21094, 622.8125, 262.2422, 448.02344, 273.95313, 103.296875, 467.60938, 108.90625, 473.22656, 103.296875, 484.46875, 844.7578, 281.82813, 861.84375, 260.4922, 624.7578, 454.1875, 358.64844, 533.4219, 341.03125, 537.8203, 332.04688, 539.3203, 322.1172, 540.7422, 155.02344, 540.9297, 143.17969, 539.2422, 125.82031, 535.77344, 103.296875, 513.21094, 644.5469, 283.97656, 539.5, 294.34375, 616.97656, 455.4922, 419.6328, 402.64063, 274.57813, 280.85938, 429.8828, 382.1328, 103.296875, 438.8672, 827.9375, 286.03125, 820.15625, 287.32813, 811.6328, 288.54688, 431.20313, 278.14844, 419.6328, 430.39844, 264.15625, 279.3672, 247.8125, 276.10156, 382.1797, 431.52344, 608.4531, 456.71094, 457.71875, 455.40625, 441.3672, 452.14063, 237.82813, 326.5, 226.07031, 254.35938, 226.07031, 226.60156)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(12, 13, 1), PackedInt32Array(14, 4, 3), PackedInt32Array(15, 3, 16, 17, 18, 19, 20), PackedInt32Array(21, 17, 16), PackedInt32Array(22, 23, 12, 1), PackedInt32Array(24, 22, 1), PackedInt32Array(25, 26, 27, 28, 29), PackedInt32Array(30, 31, 11), PackedInt32Array(30, 11, 10), PackedInt32Array(32, 30, 10, 33, 34), PackedInt32Array(35, 36, 37), PackedInt32Array(38, 39, 40, 41), PackedInt32Array(42, 43, 44, 45), PackedInt32Array(46, 47, 48, 15), PackedInt32Array(49, 50, 51, 52), PackedInt32Array(16, 53, 54, 55), PackedInt32Array(55, 56, 5, 57, 58), PackedInt32Array(10, 59, 33), PackedInt32Array(32, 34, 60, 61), PackedInt32Array(62, 63, 64, 65, 66), PackedInt32Array(7, 67, 68, 5), PackedInt32Array(5, 68, 57), PackedInt32Array(69, 70, 71), PackedInt32Array(61, 60, 72, 73), PackedInt32Array(74, 75, 76, 55), PackedInt32Array(1, 0, 26, 77), PackedInt32Array(78, 24, 1), PackedInt32Array(79, 14, 3), PackedInt32Array(80, 21, 16), PackedInt32Array(80, 16, 55, 81), PackedInt32Array(82, 81, 55), PackedInt32Array(83, 82, 55), PackedInt32Array(52, 83, 55), PackedInt32Array(49, 52, 55, 84), PackedInt32Array(85, 84, 55), PackedInt32Array(86, 85, 55), PackedInt32Array(87, 86, 55), PackedInt32Array(73, 72, 88, 89), PackedInt32Array(76, 87, 55), PackedInt32Array(90, 79, 3), PackedInt32Array(20, 46, 15), PackedInt32Array(91, 92, 38, 41, 93), PackedInt32Array(25, 42, 45, 26), PackedInt32Array(94, 74, 55), PackedInt32Array(77, 78, 1), PackedInt32Array(95, 77, 26), PackedInt32Array(96, 95, 26), PackedInt32Array(97, 96, 26), PackedInt32Array(45, 97, 26), PackedInt32Array(88, 29, 28, 89), PackedInt32Array(73, 89, 63, 98), PackedInt32Array(62, 98, 63), PackedInt32Array(66, 65, 93, 41), PackedInt32Array(92, 91, 99, 100), PackedInt32Array(101, 100, 99, 102, 35), PackedInt32Array(103, 90, 3), PackedInt32Array(15, 103, 3), PackedInt32Array(104, 20, 19), PackedInt32Array(105, 104, 19), PackedInt32Array(99, 105, 19, 102), PackedInt32Array(101, 35, 37), PackedInt32Array(101, 37, 106, 107), PackedInt32Array(107, 106, 69), PackedInt32Array(58, 108, 107, 69, 71), PackedInt32Array(58, 94, 55), PackedInt32Array(58, 57, 108)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-71.816605, 111.228165, 129.62022, 112.10397, 1205.9935, 116.48304, 1199.8628, 711.1596, -74.444046, 713.787)])
+source_geometry_mode = 1
+source_geometry_group_name = &"nav_obstacles"
+agent_radius = 35.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kfiho"]
+resource_local_to_scene = true
+shader = ExtResource("8_kfiho")
+shader_parameter/base_color = Color(1, 1, 0.8627451, 1)
+shader_parameter/panel_size = Vector2(107.0499, 755.9683)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.534
+shader_parameter/corner_radius = 0.0
+shader_parameter/gradient_angle = 219.901
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40tly"]
+resource_local_to_scene = true
+shader = ExtResource("8_kfiho")
+shader_parameter/base_color = Color(1, 1, 0.8627451, 1)
+shader_parameter/panel_size = Vector2(424.0182, 585.5924)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.499
+shader_parameter/corner_radius = 12.0
+shader_parameter/gradient_angle = 118.818
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0gngr"]
+resource_local_to_scene = true
+shader = ExtResource("8_kfiho")
+shader_parameter/base_color = Color(1, 1, 0.8627451, 1)
+shader_parameter/panel_size = Vector2(1344, 62)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.5
+shader_parameter/corner_radius = 0.0
+shader_parameter/gradient_angle = 24.828
+
+[node name="RestoA_Level1" type="Node2D" unique_id=1649520290]
+
+[node name="RestoADecor" parent="." unique_id=227072403 instance=ExtResource("1_jdaeq")]
+
+[node name="Fond" parent="RestoADecor/Plancher" parent_id_path=PackedInt32Array(227072403, 1417968947) index="0" unique_id=488499679]
+position = Vector2(628, 341.99994)
+scale = Vector2(5.5234385, 782)
+
+[node name="SunLightController" parent="RestoADecor/Ambiant" parent_id_path=PackedInt32Array(227072403, 1464737262) index="1" unique_id=863496824 node_paths=PackedStringArray("day_clock")]
+day_clock = NodePath("../../../HUD/LevelControl/VBoxContainer/DayClock")
+
+[node name="CounterLightOccluder2D" parent="RestoADecor/Ambiant" parent_id_path=PackedInt32Array(227072403, 1464737262) index="3" unique_id=1218653664]
+position = Vector2(197, 111)
+
+[node name="LightOccluder2D" parent="RestoADecor/Ambiant" parent_id_path=PackedInt32Array(227072403, 1464737262) index="4" unique_id=401477991]
+position = Vector2(-3, 46)
+
+[node name="Entities" parent="." unique_id=1316099999 instance=ExtResource("2_l3q6y")]
+
+[node name="CustomerSpawner" parent="Entities" index="0" unique_id=1257491940]
+position = Vector2(1541, 248)
+
+[node name="Comptoir" parent="Entities" index="1" unique_id=1212267104]
+position = Vector2(1084, 585)
+
+[node name="RestoACounter" parent="Entities/Comptoir/Visuals/CounterBody" parent_id_path=PackedInt32Array(1316099999, 1212267104, 1901920173) index="0" unique_id=1602640409 instance=ExtResource("3_l3q6y")]
+
+[node name="CounterFoodItem" parent="Entities/Comptoir/Visuals/CounterBody/RestoACounter" index="1" unique_id=1631497471 node_paths=PackedStringArray("level_manager")]
+level_manager = NodePath("../../../../../../GameplayCore/LevelManager")
+
+[node name="CounterOrderComponent" parent="Entities/Comptoir/Visuals" parent_id_path=PackedInt32Array(1316099999, 1212267104, 1505766415) index="1" unique_id=1482906281]
+position = Vector2(-84.4283, 10.477251)
+
+[node name="PaymentQueueComponent" parent="Entities/Comptoir" index="1" unique_id=1700191971 node_paths=PackedStringArray("feedback_display", "exit_marker")]
+feedback_display = NodePath("../PaymentFeedbackDisplay")
+exit_marker = NodePath("../../CustomerSpawner/SpawnPoint")
+
+[node name="Table_for_four" parent="Entities" unique_id=217408094 groups=["nav_obstacles"] instance=ExtResource("5_m52fl")]
+position = Vector2(298, 591)
+scale = Vector2(1.3701566, 1.3701566)
+
+[node name="Table_pour_deux2" parent="Entities" unique_id=443123715 groups=["nav_obstacles"] instance=ExtResource("6_8q153")]
+position = Vector2(419, 292)
+scale = Vector2(1.1417972, 1.1417972)
+
+[node name="Table_pour_deux3" parent="Entities" unique_id=387867586 groups=["nav_obstacles"] instance=ExtResource("6_8q153")]
+position = Vector2(872, 301)
+scale = Vector2(1.1417972, 1.1417972)
+
+[node name="Table_pour_deux" parent="Entities" unique_id=1739270022 groups=["nav_obstacles"] instance=ExtResource("6_8q153")]
+position = Vector2(640, 493)
+scale = Vector2(1.1417972, 1.1417972)
+
+[node name="player" parent="Entities" unique_id=660937136 instance=ExtResource("4_i14kd")]
+y_sort_enabled = true
+position = Vector2(924.00006, 697)
+scale = Vector2(1.3, 1.3)
+
+[node name="ZoneDeplacement" type="NavigationRegion2D" parent="." unique_id=114542850]
+y_sort_enabled = true
+position = Vector2(25, 1)
+scale = Vector2(1.1417972, 1.1417972)
+navigation_polygon = SubResource("NavigationPolygon_rus8k")
+
+[node name="HUD" parent="." unique_id=1355160810 instance=ExtResource("11_tm2ii")]
+
+[node name="LevelControl" parent="HUD" index="0" unique_id=2037204849 node_paths=PackedStringArray("day_cycle")]
+day_cycle = NodePath("../../GameplayCore/DayCycleComponent")
+
+[node name="ColoredPanel" parent="HUD/LevelControl" index="0" unique_id=777529434]
+material = SubResource("ShaderMaterial_kfiho")
+
+[node name="DayClock" parent="HUD/LevelControl/VBoxContainer" parent_id_path=PackedInt32Array(1355160810, 2037204849, 133503482) index="2" unique_id=1714067885 node_paths=PackedStringArray("day_cycle")]
+day_cycle = NodePath("../../../../GameplayCore/DayCycleComponent")
+
+[node name="RestaurantPanel" parent="HUD" index="1" unique_id=164400363 node_paths=PackedStringArray("day_cycle")]
+rotation = -0.008726646
+day_cycle = NodePath("../../GameplayCore/DayCycleComponent")
+
+[node name="Tray_places" parent="HUD" index="2" unique_id=298009879]
+offset_left = 141.0
+offset_top = 725.0
+offset_right = 141.0
+offset_bottom = 725.0
+
+[node name="ColoredPanel" parent="HUD/LevelIntroScreen/LevelInfo" parent_id_path=PackedInt32Array(1355160810, 1440735646, 343702230) index="0" unique_id=944903130]
+material = SubResource("ShaderMaterial_40tly")
+
+[node name="ColoredPanel" parent="HUD/LevelIntroScreen/LevelBar" parent_id_path=PackedInt32Array(1355160810, 1440735646, 1603993807) index="0" unique_id=777529434]
+material = SubResource("ShaderMaterial_0gngr")
+
+[node name="IntersectionPanel" parent="HUD" index="5" unique_id=537524400]
+offset_left = 461.00003
+offset_top = 88.0
+offset_right = -452.0
+offset_bottom = -486.0
+rotation = -0.034906585
+
+[node name="GameplayCore" parent="." unique_id=839634176 instance=ExtResource("12_kqvg7")]
+
+[node name="LevelManager" parent="GameplayCore" index="0" unique_id=364999028 node_paths=PackedStringArray("tray_places", "customer_spawner", "payment_queue", "day_cycle", "order_flow", "spawn_orchestrator", "intersection_panel", "level_intro_screen", "restaurant_panel", "level_results_screen", "earnings_gauge", "day_clock", "level_control", "game_menu", "navigation_region")]
+restaurant_data = ExtResource("10_kfiho")
+tray_places = NodePath("../../HUD/Tray_places")
+customer_spawner = NodePath("../../Entities/CustomerSpawner")
+payment_queue = NodePath("../../Entities/Comptoir/PaymentQueueComponent")
+day_cycle = NodePath("../DayCycleComponent")
+order_flow = NodePath("../OrderFlowComponent")
+spawn_orchestrator = NodePath("../SpawnOrchestratorComponent")
+intersection_panel = NodePath("../../HUD/IntersectionPanel")
+level_intro_screen = NodePath("../../HUD/LevelIntroScreen")
+restaurant_panel = NodePath("../../HUD/RestaurantPanel")
+level_results_screen = NodePath("../../HUD/DayResultsScreen")
+earnings_gauge = NodePath("../../HUD/LevelControl/VBoxContainer/EarningsGauge")
+day_clock = NodePath("../../HUD/LevelControl/VBoxContainer/DayClock")
+level_control = NodePath("../../HUD/LevelControl")
+game_menu = NodePath("../../HUD/GameMenu")
+navigation_region = NodePath("../../ZoneDeplacement")
+
+[node name="OrderFlowComponent" parent="GameplayCore" index="1" unique_id=976148135 node_paths=PackedStringArray("customer_spawner", "payment_queue", "waiting_queue", "day_cycle")]
+customer_spawner = NodePath("../../Entities/CustomerSpawner")
+payment_queue = NodePath("../../Entities/Comptoir/PaymentQueueComponent")
+waiting_queue = NodePath("../WaitingQueueComponent")
+day_cycle = NodePath("../DayCycleComponent")
+
+[node name="SpawnOrchestratorComponent" parent="GameplayCore" index="2" unique_id=2057923829 node_paths=PackedStringArray("customer_spawner", "payment_queue", "waiting_queue", "day_cycle")]
+customer_spawner = NodePath("../../Entities/CustomerSpawner")
+payment_queue = NodePath("../../Entities/Comptoir/PaymentQueueComponent")
+waiting_queue = NodePath("../WaitingQueueComponent")
+day_cycle = NodePath("../DayCycleComponent")
+
+[node name="DayCycleComponent" parent="GameplayCore" index="3" unique_id=1299101941 node_paths=PackedStringArray("payment_queue")]
+payment_queue = NodePath("../../Entities/Comptoir/PaymentQueueComponent")
+
+[node name="WaitingQueueComponent" parent="GameplayCore" index="4" unique_id=1557171716 node_paths=PackedStringArray("order_flow", "exit_marker", "day_cycle")]
+position = Vector2(1239.0001, 341.00003)
+rotation = 1.5761422
+scale = Vector2(1.9200001, 1)
+order_flow = NodePath("../OrderFlowComponent")
+exit_marker = NodePath("../../Entities/CustomerSpawner/SpawnPoint")
+day_cycle = NodePath("../DayCycleComponent")
+
+[editable path="RestoADecor"]
+[editable path="Entities"]
+[editable path="Entities/CustomerSpawner"]
+[editable path="Entities/Comptoir"]
+[editable path="Entities/Comptoir/Visuals/CounterBody/RestoACounter"]
+[editable path="Entities/Comptoir/Visuals/CounterBody/RestoACounter/CounterFoodItem"]
+[editable path="Entities/Comptoir/Visuals/CounterOrderComponent"]
+[editable path="Entities/Comptoir/Visuals/CounterOrderComponent/ClocheInteraction"]
+[editable path="Entities/Comptoir/Visuals/CashRegister"]
+[editable path="Entities/Comptoir/Visuals/CashRegister/CaisseInteraction"]
+[editable path="Entities/Comptoir/PaymentQueueComponent"]
+[editable path="HUD"]
+[editable path="HUD/LevelControl"]
+[editable path="HUD/LevelIntroScreen"]
+[editable path="HUD/LevelIntroScreen/LevelBar"]
+[editable path="GameplayCore"]

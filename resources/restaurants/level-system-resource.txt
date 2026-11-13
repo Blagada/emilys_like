@@ -1,0 +1,12 @@
+Fiche Mémo : Système de Ressources « Niveau »
+
+Objectif : configuration et difficulté d’un niveau.
+
+Dans le dossier du niveau ou après la création du dossier du niveau sous restaurants, clic droit > Nouvelle ressource > LevelData, nomme-la (ex : resto_a_niveau_1.tres).
+Remplis l’Inspecteur :
+Restaurant et Level Number
+Services & Clients : Level Menu (menu du niveau), Possible Customers (types de clients), Active Services, Tray Max Capacity
+Objectifs & Difficulté : Expert Threshold Percent (150 = 150 % de l’objectif normal)
+Économie : bonus de combo et de service en un seul voyage (_rate : 0.10 = 10 %)
+Rythme des Spawns : Counter Order Probability Percent (0 à 100), Spawn Interval Jitter Percent, délais initiaux min/max
+Les objectifs de la journée (daily_goal, expert_goal) sont calculés automatiquement, ne les saisis pas.

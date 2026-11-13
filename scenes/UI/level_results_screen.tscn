@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://djb2q2gqcpbf2"]
+
+[ext_resource type="Script" uid="uid://d3qsqh2goxi8l" path="res://scenes/UI/level_results_screen.gd" id="2_l3ovu"]
+[ext_resource type="PackedScene" uid="uid://e1spwrdn4r53" path="res://scenes/UI/menu/level_bar.tscn" id="3_6hule"]
+[ext_resource type="Shader" uid="uid://bl3tc61bn0h1t" path="res://resources/ambiance/panel_dither.gdshader" id="4_abcvh"]
+[ext_resource type="PackedScene" uid="uid://eb2mpv6l4wta" path="res://scenes/UI/colored_panel.tscn" id="5_6qrds"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a7s8w"]
+resource_local_to_scene = true
+shader = ExtResource("4_abcvh")
+shader_parameter/base_color = Color(1, 1, 0.8627451, 1)
+shader_parameter/panel_size = Vector2(432.14102, 361.229)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.367
+shader_parameter/corner_radius = 12.0
+shader_parameter/gradient_angle = 26.601
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_adbnm"]
+resource_local_to_scene = true
+shader = ExtResource("4_abcvh")
+shader_parameter/base_color = Color(1, 1, 0.8627451, 1)
+shader_parameter/panel_size = Vector2(1344, 62)
+shader_parameter/pixel_size = 3.0
+shader_parameter/use_gradient = true
+shader_parameter/gradient_strength = 0.5
+shader_parameter/corner_radius = 0.0
+shader_parameter/gradient_angle = 24.828
+
+[node name="LevelResultsScreen" type="Control" unique_id=1440735646 node_paths=PackedStringArray("level_bar", "level_number_label", "earnings_label", "goal_status_label", "expert_status_label", "tip_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_l3ovu")
+level_bar = NodePath("LevelBar")
+level_number_label = NodePath("LevelDesc/LevelDescContent/LevelLabel")
+earnings_label = NodePath("LevelDesc/LevelDescContent/EarningsLabel")
+goal_status_label = NodePath("LevelDesc/LevelDescContent/GoalStatusLabel")
+expert_status_label = NodePath("LevelDesc/LevelDescContent/ExpertStatusLabel")
+tip_label = NodePath("LevelDesc/LevelDescContent/TipLabel")
+
+[node name="LevelDesc" type="Control" parent="." unique_id=170834582]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColoredPanel" parent="LevelDesc" unique_id=893595248 instance=ExtResource("5_6qrds")]
+material = SubResource("ShaderMaterial_a7s8w")
+layout_mode = 1
+offset_left = 464.99997
+offset_top = 153.99998
+offset_right = -446.859
+offset_bottom = -240.771
+rotation = -0.017453292
+scale = Vector2(0.921, 0.921)
+panel_color = Color(1, 1, 0.8627451, 1)
+gradient_strength = 0.367
+gradient_angle = 26.601
+
+[node name="LevelDescContent" type="VBoxContainer" parent="LevelDesc" unique_id=757858541]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.15698
+offset_top = -183.0343
+offset_right = 150.43512
+offset_bottom = 70.52951
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.017453292
+
+[node name="LevelLabel" type="Label" parent="LevelDesc/LevelDescContent" unique_id=458450065]
+layout_mode = 2
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.07450981, 0.07450981, 0.07450981, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 0.8627451, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
+text = "Jour x"
+
+[node name="Control" type="Control" parent="LevelDesc/LevelDescContent" unique_id=1697021497]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="EarningsLabel" type="RichTextLabel" parent="LevelDesc/LevelDescContent" unique_id=1058166707]
+layout_mode = 2
+bbcode_enabled = true
+text = "Montant gagné"
+fit_content = true
+
+[node name="GoalStatusLabel" type="RichTextLabel" parent="LevelDesc/LevelDescContent" unique_id=850910235]
+layout_mode = 2
+bbcode_enabled = true
+text = "Goal"
+fit_content = true
+
+[node name="ExpertStatusLabel" type="RichTextLabel" parent="LevelDesc/LevelDescContent" unique_id=595057347]
+layout_mode = 2
+bbcode_enabled = true
+text = "Expert goal"
+fit_content = true
+
+[node name="TipLabel" type="RichTextLabel" parent="LevelDesc/LevelDescContent" unique_id=1152182010]
+layout_mode = 2
+bbcode_enabled = true
+text = "Tip"
+fit_content = true
+
+[node name="LevelBar" parent="." unique_id=1603993807 instance=ExtResource("3_6hule")]
+layout_mode = 1
+
+[node name="ColoredPanel" parent="LevelBar" index="0" unique_id=777529434]
+material = SubResource("ShaderMaterial_adbnm")
+
+[node name="CatalogButton" parent="LevelBar/MarginContainer/BarContainer" parent_id_path=PackedInt32Array(1603993807, 2042873740) index="0" unique_id=134839240]
+visible = false
+
+[node name="VisitButton" parent="LevelBar/MarginContainer/BarContainer" parent_id_path=PackedInt32Array(1603993807, 2042873740) index="1" unique_id=1131665560]
+visible = false
+
+[node name="PrimaryButton" parent="LevelBar/MarginContainer/BarContainer" parent_id_path=PackedInt32Array(1603993807, 2042873740) index="2" unique_id=245790867]
+text = "BUTTON_END_LEVEL"
+
+[editable path="LevelBar"]

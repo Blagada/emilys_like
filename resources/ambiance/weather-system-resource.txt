@@ -1,0 +1,6 @@
+Fiche Mémo : Système de Ressources « Météo »
+Objectif : décrire ce que chaque état météo change dans le jeu (lumière, son), commun à tous les restaurants.
+
+Dans le dossier des ressources de météo, clic droit > Nouvelle ressource > WeatherData, nomme-la (ex : rain.tres).
+Remplis l’Inspecteur : State (l’état météo), Api Codes (les codes de condition de WeatherAPI qui correspondent à cet état, voir leur documentation), Light Color et Light Energy, Ambient Sound et Ambient Volume Db.
+L’image de la fenêtre se règle dans RestaurantData, groupe Fenêtre : un fichier d’image par état météo.

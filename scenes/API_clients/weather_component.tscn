@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dqth3lme014s7"]
+
+[ext_resource type="Script" uid="uid://dd7kjfiaqj7jg" path="res://scenes/API_clients/weather_component.gd" id="1_dh14g"]
+[ext_resource type="Script" uid="uid://bnw3uadx1gtvs" path="res://resources/ambiance/weather_data.gd" id="2_8sgu7"]
+[ext_resource type="Resource" uid="uid://dmo71ie107wy2" path="res://resources/ambiance/clear.tres" id="3_ukv7q"]
+[ext_resource type="Resource" uid="uid://bg78xlu4v3nuf" path="res://resources/ambiance/cloudy.tres" id="4_2dn1u"]
+[ext_resource type="Resource" uid="uid://dj4q21kpvy3wv" path="res://resources/ambiance/fog.tres" id="5_g5kqh"]
+[ext_resource type="Resource" uid="uid://cdw62slgxj3ba" path="res://resources/ambiance/rain.tres" id="6_nr8na"]
+[ext_resource type="Resource" uid="uid://dgv7wwx2gw847" path="res://resources/ambiance/snow.tres" id="7_4ko48"]
+
+[node name="WeatherComponent" type="Node2D" unique_id=1076369709]
+script = ExtResource("1_dh14g")
+weather_list = Array[ExtResource("2_8sgu7")]([ExtResource("3_ukv7q"), ExtResource("4_2dn1u"), ExtResource("5_g5kqh"), ExtResource("6_nr8na"), ExtResource("7_4ko48")])
+default_weather = ExtResource("3_ukv7q")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=702080544]

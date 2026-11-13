@@ -2,49 +2,106 @@
 
 [ext_resource type="Script" uid="uid://dnnaawuno6ak8" path="res://scenes/UI/earnings_gauge.gd" id="1_ryqlg"]
 [ext_resource type="Theme" uid="uid://d143nc48cfivq" path="res://assets/themes/general_theme.tres" id="2_eisdl"]
+[ext_resource type="Texture2D" uid="uid://c2duk42od7iku" path="res://assets/customers/star.png" id="3_uocbs"]
 
-[node name="EarningsGauge" type="Control" unique_id=1098784311 node_paths=PackedStringArray("progress_bar", "goal_marker", "amount_label")]
+[node name="EarningsGauge" type="Control" unique_id=1098784311 node_paths=PackedStringArray("progress_bar", "amount_label", "goal_marker", "goal_value_label", "goal_star", "expert_goal_marker", "expert_value_label", "expert_star")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_bottom = -612.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_ryqlg")
-progress_bar = NodePath("HBoxContainer/ProgressBar")
-goal_marker = NodePath("HBoxContainer/ProgressBar/GoalMarker")
-amount_label = NodePath("HBoxContainer/AmountLabel")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=824430889]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer" unique_id=72886992]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-theme = ExtResource("2_eisdl")
-theme_override_font_sizes/font_size = 35
-
-[node name="GoalMarker" type="ColorRect" parent="HBoxContainer/ProgressBar" unique_id=1484544603]
-custom_minimum_size = Vector2(5, 0)
-layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
-offset_top = -1.0
 grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_ryqlg")
+progress_bar = NodePath("ProgressBar")
+amount_label = NodePath("AmountLabel")
+goal_marker = NodePath("ProgressBar/GoalMarker")
+goal_value_label = NodePath("ProgressBar/GoalMarker/DailyGoalLabel")
+goal_star = NodePath("ProgressBar/GoalMarker/DailyGoalStar")
+expert_goal_marker = NodePath("ProgressBar/ExpertGoalMarker")
+expert_value_label = NodePath("ProgressBar/ExpertGoalMarker/ExpertGoalLabel")
+expert_star = NodePath("ProgressBar/ExpertGoalMarker/ExpertGoalStar")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=72886992]
+layout_mode = 0
+offset_left = -26.0
+offset_top = 52.0
+offset_bottom = 371.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_eisdl")
+theme_override_font_sizes/font_size = 35
+fill_mode = 3
+show_percentage = false
+
+[node name="GoalMarker" type="ColorRect" parent="ProgressBar" unique_id=1484544603]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
 color = Color(0.0030664, 0.0014679865, 0.00066476513, 1)
 
-[node name="AmountLabel" type="Label" parent="HBoxContainer" unique_id=1536720024]
-layout_mode = 2
+[node name="DailyGoalStar" type="TextureRect" parent="ProgressBar/GoalMarker" unique_id=1446530767]
+layout_mode = 0
+offset_left = -23.0
+offset_top = -1.0000007
+offset_right = 112.33267
+offset_bottom = 134.33267
+rotation = -0.37344033
+scale = Vector2(0.16000015, 0.16000015)
+texture = ExtResource("3_uocbs")
+
+[node name="DailyGoalLabel" type="Label" parent="ProgressBar/GoalMarker" unique_id=1541585266]
+layout_mode = 0
+offset_left = 36.0
+offset_top = -6.0
+offset_right = 162.0
+offset_bottom = 28.0
+rotation = 0.034906585
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Daily"
+
+[node name="ExpertGoalMarker" type="ColorRect" parent="ProgressBar" unique_id=862296634]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 5.0
+grow_horizontal = 2
+color = Color(0.0030664, 0.0014679865, 0.00066476513, 1)
+
+[node name="ExpertGoalStar" type="TextureRect" parent="ProgressBar/ExpertGoalMarker" unique_id=1578067256]
+layout_mode = 0
+offset_left = -13.000001
+offset_top = -18.0
+offset_right = 122.33267
+offset_bottom = 117.33267
+rotation = 0.36651915
+scale = Vector2(0.16000015, 0.16000015)
+texture = ExtResource("3_uocbs")
+
+[node name="ExpertGoalLabel" type="Label" parent="ProgressBar/ExpertGoalMarker" unique_id=1592487948]
+layout_mode = 0
+offset_left = 36.0
+offset_top = -18.0
+offset_right = 174.0
+offset_bottom = 16.0
+rotation = 0.034906585
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+text = "Expert"
+vertical_alignment = 1
+
+[node name="AmountLabel" type="Label" parent="." unique_id=1536720024]
+layout_mode = 0
+offset_left = -29.0
+offset_top = 5.0
+offset_right = 21.0
+offset_bottom = 32.0
 size_flags_horizontal = 10
-theme = ExtResource("2_eisdl")
 theme_type_variation = &"count_down"
-theme_override_font_sizes/font_size = 35
 text = "Total"
-horizontal_alignment = 2
+horizontal_alignment = 1
+vertical_alignment = 2

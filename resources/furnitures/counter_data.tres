@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CounterData" format=3 uid="uid://dwp1m2d0ugurt"]
+
+[ext_resource type="Script" uid="uid://b442kbagcsvpb" path="res://resources/furnitures/counter_data.gd" id="1_54n3f"]
+
+[resource]
+script = ExtResource("1_54n3f")
+allowed_food_types = Array[int]([0, 1, 7, 5])
+metadata/_custom_type_script = "uid://b442kbagcsvpb"
